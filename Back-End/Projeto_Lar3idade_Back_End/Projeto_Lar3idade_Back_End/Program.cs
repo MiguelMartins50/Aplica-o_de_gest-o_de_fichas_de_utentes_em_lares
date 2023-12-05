@@ -17,6 +17,7 @@ namespace Projeto_Lar3idade_Back_End
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
         }
     }
 }

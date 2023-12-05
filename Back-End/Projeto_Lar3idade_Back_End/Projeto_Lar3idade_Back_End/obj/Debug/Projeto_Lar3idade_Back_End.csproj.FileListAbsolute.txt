@@ -1,0 +1,10 @@
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.exe.config
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.exe
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.pdb
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Form1.resources
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Properties.Resources.resources
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.GenerateResource.cache
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.CoreCompileInputs.cache
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.exe
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.pdb
