@@ -45,6 +45,7 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
             this.pagamentos1 = new Projeto_Lar3idade_Back_End.pagamentos();
             this.quartos1 = new Projeto_Lar3idade_Back_End.quartos();
+            this.add_Utente1 = new Projeto_Lar3idade_Back_End.Add_Utente();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -216,6 +217,14 @@ namespace Projeto_Lar3idade_Back_End
             this.quartos1.Size = new System.Drawing.Size(1022, 735);
             this.quartos1.TabIndex = 17;
             // 
+            // add_Utente1
+            // 
+            this.add_Utente1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_Utente1.Location = new System.Drawing.Point(296, 52);
+            this.add_Utente1.Name = "add_Utente1";
+            this.add_Utente1.Size = new System.Drawing.Size(1022, 735);
+            this.add_Utente1.TabIndex = 18;
+            // 
             // admin_utentes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -223,6 +232,7 @@ namespace Projeto_Lar3idade_Back_End
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.add_Utente1);
             this.Controls.Add(this.quartos1);
             this.Controls.Add(this.pagamentos1);
             this.Controls.Add(this.responsavies1);
@@ -268,5 +278,6 @@ namespace Projeto_Lar3idade_Back_End
         private responsavies responsavies1;
         private pagamentos pagamentos1;
         private quartos quartos1;
+        private Add_Utente add_Utente1;
     }
 }

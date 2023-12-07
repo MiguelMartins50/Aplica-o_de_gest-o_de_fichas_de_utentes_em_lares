@@ -24,7 +24,25 @@ namespace Projeto_Lar3idade_Back_End
             responsavies1.Hide();
             quartos1.Hide();
             pagamentos1.Hide();
+            add_Utente1.Hide();
+            utentes1.ButtonClicked += UserControl2_ButtonClicked;
+            add_Utente1.ButtonClicked += UserControl1_ButtonClicked;
+
         }
+        private void UserControl2_ButtonClicked(object sender, EventArgs e)
+        {
+            // Hide UserControl1 when the button is clicked in UserControl2
+            add_Utente1.Show();
+            utentes1.Hide();
+        }
+        private void UserControl1_ButtonClicked(object sender, EventArgs e)
+        {
+            // Hide UserControl1 when the button is clicked in UserControl2
+            add_Utente1.Hide();
+            utentes1.Show();
+        }
+
+
 
         private void label3_Click(object sender, EventArgs e)
         {

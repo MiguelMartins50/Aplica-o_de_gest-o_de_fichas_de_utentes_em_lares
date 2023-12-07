@@ -14,3 +14,21 @@ C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Ba
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.pagamentos.resources
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.quartos.resources
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.SuggestedBindingRedirects.cache
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Add_Utente.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.admin_utentes.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Form1.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.funcionarios.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.pagamentos.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Properties.Resources.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.quartos.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.responsavies.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.utentes.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.GenerateResource.cache
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.exe
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.pdb
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.exe.config
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.exe
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.pdb
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.CoreCompileInputs.cache
