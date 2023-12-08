@@ -104,6 +104,12 @@
     <Compile Include="AddResponsavel.Designer.cs">
       <DependentUpon>AddResponsavel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Add_Atividade.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Add_Atividade.Designer.cs">
+      <DependentUpon>Add_Atividade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Add_Funcionario.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -121,6 +127,18 @@
     </Compile>
     <Compile Include="admin_utentes.Designer.cs">
       <DependentUpon>admin_utentes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Atividade.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Atividade.Designer.cs">
+      <DependentUpon>Atividade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditarAtividade.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditarAtividade.Designer.cs">
+      <DependentUpon>EditarAtividade.cs</DependentUpon>
     </Compile>
     <Compile Include="Edit_Funcionario.cs">
       <SubType>UserControl</SubType>
@@ -181,6 +199,9 @@
     <EmbeddedResource Include="AddResponsavel.resx">
       <DependentUpon>AddResponsavel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Add_Atividade.resx">
+      <DependentUpon>Add_Atividade.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Add_Funcionario.resx">
       <DependentUpon>Add_Funcionario.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +210,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="admin_utentes.resx">
       <DependentUpon>admin_utentes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Atividade.resx">
+      <DependentUpon>Atividade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditarAtividade.resx">
+      <DependentUpon>EditarAtividade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Edit_Funcionario.resx">
       <DependentUpon>Edit_Funcionario.cs</DependentUpon>
