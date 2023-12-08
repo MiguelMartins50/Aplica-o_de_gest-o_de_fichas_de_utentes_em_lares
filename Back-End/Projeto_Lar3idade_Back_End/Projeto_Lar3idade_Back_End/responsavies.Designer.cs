@@ -78,7 +78,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(108, 9);
+            this.label2.Location = new System.Drawing.Point(166, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 33);
             this.label2.TabIndex = 1;

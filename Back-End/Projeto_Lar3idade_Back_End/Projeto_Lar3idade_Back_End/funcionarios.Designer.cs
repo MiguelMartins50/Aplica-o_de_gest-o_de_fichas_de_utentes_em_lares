@@ -70,12 +70,13 @@ namespace Projeto_Lar3idade_Back_End
             this.button1.Size = new System.Drawing.Size(40, 40);
             this.button1.TabIndex = 2;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(108, 9);
+            this.label2.Location = new System.Drawing.Point(160, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 33);
             this.label2.TabIndex = 1;
