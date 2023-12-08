@@ -12,8 +12,10 @@ using MySql.Data.MySqlClient;
 
 namespace Projeto_Lar3idade_Back_End
 {
+
     public partial class responsavies : UserControl
     {
+        public event EventHandler ButtonClicked;
         public responsavies()
         {
             InitializeComponent();
@@ -69,6 +71,11 @@ namespace Projeto_Lar3idade_Back_End
                     }
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ButtonClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Projeto_Lar3idade_Back_End
 {
     public partial class AddResponsavel : UserControl
     {
+        public event EventHandler ButtonClicked;
+
         public AddResponsavel()
         {
             InitializeComponent();
@@ -35,6 +37,11 @@ namespace Projeto_Lar3idade_Back_End
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ButtonClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }

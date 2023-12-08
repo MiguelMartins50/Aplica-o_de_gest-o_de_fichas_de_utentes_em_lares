@@ -25,8 +25,14 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Hide();
             pagamentos1.Hide();
             add_Utente1.Hide();
+            add_Funcionario1.Hide();
+            addResponsavel1.Hide();
             utentes1.ButtonClicked += UserControl2_ButtonClicked;
             add_Utente1.ButtonClicked += UserControl1_ButtonClicked;
+            funcionarios1.ButtonClicked += add_func2_ButtonClicked;
+            add_Funcionario1.ButtonClicked += add_func1_ButtonClicked;
+            responsavies1.ButtonClicked += add_responsavel2_ButtonClicked;
+            addResponsavel1.ButtonClicked += add_responsavel1_ButtonClicked;
 
         }
         private void UserControl2_ButtonClicked(object sender, EventArgs e)
@@ -40,6 +46,30 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_Utente1.Hide();
             utentes1.Show();
+        }
+        private void add_responsavel2_ButtonClicked(object sender, EventArgs e)
+        {
+            // Hide UserControl1 when the button is clicked in UserControl2
+            addResponsavel1.Show();
+            responsavies1.Hide();
+        }
+        private void add_responsavel1_ButtonClicked(object sender, EventArgs e)
+        {
+            // Hide UserControl1 when the button is clicked in UserControl2
+            addResponsavel1.Hide();
+            responsavies1.Show();
+        }
+        private void add_func2_ButtonClicked(object sender, EventArgs e)
+        {
+            // Hide UserControl1 when the button is clicked in UserControl2
+            add_Funcionario1.Show();
+            funcionarios1.Hide();
+        }
+        private void add_func1_ButtonClicked(object sender, EventArgs e)
+        {
+            // Hide UserControl1 when the button is clicked in UserControl2
+            add_Funcionario1.Hide();
+            funcionarios1.Show();
         }
 
 

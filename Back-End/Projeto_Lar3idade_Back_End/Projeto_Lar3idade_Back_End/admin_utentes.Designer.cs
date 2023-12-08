@@ -46,6 +46,8 @@ namespace Projeto_Lar3idade_Back_End
             this.pagamentos1 = new Projeto_Lar3idade_Back_End.pagamentos();
             this.quartos1 = new Projeto_Lar3idade_Back_End.quartos();
             this.add_Utente1 = new Projeto_Lar3idade_Back_End.Add_Utente();
+            this.add_Funcionario1 = new Projeto_Lar3idade_Back_End.Add_Funcionario();
+            this.addResponsavel1 = new Projeto_Lar3idade_Back_End.AddResponsavel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -225,6 +227,22 @@ namespace Projeto_Lar3idade_Back_End
             this.add_Utente1.Size = new System.Drawing.Size(1022, 735);
             this.add_Utente1.TabIndex = 18;
             // 
+            // add_Funcionario1
+            // 
+            this.add_Funcionario1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_Funcionario1.Location = new System.Drawing.Point(293, 57);
+            this.add_Funcionario1.Name = "add_Funcionario1";
+            this.add_Funcionario1.Size = new System.Drawing.Size(1022, 735);
+            this.add_Funcionario1.TabIndex = 19;
+            // 
+            // addResponsavel1
+            // 
+            this.addResponsavel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.addResponsavel1.Location = new System.Drawing.Point(293, 52);
+            this.addResponsavel1.Name = "addResponsavel1";
+            this.addResponsavel1.Size = new System.Drawing.Size(1022, 735);
+            this.addResponsavel1.TabIndex = 20;
+            // 
             // admin_utentes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -232,6 +250,8 @@ namespace Projeto_Lar3idade_Back_End
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.addResponsavel1);
+            this.Controls.Add(this.add_Funcionario1);
             this.Controls.Add(this.add_Utente1);
             this.Controls.Add(this.quartos1);
             this.Controls.Add(this.pagamentos1);
@@ -279,5 +299,7 @@ namespace Projeto_Lar3idade_Back_End
         private pagamentos pagamentos1;
         private quartos quartos1;
         private Add_Utente add_Utente1;
+        private Add_Funcionario add_Funcionario1;
+        private AddResponsavel addResponsavel1;
     }
 }
