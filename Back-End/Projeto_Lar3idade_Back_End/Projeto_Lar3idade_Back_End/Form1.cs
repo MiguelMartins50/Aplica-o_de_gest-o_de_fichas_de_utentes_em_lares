@@ -70,13 +70,13 @@ namespace Projeto_Lar3idade_Back_End
                     {
                     MessageBox.Show("Login bem-sucedido!");
 
-                    // Aqui você pode redirecionar para outra tela ou fazer outras ações
+                    // link pra outra tela
                     admin_utentes admin = new admin_utentes();
                     admin.Show();
 
-                    // Feche este formulário de login (opcional)
+                    // Feche este formulário de login 
                     this.Hide();
-                }
+                    }
                 else
                 {
                     MessageBox.Show("Login falhou. Verifique suas credenciais.");
