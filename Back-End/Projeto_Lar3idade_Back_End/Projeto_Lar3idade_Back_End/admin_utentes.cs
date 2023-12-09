@@ -27,12 +27,16 @@ namespace Projeto_Lar3idade_Back_End
             add_Utente1.Hide();
             add_Funcionario1.Hide();
             addResponsavel1.Hide();
+            atividade1.Hide();
+            add_Atividade1.Hide();
             utentes1.ButtonClicked += UserControl2_ButtonClicked;
             add_Utente1.ButtonClicked += UserControl1_ButtonClicked;
             funcionarios1.ButtonClicked += add_func2_ButtonClicked;
             add_Funcionario1.ButtonClicked += add_func1_ButtonClicked;
             responsavies1.ButtonClicked += add_responsavel2_ButtonClicked;
             addResponsavel1.ButtonClicked += add_responsavel1_ButtonClicked;
+            atividade1.ButtonClicked += add_ativ2_ButtonClicked;
+            add_Atividade1.ButtonClicked += add_ativ1_ButtonClicked;
 
         }
         private void UserControl2_ButtonClicked(object sender, EventArgs e)
@@ -71,6 +75,18 @@ namespace Projeto_Lar3idade_Back_End
             add_Funcionario1.Hide();
             funcionarios1.Show();
         }
+        private void add_ativ2_ButtonClicked(object sender, EventArgs e)
+        {
+            // Hide UserControl1 when the button is clicked in UserControl2
+            add_Atividade1.Show();
+            atividade1.Hide();
+        }
+        private void add_ativ1_ButtonClicked(object sender, EventArgs e)
+        {
+            // Hide UserControl1 when the button is clicked in UserControl2
+            add_Atividade1.Hide();
+            atividade1.Show();
+        }
 
 
 
@@ -81,9 +97,11 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Hide();
             pagamentos1.Hide();
             utentes1.Show();
+            atividade1.Hide();
             label3.BackColor = Color.White;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label9.BackColor = this.BackColor;
             label10.BackColor = this.BackColor;
         }
@@ -94,10 +112,13 @@ namespace Projeto_Lar3idade_Back_End
             responsavies1.Hide();
             quartos1.Hide();
             pagamentos1.Hide();
-            utentes1.Show();
+            utentes1.Hide();
+            atividade1.Hide();
+
             label3.BackColor = this.BackColor;
             label4.BackColor = Color.White;
             label5.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label9.BackColor = this.BackColor;
             label10.BackColor = this.BackColor;
         }
@@ -108,10 +129,12 @@ namespace Projeto_Lar3idade_Back_End
             responsavies1.Show();
             quartos1.Hide();
             pagamentos1.Hide();
-            utentes1.Show();
+            utentes1.Hide();
+            atividade1.Hide();
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = Color.White;
+            label6.BackColor = this.BackColor;
             label9.BackColor = this.BackColor;
             label10.BackColor = this.BackColor;
         }
@@ -122,10 +145,12 @@ namespace Projeto_Lar3idade_Back_End
             responsavies1.Hide();
             quartos1.Hide();
             pagamentos1.Hide();
-            utentes1.Show();
+            utentes1.Hide();
+            atividade1.Show();
             label3.BackColor = this.BackColor;
-            label4.BackColor = Color.White;
+            label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
+            label6.BackColor = Color.White;
             label9.BackColor = this.BackColor;
             label10.BackColor = this.BackColor;
         }
@@ -146,9 +171,12 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Hide();
             pagamentos1.Show();
             utentes1.Hide();
+            atividade1.Hide();
+
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label9.BackColor = Color.White;
             label10.BackColor = this.BackColor;
         }
@@ -160,11 +188,13 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Show();
             pagamentos1.Hide();
             utentes1.Hide();
+            atividade1.Hide();
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label9.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label10.BackColor = Color.White;
         }
 

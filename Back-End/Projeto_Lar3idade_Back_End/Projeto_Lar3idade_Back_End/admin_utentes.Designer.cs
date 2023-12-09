@@ -48,6 +48,8 @@ namespace Projeto_Lar3idade_Back_End
             this.add_Utente1 = new Projeto_Lar3idade_Back_End.Add_Utente();
             this.add_Funcionario1 = new Projeto_Lar3idade_Back_End.Add_Funcionario();
             this.addResponsavel1 = new Projeto_Lar3idade_Back_End.AddResponsavel();
+            this.atividade1 = new Projeto_Lar3idade_Back_End.Atividade();
+            this.add_Atividade1 = new Projeto_Lar3idade_Back_End.Add_Atividade();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -243,6 +245,22 @@ namespace Projeto_Lar3idade_Back_End
             this.addResponsavel1.Size = new System.Drawing.Size(1022, 735);
             this.addResponsavel1.TabIndex = 20;
             // 
+            // atividade1
+            // 
+            this.atividade1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.atividade1.Location = new System.Drawing.Point(296, 57);
+            this.atividade1.Name = "atividade1";
+            this.atividade1.Size = new System.Drawing.Size(1022, 735);
+            this.atividade1.TabIndex = 21;
+            // 
+            // add_Atividade1
+            // 
+            this.add_Atividade1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_Atividade1.Location = new System.Drawing.Point(294, 52);
+            this.add_Atividade1.Name = "add_Atividade1";
+            this.add_Atividade1.Size = new System.Drawing.Size(1022, 735);
+            this.add_Atividade1.TabIndex = 22;
+            // 
             // admin_utentes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -250,6 +268,8 @@ namespace Projeto_Lar3idade_Back_End
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.add_Atividade1);
+            this.Controls.Add(this.atividade1);
             this.Controls.Add(this.addResponsavel1);
             this.Controls.Add(this.add_Funcionario1);
             this.Controls.Add(this.add_Utente1);
@@ -301,5 +321,7 @@ namespace Projeto_Lar3idade_Back_End
         private Add_Utente add_Utente1;
         private Add_Funcionario add_Funcionario1;
         private AddResponsavel addResponsavel1;
+        private Atividade atividade1;
+        private Add_Atividade add_Atividade1;
     }
 }

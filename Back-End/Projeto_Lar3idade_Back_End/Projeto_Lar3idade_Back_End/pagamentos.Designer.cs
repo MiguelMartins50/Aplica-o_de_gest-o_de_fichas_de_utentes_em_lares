@@ -48,7 +48,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(719, 7);
+            this.label7.Location = new System.Drawing.Point(741, 7);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(154, 33);
             this.label7.TabIndex = 6;
@@ -66,6 +66,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button1.Size = new System.Drawing.Size(40, 40);
             this.button1.TabIndex = 2;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -87,7 +88,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(530, 7);
+            this.label6.Location = new System.Drawing.Point(520, 7);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 33);
             this.label6.TabIndex = 5;
@@ -120,7 +121,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(77, 7);
+            this.label2.Location = new System.Drawing.Point(65, 7);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 33);
             this.label2.TabIndex = 1;
@@ -131,7 +132,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(15, 7);
+            this.label1.Location = new System.Drawing.Point(3, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 33);
             this.label1.TabIndex = 0;

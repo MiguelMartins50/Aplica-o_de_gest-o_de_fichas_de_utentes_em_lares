@@ -12,6 +12,8 @@ namespace Projeto_Lar3idade_Back_End
 {
     public partial class Add_Atividade : UserControl
     {
+        public event EventHandler ButtonClicked;
+
         public Add_Atividade()
         {
             InitializeComponent();
@@ -20,6 +22,17 @@ namespace Projeto_Lar3idade_Back_End
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ButtonClicked?.Invoke(this, EventArgs.Empty);
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ButtonClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }
