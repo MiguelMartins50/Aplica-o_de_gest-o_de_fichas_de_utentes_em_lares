@@ -71,6 +71,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -86,9 +87,9 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.LimeGreen;
-            this.button1.Location = new System.Drawing.Point(887, 56);
+            this.button1.Location = new System.Drawing.Point(943, 56);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 31);
+            this.button1.Size = new System.Drawing.Size(67, 31);
             this.button1.TabIndex = 4;
             this.button1.Text = "Editar";
             this.button1.UseVisualStyleBackColor = false;
@@ -459,9 +460,20 @@
             this.label21.TabIndex = 52;
             this.label21.Text = "Email";
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Red;
+            this.button2.Location = new System.Drawing.Point(863, 56);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(74, 31);
+            this.button2.TabIndex = 61;
+            this.button2.Text = "Cancelar";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
             // Edit_Utente
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
@@ -558,5 +570,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button button2;
     }
 }

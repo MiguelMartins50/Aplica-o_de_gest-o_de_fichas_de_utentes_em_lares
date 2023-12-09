@@ -107,7 +107,6 @@ C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Ba
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Edit_Utente.resources
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.CopyComplete
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.exe.config
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.exe
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.pdb
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\BouncyCastle.Cryptography.dll
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Google.Protobuf.dll
@@ -226,3 +225,4 @@ C:\Users\migue\Desktop\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_
 C:\Users\migue\Desktop\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.CopyComplete
 C:\Users\migue\Desktop\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.pdb
 C:\Users\migue\Desktop\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.tarefas.resources

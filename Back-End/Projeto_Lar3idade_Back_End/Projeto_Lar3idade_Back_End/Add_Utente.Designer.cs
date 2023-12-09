@@ -41,7 +41,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -71,6 +70,7 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -202,14 +202,6 @@
             this.textBox3.Size = new System.Drawing.Size(141, 22);
             this.textBox3.TabIndex = 12;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(751, 178);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(78, 22);
-            this.textBox4.TabIndex = 13;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label8
             // 
@@ -502,11 +494,21 @@
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 16;
+            this.listBox2.Location = new System.Drawing.Point(753, 178);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(58, 20);
+            this.listBox2.TabIndex = 43;
+            // 
             // Add_Utente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.listBox2);
             this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
@@ -536,7 +538,6 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -573,7 +574,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label9;
@@ -603,5 +603,6 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }
