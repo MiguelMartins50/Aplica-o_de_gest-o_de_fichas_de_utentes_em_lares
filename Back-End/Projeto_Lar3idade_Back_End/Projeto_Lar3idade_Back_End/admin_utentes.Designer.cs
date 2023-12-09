@@ -40,15 +40,16 @@ namespace Projeto_Lar3idade_Back_End
             this.label10 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.addResponsavel1 = new Projeto_Lar3idade_Back_End.AddResponsavel();
+            this.add_Funcionario1 = new Projeto_Lar3idade_Back_End.Add_Funcionario();
+            this.add_Utente1 = new Projeto_Lar3idade_Back_End.Add_Utente();
+            this.quartos1 = new Projeto_Lar3idade_Back_End.quartos();
+            this.pagamentos1 = new Projeto_Lar3idade_Back_End.pagamentos();
             this.responsavies1 = new Projeto_Lar3idade_Back_End.responsavies();
             this.funcionarios1 = new Projeto_Lar3idade_Back_End.funcionarios();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
-            this.pagamentos1 = new Projeto_Lar3idade_Back_End.pagamentos();
-            this.quartos1 = new Projeto_Lar3idade_Back_End.quartos();
-            this.add_Utente1 = new Projeto_Lar3idade_Back_End.Add_Utente();
-            this.add_Funcionario1 = new Projeto_Lar3idade_Back_End.Add_Funcionario();
-            this.addResponsavel1 = new Projeto_Lar3idade_Back_End.AddResponsavel();
-            this.atividade1 = new Projeto_Lar3idade_Back_End.Atividade();
+            this.tarefas1 = new Projeto_Lar3idade_Back_End.tarefas();
+            this.atividade2 = new Projeto_Lar3idade_Back_End.Atividade();
             this.add_Atividade1 = new Projeto_Lar3idade_Back_End.Add_Atividade();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -177,6 +178,46 @@ namespace Projeto_Lar3idade_Back_End
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
+            // addResponsavel1
+            // 
+            this.addResponsavel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.addResponsavel1.Location = new System.Drawing.Point(293, 52);
+            this.addResponsavel1.Name = "addResponsavel1";
+            this.addResponsavel1.Size = new System.Drawing.Size(1022, 735);
+            this.addResponsavel1.TabIndex = 20;
+            // 
+            // add_Funcionario1
+            // 
+            this.add_Funcionario1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_Funcionario1.Location = new System.Drawing.Point(293, 57);
+            this.add_Funcionario1.Name = "add_Funcionario1";
+            this.add_Funcionario1.Size = new System.Drawing.Size(1022, 735);
+            this.add_Funcionario1.TabIndex = 19;
+            // 
+            // add_Utente1
+            // 
+            this.add_Utente1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_Utente1.Location = new System.Drawing.Point(296, 52);
+            this.add_Utente1.Name = "add_Utente1";
+            this.add_Utente1.Size = new System.Drawing.Size(1022, 735);
+            this.add_Utente1.TabIndex = 18;
+            // 
+            // quartos1
+            // 
+            this.quartos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.quartos1.Location = new System.Drawing.Point(296, 52);
+            this.quartos1.Name = "quartos1";
+            this.quartos1.Size = new System.Drawing.Size(1022, 735);
+            this.quartos1.TabIndex = 17;
+            // 
+            // pagamentos1
+            // 
+            this.pagamentos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.pagamentos1.Location = new System.Drawing.Point(293, 52);
+            this.pagamentos1.Name = "pagamentos1";
+            this.pagamentos1.Size = new System.Drawing.Size(1022, 735);
+            this.pagamentos1.TabIndex = 16;
+            // 
             // responsavies1
             // 
             this.responsavies1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
@@ -205,61 +246,29 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1.Size = new System.Drawing.Size(1022, 779);
             this.utentes1.TabIndex = 13;
             // 
-            // pagamentos1
+            // tarefas1
             // 
-            this.pagamentos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.pagamentos1.Location = new System.Drawing.Point(293, 52);
-            this.pagamentos1.Name = "pagamentos1";
-            this.pagamentos1.Size = new System.Drawing.Size(1022, 735);
-            this.pagamentos1.TabIndex = 16;
+            this.tarefas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.tarefas1.Location = new System.Drawing.Point(310, 52);
+            this.tarefas1.Name = "tarefas1";
+            this.tarefas1.Size = new System.Drawing.Size(1008, 735);
+            this.tarefas1.TabIndex = 21;
             // 
-            // quartos1
+            // atividade2
             // 
-            this.quartos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.quartos1.Location = new System.Drawing.Point(296, 52);
-            this.quartos1.Name = "quartos1";
-            this.quartos1.Size = new System.Drawing.Size(1022, 735);
-            this.quartos1.TabIndex = 17;
-            // 
-            // add_Utente1
-            // 
-            this.add_Utente1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_Utente1.Location = new System.Drawing.Point(296, 52);
-            this.add_Utente1.Name = "add_Utente1";
-            this.add_Utente1.Size = new System.Drawing.Size(1022, 735);
-            this.add_Utente1.TabIndex = 18;
-            // 
-            // add_Funcionario1
-            // 
-            this.add_Funcionario1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_Funcionario1.Location = new System.Drawing.Point(293, 57);
-            this.add_Funcionario1.Name = "add_Funcionario1";
-            this.add_Funcionario1.Size = new System.Drawing.Size(1022, 735);
-            this.add_Funcionario1.TabIndex = 19;
-            // 
-            // addResponsavel1
-            // 
-            this.addResponsavel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.addResponsavel1.Location = new System.Drawing.Point(293, 52);
-            this.addResponsavel1.Name = "addResponsavel1";
-            this.addResponsavel1.Size = new System.Drawing.Size(1022, 735);
-            this.addResponsavel1.TabIndex = 20;
-            // 
-            // atividade1
-            // 
-            this.atividade1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.atividade1.Location = new System.Drawing.Point(296, 57);
-            this.atividade1.Name = "atividade1";
-            this.atividade1.Size = new System.Drawing.Size(1022, 735);
-            this.atividade1.TabIndex = 21;
+            this.atividade2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.atividade2.Location = new System.Drawing.Point(310, 52);
+            this.atividade2.Name = "atividade2";
+            this.atividade2.Size = new System.Drawing.Size(1008, 735);
+            this.atividade2.TabIndex = 22;
             // 
             // add_Atividade1
             // 
             this.add_Atividade1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_Atividade1.Location = new System.Drawing.Point(294, 52);
+            this.add_Atividade1.Location = new System.Drawing.Point(296, 57);
             this.add_Atividade1.Name = "add_Atividade1";
             this.add_Atividade1.Size = new System.Drawing.Size(1022, 735);
-            this.add_Atividade1.TabIndex = 22;
+            this.add_Atividade1.TabIndex = 23;
             // 
             // admin_utentes
             // 
@@ -269,7 +278,8 @@ namespace Projeto_Lar3idade_Back_End
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
             this.Controls.Add(this.add_Atividade1);
-            this.Controls.Add(this.atividade1);
+            this.Controls.Add(this.atividade2);
+            this.Controls.Add(this.tarefas1);
             this.Controls.Add(this.addResponsavel1);
             this.Controls.Add(this.add_Funcionario1);
             this.Controls.Add(this.add_Utente1);
@@ -322,6 +332,8 @@ namespace Projeto_Lar3idade_Back_End
         private Add_Funcionario add_Funcionario1;
         private AddResponsavel addResponsavel1;
         private Atividade atividade1;
+        private tarefas tarefas1;
+        private Atividade atividade2;
         private Add_Atividade add_Atividade1;
     }
 }

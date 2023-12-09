@@ -13,7 +13,6 @@ C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Ba
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.responsavies.resources
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.pagamentos.resources
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.quartos.resources
-C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.SuggestedBindingRedirects.cache
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Add_Utente.resources
@@ -168,3 +167,5 @@ C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Proj
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Add_Atividade.resources
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Atividade.resources
 C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.EditarAtividade.resources
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.tarefas.resources
+C:\Users\migue\Desktop\Projeto_final\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache

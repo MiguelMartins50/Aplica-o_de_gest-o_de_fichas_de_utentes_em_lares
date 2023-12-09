@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
 
 namespace Projeto_Lar3idade_Back_End
 {
@@ -27,16 +29,18 @@ namespace Projeto_Lar3idade_Back_End
             add_Utente1.Hide();
             add_Funcionario1.Hide();
             addResponsavel1.Hide();
-            atividade1.Hide();
+            atividade2.Hide();
             add_Atividade1.Hide();
+            tarefas1.Hide();
             utentes1.ButtonClicked += UserControl2_ButtonClicked;
             add_Utente1.ButtonClicked += UserControl1_ButtonClicked;
             funcionarios1.ButtonClicked += add_func2_ButtonClicked;
             add_Funcionario1.ButtonClicked += add_func1_ButtonClicked;
             responsavies1.ButtonClicked += add_responsavel2_ButtonClicked;
             addResponsavel1.ButtonClicked += add_responsavel1_ButtonClicked;
-            atividade1.ButtonClicked += add_ativ2_ButtonClicked;
+            atividade2.ButtonClicked += add_ativ2_ButtonClicked;
             add_Atividade1.ButtonClicked += add_ativ1_ButtonClicked;
+
 
         }
         private void UserControl2_ButtonClicked(object sender, EventArgs e)
@@ -79,13 +83,13 @@ namespace Projeto_Lar3idade_Back_End
         {
             // Hide UserControl1 when the button is clicked in UserControl2
             add_Atividade1.Show();
-            atividade1.Hide();
+            atividade2.Hide();
         }
         private void add_ativ1_ButtonClicked(object sender, EventArgs e)
         {
             // Hide UserControl1 when the button is clicked in UserControl2
             add_Atividade1.Hide();
-            atividade1.Show();
+            atividade2.Show();
         }
 
 
@@ -97,9 +101,12 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Hide();
             pagamentos1.Hide();
             utentes1.Show();
-            atividade1.Hide();
+            atividade2.Hide();
+            tarefas1.Hide();
             label3.BackColor = Color.White;
             label4.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+
             label5.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
             label9.BackColor = this.BackColor;
@@ -113,11 +120,13 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Hide();
             pagamentos1.Hide();
             utentes1.Hide();
-            atividade1.Hide();
-
+            atividade2.Hide();
+            tarefas1.Hide();
             label3.BackColor = this.BackColor;
             label4.BackColor = Color.White;
             label5.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+
             label6.BackColor = this.BackColor;
             label9.BackColor = this.BackColor;
             label10.BackColor = this.BackColor;
@@ -130,11 +139,14 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Hide();
             pagamentos1.Hide();
             utentes1.Hide();
-            atividade1.Hide();
+            atividade2.Hide();
+            tarefas1.Hide();
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = Color.White;
             label6.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+
             label9.BackColor = this.BackColor;
             label10.BackColor = this.BackColor;
         }
@@ -146,17 +158,35 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Hide();
             pagamentos1.Hide();
             utentes1.Hide();
-            atividade1.Show();
+            atividade2.Show();
+            tarefas1.Hide();
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
             label6.BackColor = Color.White;
             label9.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+
             label10.BackColor = this.BackColor;
         }
 
         private void label7_Click(object sender, EventArgs e)
         {
+            funcionarios1.Hide();
+            responsavies1.Hide();
+            quartos1.Hide();
+            pagamentos1.Hide();
+            utentes1.Hide();
+            atividade2.Hide();
+            tarefas1.Show();
+            label3.BackColor = this.BackColor;
+            label4.BackColor = this.BackColor;
+            label5.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
+            label7.BackColor = Color.White;
+            label9.BackColor = this.BackColor;
+            label10.BackColor = this.BackColor;
+         
 
         }
         private void label8_Click(object sender, EventArgs e)
@@ -171,16 +201,18 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Hide();
             pagamentos1.Show();
             utentes1.Hide();
-            atividade1.Hide();
-
+            atividade2.Hide();
+            tarefas1.Hide();
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
             label9.BackColor = Color.White;
             label10.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+
         }
-       
+
         private void label10_Click(object sender, EventArgs e)
         {
             funcionarios1.Hide();
@@ -188,13 +220,15 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Show();
             pagamentos1.Hide();
             utentes1.Hide();
-            atividade1.Hide();
+            atividade2.Hide();
+            tarefas1.Hide();
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label9.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
             label10.BackColor = Color.White;
         }
 

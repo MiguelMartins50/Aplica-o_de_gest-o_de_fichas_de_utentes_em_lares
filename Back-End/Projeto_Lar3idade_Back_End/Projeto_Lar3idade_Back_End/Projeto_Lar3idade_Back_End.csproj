@@ -190,6 +190,12 @@
     <Compile Include="responsavies.Designer.cs">
       <DependentUpon>responsavies.cs</DependentUpon>
     </Compile>
+    <Compile Include="tarefas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tarefas.Designer.cs">
+      <DependentUpon>tarefas.cs</DependentUpon>
+    </Compile>
     <Compile Include="utentes.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -249,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="responsavies.resx">
       <DependentUpon>responsavies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tarefas.resx">
+      <DependentUpon>tarefas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="utentes.resx">
       <DependentUpon>utentes.cs</DependentUpon>

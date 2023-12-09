@@ -8,37 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using System.Data.SqlClient;
-
-
 
 namespace Projeto_Lar3idade_Back_End
 {
-
-
-    public partial class Atividade : UserControl
+    public partial class tarefas : UserControl
     {
-        MySqlConnection conexao;
-        private DataTable dataTable;
+        
         private int verticalPosition = 50;
-
         public event EventHandler ButtonClicked;
-        public Atividade()
+        public tarefas()
         {
             InitializeComponent();
             LoadData();
             vScrollBar1.Dock = DockStyle.Right;
             vScrollBar1.Scroll += vScrollBar1_Scroll;
-
-
-
         }
-
 
         private void LoadData()
         {
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
-            string query = "SELECT atividade.nome, atividade.data, atividade.descricao, tipo.tipo FROM atividade JOIN tipo ON atividade.Tipo_idTipo = tipo.idTipo";
+            string query = "SELECT tarefa.nome, funcionario.nome AS func, tarefa.descricao , tipo.tipo FROM tarefa JOIN tipo ON tarefa.Tipo_idTipo = tipo.idTipo JOIN funcionario ON tarefa.Funcionario_idFuncionario = funcionario.idFuncionario";
 
             using (MySqlConnection conexao = new MySqlConnection(connectionString))
             {
@@ -52,7 +41,7 @@ namespace Projeto_Lar3idade_Back_End
                         {
                             // Read data from the reader and create panels dynamically
                             string nome = reader["nome"].ToString();
-                            string data_ = reader["data"].ToString();
+                            string data_ = reader["func"].ToString();
                             string desc = reader["descricao"].ToString();
                             string tipo = reader["tipo"].ToString();
 
@@ -130,19 +119,11 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     Panel panel = (Panel)control;
                     panel.Location = new Point(panel.Location.X, verticalPosition);
-                    verticalPosition += panel.Height + 10 ; // Adjusted spacing
+                    verticalPosition += panel.Height + 10; // Adjusted spacing
                 }
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
