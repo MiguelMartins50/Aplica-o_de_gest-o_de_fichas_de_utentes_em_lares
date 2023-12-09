@@ -13,7 +13,7 @@ namespace Projeto_Lar3idade_Back_End
 {
     public partial class tarefas : UserControl
     {
-        
+
         private int verticalPosition = 50;
         public event EventHandler ButtonClicked;
         public tarefas()

@@ -40,6 +40,8 @@ namespace Projeto_Lar3idade_Back_End
             this.label10 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.add_Atividade1 = new Projeto_Lar3idade_Back_End.Add_Atividade();
+            this.atividade2 = new Projeto_Lar3idade_Back_End.Atividade();
             this.addResponsavel1 = new Projeto_Lar3idade_Back_End.AddResponsavel();
             this.add_Funcionario1 = new Projeto_Lar3idade_Back_End.Add_Funcionario();
             this.add_Utente1 = new Projeto_Lar3idade_Back_End.Add_Utente();
@@ -48,8 +50,7 @@ namespace Projeto_Lar3idade_Back_End
             this.responsavies1 = new Projeto_Lar3idade_Back_End.responsavies();
             this.funcionarios1 = new Projeto_Lar3idade_Back_End.funcionarios();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
-            this.atividade2 = new Projeto_Lar3idade_Back_End.Atividade();
-            this.add_Atividade1 = new Projeto_Lar3idade_Back_End.Add_Atividade();
+            this.tarefas1 = new Projeto_Lar3idade_Back_End.tarefas();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -177,6 +178,22 @@ namespace Projeto_Lar3idade_Back_End
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
+            // add_Atividade1
+            // 
+            this.add_Atividade1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_Atividade1.Location = new System.Drawing.Point(296, 57);
+            this.add_Atividade1.Name = "add_Atividade1";
+            this.add_Atividade1.Size = new System.Drawing.Size(1022, 735);
+            this.add_Atividade1.TabIndex = 23;
+            // 
+            // atividade2
+            // 
+            this.atividade2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.atividade2.Location = new System.Drawing.Point(310, 52);
+            this.atividade2.Name = "atividade2";
+            this.atividade2.Size = new System.Drawing.Size(1008, 735);
+            this.atividade2.TabIndex = 22;
+            // 
             // addResponsavel1
             // 
             this.addResponsavel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
@@ -245,21 +262,13 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1.Size = new System.Drawing.Size(1022, 779);
             this.utentes1.TabIndex = 13;
             // 
-            // atividade2
+            // tarefas1
             // 
-            this.atividade2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.atividade2.Location = new System.Drawing.Point(310, 52);
-            this.atividade2.Name = "atividade2";
-            this.atividade2.Size = new System.Drawing.Size(1008, 735);
-            this.atividade2.TabIndex = 22;
-            // 
-            // add_Atividade1
-            // 
-            this.add_Atividade1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_Atividade1.Location = new System.Drawing.Point(296, 57);
-            this.add_Atividade1.Name = "add_Atividade1";
-            this.add_Atividade1.Size = new System.Drawing.Size(1022, 735);
-            this.add_Atividade1.TabIndex = 23;
+            this.tarefas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.tarefas1.Location = new System.Drawing.Point(307, 57);
+            this.tarefas1.Name = "tarefas1";
+            this.tarefas1.Size = new System.Drawing.Size(1008, 735);
+            this.tarefas1.TabIndex = 24;
             // 
             // admin_utentes
             // 
@@ -268,6 +277,7 @@ namespace Projeto_Lar3idade_Back_End
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.tarefas1);
             this.Controls.Add(this.add_Atividade1);
             this.Controls.Add(this.atividade2);
             this.Controls.Add(this.addResponsavel1);
@@ -324,5 +334,6 @@ namespace Projeto_Lar3idade_Back_End
         private Atividade atividade1;
         private Atividade atividade2;
         private Add_Atividade add_Atividade1;
+        private tarefas tarefas1;
     }
 }
