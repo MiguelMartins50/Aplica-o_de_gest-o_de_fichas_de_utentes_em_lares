@@ -9,22 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-
 namespace Projeto_Lar3idade_Back_End
 {
-    public partial class add_atividade : UserControl
+    public partial class add_tarefas : UserControl
     {
         public event EventHandler ButtonClicked;
         private int idAdd;
         private int idtipo;
-        private int idunt;
         private int idfunc;
         private Dictionary<string, string> Tipo_ = new Dictionary<string, string>();
         private Dictionary<string, string> Func_ = new Dictionary<string, string>();
-        private Dictionary<string, string> Utente_ = new Dictionary<string, string>();
         private MySqlConnection conexao;
-
-        public add_atividade()
+        public add_tarefas()
         {
             InitializeComponent();
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
@@ -54,25 +50,8 @@ namespace Projeto_Lar3idade_Back_End
                         }
                     }
                 }
-                string query2 = "SELECT idUtente,nome FROM utente";
+                string query2 = "SELECT idFuncionario,nome FROM funcionario";
                 using (MySqlCommand cmd = new MySqlCommand(query2, conexao))
-                {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-
-                            string id = reader["idUtente"].ToString();
-                            string nome = reader["nome"].ToString();
-                            comboBox2.Items.Add(nome);
-                            Utente_[nome] = id;
-
-
-                        }
-                    }
-                }
-                string query3 = "SELECT idFuncionario,nome FROM funcionario";
-                using (MySqlCommand cmd = new MySqlCommand(query3, conexao))
                 {
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -90,14 +69,18 @@ namespace Projeto_Lar3idade_Back_End
                 }
             }
         }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ButtonClicked?.Invoke(this, EventArgs.Empty);
+            LimparTextBoxes();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-
-
             string nome = textBox1.Text;
             DateTime datarealizacao = dateTimePicker1.Value;
             string desc = richTextBox1.Text;
-            
+
 
 
 
@@ -107,9 +90,9 @@ namespace Projeto_Lar3idade_Back_End
                 using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                 {
                     conexao.Open();
-                    string query = "INSERT INTO mydb.atividade (idAtividade,Utente_idUtente, Funcionario_idFuncionario, nome, data, descricao, Tipo_idTipo)" +
-                                    "VALUES (@idAtividade, @Utente_idUtente, @Funcionario_idFuncionario, @nome, @data, @descricao, @Tipo_idTipo)";
-                    string query2 = "SELECT * FROM atividade ORDER BY idAtividade DESC LIMIT 1";
+                    string query = "INSERT INTO mydb.tarefa (idTarefa,nome, descricao, Funcionario_idFuncionario, Tipo_idTipo)" +
+                                    "VALUES (@idTarefa, @nome, @descricao, @Funcionario_idFuncionario, @Tipo_idTipo)";
+                    string query2 = "SELECT * FROM tarefa ORDER BY idTarefa DESC LIMIT 1";
 
                     using (MySqlCommand procurarId = new MySqlCommand(query2, conexao))
                     {
@@ -122,7 +105,7 @@ namespace Projeto_Lar3idade_Back_End
                             while (reader.Read())
                             {
                                 // Add data to the list
-                                idAdd = 1 + int.Parse(reader["idAtividade"].ToString());
+                                idAdd = 1 + int.Parse(reader["idTarefa"].ToString());
 
                             }
                         }
@@ -132,8 +115,7 @@ namespace Projeto_Lar3idade_Back_End
                     // Crie um comando MySqlCommand
                     using (MySqlCommand comando = new MySqlCommand(query, conexao))
                     {
-                        comando.Parameters.AddWithValue("@idAtividade", idAdd);
-                        comando.Parameters.AddWithValue("@Utente_idUtente", idunt);
+                        comando.Parameters.AddWithValue("@idTarefa", idAdd);
                         comando.Parameters.AddWithValue("@Funcionario_idFuncionario", idfunc);
                         comando.Parameters.AddWithValue("@nome", nome);
                         comando.Parameters.AddWithValue("@data", datarealizacao);
@@ -148,7 +130,7 @@ namespace Projeto_Lar3idade_Back_End
                         MessageBox.Show("Atividade adcionada com sucesso!");
 
                         ButtonClicked?.Invoke(this, EventArgs.Empty);
-                        Limpar();
+                        LimparTextBoxes();
                     }
                 }
             }
@@ -156,27 +138,16 @@ namespace Projeto_Lar3idade_Back_End
             {
                 MessageBox.Show("Erro ao adicionar Atividade: " + ex.Message);
             }
-
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            ButtonClicked?.Invoke(this, EventArgs.Empty);
-            Limpar();
-        }
-
-        private void Limpar()
+        private void LimparTextBoxes()
         {
             textBox1.Clear();
-            comboBox1.SelectedIndex = -1;
-            comboBox2.SelectedIndex = -1;
-            comboBox3.SelectedIndex = -1;
             dateTimePicker1.Value = DateTime.Now;
+            comboBox1.SelectedIndex = -1;
+            comboBox3.SelectedIndex = -1;
             richTextBox1.Clear();
 
-
         }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem != null)
@@ -189,22 +160,6 @@ namespace Projeto_Lar3idade_Back_End
                     // Use specificColumnData as needed (e.g., assign it to a variable)
                     idtipo = int.Parse(id.ToString());
                     Console.WriteLine(id);
-                }
-            }
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox2.SelectedItem != null)
-            {
-                string selectedValue = comboBox2.SelectedItem.ToString();
-
-                if (Utente_.TryGetValue(selectedValue, out string id))
-                {
-
-                    // Use specificColumnData as needed (e.g., assign it to a variable)
-                    idunt = int.Parse(id.ToString());
-                    Console.WriteLine(idunt);
                 }
             }
         }

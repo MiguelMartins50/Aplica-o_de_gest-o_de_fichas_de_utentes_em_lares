@@ -20,11 +20,12 @@ namespace Projeto_Lar3idade_Back_End
         {
             InitializeComponent();
             LoadData();
-            vScrollBar1.Dock = DockStyle.Right;
             vScrollBar1.Scroll += vScrollBar1_Scroll;
         }
         private void LoadData()
         {
+            ClearPanels();
+
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             string query = "SELECT tarefa.nome, funcionario.nome AS func, tarefa.descricao , tipo.tipo FROM tarefa JOIN tipo ON tarefa.Tipo_idTipo = tipo.idTipo JOIN funcionario ON tarefa.Funcionario_idFuncionario = funcionario.idFuncionario";
 
@@ -50,6 +51,18 @@ namespace Projeto_Lar3idade_Back_End
                     }
                 }
             }
+        }
+        private void ClearPanels()
+        {
+            // Remove all panels from the controls collection
+            foreach (Control control in this.Controls.OfType<Panel>().ToList())
+            {
+                this.Controls.Remove(control);
+                control.Dispose(); // Dispose of the panel to free up resources
+            }
+
+            // Reset the vertical position
+            verticalPosition = 50;
         }
         private void CreatePanel(string nome, string data_, string desc, string tipo)
         {
@@ -117,6 +130,12 @@ namespace Projeto_Lar3idade_Back_End
                     verticalPosition += panel.Height + 10; // Adjusted spacing
                 }
             }
+        }
+
+        private void Butt_atualizar_Click(object sender, EventArgs e)
+        {
+            LoadData();
+
         }
     }
 }

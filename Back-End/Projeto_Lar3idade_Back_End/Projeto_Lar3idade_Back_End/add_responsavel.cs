@@ -358,14 +358,14 @@ namespace Projeto_Lar3idade_Back_End
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (comboBox1.SelectedItem != null)
+            if (comboBox2.SelectedItem != null)
             {
-                string selectedValue = comboBox1.SelectedItem.ToString();
+                string selectedValue = comboBox2.SelectedItem.ToString();
 
                 if (selectedValue == "-----------------")
                 {
                     // Clear the ComboBox selection
-                    comboBox1.SelectedIndex = -1;
+                    comboBox2.SelectedIndex = -1;
                     control2 = 0;
                     // Additional actions if needed when the ComboBox is emptied
                     Console.WriteLine("ComboBox is now empty!");
@@ -387,14 +387,14 @@ namespace Projeto_Lar3idade_Back_End
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (comboBox1.SelectedItem != null)
+            if (comboBox3.SelectedItem != null)
             {
-                string selectedValue = comboBox1.SelectedItem.ToString();
+                string selectedValue = comboBox3.SelectedItem.ToString();
 
                 if (selectedValue == "-----------------")
                 {
                     // Clear the ComboBox selection
-                    comboBox1.SelectedIndex = -1;
+                    comboBox3.SelectedIndex = -1;
                     control3 = 0;
                     // Additional actions if needed when the ComboBox is emptied
                     Console.WriteLine("ComboBox is now empty!");
@@ -416,14 +416,14 @@ namespace Projeto_Lar3idade_Back_End
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (comboBox1.SelectedItem != null)
+            if (comboBox4.SelectedItem != null)
             {
-                string selectedValue = comboBox1.SelectedItem.ToString();
+                string selectedValue = comboBox4.SelectedItem.ToString();
 
                 if (selectedValue == "-----------------")
                 {
                     // Clear the ComboBox selection
-                    comboBox1.SelectedIndex = -1;
+                    comboBox4.SelectedIndex = -1;
                     control4 = 0;
                     // Additional actions if needed when the ComboBox is emptied
                     Console.WriteLine("ComboBox is now empty!");

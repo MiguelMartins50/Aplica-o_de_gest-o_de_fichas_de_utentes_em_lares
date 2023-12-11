@@ -13,7 +13,8 @@ using MySql.Data.MySqlClient;
 namespace Projeto_Lar3idade_Back_End
 {
     public partial class quartos : UserControl
-    {
+    {        public event EventHandler ButtonClicked;
+
 
         public quartos()
         {
@@ -40,7 +41,7 @@ namespace Projeto_Lar3idade_Back_End
                 connection.Open();
 
                 // Create MySqlCommand
-                string query = "SELECT quarto.idQuarto, quarto.estado, quarto.quantidade_cama, MAX(CASE WHEN quarto.idQuarto = utente.Quarto_idQuarto THEN utente.nome END) AS utente_1, MAX(CASE WHEN quarto.idQuarto = utente.Quarto_idQuarto THEN utente.nome END) AS utente_2, MAX(CASE WHEN quarto.idQuarto = utente.Quarto_idQuarto THEN utente.nome END) AS utente_3 FROM quarto LEFT JOIN utente ON quarto.idQuarto = utente.Quarto_idQuarto GROUP BY quarto.idQuarto, quarto.estado, quarto.quantidade_cama";
+                string query = "SELECT q.idQuarto, q.estado, q.quantidade_cama, MAX(CASE WHEN u.rank = 1 THEN u.nome END) AS utente_1, MAX(CASE WHEN u.rank = 2 THEN u.nome END) AS utente_2, MAX(CASE WHEN u.rank = 3 THEN u.nome END) AS utente_3 FROM quarto q LEFT JOIN (SELECT Quarto_idQuarto, nome, ROW_NUMBER() OVER (PARTITION BY Quarto_idQuarto ORDER BY nome) AS rank FROM utente) u ON q.idQuarto = u.Quarto_idQuarto GROUP BY q.idQuarto, q.estado, q.quantidade_cama;";
                 Console.WriteLine();
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -86,7 +87,13 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            ButtonClicked?.Invoke(this, EventArgs.Empty);
 
+        }
+
+        private void Butt_atualizar_Click(object sender, EventArgs e)
+        {
+            FillListView();
         }
     }
 }

@@ -14,6 +14,8 @@ namespace Projeto_Lar3idade_Back_End
 {
     public partial class pagamentos : UserControl
     {
+        public event EventHandler ButtonClicked;
+
         public pagamentos()
         {
             InitializeComponent();
@@ -86,7 +88,12 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            ButtonClicked?.Invoke(this, EventArgs.Empty);
+        }
 
+        private void Butt_atualizar_Click(object sender, EventArgs e)
+        {
+            FillListView();
         }
     }
 }

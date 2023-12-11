@@ -41,6 +41,8 @@ namespace Projeto_Lar3idade_Back_End
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.add_quartos1 = new Projeto_Lar3idade_Back_End.add_quartos();
+            this.add_tarefas1 = new Projeto_Lar3idade_Back_End.add_tarefas();
             this.quartos1 = new Projeto_Lar3idade_Back_End.quartos();
             this.pagamentos1 = new Projeto_Lar3idade_Back_End.pagamentos();
             this.tarefas1 = new Projeto_Lar3idade_Back_End.tarefas();
@@ -52,6 +54,7 @@ namespace Projeto_Lar3idade_Back_End
             this.funcionario1 = new Projeto_Lar3idade_Back_End.funcionario();
             this.add_utente1 = new Projeto_Lar3idade_Back_End.add_utente();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
+            this.add_pagamento1 = new Projeto_Lar3idade_Back_End.add_pagamento();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -173,6 +176,22 @@ namespace Projeto_Lar3idade_Back_End
             this.label8.Text = "Quartos";
             this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
+            // add_quartos1
+            // 
+            this.add_quartos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_quartos1.Location = new System.Drawing.Point(296, 66);
+            this.add_quartos1.Name = "add_quartos1";
+            this.add_quartos1.Size = new System.Drawing.Size(1022, 735);
+            this.add_quartos1.TabIndex = 22;
+            // 
+            // add_tarefas1
+            // 
+            this.add_tarefas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_tarefas1.Location = new System.Drawing.Point(296, 66);
+            this.add_tarefas1.Name = "add_tarefas1";
+            this.add_tarefas1.Size = new System.Drawing.Size(1022, 735);
+            this.add_tarefas1.TabIndex = 21;
+            // 
             // quartos1
             // 
             this.quartos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
@@ -261,12 +280,23 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1.Size = new System.Drawing.Size(1022, 735);
             this.utentes1.TabIndex = 9;
             // 
+            // add_pagamento1
+            // 
+            this.add_pagamento1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_pagamento1.Location = new System.Drawing.Point(296, 64);
+            this.add_pagamento1.Name = "add_pagamento1";
+            this.add_pagamento1.Size = new System.Drawing.Size(1022, 735);
+            this.add_pagamento1.TabIndex = 23;
+            // 
             // admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.add_pagamento1);
+            this.Controls.Add(this.add_quartos1);
+            this.Controls.Add(this.add_tarefas1);
             this.Controls.Add(this.quartos1);
             this.Controls.Add(this.pagamentos1);
             this.Controls.Add(this.tarefas1);
@@ -321,5 +351,8 @@ namespace Projeto_Lar3idade_Back_End
         private tarefas tarefas1;
         private pagamentos pagamentos1;
         private quartos quartos1;
+        private add_tarefas add_tarefas1;
+        private add_quartos add_quartos1;
+        private add_pagamento add_pagamento1;
     }
 }

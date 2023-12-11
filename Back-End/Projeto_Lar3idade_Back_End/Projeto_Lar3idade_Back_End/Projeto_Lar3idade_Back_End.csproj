@@ -110,11 +110,29 @@
     <Compile Include="add_funcionario.Designer.cs">
       <DependentUpon>add_funcionario.cs</DependentUpon>
     </Compile>
+    <Compile Include="add_pagamento.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="add_pagamento.Designer.cs">
+      <DependentUpon>add_pagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="add_quartos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="add_quartos.Designer.cs">
+      <DependentUpon>add_quartos.cs</DependentUpon>
+    </Compile>
     <Compile Include="add_responsavel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="add_responsavel.Designer.cs">
       <DependentUpon>add_responsavel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="add_tarefas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="add_tarefas.Designer.cs">
+      <DependentUpon>add_tarefas.cs</DependentUpon>
     </Compile>
     <Compile Include="add_utente.cs">
       <SubType>UserControl</SubType>
@@ -208,8 +226,17 @@
     <EmbeddedResource Include="add_funcionario.resx">
       <DependentUpon>add_funcionario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="add_pagamento.resx">
+      <DependentUpon>add_pagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="add_quartos.resx">
+      <DependentUpon>add_quartos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="add_responsavel.resx">
       <DependentUpon>add_responsavel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="add_tarefas.resx">
+      <DependentUpon>add_tarefas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="add_utente.resx">
       <DependentUpon>add_utente.cs</DependentUpon>

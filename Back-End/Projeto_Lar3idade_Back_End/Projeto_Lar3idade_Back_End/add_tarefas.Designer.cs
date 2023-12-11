@@ -1,7 +1,7 @@
 ﻿
 namespace Projeto_Lar3idade_Back_End
 {
-    partial class add_atividade
+    partial class add_tarefas
     {
         /// <summary> 
         /// Variável de designer necessária.
@@ -29,12 +29,12 @@ namespace Projeto_Lar3idade_Back_End
         /// </summary>
         private void InitializeComponent()
         {
+            this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -45,11 +45,29 @@ namespace Projeto_Lar3idade_Back_End
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(451, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 27);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Tarefas";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(299, 15);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(183, 27);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Adicionar Tarefas";
             // 
             // panel1
             // 
@@ -58,18 +76,16 @@ namespace Projeto_Lar3idade_Back_End
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(103, 101);
+            this.panel1.Location = new System.Drawing.Point(100, 103);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(822, 617);
-            this.panel1.TabIndex = 27;
+            this.panel1.TabIndex = 29;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.panel2.Controls.Add(this.comboBox3);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.comboBox2);
-            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.dateTimePicker1);
             this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Controls.Add(this.button2);
@@ -88,7 +104,7 @@ namespace Projeto_Lar3idade_Back_End
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(123, 200);
+            this.comboBox3.Location = new System.Drawing.Point(123, 160);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(501, 24);
             this.comboBox3.TabIndex = 43;
@@ -98,30 +114,11 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(5, 200);
+            this.label8.Location = new System.Drawing.Point(5, 160);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(111, 22);
             this.label8.TabIndex = 42;
             this.label8.Text = "Funcionario:";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(78, 160);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(546, 24);
-            this.comboBox2.TabIndex = 41;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 160);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 22);
-            this.label5.TabIndex = 40;
-            this.label5.Text = "Utente:";
             // 
             // dateTimePicker1
             // 
@@ -165,9 +162,9 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(106, 282);
+            this.richTextBox1.Location = new System.Drawing.Point(106, 228);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(700, 202);
+            this.richTextBox1.Size = new System.Drawing.Size(700, 256);
             this.richTextBox1.TabIndex = 34;
             this.richTextBox1.Text = "";
             // 
@@ -182,7 +179,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 282);
+            this.label6.Location = new System.Drawing.Point(5, 228);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(97, 22);
             this.label6.TabIndex = 30;
@@ -218,34 +215,14 @@ namespace Projeto_Lar3idade_Back_End
             this.label2.TabIndex = 27;
             this.label2.Text = "Nome: ";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(299, 15);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(212, 27);
-            this.label7.TabIndex = 27;
-            this.label7.Text = "Adicionar Atividade ";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(412, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(188, 27);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Atividades do lar  ";
-            // 
-            // add_atividade
+            // add_tarefas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
-            this.Name = "add_atividade";
+            this.Controls.Add(this.panel1);
+            this.Name = "add_tarefas";
             this.Size = new System.Drawing.Size(1022, 735);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -258,8 +235,14 @@ namespace Projeto_Lar3idade_Back_End
 
         #endregion
 
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
@@ -268,13 +251,5 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label5;
     }
 }

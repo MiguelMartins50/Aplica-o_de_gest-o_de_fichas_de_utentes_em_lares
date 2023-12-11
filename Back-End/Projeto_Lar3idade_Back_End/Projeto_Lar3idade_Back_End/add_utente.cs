@@ -72,7 +72,6 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            ButtonClicked?.Invoke(this, EventArgs.Empty);
 
             string nome = textBox1.Text;
             DateTime dataNascimento = dateTimePicker1.Value;
@@ -153,7 +152,7 @@ namespace Projeto_Lar3idade_Back_End
                         MessageBox.Show("Utente adicionado com sucesso!");
 
                         ButtonClicked?.Invoke(this, EventArgs.Empty);
-
+                        LimparTextBoxes();
                     }
                 }
             }
@@ -162,7 +161,34 @@ namespace Projeto_Lar3idade_Back_End
                 MessageBox.Show("Erro ao adicionar utente: " + ex.Message);
             }
         }
+        private void LimparTextBoxes()
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            dateTimePicker1.Value = DateTime.Now;
+            textBox3.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox7.Clear();
+            textBox8.Clear();
+            textBox9.Clear();
+            textBox10.Clear();
+            textBox11.Clear();
+            textBox12.Clear();
+            textBox13.Clear();
+            textBox14.Clear();
+            textBox15.Clear();
+            textBox16.Clear();
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
+            radioButton3.Checked = false;
+            radioButton4.Checked = false;
 
+
+            comboBox1.SelectedIndex = -1;
+            
+
+        }
         private string ObterGrauDependenciaSelecionado()
         {
             if (radioButton1.Checked) return "Sem necessidade de apoio";
@@ -185,7 +211,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem != null)
+            if (comboBox2.SelectedItem != null)
             {
                 string selectedValue = comboBox2.SelectedItem.ToString();
 
@@ -197,6 +223,12 @@ namespace Projeto_Lar3idade_Back_End
                     Console.WriteLine(idMedico);
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ButtonClicked?.Invoke(this, EventArgs.Empty);
+            LimparTextBoxes();
         }
     }
 
