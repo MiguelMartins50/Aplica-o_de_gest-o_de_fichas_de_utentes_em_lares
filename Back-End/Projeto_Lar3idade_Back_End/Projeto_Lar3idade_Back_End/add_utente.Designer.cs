@@ -494,6 +494,7 @@ namespace Projeto_Lar3idade_Back_End
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(214, 24);
             this.comboBox2.TabIndex = 90;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // add_utente
             // 

@@ -342,6 +342,7 @@ namespace Projeto_Lar3idade_Back_End
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(515, 24);
             this.comboBox1.TabIndex = 75;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
@@ -350,6 +351,7 @@ namespace Projeto_Lar3idade_Back_End
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(515, 24);
             this.comboBox2.TabIndex = 76;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // comboBox3
             // 
@@ -358,6 +360,7 @@ namespace Projeto_Lar3idade_Back_End
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(515, 24);
             this.comboBox3.TabIndex = 77;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // comboBox4
             // 
@@ -366,6 +369,7 @@ namespace Projeto_Lar3idade_Back_End
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(515, 24);
             this.comboBox4.TabIndex = 78;
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
             // add_responsavel
             // 
