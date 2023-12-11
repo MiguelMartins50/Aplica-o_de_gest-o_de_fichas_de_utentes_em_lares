@@ -36,6 +36,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.Butt_atualizar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,11 +101,24 @@ namespace Projeto_Lar3idade_Back_End
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
+            // Butt_atualizar
+            // 
+            this.Butt_atualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
+            this.Butt_atualizar.ForeColor = System.Drawing.Color.Ivory;
+            this.Butt_atualizar.Location = new System.Drawing.Point(916, 20);
+            this.Butt_atualizar.Name = "Butt_atualizar";
+            this.Butt_atualizar.Size = new System.Drawing.Size(75, 27);
+            this.Butt_atualizar.TabIndex = 6;
+            this.Butt_atualizar.Text = "Atualizar";
+            this.Butt_atualizar.UseVisualStyleBackColor = false;
+            this.Butt_atualizar.Click += new System.EventHandler(this.Butt_atualizar_Click);
+            // 
             // funcionario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.Butt_atualizar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.listView1);
@@ -125,5 +139,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button Butt_atualizar;
     }
 }

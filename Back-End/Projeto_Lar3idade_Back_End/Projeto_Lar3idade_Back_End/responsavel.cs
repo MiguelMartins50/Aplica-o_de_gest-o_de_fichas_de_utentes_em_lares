@@ -78,5 +78,10 @@ namespace Projeto_Lar3idade_Back_End
             ButtonClicked?.Invoke(this, EventArgs.Empty);
 
         }
+
+        private void Butt_atualizar_Click(object sender, EventArgs e)
+        {
+            FillListView();
+        }
     }
 }

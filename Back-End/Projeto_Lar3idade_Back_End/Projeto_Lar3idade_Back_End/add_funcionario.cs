@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Projeto_Lar3idade_Back_End
 {
@@ -33,7 +34,7 @@ namespace Projeto_Lar3idade_Back_End
             DateTime data_validade = dateTimePicker1.Value;
             string telemovel = textBox3.Text;
             //string funcao = textBox4.Text;
-            decimal salario_hora = Convert.ToDecimal(textBox5.Text); // Ajuste o tipo conforme necessário
+            decimal salario_hora = Convert.ToDecimal(textBox5.Text);
             string email = textBox6.Text;
             string senha = textBox7.Text;
 
@@ -91,6 +92,18 @@ namespace Projeto_Lar3idade_Back_End
             {
                 MessageBox.Show("Erro ao adicionar funcionário: " + ex.Message);
             }
+            LimparTextBoxes();
+        }
+
+        private void LimparTextBoxes()
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            dateTimePicker1.Value = DateTime.Now;
+            textBox3.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox7.Clear();  
         }
 
         private void button2_Click(object sender, EventArgs e)

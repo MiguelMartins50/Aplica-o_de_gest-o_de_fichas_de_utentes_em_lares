@@ -32,14 +32,10 @@ namespace Projeto_Lar3idade_Back_End
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textSenha = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -64,6 +60,10 @@ namespace Projeto_Lar3idade_Back_End
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBox17
@@ -87,27 +87,6 @@ namespace Projeto_Lar3idade_Back_End
             this.textBox15.Size = new System.Drawing.Size(200, 22);
             this.textBox15.TabIndex = 71;
             // 
-            // textBox14
-            // 
-            this.textBox14.Location = new System.Drawing.Point(51, 680);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(515, 22);
-            this.textBox14.TabIndex = 70;
-            // 
-            // textBox13
-            // 
-            this.textBox13.Location = new System.Drawing.Point(51, 628);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(515, 22);
-            this.textBox13.TabIndex = 69;
-            // 
-            // textBox12
-            // 
-            this.textBox12.Location = new System.Drawing.Point(51, 575);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(515, 22);
-            this.textBox12.TabIndex = 68;
-            // 
             // textBox11
             // 
             this.textBox11.Location = new System.Drawing.Point(643, 523);
@@ -125,13 +104,6 @@ namespace Projeto_Lar3idade_Back_End
             this.label14.TabIndex = 66;
             this.label14.Text = "Parentesco/Relação";
             // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(51, 523);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(515, 22);
-            this.textBox10.TabIndex = 65;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -142,12 +114,12 @@ namespace Projeto_Lar3idade_Back_End
             this.label13.TabIndex = 64;
             this.label13.Text = "Utente/s";
             // 
-            // textBox9
+            // textSenha
             // 
-            this.textBox9.Location = new System.Drawing.Point(643, 439);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(200, 22);
-            this.textBox9.TabIndex = 63;
+            this.textSenha.Location = new System.Drawing.Point(643, 439);
+            this.textSenha.Name = "textSenha";
+            this.textSenha.Size = new System.Drawing.Size(200, 22);
+            this.textSenha.TabIndex = 63;
             // 
             // label12
             // 
@@ -363,23 +335,55 @@ namespace Projeto_Lar3idade_Back_End
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(51, 521);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(515, 24);
+            this.comboBox1.TabIndex = 75;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(51, 573);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(515, 24);
+            this.comboBox2.TabIndex = 76;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(51, 626);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(515, 24);
+            this.comboBox3.TabIndex = 77;
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(51, 678);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(515, 24);
+            this.comboBox4.TabIndex = 78;
+            // 
             // add_responsavel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox17);
             this.Controls.Add(this.textBox16);
             this.Controls.Add(this.textBox15);
-            this.Controls.Add(this.textBox14);
-            this.Controls.Add(this.textBox13);
-            this.Controls.Add(this.textBox12);
             this.Controls.Add(this.textBox11);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.textBox10);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.textBox9);
+            this.Controls.Add(this.textSenha);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.label11);
@@ -415,14 +419,10 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.TextBox textBox17;
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textSenha;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label11;
@@ -447,5 +447,9 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox4;
     }
 }
