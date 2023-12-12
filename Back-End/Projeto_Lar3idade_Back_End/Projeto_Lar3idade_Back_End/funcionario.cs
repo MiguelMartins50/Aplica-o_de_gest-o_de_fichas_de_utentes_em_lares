@@ -14,7 +14,7 @@ namespace Projeto_Lar3idade_Back_End
     public partial class funcionario : UserControl
     {
         private MySqlConnection conexao;
-
+        private int idupt;
         public funcionario()
         {
             InitializeComponent();
@@ -115,11 +115,9 @@ namespace Projeto_Lar3idade_Back_End
                 cmd.CommandType = CommandType.Text;
 
                 // Certifique-se de fornecer o valor do IdFuncionario a ser atualizado
-                if (!string.IsNullOrEmpty(textBox_Name.Text) && !string.IsNullOrEmpty(textBox_Cc.Text))
+                if ( !string.IsNullOrEmpty(textBox_Name.Text) && !string.IsNullOrEmpty(textBox_Cc.Text))
                 {
                     // Obtém o valor do idFuncionario dos TextBoxes
-                    int idFuncionarioParaAtualizar = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["idFuncionario"].Value);
-
                     // Utilizando parâmetros para prevenir injeção de SQL
                     cmd.CommandText = "UPDATE mydb.funcionario SET nome = @Nome, numero_cc = @NumeroCC, data_validade = @DataValidade, telemovel = @Telemovel, salario_hora = @SalarioHora, email = @Email, senha = @Senha WHERE idFuncionario = @IdFuncionario";
 
@@ -131,7 +129,7 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.Parameters.AddWithValue("@SalarioHora", textBox_Salario.Text);
                     cmd.Parameters.AddWithValue("@Email", textBox_Email.Text);
                     cmd.Parameters.AddWithValue("@Senha", textBox_Senha.Text);
-                    cmd.Parameters.AddWithValue("@IdFuncionario", idFuncionarioParaAtualizar);
+                    cmd.Parameters.AddWithValue("@IdFuncionario", idupt);
 
                     // Executando o comando
                     cmd.ExecuteNonQuery();
@@ -227,7 +225,9 @@ namespace Projeto_Lar3idade_Back_End
             {
                 // Obtém o valor do idFuncionario da célula clicada
                 int idFuncionarioSelecionado = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idFuncionario"].Value);
-
+                Console.WriteLine("rowcount:"+ Convert.ToInt32(dataGridView1.SelectedRows.Count));
+                Console.WriteLine("id:"+Convert.ToInt32(idFuncionarioSelecionado));
+                idupt = idFuncionarioSelecionado;
                 // Obtém os dados do funcionário com base no idFuncionario
                 ExibirDadosFuncionario(idFuncionarioSelecionado);
             }

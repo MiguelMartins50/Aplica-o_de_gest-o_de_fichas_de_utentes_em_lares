@@ -174,7 +174,6 @@ C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Bac
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_tarefas.resources
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_quartos.resources
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_pagamento.resources
-C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_pagamento.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_quartos.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_tarefas.resources
