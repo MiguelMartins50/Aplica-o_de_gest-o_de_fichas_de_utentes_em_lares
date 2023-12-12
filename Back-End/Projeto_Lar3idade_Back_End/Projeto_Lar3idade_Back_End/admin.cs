@@ -31,7 +31,7 @@ namespace Projeto_Lar3idade_Back_End
             quartos1.Hide();
             utentes1.ButtonClicked += utenteControl2_ButtonClicked;
             add_utente1.ButtonClicked += utenteControl1_ButtonClicked;
-            funcionario1.ButtonClicked += funcControl2_ButtonClicked;
+          //  funcionario1.ButtonClicked += funcControl2_ButtonClicked;
             add_funcionario1.ButtonClicked += funcControl1_ButtonClicked;
             responsavel1.ButtonClicked += respControl2_ButtonClicked;
             add_responsavel1.ButtonClicked += respControl1_ButtonClicked;
