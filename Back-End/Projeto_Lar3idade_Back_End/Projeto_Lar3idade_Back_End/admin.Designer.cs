@@ -52,7 +52,7 @@ namespace Projeto_Lar3idade_Back_End
             this.responsavel1 = new Projeto_Lar3idade_Back_End.responsavel();
             this.add_funcionario1 = new Projeto_Lar3idade_Back_End.add_funcionario();
             this.funcionario1 = new Projeto_Lar3idade_Back_End.funcionario();
-            this.add_utente1 = new Projeto_Lar3idade_Back_End.add_utente();
+            
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
             this.add_pagamento1 = new Projeto_Lar3idade_Back_End.add_pagamento();
             this.panel1.SuspendLayout();
@@ -265,13 +265,8 @@ namespace Projeto_Lar3idade_Back_End
             this.funcionario1.TabIndex = 11;
             // 
             // add_utente1
-            // 
-            this.add_utente1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_utente1.Location = new System.Drawing.Point(296, 66);
-            this.add_utente1.Name = "add_utente1";
-            this.add_utente1.Size = new System.Drawing.Size(1022, 735);
-            this.add_utente1.TabIndex = 10;
-            // 
+           
+             
             // utentes1
             // 
             this.utentes1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
@@ -306,7 +301,7 @@ namespace Projeto_Lar3idade_Back_End
             this.Controls.Add(this.responsavel1);
             this.Controls.Add(this.add_funcionario1);
             this.Controls.Add(this.funcionario1);
-            this.Controls.Add(this.add_utente1);
+            
             this.Controls.Add(this.utentes1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -341,7 +336,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private utentes utentes1;
-        private add_utente add_utente1;
         private funcionario funcionario1;
         private add_funcionario add_funcionario1;
         private responsavel responsavel1;

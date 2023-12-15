@@ -53,6 +53,8 @@ namespace Projeto_Lar3idade_Back_End
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.textBox_Funcao = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -230,7 +232,7 @@ namespace Projeto_Lar3idade_Back_End
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(967, 426);
             this.dataGridView1.TabIndex = 56;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // textBox_Search
             // 
@@ -272,11 +274,30 @@ namespace Projeto_Lar3idade_Back_End
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // textBox_Funcao
+            // 
+            this.textBox_Funcao.Location = new System.Drawing.Point(600, 155);
+            this.textBox_Funcao.Name = "textBox_Funcao";
+            this.textBox_Funcao.Size = new System.Drawing.Size(236, 22);
+            this.textBox_Funcao.TabIndex = 62;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(536, 155);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 22);
+            this.label6.TabIndex = 61;
+            this.label6.Text = "Função";
+            // 
             // funcionario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.textBox_Funcao);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button4);
@@ -334,5 +355,7 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox_Funcao;
+        private System.Windows.Forms.Label label6;
     }
 }
