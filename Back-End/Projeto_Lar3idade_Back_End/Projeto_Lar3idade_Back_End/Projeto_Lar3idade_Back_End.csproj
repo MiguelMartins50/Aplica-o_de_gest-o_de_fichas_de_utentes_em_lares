@@ -134,6 +134,12 @@
     <Compile Include="add_tarefas.Designer.cs">
       <DependentUpon>add_tarefas.cs</DependentUpon>
     </Compile>
+    <Compile Include="add_utente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="add_utente.Designer.cs">
+      <DependentUpon>add_utente.cs</DependentUpon>
+    </Compile>
     <Compile Include="admin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,7 +170,6 @@
     <Compile Include="Edit_respinsavel.Designer.cs">
       <DependentUpon>Edit_respinsavel.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Edit_utentes.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -177,8 +182,6 @@
     <Compile Include="Escalas.Designer.cs">
       <DependentUpon>Escalas.cs</DependentUpon>
     </Compile>
-=======
->>>>>>> fd052066b61fb4e1b0c950187a1173dd1a606b89
     <Compile Include="funcionario.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -241,6 +244,9 @@
     <EmbeddedResource Include="add_tarefas.resx">
       <DependentUpon>add_tarefas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="add_utente.resx">
+      <DependentUpon>add_utente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="admin.resx">
       <DependentUpon>admin.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,15 +262,12 @@
     <EmbeddedResource Include="Edit_respinsavel.resx">
       <DependentUpon>Edit_respinsavel.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Edit_utentes.resx">
       <DependentUpon>Edit_utentes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Escalas.resx">
       <DependentUpon>Escalas.cs</DependentUpon>
     </EmbeddedResource>
-=======
->>>>>>> fd052066b61fb4e1b0c950187a1173dd1a606b89
     <EmbeddedResource Include="funcionario.resx">
       <DependentUpon>funcionario.cs</DependentUpon>
     </EmbeddedResource>
