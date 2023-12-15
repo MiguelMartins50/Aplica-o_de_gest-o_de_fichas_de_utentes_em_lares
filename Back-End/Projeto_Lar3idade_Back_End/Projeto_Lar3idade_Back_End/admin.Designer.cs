@@ -38,9 +38,9 @@ namespace Projeto_Lar3idade_Back_End
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.add_pagamento1 = new Projeto_Lar3idade_Back_End.add_pagamento();
             this.add_quartos1 = new Projeto_Lar3idade_Back_End.add_quartos();
             this.add_tarefas1 = new Projeto_Lar3idade_Back_End.add_tarefas();
             this.quartos1 = new Projeto_Lar3idade_Back_End.quartos();
@@ -54,8 +54,7 @@ namespace Projeto_Lar3idade_Back_End
             this.funcionario1 = new Projeto_Lar3idade_Back_End.funcionario();
             this.add_utente1 = new Projeto_Lar3idade_Back_End.add_utente();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
-            this.escalas1 = new Projeto_Lar3idade_Back_End.Escalas();
-            this.label9 = new System.Windows.Forms.Label();
+            this.add_pagamento1 = new Projeto_Lar3idade_Back_End.add_pagamento();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -145,6 +144,16 @@ namespace Projeto_Lar3idade_Back_End
             this.label5.Text = "Tarefas";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(40, 550);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(191, 27);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Escalas de Serviço";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -166,14 +175,6 @@ namespace Projeto_Lar3idade_Back_End
             this.label8.TabIndex = 8;
             this.label8.Text = "Quartos";
             this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
-            // add_pagamento1
-            // 
-            this.add_pagamento1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_pagamento1.Location = new System.Drawing.Point(296, 64);
-            this.add_pagamento1.Name = "add_pagamento1";
-            this.add_pagamento1.Size = new System.Drawing.Size(1022, 735);
-            this.add_pagamento1.TabIndex = 23;
             // 
             // add_quartos1
             // 
@@ -279,24 +280,13 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1.Size = new System.Drawing.Size(1022, 735);
             this.utentes1.TabIndex = 9;
             // 
-            // escalas1
+            // add_pagamento1
             // 
-            this.escalas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.escalas1.Location = new System.Drawing.Point(296, 66);
-            this.escalas1.Name = "escalas1";
-            this.escalas1.Size = new System.Drawing.Size(1022, 735);
-            this.escalas1.TabIndex = 24;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(41, 555);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(191, 27);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "Escalas de Serviço";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
+            this.add_pagamento1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.add_pagamento1.Location = new System.Drawing.Point(296, 64);
+            this.add_pagamento1.Name = "add_pagamento1";
+            this.add_pagamento1.Size = new System.Drawing.Size(1022, 735);
+            this.add_pagamento1.TabIndex = 23;
             // 
             // admin
             // 
@@ -304,8 +294,6 @@ namespace Projeto_Lar3idade_Back_End
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.escalas1);
             this.Controls.Add(this.add_pagamento1);
             this.Controls.Add(this.add_quartos1);
             this.Controls.Add(this.add_tarefas1);
@@ -322,6 +310,7 @@ namespace Projeto_Lar3idade_Back_End
             this.Controls.Add(this.utentes1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -348,6 +337,7 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private utentes utentes1;
@@ -364,7 +354,5 @@ namespace Projeto_Lar3idade_Back_End
         private add_tarefas add_tarefas1;
         private add_quartos add_quartos1;
         private add_pagamento add_pagamento1;
-        private Escalas escalas1;
-        private System.Windows.Forms.Label label9;
     }
 }
