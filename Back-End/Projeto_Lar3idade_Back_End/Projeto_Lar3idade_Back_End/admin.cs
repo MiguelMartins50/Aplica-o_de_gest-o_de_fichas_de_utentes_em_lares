@@ -17,7 +17,6 @@ namespace Projeto_Lar3idade_Back_End
             
             InitializeComponent();
             add_utente1.Hide();
-            escalas1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -315,7 +314,7 @@ namespace Projeto_Lar3idade_Back_End
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
             label8.BackColor = this.BackColor;
 
@@ -342,7 +341,7 @@ namespace Projeto_Lar3idade_Back_End
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
             label8.BackColor = this.BackColor;
 
@@ -369,7 +368,7 @@ namespace Projeto_Lar3idade_Back_End
             label3.BackColor = Color.White;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
             label8.BackColor = this.BackColor;
 
@@ -396,7 +395,7 @@ namespace Projeto_Lar3idade_Back_End
             label3.BackColor = this.BackColor;
             label4.BackColor = Color.White;
             label5.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
             label8.BackColor = this.BackColor;
 
@@ -423,41 +422,12 @@ namespace Projeto_Lar3idade_Back_End
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = Color.White;
-            label9.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
             label8.BackColor = this.BackColor;
 
 
         }
-        private void label6_Click(object sender, EventArgs e)
-        {
-            add_utente1.Hide();
-            escalas1.Show();
-            add_funcionario1.Hide();
-            add_responsavel1.Hide();
-            add_tarefas1.Hide();
-            add_quartos1.Hide();
-            add_pagamento1.Hide();
-            add_atividade1.Hide();
-            responsavel1.Hide();
-            utentes1.Hide();
-            funcionario1.Hide();
-            atividades1.Hide();
-            tarefas1.Show();
-            pagamentos1.Hide();
-            quartos1.Hide();
-            label1.BackColor = this.BackColor;
-            label2.BackColor = this.BackColor;
-            label3.BackColor = this.BackColor;
-            label4.BackColor = this.BackColor;
-            label5.BackColor = this.BackColor;
-            label9.BackColor = Color.White;
-            label7.BackColor = this.BackColor;
-            label8.BackColor = this.BackColor;
-
-
-        }
-
 
         private void label7_Click(object sender, EventArgs e)
         {
@@ -480,7 +450,7 @@ namespace Projeto_Lar3idade_Back_End
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label7.BackColor = Color.White;
             label8.BackColor = this.BackColor;
 
@@ -507,37 +477,10 @@ namespace Projeto_Lar3idade_Back_End
             label3.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
             label8.BackColor = Color.White;
 
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-            escalas1.Show();
-            add_utente1.Hide();
-            add_funcionario1.Hide();
-            add_responsavel1.Hide();
-            add_tarefas1.Hide();
-            add_quartos1.Hide();
-            add_pagamento1.Hide();
-            add_atividade1.Hide();
-            responsavel1.Hide();
-            utentes1.Hide();
-            funcionario1.Hide();
-            atividades1.Hide();
-            tarefas1.Hide();
-            pagamentos1.Hide();
-            quartos1.Show();
-            label1.BackColor = this.BackColor;
-            label2.BackColor = this.BackColor;
-            label3.BackColor = this.BackColor;
-            label4.BackColor = this.BackColor;
-            label5.BackColor = this.BackColor;
-            label9.BackColor = Color.White;
-            label7.BackColor = this.BackColor;
-            label8.BackColor = this.BackColor;
         }
     }
 }
