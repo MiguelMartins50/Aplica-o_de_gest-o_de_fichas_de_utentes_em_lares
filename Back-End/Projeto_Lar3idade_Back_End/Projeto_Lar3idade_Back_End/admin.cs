@@ -16,12 +16,8 @@ namespace Projeto_Lar3idade_Back_End
         {
             
             InitializeComponent();
-<<<<<<< HEAD
             add_utente1.Hide();
             escalas1.Hide();
-=======
-           
->>>>>>> fd052066b61fb4e1b0c950187a1173dd1a606b89
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -34,8 +30,8 @@ namespace Projeto_Lar3idade_Back_End
             tarefas1.Hide();
             pagamentos1.Hide();
             quartos1.Hide();
-           // utentes1.ButtonClicked += utenteControl2_ButtonClicked;
-           
+            utentes1.ButtonClicked += utenteControl2_ButtonClicked;
+            add_utente1.ButtonClicked += utenteControl1_ButtonClicked;
           //  funcionario1.ButtonClicked += funcControl2_ButtonClicked;
             add_funcionario1.ButtonClicked += funcControl1_ButtonClicked;
             responsavel1.ButtonClicked += respControl2_ButtonClicked;
@@ -52,7 +48,7 @@ namespace Projeto_Lar3idade_Back_End
         private void utenteControl2_ButtonClicked(object sender, EventArgs e)
         {
             // Hide UserControl1 when the button is clicked in UserControl2
-          
+            add_utente1.Show();
             utentes1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
@@ -70,7 +66,7 @@ namespace Projeto_Lar3idade_Back_End
         private void utenteControl1_ButtonClicked(object sender, EventArgs e)
         {
             // Hide UserControl1 when the button is clicked in UserControl2
-           
+            add_utente1.Hide();
             utentes1.Show(); 
             add_funcionario1.Hide();
             add_responsavel1.Hide();
@@ -90,7 +86,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_funcionario1.Show();
             funcionario1.Hide();
-           
+            add_utente1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
             add_quartos1.Hide();
@@ -107,7 +103,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_funcionario1.Hide();
             funcionario1.Show();
-            
+            add_utente1.Hide();
           
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -125,7 +121,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_responsavel1.Show();
             responsavel1.Hide();
-            
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_tarefas1.Hide();
             add_quartos1.Hide();
@@ -142,7 +138,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_responsavel1.Hide();
             responsavel1.Show();
-           
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_tarefas1.Hide();
             add_quartos1.Hide();
@@ -159,7 +155,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_atividade1.Show();
             atividades1.Hide();
-           
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -176,7 +172,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_atividade1.Hide();
             atividades1.Show();
-           
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -193,7 +189,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_tarefas1.Show();
             tarefas1.Hide();
-            
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_quartos1.Hide();
@@ -210,7 +206,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_tarefas1.Hide();
             tarefas1.Show();
-            
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_quartos1.Hide();
@@ -227,7 +223,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_quartos1.Show();
             quartos1.Hide();
-            
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -244,7 +240,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_quartos1.Hide();
             quartos1.Show(); 
-            
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -261,7 +257,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_pagamento1.Show();
             pagamentos1.Hide();
-            
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -278,7 +274,7 @@ namespace Projeto_Lar3idade_Back_End
             // Hide UserControl1 when the button is clicked in UserControl2
             add_pagamento1.Hide();
             pagamentos1.Show();
-          
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -300,7 +296,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label1_Click(object sender, EventArgs e)
         {
-          
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -327,7 +323,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label2_Click(object sender, EventArgs e)
         {
-           
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -354,7 +350,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label3_Click(object sender, EventArgs e)
         {
-            
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -381,7 +377,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label4_Click(object sender, EventArgs e)
         {
-            
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -408,7 +404,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label5_Click(object sender, EventArgs e)
         {
-            
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -465,7 +461,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label7_Click(object sender, EventArgs e)
         {
-           
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -492,7 +488,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label8_Click(object sender, EventArgs e)
         {
-           
+            add_utente1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
