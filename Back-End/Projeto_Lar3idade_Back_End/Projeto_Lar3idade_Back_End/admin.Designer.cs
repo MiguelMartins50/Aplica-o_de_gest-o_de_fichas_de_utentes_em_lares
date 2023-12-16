@@ -41,20 +41,14 @@ namespace Projeto_Lar3idade_Back_End
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.add_quartos1 = new Projeto_Lar3idade_Back_End.add_quartos();
-            this.add_tarefas1 = new Projeto_Lar3idade_Back_End.add_tarefas();
-            this.quartos1 = new Projeto_Lar3idade_Back_End.quartos();
             this.pagamentos1 = new Projeto_Lar3idade_Back_End.pagamentos();
-            this.tarefas1 = new Projeto_Lar3idade_Back_End.tarefas();
-            this.add_atividade1 = new Projeto_Lar3idade_Back_End.add_atividade();
-            this.atividades1 = new Projeto_Lar3idade_Back_End.atividades();
-            this.add_responsavel1 = new Projeto_Lar3idade_Back_End.add_responsavel();
+            this.quartos1 = new Projeto_Lar3idade_Back_End.quartos();
             this.responsavel1 = new Projeto_Lar3idade_Back_End.responsavel();
-            this.add_funcionario1 = new Projeto_Lar3idade_Back_End.add_funcionario();
-            this.funcionario1 = new Projeto_Lar3idade_Back_End.funcionario();
-            this.add_pagamento1 = new Projeto_Lar3idade_Back_End.add_pagamento();
+            this.tarefas1 = new Projeto_Lar3idade_Back_End.tarefas();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
+            this.funcionario1 = new Projeto_Lar3idade_Back_End.funcionario();
             this.escalas1 = new Projeto_Lar3idade_Back_End.Escalas();
+            this.atividades1 = new Projeto_Lar3idade_Back_End.atividades();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -177,21 +171,13 @@ namespace Projeto_Lar3idade_Back_End
             this.label8.Text = "Quartos";
             this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
-            // add_quartos1
+            // pagamentos1
             // 
-            this.add_quartos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_quartos1.Location = new System.Drawing.Point(296, 66);
-            this.add_quartos1.Name = "add_quartos1";
-            this.add_quartos1.Size = new System.Drawing.Size(1022, 735);
-            this.add_quartos1.TabIndex = 22;
-            // 
-            // add_tarefas1
-            // 
-            this.add_tarefas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_tarefas1.Location = new System.Drawing.Point(296, 66);
-            this.add_tarefas1.Name = "add_tarefas1";
-            this.add_tarefas1.Size = new System.Drawing.Size(1022, 735);
-            this.add_tarefas1.TabIndex = 21;
+            this.pagamentos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.pagamentos1.Location = new System.Drawing.Point(296, 64);
+            this.pagamentos1.Name = "pagamentos1";
+            this.pagamentos1.Size = new System.Drawing.Size(1022, 735);
+            this.pagamentos1.TabIndex = 13;
             // 
             // quartos1
             // 
@@ -199,47 +185,7 @@ namespace Projeto_Lar3idade_Back_End
             this.quartos1.Location = new System.Drawing.Point(296, 66);
             this.quartos1.Name = "quartos1";
             this.quartos1.Size = new System.Drawing.Size(1022, 735);
-            this.quartos1.TabIndex = 20;
-            // 
-            // pagamentos1
-            // 
-            this.pagamentos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.pagamentos1.Location = new System.Drawing.Point(296, 58);
-            this.pagamentos1.Name = "pagamentos1";
-            this.pagamentos1.Size = new System.Drawing.Size(1022, 735);
-            this.pagamentos1.TabIndex = 18;
-            // 
-            // tarefas1
-            // 
-            this.tarefas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.tarefas1.Location = new System.Drawing.Point(296, 66);
-            this.tarefas1.Name = "tarefas1";
-            this.tarefas1.Size = new System.Drawing.Size(1022, 735);
-            this.tarefas1.TabIndex = 17;
-            // 
-            // add_atividade1
-            // 
-            this.add_atividade1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_atividade1.Location = new System.Drawing.Point(296, 66);
-            this.add_atividade1.Name = "add_atividade1";
-            this.add_atividade1.Size = new System.Drawing.Size(1022, 735);
-            this.add_atividade1.TabIndex = 16;
-            // 
-            // atividades1
-            // 
-            this.atividades1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.atividades1.Location = new System.Drawing.Point(296, 66);
-            this.atividades1.Name = "atividades1";
-            this.atividades1.Size = new System.Drawing.Size(1022, 735);
-            this.atividades1.TabIndex = 15;
-            // 
-            // add_responsavel1
-            // 
-            this.add_responsavel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_responsavel1.Location = new System.Drawing.Point(296, 66);
-            this.add_responsavel1.Name = "add_responsavel1";
-            this.add_responsavel1.Size = new System.Drawing.Size(1022, 735);
-            this.add_responsavel1.TabIndex = 14;
+            this.quartos1.TabIndex = 12;
             // 
             // responsavel1
             // 
@@ -247,15 +193,23 @@ namespace Projeto_Lar3idade_Back_End
             this.responsavel1.Location = new System.Drawing.Point(296, 66);
             this.responsavel1.Name = "responsavel1";
             this.responsavel1.Size = new System.Drawing.Size(1022, 735);
-            this.responsavel1.TabIndex = 13;
+            this.responsavel1.TabIndex = 11;
             // 
-            // add_funcionario1
+            // tarefas1
             // 
-            this.add_funcionario1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_funcionario1.Location = new System.Drawing.Point(296, 66);
-            this.add_funcionario1.Name = "add_funcionario1";
-            this.add_funcionario1.Size = new System.Drawing.Size(1022, 735);
-            this.add_funcionario1.TabIndex = 12;
+            this.tarefas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.tarefas1.Location = new System.Drawing.Point(296, 66);
+            this.tarefas1.Name = "tarefas1";
+            this.tarefas1.Size = new System.Drawing.Size(1022, 735);
+            this.tarefas1.TabIndex = 10;
+            // 
+            // utentes1
+            // 
+            this.utentes1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.utentes1.Location = new System.Drawing.Point(296, 64);
+            this.utentes1.Name = "utentes1";
+            this.utentes1.Size = new System.Drawing.Size(1022, 735);
+            this.utentes1.TabIndex = 9;
             // 
             // funcionario1
             // 
@@ -263,23 +217,7 @@ namespace Projeto_Lar3idade_Back_End
             this.funcionario1.Location = new System.Drawing.Point(296, 66);
             this.funcionario1.Name = "funcionario1";
             this.funcionario1.Size = new System.Drawing.Size(1022, 735);
-            this.funcionario1.TabIndex = 11;
-            // 
-            // add_pagamento1
-            // 
-            this.add_pagamento1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.add_pagamento1.Location = new System.Drawing.Point(296, 64);
-            this.add_pagamento1.Name = "add_pagamento1";
-            this.add_pagamento1.Size = new System.Drawing.Size(1022, 735);
-            this.add_pagamento1.TabIndex = 23;
-            // 
-            // utentes1
-            // 
-            this.utentes1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.utentes1.Location = new System.Drawing.Point(296, 66);
-            this.utentes1.Name = "utentes1";
-            this.utentes1.Size = new System.Drawing.Size(1022, 735);
-            this.utentes1.TabIndex = 24;
+            this.funcionario1.TabIndex = 14;
             // 
             // escalas1
             // 
@@ -287,7 +225,15 @@ namespace Projeto_Lar3idade_Back_End
             this.escalas1.Location = new System.Drawing.Point(296, 66);
             this.escalas1.Name = "escalas1";
             this.escalas1.Size = new System.Drawing.Size(1022, 735);
-            this.escalas1.TabIndex = 25;
+            this.escalas1.TabIndex = 15;
+            // 
+            // atividades1
+            // 
+            this.atividades1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.atividades1.Location = new System.Drawing.Point(296, 66);
+            this.atividades1.Name = "atividades1";
+            this.atividades1.Size = new System.Drawing.Size(1022, 735);
+            this.atividades1.TabIndex = 16;
             // 
             // admin
             // 
@@ -295,20 +241,14 @@ namespace Projeto_Lar3idade_Back_End
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
-            this.Controls.Add(this.escalas1);
-            this.Controls.Add(this.utentes1);
-            this.Controls.Add(this.add_pagamento1);
-            this.Controls.Add(this.add_quartos1);
-            this.Controls.Add(this.add_tarefas1);
-            this.Controls.Add(this.quartos1);
-            this.Controls.Add(this.pagamentos1);
-            this.Controls.Add(this.tarefas1);
-            this.Controls.Add(this.add_atividade1);
             this.Controls.Add(this.atividades1);
-            this.Controls.Add(this.add_responsavel1);
-            this.Controls.Add(this.responsavel1);
-            this.Controls.Add(this.add_funcionario1);
+            this.Controls.Add(this.escalas1);
             this.Controls.Add(this.funcionario1);
+            this.Controls.Add(this.pagamentos1);
+            this.Controls.Add(this.quartos1);
+            this.Controls.Add(this.responsavel1);
+            this.Controls.Add(this.tarefas1);
+            this.Controls.Add(this.utentes1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -341,19 +281,13 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private funcionario funcionario1;
-        private add_funcionario add_funcionario1;
-        private responsavel responsavel1;
-        private add_responsavel add_responsavel1;
-        private atividades atividades1;
-        private add_atividade add_atividade1;
-        private tarefas tarefas1;
-        private pagamentos pagamentos1;
-        private quartos quartos1;
-        private add_tarefas add_tarefas1;
-        private add_quartos add_quartos1;
-        private add_pagamento add_pagamento1;
         private utentes utentes1;
+        private tarefas tarefas1;
+        private responsavel responsavel1;
+        private quartos quartos1;
+        private pagamentos pagamentos1;
+        private funcionario funcionario1;
         private Escalas escalas1;
+        private atividades atividades1;
     }
 }
