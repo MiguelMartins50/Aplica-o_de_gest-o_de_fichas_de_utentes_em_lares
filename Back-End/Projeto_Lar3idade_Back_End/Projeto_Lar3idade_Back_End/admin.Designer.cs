@@ -52,9 +52,9 @@ namespace Projeto_Lar3idade_Back_End
             this.responsavel1 = new Projeto_Lar3idade_Back_End.responsavel();
             this.add_funcionario1 = new Projeto_Lar3idade_Back_End.add_funcionario();
             this.funcionario1 = new Projeto_Lar3idade_Back_End.funcionario();
-            
-            this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
             this.add_pagamento1 = new Projeto_Lar3idade_Back_End.add_pagamento();
+            this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
+            this.escalas1 = new Projeto_Lar3idade_Back_End.Escalas();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -153,6 +153,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label6.Size = new System.Drawing.Size(191, 27);
             this.label6.TabIndex = 6;
             this.label6.Text = "Escalas de Serviço";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -264,17 +265,6 @@ namespace Projeto_Lar3idade_Back_End
             this.funcionario1.Size = new System.Drawing.Size(1022, 735);
             this.funcionario1.TabIndex = 11;
             // 
-            // add_utente1
-           
-             
-            // utentes1
-            // 
-            this.utentes1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.utentes1.Location = new System.Drawing.Point(296, 66);
-            this.utentes1.Name = "utentes1";
-            this.utentes1.Size = new System.Drawing.Size(1022, 735);
-            this.utentes1.TabIndex = 9;
-            // 
             // add_pagamento1
             // 
             this.add_pagamento1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
@@ -283,12 +273,30 @@ namespace Projeto_Lar3idade_Back_End
             this.add_pagamento1.Size = new System.Drawing.Size(1022, 735);
             this.add_pagamento1.TabIndex = 23;
             // 
+            // utentes1
+            // 
+            this.utentes1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.utentes1.Location = new System.Drawing.Point(296, 66);
+            this.utentes1.Name = "utentes1";
+            this.utentes1.Size = new System.Drawing.Size(1022, 735);
+            this.utentes1.TabIndex = 24;
+            // 
+            // escalas1
+            // 
+            this.escalas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.escalas1.Location = new System.Drawing.Point(296, 66);
+            this.escalas1.Name = "escalas1";
+            this.escalas1.Size = new System.Drawing.Size(1022, 735);
+            this.escalas1.TabIndex = 25;
+            // 
             // admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.escalas1);
+            this.Controls.Add(this.utentes1);
             this.Controls.Add(this.add_pagamento1);
             this.Controls.Add(this.add_quartos1);
             this.Controls.Add(this.add_tarefas1);
@@ -301,8 +309,6 @@ namespace Projeto_Lar3idade_Back_End
             this.Controls.Add(this.responsavel1);
             this.Controls.Add(this.add_funcionario1);
             this.Controls.Add(this.funcionario1);
-            
-            this.Controls.Add(this.utentes1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -335,7 +341,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private utentes utentes1;
         private funcionario funcionario1;
         private add_funcionario add_funcionario1;
         private responsavel responsavel1;
@@ -348,5 +353,7 @@ namespace Projeto_Lar3idade_Back_End
         private add_tarefas add_tarefas1;
         private add_quartos add_quartos1;
         private add_pagamento add_pagamento1;
+        private utentes utentes1;
+        private Escalas escalas1;
     }
 }
