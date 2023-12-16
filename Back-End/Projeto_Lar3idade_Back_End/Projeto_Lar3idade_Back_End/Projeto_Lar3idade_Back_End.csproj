@@ -164,6 +164,12 @@
     <Compile Include="Edit_respinsavel.Designer.cs">
       <DependentUpon>Edit_respinsavel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Escalas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Escalas.Designer.cs">
+      <DependentUpon>Escalas.cs</DependentUpon>
+    </Compile>
     <Compile Include="funcionario.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -240,6 +246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Edit_respinsavel.resx">
       <DependentUpon>Edit_respinsavel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Escalas.resx">
+      <DependentUpon>Escalas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="funcionario.resx">
       <DependentUpon>funcionario.cs</DependentUpon>

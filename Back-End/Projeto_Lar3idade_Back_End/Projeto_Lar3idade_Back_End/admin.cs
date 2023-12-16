@@ -16,7 +16,7 @@ namespace Projeto_Lar3idade_Back_End
         {
             
             InitializeComponent();
-           
+            escalas1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -295,7 +295,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label1_Click(object sender, EventArgs e)
         {
-          
+            escalas1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -322,7 +322,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label2_Click(object sender, EventArgs e)
         {
-           
+            escalas1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -349,7 +349,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label3_Click(object sender, EventArgs e)
         {
-            
+            escalas1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -376,7 +376,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label4_Click(object sender, EventArgs e)
         {
-            
+            escalas1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -403,7 +403,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label5_Click(object sender, EventArgs e)
         {
-            
+            escalas1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -431,7 +431,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label7_Click(object sender, EventArgs e)
         {
-           
+            escalas1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -458,7 +458,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label8_Click(object sender, EventArgs e)
         {
-           
+            escalas1.Hide();
             add_funcionario1.Hide();
             add_responsavel1.Hide();
             add_tarefas1.Hide();
@@ -481,6 +481,32 @@ namespace Projeto_Lar3idade_Back_End
             label7.BackColor = this.BackColor;
             label8.BackColor = Color.White;
 
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            escalas1.Show();
+            add_funcionario1.Hide();
+            add_responsavel1.Hide();
+            add_tarefas1.Hide();
+            add_quartos1.Hide();
+            add_pagamento1.Hide();
+            add_atividade1.Hide();
+            responsavel1.Hide();
+            utentes1.Hide();
+            funcionario1.Hide();
+            atividades1.Hide();
+            tarefas1.Hide();
+            pagamentos1.Hide();
+            quartos1.Hide();
+            label1.BackColor = this.BackColor;
+            label2.BackColor = this.BackColor;
+            label3.BackColor = this.BackColor;
+            label4.BackColor = this.BackColor;
+            label5.BackColor = this.BackColor;
+            label6.BackColor = Color.White;
+            label7.BackColor = this.BackColor;
+            label8.BackColor = this.BackColor;
         }
     }
 }
