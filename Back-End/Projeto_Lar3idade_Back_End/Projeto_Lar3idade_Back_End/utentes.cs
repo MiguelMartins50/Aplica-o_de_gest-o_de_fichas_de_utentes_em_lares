@@ -16,7 +16,7 @@ namespace Projeto_Lar3idade_Back_End
         private Dictionary<string, string> medico_ = new Dictionary<string, string>();
         private int idQuarto;
         private int idMedico;
-
+        private string medico_nome;
         private int idUtente; // Adicione esta variável para rastrear o IdUtente
 
         public utentes()
@@ -269,14 +269,22 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Select * from mydb.utente";
+            cmd.CommandText = "SELECT utente.*, medico.nome AS nome_medico FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico ORDER BY idUtente ASC;";
+
             cmd.ExecuteNonQuery();
             DataTable dta = new DataTable();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
             dataadapter.Fill(dta);
+            if (dta.Rows.Count > 0)
+            {
+                // Assuming that Medico_idMedico is of integer type, you may need to cast it accordingly
+                idMedico = Convert.ToInt32(dta.Rows[0]["Medico_idMedico"]);
+                medico_nome = Convert.ToString(dta.Rows[0]["nome_medico"]);
+            }
             dataGridView1.DataSource = dta;
             conexao.Close();
         }
+
 
         private void Mostrar_Click(object sender, EventArgs e)
         {
@@ -364,9 +372,17 @@ namespace Projeto_Lar3idade_Back_End
 
                 MySqlCommand cmd = conexao.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT * FROM mydb.utente WHERE idUtente = @IdUtente";
+                cmd.CommandText = "SELECT utente.*, medico.nome AS nome_medico FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico WHERE idUtente = @IdUtente";
                 cmd.Parameters.AddWithValue("@IdUtente", idUtenteParaEditar);
-
+                DataTable dta = new DataTable();
+                MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
+                dataadapter.Fill(dta);
+                if (dta.Rows.Count > 0)
+                {
+                    // Assuming that Medico_idMedico is of integer type, you may need to cast it accordingly
+                    idMedico = Convert.ToInt32(dta.Rows[0]["Medico_idMedico"]);
+                    medico_nome = Convert.ToString(dta.Rows[0]["nome_medico"]);
+                }
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
@@ -375,7 +391,7 @@ namespace Projeto_Lar3idade_Back_End
                         idUtente = idUtenteParaEditar;
 
                         // Preenche os campos com os dados do utente
-                        comboBox_medico.Text = reader["nome"].ToString();
+                        comboBox_medico.Text = medico_nome;
                         textBox_Name.Text = reader["nome"].ToString();
                         textBox_Cc.Text = reader["numero_cc"].ToString();
                         dateTimePicker_DtaValidade.Value = Convert.ToDateTime(reader["data_validade"]);
