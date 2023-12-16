@@ -26,6 +26,7 @@ namespace Projeto_Lar3idade_Back_End
         private string nome_func = "";
         private string estado;
         private int idescala_func;
+        private int idescala_med;
         private int idescala;
         private int month;
         private int year;
@@ -42,6 +43,10 @@ namespace Projeto_Lar3idade_Back_End
         {
             InitializeComponent();
             conexao = new MySqlConnection(connectionString);
+            comboBox3.Items.Add("trabalho");
+            comboBox3.Items.Add("folga");
+            comboBox3.Items.Add("falta");
+            comboBox3.Items.Add("falta Justificada");
             display_data();
 
         }
@@ -51,23 +56,16 @@ namespace Projeto_Lar3idade_Back_End
             if (comboBox1.SelectedItem != null)
             {
                 string selectedValue = comboBox1.SelectedItem.ToString();
-                if (mes_begin.TryGetValue(selectedValue, out string date_begin))
+                if (mes_begin.TryGetValue(selectedValue, out string id))
                 {
-                    data_inicio = Convert.ToDateTime(date_begin);
+                    idescala = Convert.ToInt32(id);
                     Console.WriteLine(data_inicio);
                     Console.WriteLine("IN_time");
                     display_data();
                     control = 1;
 
                 }
-                if (mes_end.TryGetValue(selectedValue, out string date_end))
-                {
-                    data_fim = Convert.ToDateTime(date_end);
-                    Console.WriteLine(data_inicio);
-                    Console.WriteLine("IN_time");
-                    display_data();
-                    control = 1;
-                }
+                
             }
         }
         private void Reload()
@@ -101,16 +99,16 @@ namespace Projeto_Lar3idade_Back_End
                         while (reader.Read())
                         {
                             // Add data to the list
+
                             data_inicio = Convert.ToDateTime(reader["data_inicial"]);
                             data_fim = Convert.ToDateTime(reader["data_final"]);
-                            string data_begin = Convert.ToString(reader["data_inicial"]);
-                            string data_end = Convert.ToString(reader["data_final"]);
+                            string id = Convert.ToString(reader["idEscala_servico"]);
                             Console.WriteLine(data_inicio);
                             Console.WriteLine(data_fim);
                             string month = data_inicio.ToString("MMMM yyyy", new System.Globalization.CultureInfo("pt-BR"));
                             comboBox1.Items.Add(month);
-                            mes_begin[month] = data_begin;
-                            mes_end[month] = data_end;
+                            mes_begin[month] = id;
+                           
                         }
                     }
                 }
@@ -140,33 +138,34 @@ namespace Projeto_Lar3idade_Back_End
                             Console.WriteLine(nome);
                             Console.WriteLine(id);
                             Console.WriteLine(tipo);
-                            tipo_func = tipo;
+                           
                             nome_func = nome;
-                            comboBox2.Items.Add(nome_func +" "+tipo_func);
+                            comboBox2.Items.Add(nome_func);
                             func_id[nome] = id;
                             func_type[nome] = tipo;
                         }
                     }
                 }
-
-
                 comboBox1.SelectedIndex = 0;
                 comboBox2.SelectedIndex = 0;
+
             }
-
-
+          
+            Console.WriteLine(tipo_func);
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
             if (tipo_func == "Funcionario")
             {
-                cmd.CommandText = "SELECT  Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM funcionario_escala WHERE Funcionario_idFuncionario = @funcionario;";
+                cmd.CommandText = "SELECT idFuncionario_Escala, Escala_servico_idEscala_servico,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM funcionario_escala WHERE Funcionario_idFuncionario = @funcionario AND Escala_servico_idEscala_servico = @idescala;";
                 cmd.Parameters.AddWithValue("@funcionario", id_func);
+                cmd.Parameters.AddWithValue("@idescala", idescala);
                 Console.WriteLine("IN_FUNC");
             }
             if (tipo_func == "Medico")
             {
-                cmd.CommandText = "SELECT Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM escala_medico WHERE Medico_idMedico = @medico;";
+                cmd.CommandText = "SELECT idEscala_Medico,Escala_servico_idEscala_servico,Dia,dia_da_semana,horario_inicio,horario_fim,estado FROM escala_medico WHERE Medico_idMedico = @medico AND Escala_servico_idEscala_servico = @idescala;";
                 cmd.Parameters.AddWithValue("@medico", id_func);
+                cmd.Parameters.AddWithValue("@idescala", idescala);
                 Console.WriteLine("IN_MED");
             }
 
@@ -175,10 +174,7 @@ namespace Projeto_Lar3idade_Back_End
             MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
             dataadapter.Fill(dta);
             dataGridView1.DataSource = dta;
-            comboBox3.Items.Add("Trabalho");
-            comboBox3.Items.Add("Folga");
-            comboBox3.Items.Add("Falta");
-            comboBox3.Items.Add("Falta Justificada");
+            
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -209,13 +205,14 @@ namespace Projeto_Lar3idade_Back_End
                     control = 1;
 
                 }
+                Console.WriteLine("tipo: "+ tipo_func);
                 display_data();
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            display_data();
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -225,6 +222,186 @@ namespace Projeto_Lar3idade_Back_End
                 estado = comboBox3.SelectedItem.ToString();
             }
 
+        }
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {   
+                if(tipo_func == "Funcionario")
+                {
+                    int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idFuncionario_Escala"].Value);
+                    Console.WriteLine("id_func: "+ idescalaParaEditar);
+                    PreencherCamposParaEdicao(idescalaParaEditar);
+                }
+                if (tipo_func == "Medico")
+                {
+                    int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idEscala_Medico"].Value);
+                    Console.WriteLine("id_med: "+idescalaParaEditar);
+
+                    PreencherCamposParaEdicao(idescalaParaEditar);
+                }
+
+            }
+        }
+        private void PreencherCamposParaEdicao(int idescalaParaEditar)
+        {
+
+            try
+            {
+                if (conexao.State != ConnectionState.Open)
+                {
+                    conexao.Open();
+                }
+
+                MySqlCommand cmd = conexao.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                if (tipo_func == "Funcionario")
+                {
+                    cmd.CommandText = "SELECT idFuncionario_Escala,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM funcionario_escala WHERE idFuncionario_Escala = @idescala_func";
+                    cmd.Parameters.AddWithValue("@idescala_func", idescalaParaEditar);
+                    DataTable dta = new DataTable();
+                    
+                    MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
+                    dataadapter.Fill(dta);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Atualize a variável idUtente com o valor do idUtenteParaEditar
+                            
+                                estado = Convert.ToString(dta.Rows[0]["estado"]);
+                                Console.WriteLine(estado + " :estado1-func");
+                                idescala_func = idescalaParaEditar;
+                            
+                                
+                          
+
+
+                            // Preenche os campos com os dados do utente
+                            Console.WriteLine(estado + " :estado2-func");
+
+                            comboBox3.Text = estado;
+                            textBox1.Text = reader["horario_inicio"].ToString();
+                            textBox2.Text = reader["horario_fim"].ToString();
+
+                        }
+                    }
+                }
+                if (tipo_func == "Medico")
+                {
+                    cmd.CommandText = "SELECT idEscala_Medico,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM escala_medico WHERE Medico_idMedico = @Idescala_med";
+                    cmd.Parameters.AddWithValue("@Idescala_med", idescalaParaEditar);
+                    DataTable dta = new DataTable();
+
+                    MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
+                    dataadapter.Fill(dta);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Atualize a variável idUtente com o valor do idUtenteParaEditar
+                                estado = Convert.ToString(dta.Rows[0]["estado"]);
+                                Console.WriteLine(estado + " :estado1-func");
+                                idescala_med = idescalaParaEditar;
+
+
+                            // Preenche os campos com os dados do utente
+                            Console.WriteLine(estado + " :estado2-med");
+
+                            comboBox3.Text = estado;
+                            textBox1.Text = reader["horario_inicio"].ToString();
+                            textBox2.Text = reader["horario_fim"].ToString();
+
+                        }
+                    }
+                }
+                
+               
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao obter dados do utente para edição: " + ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = conexao.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                if(tipo_func == "Funcionario")
+                {
+                    if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox2.Text))
+                    {
+                        // Obtém o valor do idUtente dos TextBoxes
+                        // Utilizando parâmetros para prevenir injeção de SQL
+                        cmd.CommandText = "UPDATE `mydb`.`funcionario_escala` SET `horario_inicio` = @horario_inicio, `horario_fim` = @horario_fim, `estado` = @estado WHERE (`idFuncionario_Escala` = @idFuncionario_Escala);";
+
+                        // Adicionando parâmetros
+                        cmd.Parameters.AddWithValue("@horario_inicio", Convert.ToDateTime(textBox1.Text).TimeOfDay);
+                        cmd.Parameters.AddWithValue("@horario_fim", Convert.ToDateTime(textBox2.Text).TimeOfDay);
+                        cmd.Parameters.AddWithValue("@estado", comboBox3.Text);
+                        cmd.Parameters.AddWithValue("@idFuncionario_Escala", idescala_func);
+
+                        // Executando o comando
+                        cmd.ExecuteNonQuery();
+                        conexao.Close();
+
+                        // Limpando os campos e atualizando a exibição dos dados
+                        display_data();
+
+                        MessageBox.Show("Dados da escala atualizados com sucesso");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor, selecione uma linha para editar ou preencha os campos obrigatórios.");
+                    }
+                }
+                if (tipo_func == "Medico")
+                {
+                    if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox2.Text))
+                    {
+                        // Obtém o valor do idUtente dos TextBoxes
+                        // Utilizando parâmetros para prevenir injeção de SQL
+cmd.CommandText = "UPDATE `mydb`.`escala_medico` SET `horario_inicio` = @horario_inicio, `horario_fim` = @horario_fim, `estado` = @estado WHERE (`idEscala_Medico` = @idEscala_Medico);";
+
+                        // Adicionando parâmetros
+                        cmd.Parameters.AddWithValue("@horario_inicio",Convert.ToDateTime(textBox1.Text).TimeOfDay);
+                        cmd.Parameters.AddWithValue("@horario_fim",Convert.ToDateTime(textBox2.Text).TimeOfDay);
+                        cmd.Parameters.AddWithValue("@estado", comboBox3.Text);
+                        cmd.Parameters.AddWithValue("@idEscala_Medico", idescala_med);
+
+                        // Executando o comando
+                        cmd.ExecuteNonQuery();
+                        conexao.Close();
+
+                        // Limpando os campos e atualizando a exibição dos dados
+                        display_data();
+
+                        MessageBox.Show("Dados da escala atualizados com sucesso");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor, selecione uma linha para editar ou preencha os campos obrigatórios.");
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao atualizar dados das escalas: " + ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
         }
     }
 }
