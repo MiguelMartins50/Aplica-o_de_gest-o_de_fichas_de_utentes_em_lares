@@ -41,14 +41,14 @@ namespace Projeto_Lar3idade_Back_End
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.atividades1 = new Projeto_Lar3idade_Back_End.atividades();
+            this.escalas1 = new Projeto_Lar3idade_Back_End.Escalas();
+            this.funcionario1 = new Projeto_Lar3idade_Back_End.funcionario();
             this.pagamentos1 = new Projeto_Lar3idade_Back_End.pagamentos();
             this.quartos1 = new Projeto_Lar3idade_Back_End.quartos();
             this.responsavel1 = new Projeto_Lar3idade_Back_End.responsavel();
             this.tarefas1 = new Projeto_Lar3idade_Back_End.tarefas();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
-            this.funcionario1 = new Projeto_Lar3idade_Back_End.funcionario();
-            this.escalas1 = new Projeto_Lar3idade_Back_End.Escalas();
-            this.atividades1 = new Projeto_Lar3idade_Back_End.atividades();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -86,6 +86,7 @@ namespace Projeto_Lar3idade_Back_End
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(40, 175);
             this.label1.Name = "label1";
@@ -171,6 +172,30 @@ namespace Projeto_Lar3idade_Back_End
             this.label8.Text = "Quartos";
             this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
+            // atividades1
+            // 
+            this.atividades1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.atividades1.Location = new System.Drawing.Point(296, 66);
+            this.atividades1.Name = "atividades1";
+            this.atividades1.Size = new System.Drawing.Size(1022, 735);
+            this.atividades1.TabIndex = 16;
+            // 
+            // escalas1
+            // 
+            this.escalas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.escalas1.Location = new System.Drawing.Point(296, 66);
+            this.escalas1.Name = "escalas1";
+            this.escalas1.Size = new System.Drawing.Size(1022, 735);
+            this.escalas1.TabIndex = 15;
+            // 
+            // funcionario1
+            // 
+            this.funcionario1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.funcionario1.Location = new System.Drawing.Point(296, 66);
+            this.funcionario1.Name = "funcionario1";
+            this.funcionario1.Size = new System.Drawing.Size(1022, 735);
+            this.funcionario1.TabIndex = 14;
+            // 
             // pagamentos1
             // 
             this.pagamentos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
@@ -210,30 +235,6 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1.Name = "utentes1";
             this.utentes1.Size = new System.Drawing.Size(1022, 735);
             this.utentes1.TabIndex = 9;
-            // 
-            // funcionario1
-            // 
-            this.funcionario1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.funcionario1.Location = new System.Drawing.Point(296, 66);
-            this.funcionario1.Name = "funcionario1";
-            this.funcionario1.Size = new System.Drawing.Size(1022, 735);
-            this.funcionario1.TabIndex = 14;
-            // 
-            // escalas1
-            // 
-            this.escalas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.escalas1.Location = new System.Drawing.Point(296, 66);
-            this.escalas1.Name = "escalas1";
-            this.escalas1.Size = new System.Drawing.Size(1022, 735);
-            this.escalas1.TabIndex = 15;
-            // 
-            // atividades1
-            // 
-            this.atividades1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.atividades1.Location = new System.Drawing.Point(296, 66);
-            this.atividades1.Name = "atividades1";
-            this.atividades1.Size = new System.Drawing.Size(1022, 735);
-            this.atividades1.TabIndex = 16;
             // 
             // admin
             // 

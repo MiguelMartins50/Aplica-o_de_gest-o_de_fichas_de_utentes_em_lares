@@ -42,22 +42,22 @@ namespace Projeto_Lar3idade_Back_End
                 // Abra a conexão
                 conexao.Open();
 
-                // Consulta SQL para verificar o login
-                string query = $"SELECT COUNT(*) FROM mydb.funcionario WHERE email='{email}' AND senha='{senha}'";
-                MySqlCommand cmd = new MySqlCommand(query, conexao);
+                // Consulta SQL para verificar o login como funcionario
+                string queryFuncionario = $"SELECT COUNT(*) FROM mydb.funcionario WHERE email='{email}' AND senha='{senha}'";
+                MySqlCommand cmdFuncionario = new MySqlCommand(queryFuncionario, conexao);
 
-                // Execute a consulta e obtenha o resultado
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                // Execute a consulta e obtenha o resultado como funcionario
+                int countFuncionario = Convert.ToInt32(cmdFuncionario.ExecuteScalar());
 
-                // Verifique se o login foi bem-sucedido
-                if (count > 0)
+                // Verifique se o login como funcionario foi bem-sucedido
+                if (countFuncionario > 0)
+                {
                     // Verifica se o email é do administrador
                     if (email.Equals("Admin01@gmail.com", StringComparison.OrdinalIgnoreCase))
                     {
-                        MessageBox.Show("Login bem-sucedido!");
+                        MessageBox.Show("Login bem-sucedido como administrador!");
 
                         // link pra outra tela
-
                         admin admin = new admin();
                         admin.Show();
 
@@ -66,8 +66,41 @@ namespace Projeto_Lar3idade_Back_End
                     }
                     else
                     {
+                        MessageBox.Show("Login bem-sucedido como funcionario!");
+
+                        // link pra outra tela para funcionario (replace 'YourFuncionarioForm' with the actual form for funcionario)
+                        Funcionario_Pagina Funcionario_Pagina = new Funcionario_Pagina();
+                        Funcionario_Pagina.Show();
+
+                        // Feche este formulário de login 
+                        this.Hide();
+                    }
+                }
+                else
+                {
+                    // If login as funcionario fails, check in the "medico" table
+                    string queryMedico = $"SELECT COUNT(*) FROM mydb.medico WHERE email='{email}' AND senha='{senha}'";
+                    MySqlCommand cmdMedico = new MySqlCommand(queryMedico, conexao);
+
+                    int countMedico = Convert.ToInt32(cmdMedico.ExecuteScalar());
+
+                    // Check if login as medico is successful
+                    if (countMedico > 0)
+                    {
+                        MessageBox.Show("Login bem-sucedido como medico!");
+
+                        // link pra outra tela para medico (replace 'YourMedicoForm' with the actual form for medico)
+                        /*YourMedicoForm medicoForm = new YourMedicoForm();
+                        medicoForm.Show();*/
+
+                        // Feche este formulário de login 
+                        this.Hide();
+                    }
+                    else
+                    {
                         MessageBox.Show("Login falhou. Verifique suas credenciais.");
                     }
+                }
 
 
             }
