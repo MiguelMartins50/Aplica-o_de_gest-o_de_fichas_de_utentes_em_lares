@@ -268,9 +268,9 @@ namespace Projeto_Lar3idade_Back_End
             this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
             this.button5.Location = new System.Drawing.Point(320, 262);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(77, 28);
+            this.button5.Size = new System.Drawing.Size(137, 28);
             this.button5.TabIndex = 60;
-            this.button5.Text = "Mostrar";
+            this.button5.Text = "Atualizar/Limpar";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

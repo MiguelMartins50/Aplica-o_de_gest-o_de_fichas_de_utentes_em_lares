@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Projeto_Lar3idade_Back_End
 {
@@ -64,7 +65,19 @@ namespace Projeto_Lar3idade_Back_End
         private void button5_Click(object sender, EventArgs e)
         {
             display_data();
+            LimparTextBoxes();
 
+        }
+        private void LimparTextBoxes()
+        {
+            // Limpar todos os controles TextBox e outros controles conforme necessário
+            foreach (Control control in Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Clear();
+                }
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

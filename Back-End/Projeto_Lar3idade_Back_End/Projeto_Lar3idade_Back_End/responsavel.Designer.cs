@@ -105,9 +105,9 @@ namespace Projeto_Lar3idade_Back_End
             this.Mostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
             this.Mostrar.Location = new System.Drawing.Point(316, 334);
             this.Mostrar.Name = "Mostrar";
-            this.Mostrar.Size = new System.Drawing.Size(77, 28);
+            this.Mostrar.Size = new System.Drawing.Size(149, 28);
             this.Mostrar.TabIndex = 112;
-            this.Mostrar.Text = "Mostrar";
+            this.Mostrar.Text = "Atualizar/Limpar";
             this.Mostrar.UseVisualStyleBackColor = false;
             this.Mostrar.Click += new System.EventHandler(this.Mostrar_Click);
             // 

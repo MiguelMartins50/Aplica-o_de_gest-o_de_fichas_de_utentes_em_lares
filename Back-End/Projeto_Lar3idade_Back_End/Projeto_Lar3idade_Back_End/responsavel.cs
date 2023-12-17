@@ -270,6 +270,10 @@ namespace Projeto_Lar3idade_Back_End
             textBox_email.Clear();
             textBox3_senha.Clear();
             textBox1_parentesco.Clear();
+            // Limpar outras ComboBoxes e controles conforme necessário
+            comboBox1_Utente.SelectedIndex = -1;
+            comboBox2_Utente.SelectedIndex = -1;
+            comboBox3_Utente.SelectedIndex = -1;
         }
         
         private void button_update_Click(object sender, EventArgs e)
@@ -406,6 +410,7 @@ namespace Projeto_Lar3idade_Back_End
         private void Mostrar_Click(object sender, EventArgs e)
         {
             display_data();
+            LimparTextBoxes();
         }
 
         private void button_Search_Click(object sender, EventArgs e)
@@ -592,6 +597,8 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_telemovel.Text = selectedRow.Cells["telemovel"].Value.ToString();
                 textBox_email.Text = selectedRow.Cells["email"].Value.ToString(); 
                 textBox1_parentesco.Text = selectedRow.Cells["parentesco_relacao"].Value.ToString();
+                textBox2_parentesco.Text = selectedRow.Cells["parentesco_relacao"].Value.ToString();
+                textBox3_parentesco.Text = selectedRow.Cells["parentesco_relacao"].Value.ToString();
                 textBox_morada.Text = selectedRow.Cells["morada"].Value.ToString();
                 textBox_codPostal.Text = selectedRow.Cells["cod_postal"].Value.ToString();
                 textBox_ocupacao.Text = selectedRow.Cells["ocupacao"].Value.ToString();

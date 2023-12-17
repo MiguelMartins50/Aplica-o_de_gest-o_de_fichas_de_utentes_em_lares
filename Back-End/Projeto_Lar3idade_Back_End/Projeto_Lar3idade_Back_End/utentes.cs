@@ -21,6 +21,7 @@ namespace Projeto_Lar3idade_Back_End
 
         public utentes()
         {
+           
             InitializeComponent();
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
@@ -222,6 +223,7 @@ namespace Projeto_Lar3idade_Back_End
             {
                 MessageBox.Show("Nenhum resultado encontrado.");
             }
+            
         }
 
         private void button_delete_Click(object sender, EventArgs e)
@@ -289,6 +291,7 @@ namespace Projeto_Lar3idade_Back_End
         private void Mostrar_Click(object sender, EventArgs e)
         {
             display_data();
+            LimparTextBoxes();
         }
 
         private void button_update_Click(object sender, EventArgs e)
