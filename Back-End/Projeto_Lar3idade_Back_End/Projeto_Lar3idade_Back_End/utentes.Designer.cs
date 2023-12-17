@@ -115,7 +115,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // Mostrar
             // 
-            this.Mostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
+            this.Mostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.Mostrar.Location = new System.Drawing.Point(316, 345);
             this.Mostrar.Name = "Mostrar";
             this.Mostrar.Size = new System.Drawing.Size(137, 28);
