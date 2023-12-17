@@ -265,13 +265,15 @@ namespace Projeto_Lar3idade_Back_End
                             }
 
                         }
-                        string insertFuncionarioEscalaQuery = "INSERT INTO funcionario_escala (idFuncionario_Escala,Funcionario_idFuncionario, Escala_servico_idEscala_servico, Dia, horario_inicio, horario_fim, estado) VALUES (@idFuncionario_Escala,@funcionario, @idescala, @dia, @horario_inicio, @horario_fim, @estado);";
+                        string insertFuncionarioEscalaQuery = "INSERT INTO funcionario_escala (idFuncionario_Escala,Funcionario_idFuncionario, Escala_servico_idEscala_servico, Dia,dia_da_semana, horario_inicio, horario_fim, estado) VALUES (@idFuncionario_Escala,@funcionario, @idescala, @dia, @dia_da_semana, @horario_inicio, @horario_fim, @estado);";
                         using (MySqlCommand cmdInsertFuncionarioEscala = new MySqlCommand(insertFuncionarioEscalaQuery, conexao))
                         {
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@idFuncionario_Escala", idADD2);
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@funcionario", id_func);
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@idescala", idescala);
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@dia", data_create);
+                            string dia_da_semana = data_create.ToString("dddd", new System.Globalization.CultureInfo("pt-BR"));
+                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@dia_da_semana", dia_da_semana);
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@horario_inicio", "00:00:00"); // Replace with your logic for setting the start time
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@horario_fim", "00:00:00"); // Replace with your logic for setting the end time
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@estado", "Sem Estado"); // Replace with your logic for setting the estado
@@ -310,13 +312,15 @@ namespace Projeto_Lar3idade_Back_End
                             }
 
                         }
-                        string insertEscalaMedicoQuery = "INSERT INTO escala_medico (idEscala_Medico,Medico_idMedico, Escala_servico_idEscala_servico, Dia, horario_inicio, horario_fim, estado) VALUES (@idEscala_Medico,@medico, @idescala, @dia, @horario_inicio, @horario_fim, @estado);";
+                        string insertEscalaMedicoQuery = "INSERT INTO escala_medico (idEscala_Medico,Medico_idMedico, Escala_servico_idEscala_servico, Dia,dia_da_semana, horario_inicio, horario_fim, estado) VALUES (@idEscala_Medico,@medico, @idescala, @dia,@dia_da_semana, @horario_inicio, @horario_fim, @estado);";
                         using (MySqlCommand cmdInsertEscalaMedico = new MySqlCommand(insertEscalaMedicoQuery, conexao))
                         {
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@idEscala_Medico", idADD3);
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@medico", id_func);
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@idescala", idescala);
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@dia", data_create);
+                            string dia_da_semana = data_create.ToString("dddd", new System.Globalization.CultureInfo("pt-BR"));
+                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@dia_da_semana", dia_da_semana);
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@horario_inicio", "00:00:00"); // Replace with your logic for setting the start time
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@horario_fim", "00:00:00"); // Replace with your logic for setting the end time
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@estado", "Sem Estado"); // Replace with your logic for setting the estado
