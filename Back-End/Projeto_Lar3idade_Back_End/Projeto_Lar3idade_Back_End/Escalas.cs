@@ -31,8 +31,9 @@ namespace Projeto_Lar3idade_Back_End
         private int idADD;
         private int idADD2;
         private int idADD3;
+        private string titulo = "";
         private DateTime Lastmonth;
-        
+
 
 
 
@@ -48,9 +49,12 @@ namespace Projeto_Lar3idade_Back_End
             comboBox3.Items.Add("folga");
             comboBox3.Items.Add("falta");
             comboBox3.Items.Add("falta Justificada");
+            Loadcomboboxes();
             display_data();
-
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
         }
+        
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -66,24 +70,23 @@ namespace Projeto_Lar3idade_Back_End
                     control = 1;
 
                 }
-                
+
             }
         }
-        private void display_data()
+        private void Loadcomboboxes()
         {
-
+            int count = 1;
             if (conexao.State != ConnectionState.Open)
             {
                 conexao.Open();
             }
-
+            Console.WriteLine("Begining");
             if (control == 0)
             {
-                Console.WriteLine("Begining");
-
                 // Query for the first MySqlCommand
                 string query1 = "SELECT * FROM escala_servico ORDER BY data_inicial;";
-                Console.WriteLine();
+                Console.WriteLine("escalas");
+                comboBox1.DataSource = null;
                 using (MySqlCommand command1 = new MySqlCommand(query1, conexao))
                 {
                     // Execute the first query
@@ -104,18 +107,18 @@ namespace Projeto_Lar3idade_Back_End
                             Console.WriteLine(data_inicio);
                             Console.WriteLine(data_fim);
                             string month = data_inicio.ToString("MMMM yyyy", new System.Globalization.CultureInfo("pt-BR"));
-                            comboBox1.Items.Add(month);
+                            comboBox1.Items.Add(data_inicio.ToString("MMMM yyyy", new System.Globalization.CultureInfo("pt-BR")));
                             mes_begin[month] = id;
-                           
+
                         }
                     }
                 }
-
                 Console.WriteLine("Begining_func");
 
                 // Query for the second MySqlCommand
                 string query2 = "SELECT nome, idFuncionario as id, 'Funcionario' as tipo FROM funcionario UNION SELECT nome, idMedico as id, 'Medico' as tipo FROM medico;";
                 Console.WriteLine();
+
                 using (MySqlCommand command2 = new MySqlCommand(query2, conexao))
                 {
                     // Execute the second query
@@ -136,19 +139,32 @@ namespace Projeto_Lar3idade_Back_End
                             Console.WriteLine(nome);
                             Console.WriteLine(id);
                             Console.WriteLine(tipo);
-                           
+                            tipo_func = tipo;
                             nome_func = nome;
-                            comboBox2.Items.Add(nome_func);
-                            func_id[nome] = id;
-                            func_type[nome] = tipo;
+                            if (tipo_func == "Funcionario")
+                                titulo = nome_func + " Funcionario";
+                            if (tipo_func == "Medico")
+                                titulo = nome_func + " Medico";
+                            comboBox2.Items.Add(titulo);
+                            string countstr = Convert.ToString(count);
+                            func_id[titulo] = id;
+                            func_type[titulo] = tipo;
+                            count++;
+                            Console.WriteLine("counter:"+countstr);
+
+
                         }
                     }
                 }
-                comboBox1.SelectedIndex = 0;
-                comboBox2.SelectedIndex = 0;
 
             }
-          
+        }
+        private void display_data()
+        {
+            if (conexao.State != ConnectionState.Open)
+            {
+                conexao.Open();
+            }
             Console.WriteLine(tipo_func);
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
@@ -172,80 +188,66 @@ namespace Projeto_Lar3idade_Back_End
             MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
             dataadapter.Fill(dta);
             dataGridView1.DataSource = dta;
-            
+
         }
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Tem a certeza que quer criar um novo mês de escalas?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
-
+                CriarEscalaServico();
             }
 
 
         }
+
         private void CriarEscalaServico()
         {
+            int count = 1;
+            Console.WriteLine($"Month: {Lastmonth.Month}, Year: {Lastmonth.Year}");
+            int counter = 0;
             int dateadd;
             DateTime data_create = Lastmonth.AddDays(1);
-            if (Lastmonth.Month != 2)
+            if (Lastmonth.Month == 2)
             {
-                if (Lastmonth.Month % 2 == 0)
-                    dateadd = 30;
+
+                // February
+                if (IsLeapYear(Lastmonth.Year))
+                    dateadd = 29; // Leap year
                 else
-                    dateadd = 31;
+                    dateadd = 28; // Non-leap year
+                Console.WriteLine("F");
 
             }
+            else if (Lastmonth.Month == 4 || Lastmonth.Month == 6 || Lastmonth.Month == 9 || Lastmonth.Month == 11)
+            {
+                // April, June, September, November
+                dateadd = 30;
+                Console.WriteLine("A-J-S-N");
+            }
             else
-                dateadd = 28;
+            {
+                // Other months (excluding February, April, June, September, November)
+                dateadd = 31;
+                Console.WriteLine("J-M-M-J-A-O-D");
+
+            }
+            bool IsLeapYear(int year)
+            {
+                return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+            }
+            // ...
+
+            // Function to check if a year is a leap year
             try
             {
-                // Open the connection
                 if (conexao.State != ConnectionState.Open)
                 {
                     conexao.Open();
                 }
-                string Querryid = "SELECT idEscala_servico FROM escala_servico ORDER BY idEscala_servico DESC LIMIT 1;";
-                using (MySqlCommand cmd = new MySqlCommand(Querryid, conexao))
+                if (tipo_func == "Funcionario")
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read()) // Check if there are records before trying to read
-                        {
-                            idADD = Convert.ToInt32(reader["idEscala_servico"]) + 1;
-                        }
-                        else
-                        {
-                            MessageBox.Show("ultimo id nao encontrado-ESCALA");
-                        }
-                    }
-                }
-                // Create a new entry in escala_servico
-                string QuerryESCALAS = "INSERT INTO escala_servico (idEscala_servico,data_inicial, data_final) VALUES (@idEscala_servico,@data_inicial, @data_final);";
-                using (MySqlCommand cmd = new MySqlCommand(QuerryESCALAS, conexao))
-                {
-                    cmd.Parameters.AddWithValue("@idEscala_servico", idADD); // Replace with your desired data_inicial
-
-                    cmd.Parameters.AddWithValue("@data_inicial", Lastmonth.AddDays(1)); // Replace with your desired data_inicial
-                    
-                    cmd.Parameters.AddWithValue("@data_final", Lastmonth.AddDays(dateadd)); // Replace with your desired data_final
-
-                    cmd.ExecuteNonQuery();
-                }
-                Console.WriteLine("Acabou de criar a escala");
-                // Get the ID of the newly created escala_servico
-                int idEscalaServico;
-                string getLastInsertIdQuery = "SELECT LAST_INSERT_ID();";
-                using (MySqlCommand cmdLastInsertId = new MySqlCommand(getLastInsertIdQuery, conexao))
-                {
-                    idEscalaServico = Convert.ToInt32(cmdLastInsertId.ExecuteScalar());
-                }
-
-                // Create entries in funcionario_escala for each funcionario for each day
-                foreach (var funcId in func_id.Values)
-                {
-                   
-                    while (Lastmonth <= Lastmonth.AddDays(dateadd)) // Adjust the condition based on your requirements
+                    while (counter < dateadd) // Adjust the condition based on your requirements
                     {
                         string Querryid_func = "SELECT idFuncionario_Escala FROM funcionario_escala ORDER BY idFuncionario_Escala DESC LIMIT 1";
                         using (MySqlCommand cmd = new MySqlCommand(Querryid_func, conexao))
@@ -267,8 +269,8 @@ namespace Projeto_Lar3idade_Back_End
                         using (MySqlCommand cmdInsertFuncionarioEscala = new MySqlCommand(insertFuncionarioEscalaQuery, conexao))
                         {
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@idFuncionario_Escala", idADD2);
-                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@funcionario", funcId);
-                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@idescala", idADD);
+                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@funcionario", id_func);
+                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@idescala", idescala);
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@dia", data_create);
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@horario_inicio", "00:00:00"); // Replace with your logic for setting the start time
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@horario_fim", "00:00:00"); // Replace with your logic for setting the end time
@@ -276,18 +278,21 @@ namespace Projeto_Lar3idade_Back_End
                             cmdInsertFuncionarioEscala.ExecuteNonQuery();
                         }
                         Console.WriteLine("Acabou de criar uma escala_funcionario");
-
+                        count++;
+                        counter++;
+                        Console.WriteLine(Convert.ToString(count));
                         data_create = data_create.AddDays(1);
                     }
                 }
-                Console.WriteLine("Acabou de criar as escala_funcionario");
+
+
 
                 // Create entries in escala_medico for each medico for each day
-                foreach (var medId in func_id.Values)
+                if (tipo_func == "Medico")
                 {
-                    
 
-                    while (Lastmonth <= Lastmonth.AddDays(dateadd)) // Adjust the condition based on your requirements
+
+                    while (counter < dateadd) // Adjust the condition based on your requirements
                     {
                         string Querryid_med = "SELECT idEscala_Medico FROM escala_medico ORDER BY idEscala_Medico DESC LIMIT 1";
                         using (MySqlCommand cmd = new MySqlCommand(Querryid_med, conexao))
@@ -309,8 +314,8 @@ namespace Projeto_Lar3idade_Back_End
                         using (MySqlCommand cmdInsertEscalaMedico = new MySqlCommand(insertEscalaMedicoQuery, conexao))
                         {
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@idEscala_Medico", idADD3);
-                            cmdInsertEscalaMedico.Parameters.AddWithValue("@medico", medId);
-                            cmdInsertEscalaMedico.Parameters.AddWithValue("@idescala", idADD);
+                            cmdInsertEscalaMedico.Parameters.AddWithValue("@medico", id_func);
+                            cmdInsertEscalaMedico.Parameters.AddWithValue("@idescala", idescala);
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@dia", data_create);
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@horario_inicio", "00:00:00"); // Replace with your logic for setting the start time
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@horario_fim", "00:00:00"); // Replace with your logic for setting the end time
@@ -319,7 +324,9 @@ namespace Projeto_Lar3idade_Back_End
 
                         }
                         Console.WriteLine("Acabou de criar uma escala_medico");
-
+                        count++;
+                        counter++;
+                        Console.WriteLine(Convert.ToString(count));
                         data_create = data_create.AddDays(1);
                     }
                 }
@@ -328,7 +335,6 @@ namespace Projeto_Lar3idade_Back_End
 
                 // Display the updated data
                 display_data();
-
                 MessageBox.Show("Escala_servico and associated entries created successfully");
             }
             catch (Exception ex)
@@ -340,6 +346,23 @@ namespace Projeto_Lar3idade_Back_End
                 // Close the connection
                 conexao.Close();
             }
+
+            
+            /*
+                Console.WriteLine("Acabou de criar a escala");
+                // Get the ID of the newly created escala_servico
+                int idEscalaServico;
+                string getLastInsertIdQuery = "SELECT LAST_INSERT_ID();";
+                using (MySqlCommand cmdLastInsertId = new MySqlCommand(getLastInsertIdQuery, conexao))
+                {
+                    idEscalaServico = Convert.ToInt32(cmdLastInsertId.ExecuteScalar());
+                }
+
+                // Create entries in funcionario_escala for each funcionario for each day
+                
+                
+            }
+           */
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -353,25 +376,33 @@ namespace Projeto_Lar3idade_Back_End
                     Console.WriteLine(id_func);
                     Console.WriteLine("IN_id");
                     control = 1;
+                    
+
 
                 }
                 if (func_type.TryGetValue(selectedValue, out string type))
                 {
-                    tipo_func = Convert.ToString(type);
+                    tipo_func = type; // Just assign the value directly without converting to string
                     Console.WriteLine(tipo_func);
                     Console.WriteLine("IN_tipo");
-
                     control = 1;
 
+                    display_data();
                 }
-                Console.WriteLine("tipo: "+ tipo_func);
-                display_data();
+                Console.WriteLine("tipo: " + tipo_func);
+                Console.WriteLine("Nome: " + selectedValue);
+
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            
+            control = 0;
             display_data();
+            comboBox1.Items.Clear();
+            comboBox2.Items.Clear();
+            Loadcomboboxes();
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -385,17 +416,17 @@ namespace Projeto_Lar3idade_Back_End
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
-            {   
-                if(tipo_func == "Funcionario")
+            {
+                if (tipo_func == "Funcionario")
                 {
                     int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idFuncionario_Escala"].Value);
-                    Console.WriteLine("id_func: "+ idescalaParaEditar);
+                    Console.WriteLine("id_func: " + idescalaParaEditar);
                     PreencherCamposParaEdicao(idescalaParaEditar);
                 }
                 if (tipo_func == "Medico")
                 {
                     int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idEscala_Medico"].Value);
-                    Console.WriteLine("id_med: "+idescalaParaEditar);
+                    Console.WriteLine("id_med: " + idescalaParaEditar);
 
                     PreencherCamposParaEdicao(idescalaParaEditar);
                 }
@@ -419,7 +450,7 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.CommandText = "SELECT idFuncionario_Escala,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM funcionario_escala WHERE idFuncionario_Escala = @idescala_func";
                     cmd.Parameters.AddWithValue("@idescala_func", idescalaParaEditar);
                     DataTable dta = new DataTable();
-                    
+
                     MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
                     dataadapter.Fill(dta);
                     using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -427,13 +458,13 @@ namespace Projeto_Lar3idade_Back_End
                         if (reader.Read())
                         {
                             // Atualize a variável idUtente com o valor do idUtenteParaEditar
-                            
-                                estado = Convert.ToString(dta.Rows[0]["estado"]);
-                                Console.WriteLine(estado + " :estado1-func");
-                                idescala_func = idescalaParaEditar;
-                            
-                                
-                          
+
+                            estado = Convert.ToString(dta.Rows[0]["estado"]);
+                            Console.WriteLine(estado + " :estado1-func");
+                            idescala_func = idescalaParaEditar;
+
+
+
 
 
                             // Preenche os campos com os dados do utente
@@ -459,9 +490,9 @@ namespace Projeto_Lar3idade_Back_End
                         if (reader.Read())
                         {
                             // Atualize a variável idUtente com o valor do idUtenteParaEditar
-                                estado = Convert.ToString(dta.Rows[0]["estado"]);
-                                Console.WriteLine(estado + " :estado1-func");
-                                idescala_med = idescalaParaEditar;
+                            estado = Convert.ToString(dta.Rows[0]["estado"]);
+                            Console.WriteLine(estado + " :estado1-func");
+                            idescala_med = idescalaParaEditar;
 
 
                             // Preenche os campos com os dados do utente
@@ -474,9 +505,9 @@ namespace Projeto_Lar3idade_Back_End
                         }
                     }
                 }
-                
-               
-                
+
+
+
             }
             catch (Exception ex)
             {
@@ -495,7 +526,7 @@ namespace Projeto_Lar3idade_Back_End
 
                 MySqlCommand cmd = conexao.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                if(tipo_func == "Funcionario")
+                if (tipo_func == "Funcionario")
                 {
                     if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox2.Text))
                     {
@@ -515,7 +546,6 @@ namespace Projeto_Lar3idade_Back_End
 
                         // Limpando os campos e atualizando a exibição dos dados
                         display_data();
-
                         MessageBox.Show("Dados da escala atualizados com sucesso");
                     }
                     else
@@ -532,8 +562,8 @@ namespace Projeto_Lar3idade_Back_End
                         cmd.CommandText = "UPDATE `mydb`.`escala_medico` SET `horario_inicio` = @horario_inicio, `horario_fim` = @horario_fim, `estado` = @estado WHERE (`idEscala_Medico` = @idEscala_Medico);";
 
                         // Adicionando parâmetros
-                        cmd.Parameters.AddWithValue("@horario_inicio",Convert.ToDateTime(textBox1.Text).TimeOfDay);
-                        cmd.Parameters.AddWithValue("@horario_fim",Convert.ToDateTime(textBox2.Text).TimeOfDay);
+                        cmd.Parameters.AddWithValue("@horario_inicio", Convert.ToDateTime(textBox1.Text).TimeOfDay);
+                        cmd.Parameters.AddWithValue("@horario_fim", Convert.ToDateTime(textBox2.Text).TimeOfDay);
                         cmd.Parameters.AddWithValue("@estado", comboBox3.Text);
                         cmd.Parameters.AddWithValue("@idEscala_Medico", idescala_med);
 
@@ -543,7 +573,6 @@ namespace Projeto_Lar3idade_Back_End
 
                         // Limpando os campos e atualizando a exibição dos dados
                         display_data();
-
                         MessageBox.Show("Dados da escala atualizados com sucesso");
                     }
                     else
@@ -551,7 +580,7 @@ namespace Projeto_Lar3idade_Back_End
                         MessageBox.Show("Por favor, selecione uma linha para editar ou preencha os campos obrigatórios.");
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -565,7 +594,95 @@ namespace Projeto_Lar3idade_Back_End
 
         private void button4_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show("Tem a certeza que quer criar um novo mês de escalas?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.OK)
+            {
+                // Open the connection
+                if (conexao.State != ConnectionState.Open)
+                {
+                    conexao.Open();
+                }
 
+                try
+                {
+                    string Querryid = "SELECT idEscala_servico FROM escala_servico ORDER BY idEscala_servico DESC LIMIT 1;";
+                    using (MySqlCommand cmd = new MySqlCommand(Querryid, conexao))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read()) // Check if there are records before trying to read
+                            {
+                                idADD = Convert.ToInt32(reader["idEscala_servico"]) + 1;
+                            }
+                            else
+                            {
+                                MessageBox.Show("ultimo id nao encontrado-ESCALA");
+                            }
+                        }
+                    }
+                    Console.WriteLine($"Month: {Lastmonth.Month}, Year: {Lastmonth.Year}");
+
+                    int dateadd;
+                    DateTime data_create = Lastmonth.AddDays(1);
+                    if (Lastmonth.Month == 2)
+                    {
+
+                        // February
+                        if (IsLeapYear(Lastmonth.Year))
+                            dateadd = 29; // Leap year
+                        else
+                            dateadd = 28; // Non-leap year
+                        Console.WriteLine("F");
+
+                    }
+                    else if (Lastmonth.Month == 4 || Lastmonth.Month == 6 || Lastmonth.Month == 9 || Lastmonth.Month == 11)
+                    {
+                        // April, June, September, November
+                        dateadd = 30;
+                        Console.WriteLine("A-J-S-N");
+                    }
+                    else
+                    {
+                        // Other months (excluding February, April, June, September, November)
+                        dateadd = 31;
+                        Console.WriteLine("J-M-M-J-A-O-D");
+
+                    }
+                    bool IsLeapYear(int year)
+                    {
+                        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+                    }
+                    // Create a new entry in escala_servico
+                    string QuerryESCALAS = "INSERT INTO escala_servico (idEscala_servico,data_inicial, data_final) VALUES (@idEscala_servico,@data_inicial, @data_final);";
+                    using (MySqlCommand cmd = new MySqlCommand(QuerryESCALAS, conexao))
+                    {
+                        cmd.Parameters.AddWithValue("@idEscala_servico", idADD); // Replace with your desired data_inicial
+
+                        cmd.Parameters.AddWithValue("@data_inicial", Lastmonth.AddDays(1)); // Replace with your desired data_inicial
+
+                        cmd.Parameters.AddWithValue("@data_final", Lastmonth.AddDays(dateadd)); // Replace with your desired data_final
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Mês foi criado com sucesso");
+                    display_data();
+                    comboBox1.Items.Clear();
+                    comboBox2.Items.Clear();
+
+                    Loadcomboboxes();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error creating escala_servico and associated entries: " + ex.Message);
+                }
+                finally
+                {
+                    // Close the connection
+                    conexao.Close();
+                }
+
+            }
         }
     }
 }
