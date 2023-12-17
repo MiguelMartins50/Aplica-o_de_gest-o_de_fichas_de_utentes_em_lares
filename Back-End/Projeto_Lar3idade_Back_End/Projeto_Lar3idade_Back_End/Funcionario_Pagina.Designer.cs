@@ -40,6 +40,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
+            this.consultas1 = new Projeto_Lar3idade_Back_End.consultas();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -142,12 +143,21 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1.Size = new System.Drawing.Size(1022, 735);
             this.utentes1.TabIndex = 9;
             // 
-            // Medico
+            // consultas1
+            // 
+            this.consultas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.consultas1.Location = new System.Drawing.Point(296, 66);
+            this.consultas1.Name = "consultas1";
+            this.consultas1.Size = new System.Drawing.Size(1022, 735);
+            this.consultas1.TabIndex = 10;
+            // 
+            // Funcionario_Pagina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.consultas1);
             this.Controls.Add(this.utentes1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -157,7 +167,7 @@ namespace Projeto_Lar3idade_Back_End
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
-            this.Name = "Medico";
+            this.Name = "Funcionario_Pagina";
             this.Text = "Medico";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -178,5 +188,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private utentes utentes1;
+        private consultas consultas1;
     }
 }
