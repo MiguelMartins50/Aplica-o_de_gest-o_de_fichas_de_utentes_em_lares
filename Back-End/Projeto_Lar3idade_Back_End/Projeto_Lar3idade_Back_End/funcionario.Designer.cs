@@ -265,7 +265,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
+            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.button5.Location = new System.Drawing.Point(320, 262);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(137, 28);

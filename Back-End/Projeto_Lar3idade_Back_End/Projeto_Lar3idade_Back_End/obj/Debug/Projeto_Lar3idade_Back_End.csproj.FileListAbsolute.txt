@@ -237,3 +237,4 @@ C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Ba
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.exe
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.pdb
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Funcionario_Pagina.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Funcionario_Pagina.resources

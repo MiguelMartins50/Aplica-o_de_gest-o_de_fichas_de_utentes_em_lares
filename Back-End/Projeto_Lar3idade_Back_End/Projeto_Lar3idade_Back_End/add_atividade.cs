@@ -92,15 +92,9 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void button1_Click(object sender, EventArgs e)
         {
-
-
             string nome = textBox1.Text;
             DateTime datarealizacao = dateTimePicker1.Value;
             string desc = richTextBox1.Text;
-            
-
-
-
 
             try
             {
