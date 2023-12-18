@@ -31,7 +31,6 @@ namespace Projeto_Lar3idade_Back_End
         private void LoadComboBox()
         {
 
-
             using (conexao)
             {
                 conexao.Open();
@@ -80,9 +79,6 @@ namespace Projeto_Lar3idade_Back_End
             string nome = textBox1.Text;
             DateTime datarealizacao = dateTimePicker1.Value;
             string desc = richTextBox1.Text;
-
-
-
 
 
             try

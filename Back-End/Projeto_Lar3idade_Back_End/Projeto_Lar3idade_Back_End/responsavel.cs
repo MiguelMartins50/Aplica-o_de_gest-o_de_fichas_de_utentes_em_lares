@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+
 
 
 namespace Projeto_Lar3idade_Back_End
@@ -94,7 +93,7 @@ namespace Projeto_Lar3idade_Back_End
             string email = textBox_email.Text;
             string senha = textBox3_senha.Text;
             string parentesco = textBox1_parentesco.Text;
-
+          
             try
             {
                 using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
@@ -143,40 +142,9 @@ namespace Projeto_Lar3idade_Back_End
                             }
                         }
                     }
-                    using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
-                    {
-                        using (MySqlDataReader reader = procurarId.ExecuteReader())
-                        {
-                            // Create a list to store data
-                            List<string[]> data = new List<string[]>();
-
-                            // Iterate through the results
-                            while (reader.Read())
-                            {
-                                // Add data to the list
-                                idAddUt2 = 1 + int.Parse(reader["idUtente_familiar"].ToString());
-
-                            }
-                        }
-                    }
-                    using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
-                    {
-                        using (MySqlDataReader reader = procurarId.ExecuteReader())
-                        {
-                            // Create a list to store data
-                            List<string[]> data = new List<string[]>();
-
-                            // Iterate through the results
-                            while (reader.Read())
-                            {
-                                // Add data to the list
-                                idAddUt3 = 1 + int.Parse(reader["idUtente_familiar"].ToString());
-
-                            }
-                        }
-                    }
+                    idAddUt2 = idAddUt + 1;
+                    idAddUt3= idAddUt2 + 1;
                    
-
 
                     // Crie um comando MySqlCommand
                     using (MySqlCommand comando = new MySqlCommand(query, conexao))
@@ -270,6 +238,8 @@ namespace Projeto_Lar3idade_Back_End
             textBox_email.Clear();
             textBox3_senha.Clear();
             textBox1_parentesco.Clear();
+            textBox2_parentesco.Clear();
+            textBox3_parentesco.Clear();
             // Limpar outras ComboBoxes e controles conforme necessário
             comboBox1_Utente.SelectedIndex = -1;
             comboBox2_Utente.SelectedIndex = -1;
@@ -418,7 +388,13 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT * FROM familiar WHERE nomel LIKE @searchText OR SUBSTRING_INDEX(nomel, ' ', 1) LIKE @searchText";
+            cmd.CommandText = "SELECT f.idFamiliar, f.nomel, f.numero_cc, f.data_validade, f.telemovel, f.data_nascimento, " +
+                               "f.parentesco_relacao, f.morada, f.cod_postal, f.ocupacao, f.tel_casa, f.senha, f.email, " +
+                               "u.nome AS NomeUtente " +
+                               "FROM familiar f " +
+                               "JOIN utente_familiar uf ON f.idFamiliar = uf.Familiar_idFamiliar " +
+                               "JOIN utente u ON uf.Utente_idUtente = u.idUtente " +
+                               "WHERE f.nomel LIKE @searchText OR SUBSTRING_INDEX(f.nomel, ' ', 1) LIKE @searchText";
             cmd.Parameters.AddWithValue("@searchText", "%" + textBox_Search.Text + "%");
             cmd.ExecuteNonQuery();
             DataTable dt = new DataTable();

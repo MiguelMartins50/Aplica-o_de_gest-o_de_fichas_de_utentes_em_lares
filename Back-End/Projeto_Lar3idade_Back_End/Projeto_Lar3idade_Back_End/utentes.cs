@@ -9,8 +9,7 @@ namespace Projeto_Lar3idade_Back_End
 {
     public partial class utentes : UserControl
     {
-       // public event EventHandler ButtonClicked;
-
+      
         private MySqlConnection conexao;
 
         private Dictionary<string, string> medico_ = new Dictionary<string, string>();
@@ -27,8 +26,6 @@ namespace Projeto_Lar3idade_Back_End
             conexao = new MySqlConnection(connectionString);
             LoadComboBox();
             display_data();
-
-            
 
         }
 
@@ -187,7 +184,7 @@ namespace Projeto_Lar3idade_Back_End
 
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT * FROM utente WHERE nome LIKE @searchText OR SUBSTRING_INDEX(nome, ' ', 1) LIKE @searchText";
+            cmd.CommandText = "SELECT utente.*, medico.nome AS nome_medico FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico WHERE utente.nome LIKE @searchText OR SUBSTRING_INDEX(utente.nome, ' ', 1) LIKE @searchText ORDER BY utente.idUtente ASC";
             cmd.Parameters.AddWithValue("@searchText", "%" + textBox_Search.Text + "%");
             cmd.ExecuteNonQuery();
             DataTable dt = new DataTable();

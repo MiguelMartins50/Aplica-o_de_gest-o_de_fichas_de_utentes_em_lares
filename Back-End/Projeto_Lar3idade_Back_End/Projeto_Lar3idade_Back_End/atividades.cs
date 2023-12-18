@@ -325,7 +325,13 @@ namespace Projeto_Lar3idade_Back_End
 
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT * FROM atividade WHERE nome LIKE @searchText OR SUBSTRING_INDEX(nome, ' ', 1) LIKE @searchText";
+            cmd.CommandText = "SELECT A.idAtividade, A.Utente_idUtente, U.nome AS nome_utente, " +
+                            "A.Funcionario_idFuncionario, F.nome AS nome_funcionario, " +
+                            "A.nome AS nome_atividade, A.data, A.descricao, A.Tipo_idTipo " +
+                            "FROM atividade A " +
+                            "JOIN utente U ON A.Utente_idUtente = U.idUtente " +
+                            "JOIN funcionario F ON A.Funcionario_idFuncionario = F.idFuncionario " +
+                            "WHERE A.nome LIKE @searchText OR SUBSTRING_INDEX(A.nome, ' ', 1) LIKE @searchText";
             cmd.Parameters.AddWithValue("@searchText", "%" + textBox_Search.Text + "%");
             cmd.ExecuteNonQuery();
             DataTable dt = new DataTable();
