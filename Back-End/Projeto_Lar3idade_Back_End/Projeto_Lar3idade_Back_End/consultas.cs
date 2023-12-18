@@ -33,7 +33,6 @@ namespace Projeto_Lar3idade_Back_End
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
             LoadComboBox();
-
             display_data();
         }
         private void display_data()
@@ -56,6 +55,10 @@ namespace Projeto_Lar3idade_Back_End
             dataGridView1.Columns["Utente_idUtente"].Visible = false;
             dataGridView1.Columns["Medico_idMedico"].Visible = false;
             conexao.Close();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
         }
         private void LoadComboBox()
         {
@@ -161,11 +164,12 @@ namespace Projeto_Lar3idade_Back_End
                     // Obtém o valor do idUtente dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
                     cmd.CommandText = "UPDATE mydb.consulta SET idConsulta = @idConsulta, Utente_idUtente = @Utente_idUtente, Medico_idMedico = @Medico_idMedico, data = @data WHERE idconsulta = @idconsulta";
+                  
 
                     // Adicionando parâmetros
                     cmd.Parameters.AddWithValue("@Medico_idMedico", idMedico);
                     cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
-                    cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@idConsulta", idconsulta);
                     
 
@@ -177,7 +181,7 @@ namespace Projeto_Lar3idade_Back_End
                     LimparTextBoxes();
                     display_data();
 
-                    MessageBox.Show("Dados do Utente atualizados com sucesso");
+                    MessageBox.Show("Consulta alterada com sucesso");
                 }
                 else
                 {
@@ -186,7 +190,7 @@ namespace Projeto_Lar3idade_Back_End
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao atualizar dados do Utente: " + ex.Message);
+                MessageBox.Show("Erro ao atualizar dados da consulta: " + ex.Message + "\n" + ex.StackTrace);
             }
             finally
             {
@@ -202,6 +206,54 @@ namespace Projeto_Lar3idade_Back_End
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                conexao.Open();
+                string query3 = "SELECT * FROM consulta ORDER BY idConsulta DESC LIMIT 1";
+
+                using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                {
+                    using (MySqlDataReader reader = procurarId.ExecuteReader())
+                    {
+                        // Create a list to store data
+                        List<string[]> data = new List<string[]>();
+
+                        // Iterate through the results
+                        while (reader.Read())
+                        {
+                            // Add data to the list
+                            idconsulta = 1 + int.Parse(reader["idConsulta"].ToString());
+
+                        }
+                    }
+                }
+                MySqlCommand cmd = conexao.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "INSERT INTO mydb.consulta (idConsulta, Utente_idUtente, Medico_idMedico, data, estado, relatorio) " +
+                      "VALUES (@idConsulta, @Utente_idUtente, @Medico_idMedico, @data, @estado, @relatorio)";
+
+                cmd.Parameters.AddWithValue("@idConsulta", idconsulta);
+                cmd.Parameters.AddWithValue("@Medico_idMedico", idMedico);
+                cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
+                cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                cmd.Parameters.AddWithValue("@estado", "Agendada");
+                cmd.Parameters.AddWithValue("@relatorio", "");
+
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Consulta agendada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao adicionar consulta: " + ex.Message + "\n" + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            LimparTextBoxes();
+            display_data();
 
         }
 
@@ -237,6 +289,10 @@ namespace Projeto_Lar3idade_Back_End
             {
                 int idUtenteParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idConsulta"].Value);
                 PreencherCamposParaEdicao(idUtenteParaEditar);
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
+                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
             }
         }
         private void PreencherCamposParaEdicao(int idconsultarParaEditar)
@@ -280,7 +336,7 @@ namespace Projeto_Lar3idade_Back_End
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao obter dados do utente para edição: " + ex.Message+ "\n"+ ex.StackTrace);
+                MessageBox.Show("Erro ao obter dados da consulta para edição: " + ex.Message+ "\n"+ ex.StackTrace);
             }
             finally
             {

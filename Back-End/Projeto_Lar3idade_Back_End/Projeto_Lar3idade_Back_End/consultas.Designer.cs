@@ -72,7 +72,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(418, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 39);
+            this.label1.Size = new System.Drawing.Size(145, 37);
             this.label1.TabIndex = 19;
             this.label1.Text = "Consultas";
             // 
