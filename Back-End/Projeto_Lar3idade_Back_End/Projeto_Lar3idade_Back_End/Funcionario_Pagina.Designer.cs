@@ -40,6 +40,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
+            this.consultas1 = new Projeto_Lar3idade_Back_End.consultas();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Size = new System.Drawing.Size(141, 27);
             this.label1.TabIndex = 3;
             this.label1.Text = "Gerir Utentes";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -93,6 +95,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label2.Size = new System.Drawing.Size(194, 27);
             this.label2.TabIndex = 4;
             this.label2.Text = "Agendar Consultas";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -103,6 +106,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label3.Size = new System.Drawing.Size(202, 27);
             this.label3.TabIndex = 5;
             this.label3.Text = "Agendar Atividades";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -113,6 +117,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label4.Size = new System.Drawing.Size(131, 27);
             this.label4.TabIndex = 6;
             this.label4.Text = "Gerir Visitas";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -123,6 +128,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label5.Size = new System.Drawing.Size(197, 27);
             this.label5.TabIndex = 7;
             this.label5.Text = "Escalas de Serviço ";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -133,6 +139,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label6.Size = new System.Drawing.Size(82, 27);
             this.label6.TabIndex = 8;
             this.label6.Text = "Tarefas";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // utentes1
             // 
@@ -142,12 +149,21 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1.Size = new System.Drawing.Size(1022, 735);
             this.utentes1.TabIndex = 9;
             // 
-            // Medico
+            // consultas1
+            // 
+            this.consultas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.consultas1.Location = new System.Drawing.Point(296, 66);
+            this.consultas1.Name = "consultas1";
+            this.consultas1.Size = new System.Drawing.Size(1022, 735);
+            this.consultas1.TabIndex = 10;
+            // 
+            // Funcionario_Pagina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.consultas1);
             this.Controls.Add(this.utentes1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -157,7 +173,9 @@ namespace Projeto_Lar3idade_Back_End
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
-            this.Name = "Medico";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "Funcionario_Pagina";
             this.Text = "Medico";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -178,5 +196,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private utentes utentes1;
+        private consultas consultas1;
     }
 }

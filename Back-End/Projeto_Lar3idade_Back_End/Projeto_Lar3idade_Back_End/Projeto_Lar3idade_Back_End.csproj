@@ -146,6 +146,12 @@
     <Compile Include="atividades.Designer.cs">
       <DependentUpon>atividades.cs</DependentUpon>
     </Compile>
+    <Compile Include="consultas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="consultas.Designer.cs">
+      <DependentUpon>consultas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editar_atividade.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -243,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="atividades.resx">
       <DependentUpon>atividades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="consultas.resx">
+      <DependentUpon>consultas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editar_atividade.resx">
       <DependentUpon>Editar_atividade.cs</DependentUpon>

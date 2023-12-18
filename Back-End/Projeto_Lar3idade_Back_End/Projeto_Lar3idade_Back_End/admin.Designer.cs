@@ -260,6 +260,8 @@ namespace Projeto_Lar3idade_Back_End
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "admin";
             this.Text = "admin";
             this.panel1.ResumeLayout(false);

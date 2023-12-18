@@ -24,7 +24,10 @@ namespace Projeto_Lar3idade_Back_End
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
         }
-
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            this.Size = new Size(1000, 700); // Replace width and height with your desired values
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             string email = textBox1.Text;

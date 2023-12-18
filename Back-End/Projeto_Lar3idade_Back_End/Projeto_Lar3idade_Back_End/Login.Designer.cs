@@ -103,6 +103,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button1.Text = "Entrar";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Resize += new System.EventHandler(this.Form1_Resize);
             // 
             // label2
             // 
@@ -136,6 +137,8 @@ namespace Projeto_Lar3idade_Back_End
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Login";
             this.Text = "Login";
             this.panel1.ResumeLayout(false);
