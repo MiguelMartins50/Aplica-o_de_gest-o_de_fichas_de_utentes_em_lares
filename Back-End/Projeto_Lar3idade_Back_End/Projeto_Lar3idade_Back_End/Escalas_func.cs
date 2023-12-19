@@ -67,6 +67,37 @@ namespace Projeto_Lar3idade_Back_End
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
+                // Get the selected row
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                // Make sure to replace these values with your own email settings
+                string smtpServer = "smtp-mail.outlook.com";
+                int smtpPort = 587; // Replace with your SMTP port
+                string smtpUsername = mail;
+                string smtpPassword = senha;
+                string dia = ((DateTime)selectedRow.Cells["Dia"].Value).ToString("dddd MMMM yyyy");
+                string estadoAtual = selectedRow.Cells["estado"].Value.ToString();
+                string recipientEmail = "a44610@alunos.ipb.pt";
+                string subject = "Change of Estado Request";
+                string body = $"Prezado Adminstrador,\n\nSolicito a alteração do estado da escala do dia {dia} de {estadoAtual} para {estado} \n\nAtenciosamente,\nSua {nome}";
+
+                try
+                {
+                    using (MailMessage mail = new MailMessage(smtpUsername, recipientEmail, subject, body))
+                    {
+                        using (SmtpClient smtp = new SmtpClient(smtpServer, smtpPort))
+                        {
+                            smtp.UseDefaultCredentials = false;
+                            smtp.EnableSsl = true;
+                            smtp.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                            smtp.Send(mail);
+                            MessageBox.Show("Email de pedido enviado", "Success");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erro ao enviar email: {ex.Message}");
+                }
             }
         }
 
