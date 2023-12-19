@@ -15,7 +15,7 @@ namespace Projeto_Lar3idade_Back_End
 {
     public partial class tarefas : UserControl
     {
-        public event EventHandler ButtonClicked;
+       
         private int idAdd;
         private int idtipo;
         private int idfunc;
@@ -119,7 +119,7 @@ namespace Projeto_Lar3idade_Back_End
 
                         MessageBox.Show("Atividade adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        ButtonClicked?.Invoke(this, EventArgs.Empty);
+                       
                         LimparTextBoxes();
                     }
                 }
