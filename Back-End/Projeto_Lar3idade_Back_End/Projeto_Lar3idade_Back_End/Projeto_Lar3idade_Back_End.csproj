@@ -36,6 +36,12 @@
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
+    <Reference Include="FluentEmail.Core, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentEmail.Core.3.0.2\lib\netstandard2.0\FluentEmail.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentEmail.Smtp, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentEmail.Smtp.3.0.2\lib\netstandard2.0\FluentEmail.Smtp.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.21.9.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -50,6 +56,9 @@
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=8.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.2.0\lib\net462\MySql.Data.dll</HintPath>
@@ -146,6 +155,12 @@
     <Compile Include="atividades.Designer.cs">
       <DependentUpon>atividades.cs</DependentUpon>
     </Compile>
+    <Compile Include="Atividades_func.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Atividades_func.Designer.cs">
+      <DependentUpon>Atividades_func.cs</DependentUpon>
+    </Compile>
     <Compile Include="consultas.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -175,6 +190,12 @@
     </Compile>
     <Compile Include="Escalas.Designer.cs">
       <DependentUpon>Escalas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Escalas_func.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Escalas_func.Designer.cs">
+      <DependentUpon>Escalas_func.cs</DependentUpon>
     </Compile>
     <Compile Include="funcionario.cs">
       <SubType>UserControl</SubType>
@@ -250,6 +271,9 @@
     <EmbeddedResource Include="atividades.resx">
       <DependentUpon>atividades.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Atividades_func.resx">
+      <DependentUpon>Atividades_func.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="consultas.resx">
       <DependentUpon>consultas.cs</DependentUpon>
     </EmbeddedResource>
@@ -264,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Escalas.resx">
       <DependentUpon>Escalas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Escalas_func.resx">
+      <DependentUpon>Escalas_func.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="funcionario.resx">
       <DependentUpon>funcionario.cs</DependentUpon>

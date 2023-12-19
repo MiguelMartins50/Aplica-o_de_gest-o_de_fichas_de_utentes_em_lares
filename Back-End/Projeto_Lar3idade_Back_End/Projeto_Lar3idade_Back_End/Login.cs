@@ -32,7 +32,7 @@ namespace Projeto_Lar3idade_Back_End
         {
             string email = textBox1.Text;
             string senha = textBox2.Text;
-
+            int userID ;
             // Verifique se os campos de e-mail e senha não estão vazios
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
 
@@ -46,15 +46,17 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Open();
 
                 // Consulta SQL para verificar o login como funcionario
-                string queryFuncionario = $"SELECT COUNT(*) FROM mydb.funcionario WHERE email='{email}' AND senha='{senha}'";
+                string queryFuncionario = $"SELECT idFuncionario FROM mydb.funcionario WHERE email='{email}' AND senha='{senha}'";
                 MySqlCommand cmdFuncionario = new MySqlCommand(queryFuncionario, conexao);
 
                 // Execute a consulta e obtenha o resultado como funcionario
-                int countFuncionario = Convert.ToInt32(cmdFuncionario.ExecuteScalar());
+                object resultFuncionario = cmdFuncionario.ExecuteScalar();
 
                 // Verifique se o login como funcionario foi bem-sucedido
-                if (countFuncionario > 0)
+                if (resultFuncionario != null)
                 {
+                    userID = Convert.ToInt32(resultFuncionario);
+                    Console.WriteLine("Id Utilizador do Login:" + userID);
                     // Verifica se o email é do administrador
                     if (email.Equals("Admin01@gmail.com", StringComparison.OrdinalIgnoreCase))
                     {
@@ -72,7 +74,7 @@ namespace Projeto_Lar3idade_Back_End
                         MessageBox.Show("Login bem-sucedido como funcionario!");
 
                         // link pra outra tela para funcionario (replace 'YourFuncionarioForm' with the actual form for funcionario)
-                        Funcionario_Pagina Funcionario_Pagina = new Funcionario_Pagina();
+                        Funcionario_Pagina Funcionario_Pagina = new Funcionario_Pagina(userID);
                         Funcionario_Pagina.Show();
 
                         // Feche este formulário de login 
@@ -82,14 +84,16 @@ namespace Projeto_Lar3idade_Back_End
                 else
                 {
                     // If login as funcionario fails, check in the "medico" table
-                    string queryMedico = $"SELECT COUNT(*) FROM mydb.medico WHERE email='{email}' AND senha='{senha}'";
+                    string queryMedico = $"SELECT ID FROM mydb.medico WHERE email='{email}' AND senha='{senha}'";
                     MySqlCommand cmdMedico = new MySqlCommand(queryMedico, conexao);
 
-                    int countMedico = Convert.ToInt32(cmdMedico.ExecuteScalar());
+                    object resultMedico = cmdMedico.ExecuteScalar();
 
                     // Check if login as medico is successful
-                    if (countMedico > 0)
+                    if (resultMedico != null)
                     {
+                        userID = Convert.ToInt32(resultMedico);
+
                         MessageBox.Show("Login bem-sucedido como medico!");
 
                         // link pra outra tela para medico (replace 'YourMedicoForm' with the actual form for medico)
