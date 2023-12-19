@@ -39,8 +39,8 @@ namespace Projeto_Lar3idade_Back_End
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
             this.consultas1 = new Projeto_Lar3idade_Back_End.consultas();
+            this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,6 +53,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button1.TabIndex = 1;
             this.button1.Text = "Sair";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
@@ -141,14 +142,6 @@ namespace Projeto_Lar3idade_Back_End
             this.label6.Text = "Tarefas";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
-            // utentes1
-            // 
-            this.utentes1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            this.utentes1.Location = new System.Drawing.Point(296, 64);
-            this.utentes1.Name = "utentes1";
-            this.utentes1.Size = new System.Drawing.Size(1022, 735);
-            this.utentes1.TabIndex = 9;
-            // 
             // consultas1
             // 
             this.consultas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
@@ -156,6 +149,14 @@ namespace Projeto_Lar3idade_Back_End
             this.consultas1.Name = "consultas1";
             this.consultas1.Size = new System.Drawing.Size(1022, 735);
             this.consultas1.TabIndex = 10;
+            // 
+            // utentes1
+            // 
+            this.utentes1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.utentes1.Location = new System.Drawing.Point(296, 64);
+            this.utentes1.Name = "utentes1";
+            this.utentes1.Size = new System.Drawing.Size(1022, 735);
+            this.utentes1.TabIndex = 9;
             // 
             // Funcionario_Pagina
             // 
@@ -197,5 +198,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label6;
         private utentes utentes1;
         private consultas consultas1;
+        private Atividades_func atividades_func1;
     }
 }
