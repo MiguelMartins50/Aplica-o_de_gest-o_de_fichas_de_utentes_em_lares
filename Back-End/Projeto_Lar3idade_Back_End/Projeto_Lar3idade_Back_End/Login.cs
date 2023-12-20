@@ -84,7 +84,7 @@ namespace Projeto_Lar3idade_Back_End
                 else
                 {
                     // If login as funcionario fails, check in the "medico" table
-                    string queryMedico = $"SELECT ID FROM mydb.medico WHERE email='{email}' AND senha='{senha}'";
+                    string queryMedico = $"SELECT idMedico FROM mydb.medico WHERE email='{email}' AND password='{senha}'";
                     MySqlCommand cmdMedico = new MySqlCommand(queryMedico, conexao);
 
                     object resultMedico = cmdMedico.ExecuteScalar();
@@ -93,12 +93,12 @@ namespace Projeto_Lar3idade_Back_End
                     if (resultMedico != null)
                     {
                         userID = Convert.ToInt32(resultMedico);
-
+                        Console.WriteLine("idMedico"+ userID);
                         MessageBox.Show("Login bem-sucedido como medico!");
 
                         // link pra outra tela para medico (replace 'YourMedicoForm' with the actual form for medico)
-                        /*YourMedicoForm medicoForm = new YourMedicoForm();
-                        medicoForm.Show();*/
+                        Medico_Pagina Medico_Pagina = new Medico_Pagina(userID);
+                        Medico_Pagina.Show();
 
                         // Feche este formulário de login 
                         this.Hide();

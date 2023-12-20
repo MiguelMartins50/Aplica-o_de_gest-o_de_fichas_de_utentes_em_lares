@@ -215,6 +215,24 @@
     <Compile Include="Funcionario_Pagina.Designer.cs">
       <DependentUpon>Funcionario_Pagina.cs</DependentUpon>
     </Compile>
+    <Compile Include="Medico_consultas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Medico_consultas.Designer.cs">
+      <DependentUpon>Medico_consultas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Medico_Pagina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Medico_Pagina.Designer.cs">
+      <DependentUpon>Medico_Pagina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Medico_Utente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Medico_Utente.Designer.cs">
+      <DependentUpon>Medico_Utente.cs</DependentUpon>
+    </Compile>
     <Compile Include="pagamentos.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -300,6 +318,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Funcionario_Pagina.resx">
       <DependentUpon>Funcionario_Pagina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medico_consultas.resx">
+      <DependentUpon>Medico_consultas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medico_Pagina.resx">
+      <DependentUpon>Medico_Pagina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medico_Utente.resx">
+      <DependentUpon>Medico_Utente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pagamentos.resx">
       <DependentUpon>pagamentos.cs</DependentUpon>

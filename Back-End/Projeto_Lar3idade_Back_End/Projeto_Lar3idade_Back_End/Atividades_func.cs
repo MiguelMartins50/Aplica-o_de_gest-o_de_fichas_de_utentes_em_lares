@@ -43,7 +43,7 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Open();
                 MySqlCommand cmd = conexao.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT A.idAtividade, A.Utente_idUtente, U.nome AS Utente,A.nome AS Titulo , A.data, A.descricao, A.Tipo_idTipo ,t.tipo FROM atividade A JOIN utente U ON A.Utente_idUtente = U.idUtente JOIN tipo t ON a.Tipo_idTipo = t.idTipo where Funcionario_idFuncionario = @iduser;";
+                cmd.CommandText = "SELECT A.idAtividade, A.Utente_idUtente, U.nome AS Utente,A.nome AS nome_atividade , A.data, A.descricao, A.Tipo_idTipo ,t.tipo FROM atividade A JOIN utente U ON A.Utente_idUtente = U.idUtente JOIN tipo t ON a.Tipo_idTipo = t.idTipo where Funcionario_idFuncionario = @iduser;";
                 cmd.Parameters.AddWithValue("@iduser", iduser);
                 cmd.ExecuteNonQuery();
                 DataTable dta = new DataTable();
@@ -363,7 +363,7 @@ namespace Projeto_Lar3idade_Back_End
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
                 // Preencher os TextBoxes e ComboBoxes com os valores da linha selecionada
-                textBox_nome.Text = row.Cells["Titulo"].Value.ToString();  // Use "Titulo" instead of "nome"
+                textBox_nome.Text = row.Cells["nome_atividade"].Value.ToString();  // Use "Titulo" instead of "nome"
                 dateTimePicker_realizacao.Value = Convert.ToDateTime(row.Cells["data"].Value);
                 richTextBox_descricao.Text = row.Cells["descricao"].Value.ToString();
 

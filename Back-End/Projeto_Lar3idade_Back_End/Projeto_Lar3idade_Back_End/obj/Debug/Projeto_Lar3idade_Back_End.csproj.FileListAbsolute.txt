@@ -251,3 +251,6 @@ C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Ba
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Atividades_func.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Escalas_func.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Medico_consultas.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Medico_Pagina.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Medico_Utente.resources
