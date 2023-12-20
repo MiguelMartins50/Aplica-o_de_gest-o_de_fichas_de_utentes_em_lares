@@ -245,7 +245,6 @@ C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Bac
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.consultas.resources
-<<<<<<< HEAD
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\FluentEmail.Core.dll
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\FluentEmail.Smtp.dll
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -255,8 +254,9 @@ C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Ba
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Medico_consultas.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Medico_Pagina.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Medico_Utente.resources
-=======
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Tarefas_Func.resources
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Visitas.resources
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
->>>>>>> ce71e4c2cb937b10ee5a26bc133acb362c7414ff
+C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Medico_consultas.resources
+C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Medico_Pagina.resources
+C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Medico_Utente.resources
