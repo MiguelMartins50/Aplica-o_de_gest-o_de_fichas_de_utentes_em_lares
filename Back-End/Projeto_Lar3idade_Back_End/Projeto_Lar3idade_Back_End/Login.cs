@@ -84,7 +84,7 @@ namespace Projeto_Lar3idade_Back_End
                 else
                 {
                     // If login as funcionario fails, check in the "medico" table
-                    string queryMedico = $"SELECT ID FROM mydb.medico WHERE email='{email}' AND senha='{senha}'";
+                    string queryMedico = $"SELECT idMedico FROM mydb.medico WHERE email='{email}' AND senha='{senha}'";
                     MySqlCommand cmdMedico = new MySqlCommand(queryMedico, conexao);
 
                     object resultMedico = cmdMedico.ExecuteScalar();

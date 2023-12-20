@@ -12,8 +12,8 @@ namespace Projeto_Lar3idade_Back_End
 {
     public partial class Funcionario_Pagina : Form
     {
+        private Tarefas_Func tarefas_Func1;
         private Escalas_func escalas_Func1;
-        private tarefas_fun tarefas_Fun1;
         public int iduser { get; set; }
         public Funcionario_Pagina(int IDuser)
         {
@@ -27,14 +27,15 @@ namespace Projeto_Lar3idade_Back_End
             escalas_Func1.Location = new Point(215, 60);
             escalas_Func1.Size = new Size(1022, 700);
             this.Controls.Add(escalas_Func1);
-            tarefas_Fun1 = new tarefas_fun(iduser);
-            tarefas_Fun1.Location = new Point(215, 60);
-            tarefas_Fun1.Size = new Size(1022, 700);
-            this.Controls.Add(escalas_Func1);
+            tarefas_Func1 = new Tarefas_Func(iduser);
+            tarefas_Func1.Location = new Point(215, 60);
+            tarefas_Func1.Size = new Size(1022, 700);
+            this.Controls.Add(tarefas_Func1);
             consultas1.Hide();
             atividades_func1.Hide();
             escalas_Func1.Hide();
-            tarefas_Fun1.Hide();
+            tarefas_Func1.Hide();
+            visitas1.Hide();
 
             Console.WriteLine("Id Utilizador do funcionario nº1:" + iduser);
             Console.WriteLine("Id Utilizador do funcionario nº2:" + IDuser);
@@ -45,7 +46,9 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label1_Click(object sender, EventArgs e)
         {
-            tarefas_Fun1.Hide();
+            label4.BackColor = this.BackColor;
+            visitas1.Hide();
+            tarefas_Func1.Hide();
             consultas1.Hide();
             utentes1.Show();
             atividades_func1.Hide();
@@ -55,11 +58,12 @@ namespace Projeto_Lar3idade_Back_End
             label1.BackColor = Color.White;
             label3.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
+            
 
         }
         private void label2_Click(object sender, EventArgs e)
         {
-            tarefas_Fun1.Hide();
+            tarefas_Func1.Hide();
             consultas1.Show();
             utentes1.Hide();
             atividades_func1.Hide();
@@ -69,12 +73,14 @@ namespace Projeto_Lar3idade_Back_End
             label1.BackColor = this.BackColor;
             label3.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
+            label4.BackColor = this.BackColor;
+            visitas1.Hide();
 
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
-            tarefas_Fun1.Hide();
+            tarefas_Func1.Hide();
             consultas1.Hide();
             utentes1.Hide();
             atividades_func1.Show();
@@ -84,12 +90,14 @@ namespace Projeto_Lar3idade_Back_End
             label1.BackColor = this.BackColor;
             label3.BackColor = Color.White;
             label6.BackColor = this.BackColor;
+            label4.BackColor = this.BackColor;
+            visitas1.Hide();
 
         }
 
         private void label5_Click(object sender, EventArgs e)
         {
-            tarefas_Fun1.Hide();
+            tarefas_Func1.Hide();
             consultas1.Hide();
             utentes1.Hide();
             atividades_func1.Hide();
@@ -99,28 +107,40 @@ namespace Projeto_Lar3idade_Back_End
             label3.BackColor = this.BackColor;
             label5.BackColor = Color.White;
             label6.BackColor = this.BackColor;
-
+            label4.BackColor = this.BackColor;
+            visitas1.Hide();
         }
 
         private void label4_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-            tarefas_Fun1.Hide();
+            visitas1.Show();
+            tarefas_Func1.Hide();
             consultas1.Hide();
             utentes1.Hide();
             atividades_func1.Hide();
             escalas_Func1.Hide();
-            tarefas_Fun1.Show();
+            label2.BackColor = this.BackColor;
+            label1.BackColor = this.BackColor;
+            label3.BackColor = this.BackColor;
+            label5.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
+            label4.BackColor = Color.White;
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            tarefas_Func1.Show();
+            consultas1.Hide();
+            utentes1.Hide();
+            atividades_func1.Hide();
+            escalas_Func1.Hide();
             label2.BackColor = this.BackColor;
             label1.BackColor = this.BackColor;
             label3.BackColor = this.BackColor;
             label6.BackColor = Color.White;
             label5.BackColor = this.BackColor;
-
+            label4.BackColor = this.BackColor;
+            visitas1.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)

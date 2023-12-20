@@ -107,42 +107,7 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Close();
             }
         }
-        private void button4_Click(object sender, EventArgs e)
-        {
-            conexao.Open();
-
-            MySqlCommand cmd = conexao.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT c.idConsulta,u.nome as Utente, c.Utente_idUtente,c.Medico_idMedico,m.nome as Medico,c.data,c.estado " +
-                              "FROM mydb.consulta c " +
-                              "JOIN mydb.utente u ON c.Utente_idUtente = u.idUtente " +
-                              "JOIN mydb.medico m ON c.Medico_idMedico = m.idMedico " +
-                              "WHERE u.nome LIKE @searchText OR m.nome LIKE @searchText OR " +
-                              "SUBSTRING_INDEX(u.nome, ' ', 1) LIKE @searchText OR SUBSTRING_INDEX(m.nome, ' ', 1) LIKE @searchText";
-
-            cmd.Parameters.AddWithValue("@searchText", "%" + textBox2.Text + "%");
-            cmd.ExecuteNonQuery();
-
-            DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-            da.Fill(dt);
-            dataGridView1.DataSource = dt;
-
-            conexao.Close();
-
-            // Os campos de texto são limpos apenas se houver resultados da pesquisa
-            if (dt.Rows.Count > 0)
-            {
-                comboBox1.SelectedIndex = 0;
-                comboBox2.SelectedIndex = 0;
-            }
-            else
-            {
-                MessageBox.Show("Nenhum resultado encontrado.");
-            }
-
-
-        }
+       
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -342,6 +307,42 @@ namespace Projeto_Lar3idade_Back_End
             {
                 conexao.Close();
             }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            conexao.Open();
+
+            MySqlCommand cmd = conexao.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT c.idConsulta,u.nome as Utente, c.Utente_idUtente,c.Medico_idMedico,m.nome as Medico,c.data,c.estado " +
+                              "FROM mydb.consulta c " +
+                              "JOIN mydb.utente u ON c.Utente_idUtente = u.idUtente " +
+                              "JOIN mydb.medico m ON c.Medico_idMedico = m.idMedico " +
+                              "WHERE u.nome LIKE @searchText OR m.nome LIKE @searchText OR " +
+                              "SUBSTRING_INDEX(u.nome, ' ', 1) LIKE @searchText OR SUBSTRING_INDEX(m.nome, ' ', 1) LIKE @searchText";
+
+            cmd.Parameters.AddWithValue("@searchText", "%" + textBox2.Text + "%");
+            cmd.ExecuteNonQuery();
+
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+
+            conexao.Close();
+
+            // Os campos de texto são limpos apenas se houver resultados da pesquisa
+            if (dt.Rows.Count > 0)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show("Nenhum resultado encontrado.");
+            }
+
         }
     }
 }

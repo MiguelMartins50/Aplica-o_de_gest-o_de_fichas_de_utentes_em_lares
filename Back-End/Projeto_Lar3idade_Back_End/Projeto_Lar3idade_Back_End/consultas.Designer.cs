@@ -40,7 +40,6 @@ namespace Projeto_Lar3idade_Back_End
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -164,20 +163,9 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.textBox2.Location = new System.Drawing.Point(777, 307);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(144, 22);
+            this.textBox2.Size = new System.Drawing.Size(226, 22);
             this.textBox2.TabIndex = 29;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(926, 304);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(77, 28);
-            this.button4.TabIndex = 30;
-            this.button4.Text = "Procurar";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // dateTimePicker1
             // 
@@ -192,7 +180,6 @@ namespace Projeto_Lar3idade_Back_End
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -225,7 +212,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

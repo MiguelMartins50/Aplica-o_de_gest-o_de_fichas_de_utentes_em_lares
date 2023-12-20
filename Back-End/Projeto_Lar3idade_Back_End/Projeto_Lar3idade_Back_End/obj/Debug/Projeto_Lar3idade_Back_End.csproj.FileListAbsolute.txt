@@ -245,5 +245,6 @@ C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Bac
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\Nova pasta\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.consultas.resources
+C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Tarefas_Func.resources
+C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Visitas.resources
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
-C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.tarefas_fun.resources

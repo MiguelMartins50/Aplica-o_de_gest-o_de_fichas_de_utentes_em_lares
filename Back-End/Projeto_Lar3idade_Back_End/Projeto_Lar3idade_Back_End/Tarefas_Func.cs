@@ -9,18 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
+
 namespace Projeto_Lar3idade_Back_End
 {
-    public partial class tarefas_fun : UserControl
+    public partial class Tarefas_Func : UserControl
     {
         private int iduser;
-        private int verticalPosition = 50;
-        public tarefas_fun(int userid)
+       
+        private int verticalPosition;
+        public Tarefas_Func(int userid)
         {
             InitializeComponent();
+            verticalPosition = pictureBox1.Height + 5;
             this.iduser = userid;
             LoadData();
             vScrollBar1.Scroll += vScrollBar1_Scroll;
+
         }
         private void LoadData()
         {
@@ -45,13 +49,13 @@ namespace Projeto_Lar3idade_Back_End
                             string tipo = reader["tipo"].ToString();
 
 
-                            CreatePanel(nome, , desc, tipo);
+                            CreatePanel(nome,  desc, tipo);
                         }
                     }
                 }
             }
         }
-        private void CreatePanel(string nome, string data_, string desc, string tipo)
+        private void CreatePanel(string nome,  string desc, string tipo)
         {
             // Create a new panel for each database entry
             Panel panel = new Panel();
@@ -89,7 +93,7 @@ namespace Projeto_Lar3idade_Back_End
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
             // Adjust the vertical position based on the scrollbar value
-            verticalPosition = 10 - e.NewValue;
+            verticalPosition = pictureBox1.Height + 10 - e.NewValue;
 
             // Reposition the panels based on the new vertical position
             RepositionPanels();
@@ -106,6 +110,7 @@ namespace Projeto_Lar3idade_Back_End
                     verticalPosition += panel.Height + 10; // Adjusted spacing
                 }
             }
+
         }
-    }
+    } 
 }
