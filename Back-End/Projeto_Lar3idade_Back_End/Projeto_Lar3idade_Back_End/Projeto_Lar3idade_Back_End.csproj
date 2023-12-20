@@ -259,11 +259,23 @@
     <Compile Include="tarefas.Designer.cs">
       <DependentUpon>tarefas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tarefas_Func.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tarefas_Func.Designer.cs">
+      <DependentUpon>Tarefas_Func.cs</DependentUpon>
+    </Compile>
     <Compile Include="utentes.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="utentes.Designer.cs">
       <DependentUpon>utentes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Visitas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Visitas.Designer.cs">
+      <DependentUpon>Visitas.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="add_atividade.resx">
       <DependentUpon>add_atividade.cs</DependentUpon>
@@ -349,8 +361,14 @@
     <EmbeddedResource Include="tarefas.resx">
       <DependentUpon>tarefas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tarefas_Func.resx">
+      <DependentUpon>Tarefas_Func.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="utentes.resx">
       <DependentUpon>utentes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visitas.resx">
+      <DependentUpon>Visitas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

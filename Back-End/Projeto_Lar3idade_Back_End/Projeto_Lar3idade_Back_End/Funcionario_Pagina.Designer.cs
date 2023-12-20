@@ -41,6 +41,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label6 = new System.Windows.Forms.Label();
             this.consultas1 = new Projeto_Lar3idade_Back_End.consultas();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
+            this.visitas1 = new Projeto_Lar3idade_Back_End.Visitas();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -158,12 +159,21 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1.Size = new System.Drawing.Size(1022, 735);
             this.utentes1.TabIndex = 9;
             // 
+            // visitas1
+            // 
+            this.visitas1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.visitas1.Location = new System.Drawing.Point(296, 66);
+            this.visitas1.Name = "visitas1";
+            this.visitas1.Size = new System.Drawing.Size(1022, 735);
+            this.visitas1.TabIndex = 11;
+            // 
             // Funcionario_Pagina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.visitas1);
             this.Controls.Add(this.consultas1);
             this.Controls.Add(this.utentes1);
             this.Controls.Add(this.label6);
@@ -199,5 +209,6 @@ namespace Projeto_Lar3idade_Back_End
         private utentes utentes1;
         private consultas consultas1;
         private Atividades_func atividades_func1;
+        private Visitas visitas1;
     }
 }

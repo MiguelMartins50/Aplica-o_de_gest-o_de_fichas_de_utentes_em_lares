@@ -12,19 +12,17 @@ using MySql.Data.MySqlClient;
 
 namespace Projeto_Lar3idade_Back_End
 {
-    public partial class consultas : UserControl
+    public partial class Visitas : UserControl
     {
         private MySqlConnection conexao;
-        private Dictionary<string, string> medico_ = new Dictionary<string, string>();
+        private Dictionary<string, string> responsavel_ = new Dictionary<string, string>();
         private Dictionary<string, string> utente_ = new Dictionary<string, string>();
-        private int idconsulta;
-        private int idMedico;
+        private int idVisita;
+        private int idresponsavel;
         private int idutente;
-        private string nome_Medico = "";
+        private string nome_responsavel = "";
         private string nome_utente = "";
-
-
-        public consultas()
+        public Visitas()
         {
             InitializeComponent();
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
@@ -40,7 +38,7 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT c.idConsulta,u.nome as Utente, c.Utente_idUtente,c.Medico_idMedico,m.nome as Medico,c.data,c.estado FROM mydb.consulta c JOIN mydb.utente u ON c.Utente_idUtente = u.idUtente JOIN mydb.medico m ON c.Medico_idMedico = m.idMedico;";
+            cmd.CommandText = "SELECT v.idVisita,u.nome as Utente, v.Utente_idUtente,v.Familiar_idFamiliar,f.nomel as Familiar,v.data FROM mydb.visita v JOIN mydb.utente u ON v.Utente_idUtente = u.idUtente JOIN mydb.familiar f ON v.Familiar_idFamiliar = f.idFamiliar;";
             cmd.ExecuteNonQuery();
             DataTable dta = new DataTable();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
@@ -48,12 +46,12 @@ namespace Projeto_Lar3idade_Back_End
             if (dta.Rows.Count > 0)
             {
                 // Assuming that Medico_idMedico is of integer type, you may need to cast it accordingly
-                idMedico = Convert.ToInt32(dta.Rows[0]["Medico_idMedico"]);
+                idresponsavel = Convert.ToInt32(dta.Rows[0]["Familiar_idFamiliar"]);
                 idutente = Convert.ToInt32(dta.Rows[0]["Utente_idUtente"]);
             }
             dataGridView1.DataSource = dta;
+            dataGridView1.Columns["Familiar_idFamiliar"].Visible = false;
             dataGridView1.Columns["Utente_idUtente"].Visible = false;
-            dataGridView1.Columns["Medico_idMedico"].Visible = false;
             conexao.Close();
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
@@ -83,17 +81,17 @@ namespace Projeto_Lar3idade_Back_End
                 }
 
                 // Carregar dados para a ComboBox de Médicos
-                string queryMedico = "SELECT idMedico, nome FROM medico";
+                string queryMedico = "SELECT idFamiliar, nomel FROM familiar";
                 using (MySqlCommand cmdMedico = new MySqlCommand(queryMedico, conexao))
                 {
                     using (MySqlDataReader readerMedico = cmdMedico.ExecuteReader())
                     {
                         while (readerMedico.Read())
                         {
-                            string idMedico = readerMedico["idMedico"].ToString();
-                            string nomeMedico = readerMedico["nome"].ToString();
-                            comboBox2.Items.Add(nomeMedico);
-                            medico_[nomeMedico] = idMedico;
+                            string idresponsavel = readerMedico["idFamiliar"].ToString();
+                            string nomeresponavel = readerMedico["nomel"].ToString();
+                            comboBox2.Items.Add(nomeresponavel);
+                            responsavel_[nomeresponavel] = idresponsavel;
                         }
                     }
                 }
@@ -107,10 +105,53 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Close();
             }
         }
-       
-
-        private void button3_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                conexao.Open();
+                string query3 = "SELECT * FROM visita ORDER BY idVisita DESC LIMIT 1";
+
+                using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                {
+                    using (MySqlDataReader reader = procurarId.ExecuteReader())
+                    {
+                        // Create a list to store data
+                        List<string[]> data = new List<string[]>();
+
+                        // Iterate through the results
+                        while (reader.Read())
+                        {
+                            // Add data to the list
+                            idVisita = 1 + int.Parse(reader["idVisita"].ToString());
+
+                        }
+                    }
+                }
+                MySqlCommand cmd = conexao.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "INSERT INTO mydb.visita (idVisita, Utente_idUtente, Familiar_idFamiliar, data) VALUES(@idVisita, @Utente_idUtente, @Familiar_idFamiliar, @data)";
+
+                cmd.Parameters.AddWithValue("@idVisita", idVisita);
+                cmd.Parameters.AddWithValue("@Familiar_idFamiliar", idresponsavel);
+                cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
+                cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                
+
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Consulta agendada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao adicionar consulta: " + ex.Message + "\n" + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            LimparTextBoxes();
             display_data();
         }
 
@@ -128,15 +169,15 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     // Obtém o valor do idUtente dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
-                    cmd.CommandText = "UPDATE mydb.consulta SET idConsulta = @idConsulta, Utente_idUtente = @Utente_idUtente, Medico_idMedico = @Medico_idMedico, data = @data WHERE idconsulta = @idconsulta";
-                  
+                    cmd.CommandText = "UPDATE mydb.visita SET Utente_idUtente = @Utente_idUtente, Familiar_idFamiliar = @Familiar_idFamiliar, data = @data WHERE idVisita = @idVisita;";
+
 
                     // Adicionando parâmetros
-                    cmd.Parameters.AddWithValue("@Medico_idMedico", idMedico);
+                    cmd.Parameters.AddWithValue("@Familiar_idFamiliar", idresponsavel);
                     cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
                     cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                    cmd.Parameters.AddWithValue("@idConsulta", idconsulta);
-                    
+                    cmd.Parameters.AddWithValue("@idVisita", idVisita);
+
 
                     // Executando o comando
                     cmd.ExecuteNonQuery();
@@ -168,161 +209,66 @@ namespace Projeto_Lar3idade_Back_End
             comboBox1.SelectedIndex = -1;
             comboBox2.SelectedIndex = -1;
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            try
+            DialogResult result = MessageBox.Show("Tem a certeza que quer desmarcar a visita?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.OK)
             {
-                conexao.Open();
-                string query3 = "SELECT * FROM consulta ORDER BY idConsulta DESC LIMIT 1";
-
-                using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    using (MySqlDataReader reader = procurarId.ExecuteReader())
+                    try
                     {
-                        // Create a list to store data
-                        List<string[]> data = new List<string[]>();
+                        int rowIndex = dataGridView1.SelectedRows[0].Index;
+                        int idVisita = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idVisita"].Value);
 
-                        // Iterate through the results
-                        while (reader.Read())
+                        using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                         {
-                            // Add data to the list
-                            idconsulta = 1 + int.Parse(reader["idConsulta"].ToString());
+                            conexao.Open();
 
+                            string query = "DELETE FROM visita WHERE idVisita = @idVisita";
+
+                            using (MySqlCommand comando = new MySqlCommand(query, conexao))
+                            {
+                                comando.Parameters.AddWithValue("@idVisita", idVisita);
+                                comando.ExecuteNonQuery();
+
+                                MessageBox.Show("Visita desmarcada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                display_data();
+                                LimparTextBoxes();
+                            }
                         }
                     }
-                }
-                MySqlCommand cmd = conexao.CreateCommand();
-                cmd.CommandType = CommandType.Text;
 
-                cmd.CommandText = "INSERT INTO mydb.consulta (idConsulta, Utente_idUtente, Medico_idMedico, data, estado, relatorio) " +
-                      "VALUES (@idConsulta, @Utente_idUtente, @Medico_idMedico, @data, @estado, @relatorio)";
-
-                cmd.Parameters.AddWithValue("@idConsulta", idconsulta);
-                cmd.Parameters.AddWithValue("@Medico_idMedico", idMedico);
-                cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
-                cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                cmd.Parameters.AddWithValue("@estado", "Agendada");
-                cmd.Parameters.AddWithValue("@relatorio", "");
-
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Consulta agendada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao adicionar consulta: " + ex.Message + "\n" + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-
-            LimparTextBoxes();
-            display_data();
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox2.SelectedItem != null)
-            {
-                string selectedValue = comboBox2.SelectedItem.ToString();
-
-                if (medico_.TryGetValue(selectedValue, out string id))
-                {
-                    idMedico = int.Parse(id);
-                }
-            }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedItem != null)
-            {
-                string selectedValue = comboBox1.SelectedItem.ToString();
-
-                if (utente_.TryGetValue(selectedValue, out string id))
-                {
-                    idutente = int.Parse(id);
-                }
-            }
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                int idUtenteParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idConsulta"].Value);
-                PreencherCamposParaEdicao(idUtenteParaEditar);
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
-            }
-        }
-        private void PreencherCamposParaEdicao(int idconsultarParaEditar)
-        {
-            try
-            {
-                conexao.Open();
-
-                MySqlCommand cmd = conexao.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT c.idConsulta,u.nome as Utente, c.Utente_idUtente,c.Medico_idMedico,m.nome as Medico,c.data,c.estado FROM mydb.consulta c JOIN mydb.utente u ON c.Utente_idUtente = u.idUtente JOIN mydb.medico m ON c.Medico_idMedico = m.idMedico WHERE c.idconsulta = @idconsulta";
-                cmd.Parameters.AddWithValue("@idconsulta", idconsultarParaEditar);
-                DataTable dta = new DataTable();
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
-                dataadapter.Fill(dta);
-                if (dta.Rows.Count > 0)
-                {
-                    // Assuming that Medico_idMedico is of integer type, you may need to cast it accordingly
-                    idMedico = Convert.ToInt32(dta.Rows[0]["Medico_idMedico"]);
-                    idutente = Convert.ToInt32(dta.Rows[0]["Utente_idUtente"]);
-                    nome_Medico = Convert.ToString(dta.Rows[0]["Medico"]);
-                    nome_utente = Convert.ToString(dta.Rows[0]["Utente"]);
-                    Console.WriteLine("idM "+idMedico);
-                    Console.WriteLine("idu "+idutente);
-
-                }
-                using (MySqlDataReader reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
+                    catch (Exception ex)
                     {
-                        // Atualize a variável idUtente com o valor do idUtenteParaEditar
-                        idconsulta = idconsultarParaEditar;
-
-                        // Preenche os campos com os dados do utente
-                        comboBox1.Text = nome_Medico;
-                        comboBox2.Text = nome_utente;
-                        dateTimePicker1.Value = Convert.ToDateTime(reader["data"]);
-                        
+                        MessageBox.Show("Erro ao excluir tarefa: " + ex.Message);
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione uma tarefa para excluir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao obter dados da consulta para edição: " + ex.Message+ "\n"+ ex.StackTrace);
-            }
-            finally
-            {
-                conexao.Close();
-            }
+            
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
+        {
+            display_data();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
             conexao.Open();
 
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT c.idConsulta,u.nome as Utente, c.Utente_idUtente,c.Medico_idMedico,m.nome as Medico,c.data,c.estado " +
-                              "FROM mydb.consulta c " +
-                              "JOIN mydb.utente u ON c.Utente_idUtente = u.idUtente " +
-                              "JOIN mydb.medico m ON c.Medico_idMedico = m.idMedico " +
-                              "WHERE u.nome LIKE @searchText OR m.nome LIKE @searchText OR " +
-                              "SUBSTRING_INDEX(u.nome, ' ', 1) LIKE @searchText OR SUBSTRING_INDEX(m.nome, ' ', 1) LIKE @searchText";
+            cmd.CommandText = "SELECT v.idVisita,u.nome as Utente, v.Utente_idUtente,v.Familiar_idFamiliar,f.nomel as Familiar,v.data FROM mydb.visita v JOIN mydb.utente u ON v.Utente_idUtente = u.idUtente JOIN mydb.familiar f ON v.Familiar_idFamiliar = f.idFamiliar " +
+                  "WHERE (SUBSTRING_INDEX(u.nome, ' ', 1) LIKE @searchText OR SUBSTRING_INDEX(f.nomel, ' ', 1) LIKE @searchText)";
 
-            cmd.Parameters.AddWithValue("@searchText", "%" + textBox2.Text + "%");
+
+            cmd.Parameters.AddWithValue("@searchText", "%" + textBox1.Text + "%");
             cmd.ExecuteNonQuery();
 
             DataTable dt = new DataTable();
@@ -342,7 +288,92 @@ namespace Projeto_Lar3idade_Back_End
             {
                 MessageBox.Show("Nenhum resultado encontrado.");
             }
+        }
 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedItem != null)
+            {
+                string selectedValue = comboBox2.SelectedItem.ToString();
+
+                if (responsavel_.TryGetValue(selectedValue, out string id))
+                {
+                    idresponsavel = int.Parse(id);
+                }
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem != null)
+            {
+                string selectedValue = comboBox1.SelectedItem.ToString();
+
+                if (utente_.TryGetValue(selectedValue, out string id))
+                {
+                    idutente = int.Parse(id);
+                }
+            }
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int idVisitaparaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idVisita"].Value);
+                PreencherCamposParaEdicao(idVisitaparaEditar);
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
+                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+            }
+        }
+        private void PreencherCamposParaEdicao(int idvisitaParaEditar)
+        {
+            try
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = conexao.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT v.idVisita,u.nome as Utente, v.Utente_idUtente,v.Familiar_idFamiliar,f.nomel as Familiar,v.data FROM mydb.visita v JOIN mydb.utente u ON v.Utente_idUtente = u.idUtente JOIN mydb.familiar f ON v.Familiar_idFamiliar = f.idFamiliar  WHERE v.idVisita = @idVisita";
+                cmd.Parameters.AddWithValue("@idVisita", idvisitaParaEditar);
+                DataTable dta = new DataTable();
+                MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
+                dataadapter.Fill(dta);
+                if (dta.Rows.Count > 0)
+                {
+                    // Assuming that Medico_idMedico is of integer type, you may need to cast it accordingly
+                    idresponsavel = Convert.ToInt32(dta.Rows[0]["Familiar_idFamiliar"]);
+                    idutente = Convert.ToInt32(dta.Rows[0]["Utente_idUtente"]);
+                    nome_responsavel = Convert.ToString(dta.Rows[0]["Familiar"]);
+                    nome_utente = Convert.ToString(dta.Rows[0]["Utente"]);
+                    Console.WriteLine("idv " + idresponsavel);
+                    Console.WriteLine("idu " + idutente);
+
+                }
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        // Atualize a variável idUtente com o valor do idUtenteParaEditar
+                        idVisita = idvisitaParaEditar;
+
+                        // Preenche os campos com os dados do utente
+                        comboBox1.Text = nome_responsavel;
+                        comboBox2.Text = nome_utente;
+                        dateTimePicker1.Value = Convert.ToDateTime(reader["data"]);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao obter dados da consulta para edição: " + ex.Message + "\n" + ex.StackTrace);
+            }
+            finally
+            {
+                conexao.Close();
+            }
         }
     }
 }
