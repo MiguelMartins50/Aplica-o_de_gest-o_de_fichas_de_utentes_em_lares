@@ -573,15 +573,12 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_telemovel.Text = selectedRow.Cells["telemovel"].Value.ToString();
                 textBox_email.Text = selectedRow.Cells["email"].Value.ToString(); 
                 textBox1_parentesco.Text = selectedRow.Cells["parentesco_relacao"].Value.ToString();
-                textBox2_parentesco.Text = selectedRow.Cells["parentesco_relacao"].Value.ToString();
-                textBox3_parentesco.Text = selectedRow.Cells["parentesco_relacao"].Value.ToString();
                 textBox_morada.Text = selectedRow.Cells["morada"].Value.ToString();
                 textBox_codPostal.Text = selectedRow.Cells["cod_postal"].Value.ToString();
                 textBox_ocupacao.Text = selectedRow.Cells["ocupacao"].Value.ToString();
                 textBox3_senha.Text = selectedRow.Cells["senha"].Value.ToString();
                 comboBox1_Utente.SelectedItem = selectedRow.Cells["NomeUtente"].Value.ToString();
-                comboBox2_Utente.SelectedItem = selectedRow.Cells["NomeUtente"].Value.ToString();
-                comboBox3_Utente.SelectedItem = selectedRow.Cells["NomeUtente"].Value.ToString();
+                
             }
 
 
