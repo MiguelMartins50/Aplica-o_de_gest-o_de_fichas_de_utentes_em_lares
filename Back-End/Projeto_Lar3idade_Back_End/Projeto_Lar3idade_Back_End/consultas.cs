@@ -128,7 +128,7 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     // Obtém o valor do idUtente dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
-                    cmd.CommandText = "UPDATE mydb.consulta SET idConsulta = @idConsulta, Utente_idUtente = @Utente_idUtente, Medico_idMedico = @Medico_idMedico, data = @data WHERE idconsulta = @idconsulta";
+                    cmd.CommandText = "UPDATE mydb.consulta SET  Utente_idUtente = @Utente_idUtente, Medico_idMedico = @Medico_idMedico, data = @data WHERE idconsulta = @idconsulta";
                   
 
                     // Adicionando parâmetros

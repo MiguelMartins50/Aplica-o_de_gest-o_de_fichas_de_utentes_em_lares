@@ -42,7 +42,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.button_Search = new System.Windows.Forms.Button();
             this.textBox_Search = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button3 = new System.Windows.Forms.Button();
@@ -57,7 +56,7 @@
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(399, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 26);
+            this.label1.Size = new System.Drawing.Size(106, 27);
             this.label1.TabIndex = 3;
             this.label1.Text = "Consultas";
             // 
@@ -180,24 +179,16 @@
             this.button5.TabIndex = 67;
             this.button5.Text = "Atualizar/Limpar";
             this.button5.UseVisualStyleBackColor = false;
-            // 
-            // button_Search
-            // 
-            this.button_Search.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
-            this.button_Search.Location = new System.Drawing.Point(912, 304);
-            this.button_Search.Name = "button_Search";
-            this.button_Search.Size = new System.Drawing.Size(77, 29);
-            this.button_Search.TabIndex = 66;
-            this.button_Search.Text = "Search";
-            this.button_Search.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // textBox_Search
             // 
             this.textBox_Search.Location = new System.Drawing.Point(694, 307);
             this.textBox_Search.Multiline = true;
             this.textBox_Search.Name = "textBox_Search";
-            this.textBox_Search.Size = new System.Drawing.Size(221, 26);
+            this.textBox_Search.Size = new System.Drawing.Size(295, 26);
             this.textBox_Search.TabIndex = 65;
+            this.textBox_Search.TextChanged += new System.EventHandler(this.textBox_Search_TextChanged);
             // 
             // dataGridView1
             // 
@@ -206,10 +197,15 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(22, 339);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(967, 378);
             this.dataGridView1.TabIndex = 64;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellClick);
+            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellClick);
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellClick);
             // 
             // button3
             // 
@@ -220,6 +216,7 @@
             this.button3.TabIndex = 63;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -230,6 +227,7 @@
             this.button2.TabIndex = 62;
             this.button2.Text = "Update";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -248,7 +246,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button_Search);
             this.Controls.Add(this.textBox_Search);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button3);
@@ -291,7 +288,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button_Search;
         private System.Windows.Forms.TextBox textBox_Search;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button3;
