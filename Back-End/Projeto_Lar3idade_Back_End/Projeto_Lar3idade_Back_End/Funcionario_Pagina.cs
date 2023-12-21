@@ -15,6 +15,7 @@ namespace Projeto_Lar3idade_Back_End
         private Tarefas_Func tarefas_Func1;
         private Escalas_func escalas_Func1;
         public int iduser { get; set; }
+        private string tipo_func = "funcionario";
         public Funcionario_Pagina(int IDuser)
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace Projeto_Lar3idade_Back_End
             atividades_func1.Location = new Point(215, 60); 
             atividades_func1.Size = new Size(1022, 700);
             this.Controls.Add(atividades_func1);
-            escalas_Func1 = new Escalas_func(iduser);
+            escalas_Func1 = new Escalas_func(iduser, tipo_func);
             escalas_Func1.Location = new Point(215, 60);
             escalas_Func1.Size = new Size(1022, 700);
             this.Controls.Add(escalas_Func1);

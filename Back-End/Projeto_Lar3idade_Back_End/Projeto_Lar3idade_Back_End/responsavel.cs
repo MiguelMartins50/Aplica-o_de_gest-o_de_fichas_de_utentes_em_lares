@@ -22,6 +22,9 @@ namespace Projeto_Lar3idade_Back_End
         private int idUt1;
         private int idUt2;
         private int idUt3;
+        private int idUf1;
+        private int idUf2;
+        private int idUf3;
         private int control1;
         private int control2;
         private int control3;
@@ -93,21 +96,23 @@ namespace Projeto_Lar3idade_Back_End
             string email = textBox_email.Text;
             string senha = textBox3_senha.Text;
             string parentesco = textBox1_parentesco.Text;
-          
+            string parentesco2 = textBox2_parentesco.Text;
+            string parentesco3 = textBox3_parentesco.Text;
+
             try
             {
                 using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                 {
                     conexao.Open();
-                    string query = "INSERT INTO mydb.familiar (idFamiliar, nomel, numero_cc, data_validade, telemovel, data_nascimento,parentesco_relacao,morada,cod_postal,ocupacao,tel_casa, email, senha)" +
-                                  "VALUES (@idFamiliar,@nomel, @numero_cc, @data_validade, @telemovel, @data_nascimento, @parentesco_relacao,@morada,@cod_postal,@ocupacao,@tel_casa,@email, @senha)";
+                    string query = "INSERT INTO mydb.familiar (idFamiliar, nomel, numero_cc, data_validade, telemovel, data_nascimento,morada,cod_postal,ocupacao,tel_casa, email, senha)" +
+                                  "VALUES (@idFamiliar,@nomel, @numero_cc, @data_validade, @telemovel, @data_nascimento, @morada,@cod_postal,@ocupacao,@tel_casa,@email, @senha)";
 
                     string query2 = "SELECT * FROM familiar ORDER BY idFamiliar DESC LIMIT 1";
                     string query3 = "SELECT * FROM utente_familiar ORDER BY idUtente_familiar DESC LIMIT 1";
                     string query4 = "LOCK TABLES utente_familiar WRITE;" +
                                     "ALTER TABLE utente_familiar DISABLE KEYS;" +
-                                    "INSERT INTO mydb.utente_familiar (idUtente_familiar, Utente_idUtente, Familiar_idFamiliar)" +
-                                    "VALUES (@idUtente_familiar, @Utente_idUtente, @Familiar_idFamiliar);" +
+                                    "INSERT INTO mydb.utente_familiar (idUtente_familiar, Utente_idUtente, Familiar_idFamiliar,parentesco)" +
+                                    "VALUES (@idUtente_familiar, @Utente_idUtente, @Familiar_idFamiliar, @parentesco);" +
                                     "ALTER TABLE utente_familiar ENABLE KEYS;" +
                                     "UNLOCK TABLES;";
                     using (MySqlCommand procurarId = new MySqlCommand(query2, conexao))
@@ -156,7 +161,6 @@ namespace Projeto_Lar3idade_Back_End
                         comando.Parameters.AddWithValue("@data_validade", data_validade);
                         comando.Parameters.AddWithValue("@telemovel", telemovel);
                         comando.Parameters.AddWithValue("@data_nascimento", data_nascimento);
-                        comando.Parameters.AddWithValue("@parentesco_relacao", parentesco);
                         comando.Parameters.AddWithValue("@morada", morada);
                         comando.Parameters.AddWithValue("@cod_postal", cod_postal);
                         comando.Parameters.AddWithValue("@ocupacao", ocupacao);
@@ -175,6 +179,7 @@ namespace Projeto_Lar3idade_Back_End
                         using (MySqlCommand comando = new MySqlCommand(query4, conexao))
                         {
                             // Adicione os parâmetros com os valores obtidos do formulário
+                            comando.Parameters.AddWithValue("@parentesco", parentesco);
                             comando.Parameters.AddWithValue("@idUtente_familiar", idAddUt);
                             comando.Parameters.AddWithValue("@Utente_idUtente", idUt1);
                             comando.Parameters.AddWithValue("@Familiar_idFamiliar", idAdd);
@@ -190,6 +195,7 @@ namespace Projeto_Lar3idade_Back_End
                         using (MySqlCommand comando = new MySqlCommand(query4, conexao))
                         {
                             // Adicione os parâmetros com os valores obtidos do formulário
+                            comando.Parameters.AddWithValue("@parentesco", parentesco2);
                             comando.Parameters.AddWithValue("@idUtente_familiar", idAddUt2);
                             comando.Parameters.AddWithValue("@Utente_idUtente", idUt2);
                             comando.Parameters.AddWithValue("@Familiar_idFamiliar", idAdd);
@@ -204,6 +210,7 @@ namespace Projeto_Lar3idade_Back_End
                         using (MySqlCommand comando = new MySqlCommand(query4, conexao))
                         {
                             // Adicione os parâmetros com os valores obtidos do formulário
+                            comando.Parameters.AddWithValue("@parentesco", parentesco3);
                             comando.Parameters.AddWithValue("@idUtente_familiar", idAddUt3);
                             comando.Parameters.AddWithValue("@Utente_idUtente", idUt3);
                             comando.Parameters.AddWithValue("@Familiar_idFamiliar", idAdd);
@@ -269,15 +276,26 @@ namespace Projeto_Lar3idade_Back_End
                     string email = textBox_email.Text;
                     string senha = textBox3_senha.Text;
                     string parentesco = textBox1_parentesco.Text;
+                    string parentesco2 = textBox2_parentesco.Text;
+                    string parentesco3 = textBox3_parentesco.Text;
+                    Console.WriteLine("idutente1:" + idUt1);
+                    Console.WriteLine("idutente2:" + idUt2);
+                    Console.WriteLine("idutente3:" + idUt3);
+
 
                     using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                     {
                         conexao.Open();
                         string query = "UPDATE mydb.familiar SET nomel = @nomel, numero_cc = @numero_cc, data_validade = @data_validade, " +
-                                       "telemovel = @telemovel, data_nascimento = @data_nascimento, parentesco_relacao = @parentesco_relacao, " +
+                                       "telemovel = @telemovel, data_nascimento = @data_nascimento,  " +
                                        "morada = @morada, cod_postal = @cod_postal, ocupacao = @ocupacao, tel_casa = @tel_casa, " +
                                        "email = @email, senha = @senha " +
                                        "WHERE idFamiliar = @idFamiliar";
+                        string query2 = "LOCK TABLES utente_familiar WRITE;" +
+                                        "ALTER TABLE utente_familiar DISABLE KEYS;" + 
+                                        "UPDATE `mydb`.`utente_familiar` SET `Utente_idUtente` = @Utente_idUtente, `Familiar_idFamiliar` = @Familiar_idFamiliar, `parentesco` = @parentesco WHERE (`idUtente_familiar` = @idUtente_familiar);" +
+                                        "ALTER TABLE utente_familiar ENABLE KEYS;" +
+                                        "UNLOCK TABLES;";
 
                         using (MySqlCommand comando = new MySqlCommand(query, conexao))
                         {
@@ -287,7 +305,6 @@ namespace Projeto_Lar3idade_Back_End
                             comando.Parameters.AddWithValue("@data_validade", data_validade);
                             comando.Parameters.AddWithValue("@telemovel", telemovel);
                             comando.Parameters.AddWithValue("@data_nascimento", data_nascimento);
-                            comando.Parameters.AddWithValue("@parentesco_relacao", parentesco);
                             comando.Parameters.AddWithValue("@morada", morada);
                             comando.Parameters.AddWithValue("@cod_postal", cod_postal);
                             comando.Parameters.AddWithValue("@ocupacao", ocupacao);
@@ -300,6 +317,79 @@ namespace Projeto_Lar3idade_Back_End
                             comando.ExecuteNonQuery();
 
                             MessageBox.Show("Responsável atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        if(control1 == 1)
+                        {
+                            using (MySqlCommand comando = new MySqlCommand(query2, conexao))
+                            {
+                                try
+                                {
+                                    comando.Parameters.AddWithValue("@Utente_idUtente", idUt1);
+                                    comando.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+                                    comando.Parameters.AddWithValue("@parentesco", parentesco);
+                                    comando.Parameters.AddWithValue(" @idUtente_familiar", idUf1);
+                                    // Execute the query
+                                    comando.ExecuteNonQuery();
+                                    Console.WriteLine("Connection added successfully");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Error adding connection1: " + ex.Message);
+                                    throw; // Re-throw the exception to propagate it further
+                                }
+                                // Adicione os parâmetros com os novos valores obtidos do formulário
+                                
+                                Console.WriteLine("ligaçao adicionada");
+                            }
+                        }
+
+                        if (control2 == 1)
+                        {
+                            using (MySqlCommand comando = new MySqlCommand(query2, conexao))
+                            {
+                                try
+                                {
+                                    comando.Parameters.AddWithValue("@Utente_idUtente", idUt2);
+                                    comando.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+                                    comando.Parameters.AddWithValue("@parentesco", parentesco2);
+                                    comando.Parameters.AddWithValue(" @idUtente_familiar", idUf2);
+                                    // Execute the query
+                                    comando.ExecuteNonQuery();
+                                    Console.WriteLine("Connection added successfully");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Error adding connection2: " + ex.Message);
+                                    throw; // Re-throw the exception to propagate it further
+                                }
+                                // Adicione os parâmetros com os novos valores obtidos do formulário
+
+                                Console.WriteLine("ligaçao adicionada");
+                            }
+                        }
+                        if (control3 == 1)
+                        {
+                            using (MySqlCommand comando = new MySqlCommand(query2, conexao))
+                            {
+                                try
+                                {
+                                    comando.Parameters.AddWithValue("@Utente_idUtente", idUt3);
+                                    comando.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+                                    comando.Parameters.AddWithValue("@parentesco", parentesco3);
+                                    comando.Parameters.AddWithValue(" @idUtente_familiar", idUf3);
+                                    // Execute the query
+                                    comando.ExecuteNonQuery();
+                                    Console.WriteLine("Connection added successfully");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Error adding connection3: " + ex.Message);
+                                    throw; // Re-throw the exception to propagate it further
+                                }
+                                // Adicione os parâmetros com os novos valores obtidos do formulário
+
+                                Console.WriteLine("ligaçao adicionada");
+                            }
                         }
                     }
                 }
@@ -447,14 +537,18 @@ namespace Projeto_Lar3idade_Back_End
                 using (MySqlCommand cmd = conexao.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT f.idFamiliar, f.nomel, f.numero_cc,f.data_validade, f.telemovel,  f.data_nascimento,   f.parentesco_relacao,  f.morada,  f.cod_postal , f.ocupacao , f.tel_casa,    f.senha,  f.email, u.nome AS NomeUtente FROM   familiar f JOIN   utente_familiar uf ON f.idFamiliar = uf.Familiar_idFamiliar JOIN  utente u ON uf.Utente_idUtente = u.idUtente";
+                    cmd.CommandText = "SELECT f.idFamiliar, f.nomel, f.numero_cc, f.data_validade, f.telemovel, f.data_nascimento, f.morada, f.cod_postal, f.ocupacao, f.tel_casa, f.senha, f.email, MAX(CASE WHEN u.row_num = 1 THEN u.nome END) AS Utente1,MAX(CASE WHEN u.row_num = 1 THEN uf.idUtente_familiar END) AS idUtente_familiar1, MAX(CASE WHEN u.row_num = 1 THEN uf.parentesco END) AS Utente1_Parentesco, MAX(CASE WHEN u.row_num = 2 THEN u.nome END) AS Utente2,MAX(CASE WHEN u.row_num = 2 THEN uf.idUtente_familiar END) AS idUtente_familiar2, MAX(CASE WHEN u.row_num = 2 THEN uf.parentesco END) AS Utente2_Parentesco, MAX(CASE WHEN u.row_num = 3 THEN u.nome END) AS Utente3,MAX(CASE WHEN u.row_num = 3 THEN uf.idUtente_familiar END) AS idUtente_familiar3, MAX(CASE WHEN u.row_num = 3 THEN uf.parentesco END) AS Utente3_Parentesco FROM familiar f JOIN utente_familiar uf ON f.idFamiliar = uf.Familiar_idFamiliar JOIN (SELECT u.*, uf.Familiar_idFamiliar, ROW_NUMBER() OVER (PARTITION BY uf.Familiar_idFamiliar ORDER BY u.idUtente) AS row_num FROM utente u JOIN utente_familiar uf ON u.idUtente = uf.Utente_idUtente) u ON uf.Utente_idUtente = u.idUtente AND uf.Familiar_idFamiliar = u.Familiar_idFamiliar GROUP BY f.idFamiliar, f.nomel, f.numero_cc, f.data_validade, f.telemovel, f.data_nascimento, f.morada, f.cod_postal, f.ocupacao, f.tel_casa, f.senha, f.email;";
                     cmd.ExecuteNonQuery();
                     DataTable dta = new DataTable();
                     MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
                     dataadapter.Fill(dta);
                     dataGridView1.DataSource = dta;
+                    dataGridView1.Columns["idUtente_familiar1"].Visible = false;
+                    dataGridView1.Columns["idUtente_familiar2"].Visible = false;
+                    dataGridView1.Columns["idUtente_familiar3"].Visible = false;
+
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -572,13 +666,36 @@ namespace Projeto_Lar3idade_Back_End
                 dateTimePicker_dataNascimento.Value = Convert.ToDateTime(selectedRow.Cells["data_nascimento"].Value);
                 textBox_telemovel.Text = selectedRow.Cells["telemovel"].Value.ToString();
                 textBox_email.Text = selectedRow.Cells["email"].Value.ToString(); 
-                textBox1_parentesco.Text = selectedRow.Cells["parentesco_relacao"].Value.ToString();
                 textBox_morada.Text = selectedRow.Cells["morada"].Value.ToString();
                 textBox_codPostal.Text = selectedRow.Cells["cod_postal"].Value.ToString();
                 textBox_ocupacao.Text = selectedRow.Cells["ocupacao"].Value.ToString();
                 textBox3_senha.Text = selectedRow.Cells["senha"].Value.ToString();
-                comboBox1_Utente.SelectedItem = selectedRow.Cells["NomeUtente"].Value.ToString();
-                
+                comboBox1_Utente.SelectedItem = selectedRow.Cells["Utente1"].Value.ToString();
+                textBox1_parentesco.Text = selectedRow.Cells["Utente1_Parentesco"].Value.ToString();
+                comboBox2_Utente.SelectedItem = selectedRow.Cells["Utente2"].Value.ToString();
+                textBox2_parentesco.Text = selectedRow.Cells["Utente2_Parentesco"].Value.ToString();
+                comboBox3_Utente.SelectedItem = selectedRow.Cells["Utente3"].Value.ToString();
+                textBox3_parentesco.Text = selectedRow.Cells["Utente3_Parentesco"].Value.ToString();
+                if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar1"].Value.ToString()))))
+                {
+                    int.TryParse(selectedRow.Cells["idUtente_familiar1"].Value.ToString(), out idUf1);
+
+                }
+                if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar2"].Value.ToString()))))
+                {
+                    int.TryParse(selectedRow.Cells["idUtente_familiar2"].Value.ToString(), out idUf2);
+                }
+                if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar3"].Value.ToString()))))
+                {
+                    int.TryParse(selectedRow.Cells["idUtente_familiar3"].Value.ToString(), out idUf3);
+                }
+                Console.WriteLine("iduf1:"+idUf1);
+                Console.WriteLine("iduf2:" + idUf2);
+                Console.WriteLine("iduf3:" + idUf3);
+                Console.WriteLine("controlo1:" + control1);
+                Console.WriteLine("controlo2:" + control2);
+                Console.WriteLine("controlo3:" + control3);
+
             }
 
 

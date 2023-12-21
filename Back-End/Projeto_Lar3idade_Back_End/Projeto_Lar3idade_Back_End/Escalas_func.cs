@@ -40,12 +40,13 @@ namespace Projeto_Lar3idade_Back_End
         private DateTime Lastmonth;
 
 
-        public Escalas_func( int userid)
+        public Escalas_func( int userid, string func_tipo)
         {
             InitializeComponent();
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
             this.iduser = userid;
+            this.tipo_func = func_tipo;
             comboBox3.Items.Add("folga");
             comboBox3.Items.Add("falta Justificada");
             Console.WriteLine("id Utlizador da Escalas:" + iduser);
@@ -78,7 +79,7 @@ namespace Projeto_Lar3idade_Back_End
                 string estadoAtual = selectedRow.Cells["estado"].Value.ToString();
                 string recipientEmail = "a44610@alunos.ipb.pt";
                 string subject = "Change of Estado Request";
-                string body = $"Prezado Adminstrador,\n\nSolicito a alteração do estado da escala do dia {dia} de {estadoAtual} para {estado} \n\nAtenciosamente,\nSua {nome}";
+                string body = $"Prezado Adminstrador,\n\nSolicito a alteração do estado da escala do dia {dia} de {estadoAtual} para {estado} \n\nAtenciosamente,\n{nome}";
 
                 try
                 {
@@ -174,32 +175,65 @@ namespace Projeto_Lar3idade_Back_End
             {
                 conexao.Open();
             }
-            string query2 = "select nome,email,senha from funcionario where idFuncionario = @idFuncionario;";
-
-            using (MySqlCommand procuraremail = new MySqlCommand(query2, conexao))
+            MySqlCommand cmd = conexao.CreateCommand();
+            if (tipo_func == "funcionario")
             {
-                procuraremail.Parameters.AddWithValue("@idFuncionario", iduser);
+                string query2 = "select nome,email,senha from funcionario where idFuncionario = @idFuncionario;";
 
-                using (MySqlDataReader reader = procuraremail.ExecuteReader())
+                using (MySqlCommand procuraremail = new MySqlCommand(query2, conexao))
                 {
-                    // Create a list to store data
-                    List<string[]> data = new List<string[]>();
+                    procuraremail.Parameters.AddWithValue("@idFuncionario", iduser);
 
-                    // Iterate through the results
-                    while (reader.Read())
+                    using (MySqlDataReader reader = procuraremail.ExecuteReader())
                     {
-                        mail = Convert.ToString(reader["email"]);
-                        senha = Convert.ToString(reader["senha"]);
-                        nome = Convert.ToString(reader["nome"]);
+                        // Create a list to store data
+                        List<string[]> data = new List<string[]>();
+
+                        // Iterate through the results
+                        while (reader.Read())
+                        {
+                            mail = Convert.ToString(reader["email"]);
+                            senha = Convert.ToString(reader["senha"]);
+                            nome = Convert.ToString(reader["nome"]);
+                        }
                     }
                 }
+                
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT idFuncionario_Escala,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM funcionario_escala WHERE Funcionario_idFuncionario = @funcionario AND Escala_servico_idEscala_servico = @idescala;";
+                cmd.Parameters.AddWithValue("@funcionario", iduser);
+                cmd.Parameters.AddWithValue("@idescala", idescala);
+                Console.WriteLine("IN_FUNC");
             }
-            MySqlCommand cmd = conexao.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT idFuncionario_Escala,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM funcionario_escala WHERE Funcionario_idFuncionario = @funcionario AND Escala_servico_idEscala_servico = @idescala;";
-            cmd.Parameters.AddWithValue("@funcionario", iduser);
-            cmd.Parameters.AddWithValue("@idescala", idescala);
-            Console.WriteLine("IN_FUNC");
+            if(tipo_func == "medico")
+            {
+                string query2 = "select nome,email,password from medico where idMedico = @idMedico;";
+
+                using (MySqlCommand procuraremail = new MySqlCommand(query2, conexao))
+                {
+                    procuraremail.Parameters.AddWithValue("@idMedico", iduser);
+
+                    using (MySqlDataReader reader = procuraremail.ExecuteReader())
+                    {
+                        // Create a list to store data
+                        List<string[]> data = new List<string[]>();
+
+                        // Iterate through the results
+                        while (reader.Read())
+                        {
+                            mail = Convert.ToString(reader["email"]);
+                            senha = Convert.ToString(reader["password"]);
+                            nome = Convert.ToString(reader["nome"]);
+                        }
+                    }
+                }
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT idEscala_Medico,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM escala_medico WHERE Medico_idMedico = @medico AND Escala_servico_idEscala_servico = @idescala;";
+                cmd.Parameters.AddWithValue("@medico", iduser);
+                cmd.Parameters.AddWithValue("@idescala", idescala);
+                Console.WriteLine("IN_FUNC");
+            }
             
            
 
