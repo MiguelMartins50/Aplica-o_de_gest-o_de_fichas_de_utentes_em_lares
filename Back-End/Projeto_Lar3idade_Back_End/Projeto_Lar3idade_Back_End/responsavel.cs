@@ -28,7 +28,11 @@ namespace Projeto_Lar3idade_Back_End
         private int control1;
         private int control2;
         private int control3;
-       
+        private int doublecontrol1 = 0;
+        private int doublecontrol2 = 0;
+        private int doublecontrol3 = 0;
+
+
         private MySqlConnection conexao;
         private Dictionary<string, string> utente_ = new Dictionary<string, string>();
 
@@ -301,11 +305,19 @@ namespace Projeto_Lar3idade_Back_End
 
                         // Query SQL para atualizar a relação com o utente
                         string queryUpdateRelacaoUtente = "UPDATE mydb.utente_familiar SET " +
-                                                          "parentesco = @parentesco " +
+                                                          "`Utente_idUtente` = @Utente_idUtente, `Familiar_idFamiliar` = @Familiar_idFamiliar,parentesco = @parentesco " +
                                                           "WHERE idUtente_familiar = @idUtente_familiar";
+                        string query4 = "LOCK TABLES utente_familiar WRITE;" +
+                                    "ALTER TABLE utente_familiar DISABLE KEYS;" +
+                                    "INSERT INTO mydb.utente_familiar (idUtente_familiar, Utente_idUtente, Familiar_idFamiliar,parentesco)" +
+                                    "VALUES (@idUtente_familiar, @Utente_idUtente, @Familiar_idFamiliar, @parentesco);" +
+                                    "ALTER TABLE utente_familiar ENABLE KEYS;" +
+                                    "UNLOCK TABLES;";
+                        string query3 = "SELECT * FROM utente_familiar ORDER BY idUtente_familiar DESC LIMIT 1";
 
                         using (MySqlCommand comandoUpdateFamiliar = new MySqlCommand(queryUpdateFamiliar, conexao))
                         using (MySqlCommand comandoUpdateRelacaoUtente = new MySqlCommand(queryUpdateRelacaoUtente, conexao))
+                        using (MySqlCommand comandoUpdateinserirRelacaoUtente = new MySqlCommand(query4, conexao))
                         {
                             // Adicione os parâmetros com os valores obtidos do formulário
                             comandoUpdateFamiliar.Parameters.AddWithValue("@idFamiliar", idFamiliarParaAtualizar);
@@ -326,41 +338,146 @@ namespace Projeto_Lar3idade_Back_End
 
                             if (control1 == 1)
                             {
-                                // Limpar os parâmetros antes de adicioná-los novamente
-                                comandoUpdateRelacaoUtente.Parameters.Clear();
+                                if(doublecontrol1 == 1)
+                                {
+                                    Console.WriteLine("inserirUpdate 1");
+                                    using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                                    {
+                                        using (MySqlDataReader reader = procurarId.ExecuteReader())
+                                        {
+                                            // Create a list to store data
+                                            List<string[]> data = new List<string[]>();
 
-                                // Adicione os parâmetros com os valores obtidos do formulário
-                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco);
-                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf1);
+                                            // Iterate through the results
+                                            while (reader.Read())
+                                            {
+                                                // Add data to the list
+                                                idAddUt = 1 + int.Parse(reader["idUtente_familiar"].ToString());
 
-                                // Execute a consulta de atualização da relação com o utente
-                                comandoUpdateRelacaoUtente.ExecuteNonQuery();
+                                            }
+                                        }
+                                    }
+                                    // Adicione os parâmetros com os valores obtidos do formulário
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco);
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idAddUt);
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Utente_idUtente", idUt1);
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+
+
+                                    // Execute a consulta de inserção
+                                    comandoUpdateinserirRelacaoUtente.ExecuteNonQuery();
+                                }
+                                else
+                                {
+                                    // Limpar os parâmetros antes de adicioná-los novamente
+                                    comandoUpdateRelacaoUtente.Parameters.Clear();
+
+                                    // Adicione os parâmetros com os valores obtidos do formulário
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@@Utente_idUtente", idUt1);
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco);
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf1);
+
+                                    // Execute a consulta de atualização da relação com o utente
+                                    comandoUpdateRelacaoUtente.ExecuteNonQuery();
+                                }
+                                
                             }
 
                             if (control2 == 1)
                             {
-                                // Limpar os parâmetros antes de adicioná-los novamente
-                                comandoUpdateRelacaoUtente.Parameters.Clear();
+                                if(doublecontrol2 == 1)
+                                {
+                                    Console.WriteLine("inserirUpdate 2");
 
-                                // Adicione os parâmetros com os valores obtidos do formulário
-                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco2);
-                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf2);
+                                    using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                                    {
+                                        using (MySqlDataReader reader = procurarId.ExecuteReader())
+                                        {
+                                            // Create a list to store data
+                                            List<string[]> data = new List<string[]>();
 
-                                // Execute a consulta de atualização da relação com o utente
-                                comandoUpdateRelacaoUtente.ExecuteNonQuery();
+                                            // Iterate through the results
+                                            while (reader.Read())
+                                            {
+                                                // Add data to the list
+                                                idAddUt = 1 + int.Parse(reader["idUtente_familiar"].ToString());
+
+                                            }
+                                        }
+                                    }
+                                    // Adicione os parâmetros com os valores obtidos do formulário
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco2);
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idAddUt);
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Utente_idUtente", idUt2);
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+
+
+                                    // Execute a consulta de inserção
+                                    comandoUpdateinserirRelacaoUtente.ExecuteNonQuery();
+                                }
+                                else
+                                {
+                                    // Limpar os parâmetros antes de adicioná-los novamente
+                                    comandoUpdateRelacaoUtente.Parameters.Clear();
+
+                                    // Adicione os parâmetros com os valores obtidos do formulário
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@@Utente_idUtente", idUt2);
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco2);
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf2);
+
+                                    // Execute a consulta de atualização da relação com o utente
+                                    comandoUpdateRelacaoUtente.ExecuteNonQuery();
+                                }
+                                
                             }
 
                             if (control3 == 1)
                             {
+                                if (doublecontrol3 == 1)
+                                {
+                                    using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                                    {
+                                        using (MySqlDataReader reader = procurarId.ExecuteReader())
+                                        {
+                                            // Create a list to store data
+                                            List<string[]> data = new List<string[]>();
+
+                                            // Iterate through the results
+                                            while (reader.Read())
+                                            {
+                                                // Add data to the list
+                                                idAddUt3 = 1 + int.Parse(reader["idUtente_familiar"].ToString());
+
+                                            }
+                                        }
+                                    }
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco3);
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idAddUt);
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Utente_idUtente", idUt3);
+                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+
+
+                                    // Execute a consulta de inserção
+                                    comandoUpdateinserirRelacaoUtente.ExecuteNonQuery();
+
+                                }
+                                else
+                                {
+                                    comandoUpdateRelacaoUtente.Parameters.Clear();
+
+                                    // Adicione os parâmetros com os valores obtidos do formulário
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@@Utente_idUtente", idUt3);
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco3);
+                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf3);
+
+                                    // Execute a consulta de atualização da relação com o utente
+                                    comandoUpdateRelacaoUtente.ExecuteNonQuery();
+                                }
                                 // Limpar os parâmetros antes de adicioná-los novamente
-                                comandoUpdateRelacaoUtente.Parameters.Clear();
-
-                                // Adicione os parâmetros com os valores obtidos do formulário
-                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco3);
-                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf3);
-
-                                // Execute a consulta de atualização da relação com o utente
-                                comandoUpdateRelacaoUtente.ExecuteNonQuery();
+                               
                             }
 
                             MessageBox.Show("Responsável atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -684,13 +801,30 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     int.TryParse(selectedRow.Cells["idUtente_familiar1"].Value.ToString(), out idUf1);
                 }
+                else
+                {
+                    doublecontrol1 = 1;
+                    Console.WriteLine("Aqui 1");
+                }
                 if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar2"].Value.ToString()))))
                 {
                     int.TryParse(selectedRow.Cells["idUtente_familiar2"].Value.ToString(), out idUf2);
                 }
+                else
+                {
+                    doublecontrol2 = 1;
+
+                    Console.WriteLine("Aqui 2");
+                }
                 if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar3"].Value.ToString()))))
                 {
                     int.TryParse(selectedRow.Cells["idUtente_familiar3"].Value.ToString(), out idUf3);
+                }
+                else
+                {
+                    doublecontrol3 = 1;
+
+                    Console.WriteLine("Aqui 3");
                 }
                 Console.WriteLine("iduf1:" + idUf1);
                 Console.WriteLine("iduf2:" + idUf2);
