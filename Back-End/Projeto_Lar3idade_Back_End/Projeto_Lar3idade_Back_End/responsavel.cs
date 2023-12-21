@@ -43,6 +43,7 @@ namespace Projeto_Lar3idade_Back_End
 
             // Adicione o evento CellClick ao DataGridView
             dataGridView1.CellClick += dataGridView1_CellClick;
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -252,7 +253,7 @@ namespace Projeto_Lar3idade_Back_End
             comboBox2_Utente.SelectedIndex = -1;
             comboBox3_Utente.SelectedIndex = -1;
         }
-        
+
         private void button_update_Click(object sender, EventArgs e)
         {
             try
@@ -263,7 +264,7 @@ namespace Projeto_Lar3idade_Back_End
                     // Obtém o idFamiliar da linha selecionada
                     int idFamiliarParaAtualizar = ObterIdFamiliarSelecionado();
 
-                    // Obtém os novos valores dos controles do formulário
+                    // Obtém os valores dos controles do formulário
                     string nomel = textBox_Name.Text;
                     DateTime data_nascimento = dateTimePicker_dataNascimento.Value;
                     string numero_cc = textBox_Cc.Text;
@@ -278,118 +279,91 @@ namespace Projeto_Lar3idade_Back_End
                     string parentesco = textBox1_parentesco.Text;
                     string parentesco2 = textBox2_parentesco.Text;
                     string parentesco3 = textBox3_parentesco.Text;
-                    Console.WriteLine("idutente1:" + idUt1);
-                    Console.WriteLine("idutente2:" + idUt2);
-                    Console.WriteLine("idutente3:" + idUt3);
-
 
                     using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                     {
                         conexao.Open();
-                        string query = "UPDATE mydb.familiar SET nomel = @nomel, numero_cc = @numero_cc, data_validade = @data_validade, " +
-                                       "telemovel = @telemovel, data_nascimento = @data_nascimento,  " +
-                                       "morada = @morada, cod_postal = @cod_postal, ocupacao = @ocupacao, tel_casa = @tel_casa, " +
-                                       "email = @email, senha = @senha " +
-                                       "WHERE idFamiliar = @idFamiliar";
-                        string query2 = "LOCK TABLES utente_familiar WRITE;" +
-                                        "ALTER TABLE utente_familiar DISABLE KEYS;" + 
-                                        "UPDATE `mydb`.`utente_familiar` SET `Utente_idUtente` = @Utente_idUtente, `Familiar_idFamiliar` = @Familiar_idFamiliar, `parentesco` = @parentesco WHERE (`idUtente_familiar` = @idUtente_familiar);" +
-                                        "ALTER TABLE utente_familiar ENABLE KEYS;" +
-                                        "UNLOCK TABLES;";
 
-                        using (MySqlCommand comando = new MySqlCommand(query, conexao))
+                        // Query SQL para atualizar o familiar
+                        string queryUpdateFamiliar = "UPDATE mydb.familiar SET " +
+                                                     "nomel = @nomel, " +
+                                                     "numero_cc = @numero_cc, " +
+                                                     "data_validade = @data_validade, " +
+                                                     "telemovel = @telemovel, " +
+                                                     "data_nascimento = @data_nascimento, " +
+                                                     "morada = @morada, " +
+                                                     "cod_postal = @cod_postal, " +
+                                                     "ocupacao = @ocupacao, " +
+                                                     "tel_casa = @tel_casa, " +
+                                                     "email = @email, " +
+                                                     "senha = @senha " +
+                                                     "WHERE idFamiliar = @idFamiliar";
+
+                        // Query SQL para atualizar a relação com o utente
+                        string queryUpdateRelacaoUtente = "UPDATE mydb.utente_familiar SET " +
+                                                          "parentesco = @parentesco " +
+                                                          "WHERE idUtente_familiar = @idUtente_familiar";
+
+                        using (MySqlCommand comandoUpdateFamiliar = new MySqlCommand(queryUpdateFamiliar, conexao))
+                        using (MySqlCommand comandoUpdateRelacaoUtente = new MySqlCommand(queryUpdateRelacaoUtente, conexao))
                         {
-                            // Adicione os parâmetros com os novos valores obtidos do formulário
-                            comando.Parameters.AddWithValue("@nomel", nomel);
-                            comando.Parameters.AddWithValue("@numero_cc", numero_cc);
-                            comando.Parameters.AddWithValue("@data_validade", data_validade);
-                            comando.Parameters.AddWithValue("@telemovel", telemovel);
-                            comando.Parameters.AddWithValue("@data_nascimento", data_nascimento);
-                            comando.Parameters.AddWithValue("@morada", morada);
-                            comando.Parameters.AddWithValue("@cod_postal", cod_postal);
-                            comando.Parameters.AddWithValue("@ocupacao", ocupacao);
-                            comando.Parameters.AddWithValue("@tel_casa", tel_casa);
-                            comando.Parameters.AddWithValue("@email", email);
-                            comando.Parameters.AddWithValue("@senha", senha);
-                            comando.Parameters.AddWithValue("@idFamiliar", idFamiliarParaAtualizar);
+                            // Adicione os parâmetros com os valores obtidos do formulário
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@idFamiliar", idFamiliarParaAtualizar);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@nomel", nomel);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@numero_cc", numero_cc);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@data_validade", data_validade);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@telemovel", telemovel);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@data_nascimento", data_nascimento);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@morada", morada);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@cod_postal", cod_postal);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@ocupacao", ocupacao);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@tel_casa", tel_casa);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@email", email);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@senha", senha);
 
-                            // Execute a consulta de atualização
-                            comando.ExecuteNonQuery();
+                            // Execute a consulta de atualização do familiar
+                            comandoUpdateFamiliar.ExecuteNonQuery();
+
+                            if (control1 == 1)
+                            {
+                                // Limpar os parâmetros antes de adicioná-los novamente
+                                comandoUpdateRelacaoUtente.Parameters.Clear();
+
+                                // Adicione os parâmetros com os valores obtidos do formulário
+                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco);
+                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf1);
+
+                                // Execute a consulta de atualização da relação com o utente
+                                comandoUpdateRelacaoUtente.ExecuteNonQuery();
+                            }
+
+                            if (control2 == 1)
+                            {
+                                // Limpar os parâmetros antes de adicioná-los novamente
+                                comandoUpdateRelacaoUtente.Parameters.Clear();
+
+                                // Adicione os parâmetros com os valores obtidos do formulário
+                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco2);
+                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf2);
+
+                                // Execute a consulta de atualização da relação com o utente
+                                comandoUpdateRelacaoUtente.ExecuteNonQuery();
+                            }
+
+                            if (control3 == 1)
+                            {
+                                // Limpar os parâmetros antes de adicioná-los novamente
+                                comandoUpdateRelacaoUtente.Parameters.Clear();
+
+                                // Adicione os parâmetros com os valores obtidos do formulário
+                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco3);
+                                comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf3);
+
+                                // Execute a consulta de atualização da relação com o utente
+                                comandoUpdateRelacaoUtente.ExecuteNonQuery();
+                            }
 
                             MessageBox.Show("Responsável atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        if(control1 == 1)
-                        {
-                            using (MySqlCommand comando = new MySqlCommand(query2, conexao))
-                            {
-                                try
-                                {
-                                    comando.Parameters.AddWithValue("@Utente_idUtente", idUt1);
-                                    comando.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
-                                    comando.Parameters.AddWithValue("@parentesco", parentesco);
-                                    comando.Parameters.AddWithValue(" @idUtente_familiar", idUf1);
-                                    // Execute the query
-                                    comando.ExecuteNonQuery();
-                                    Console.WriteLine("Connection added successfully");
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine("Error adding connection1: " + ex.Message);
-                                    throw; // Re-throw the exception to propagate it further
-                                }
-                                // Adicione os parâmetros com os novos valores obtidos do formulário
-                                
-                                Console.WriteLine("ligaçao adicionada");
-                            }
-                        }
-
-                        if (control2 == 1)
-                        {
-                            using (MySqlCommand comando = new MySqlCommand(query2, conexao))
-                            {
-                                try
-                                {
-                                    comando.Parameters.AddWithValue("@Utente_idUtente", idUt2);
-                                    comando.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
-                                    comando.Parameters.AddWithValue("@parentesco", parentesco2);
-                                    comando.Parameters.AddWithValue(" @idUtente_familiar", idUf2);
-                                    // Execute the query
-                                    comando.ExecuteNonQuery();
-                                    Console.WriteLine("Connection added successfully");
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine("Error adding connection2: " + ex.Message);
-                                    throw; // Re-throw the exception to propagate it further
-                                }
-                                // Adicione os parâmetros com os novos valores obtidos do formulário
-
-                                Console.WriteLine("ligaçao adicionada");
-                            }
-                        }
-                        if (control3 == 1)
-                        {
-                            using (MySqlCommand comando = new MySqlCommand(query2, conexao))
-                            {
-                                try
-                                {
-                                    comando.Parameters.AddWithValue("@Utente_idUtente", idUt3);
-                                    comando.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
-                                    comando.Parameters.AddWithValue("@parentesco", parentesco3);
-                                    comando.Parameters.AddWithValue(" @idUtente_familiar", idUf3);
-                                    // Execute the query
-                                    comando.ExecuteNonQuery();
-                                    Console.WriteLine("Connection added successfully");
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine("Error adding connection3: " + ex.Message);
-                                    throw; // Re-throw the exception to propagate it further
-                                }
-                                // Adicione os parâmetros com os novos valores obtidos do formulário
-
-                                Console.WriteLine("ligaçao adicionada");
-                            }
                         }
                     }
                 }
@@ -406,7 +380,9 @@ namespace Projeto_Lar3idade_Back_End
             {
                 display_data();  // Atualize a exibição dos dados após a atualização
             }
+            LimparTextBoxes();
         }
+
 
 
         private void button_delete_Click(object sender, EventArgs e)
@@ -657,7 +633,7 @@ namespace Projeto_Lar3idade_Back_End
             {
                 // Obtém os valores da linha clicada
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
-                
+
                 // Preenche os TextBoxes com os valores da linha
                 textBox_Name.Text = selectedRow.Cells["nomel"].Value.ToString();
                 textBox_Cc.Text = selectedRow.Cells["numero_cc"].Value.ToString();
@@ -665,21 +641,48 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_telCasa.Text = selectedRow.Cells["tel_casa"].Value.ToString();
                 dateTimePicker_dataNascimento.Value = Convert.ToDateTime(selectedRow.Cells["data_nascimento"].Value);
                 textBox_telemovel.Text = selectedRow.Cells["telemovel"].Value.ToString();
-                textBox_email.Text = selectedRow.Cells["email"].Value.ToString(); 
+                textBox_email.Text = selectedRow.Cells["email"].Value.ToString();
                 textBox_morada.Text = selectedRow.Cells["morada"].Value.ToString();
                 textBox_codPostal.Text = selectedRow.Cells["cod_postal"].Value.ToString();
                 textBox_ocupacao.Text = selectedRow.Cells["ocupacao"].Value.ToString();
                 textBox3_senha.Text = selectedRow.Cells["senha"].Value.ToString();
-                comboBox1_Utente.SelectedItem = selectedRow.Cells["Utente1"].Value.ToString();
+
+                // ComboBox para Utente1
+                if (!string.IsNullOrWhiteSpace(selectedRow.Cells["Utente1"].Value?.ToString()))
+                {
+                    comboBox1_Utente.SelectedItem = selectedRow.Cells["Utente1"].Value.ToString();
+                }
+                else
+                {
+                    comboBox1_Utente.SelectedIndex = -1; // Define como vazio
+                }
                 textBox1_parentesco.Text = selectedRow.Cells["Utente1_Parentesco"].Value.ToString();
-                comboBox2_Utente.SelectedItem = selectedRow.Cells["Utente2"].Value.ToString();
+
+                // ComboBox para Utente2
+                if (!string.IsNullOrWhiteSpace(selectedRow.Cells["Utente2"].Value?.ToString()))
+                {
+                    comboBox2_Utente.SelectedItem = selectedRow.Cells["Utente2"].Value.ToString();
+                }
+                else
+                {
+                    comboBox2_Utente.SelectedIndex = -1; // Define como vazio
+                }
                 textBox2_parentesco.Text = selectedRow.Cells["Utente2_Parentesco"].Value.ToString();
-                comboBox3_Utente.SelectedItem = selectedRow.Cells["Utente3"].Value.ToString();
+
+                // ComboBox para Utente3
+                if (!string.IsNullOrWhiteSpace(selectedRow.Cells["Utente3"].Value?.ToString()))
+                {
+                    comboBox3_Utente.SelectedItem = selectedRow.Cells["Utente3"].Value.ToString();
+                }
+                else
+                {
+                    comboBox3_Utente.SelectedIndex = -1; // Define como vazio
+                }
                 textBox3_parentesco.Text = selectedRow.Cells["Utente3_Parentesco"].Value.ToString();
+
                 if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar1"].Value.ToString()))))
                 {
                     int.TryParse(selectedRow.Cells["idUtente_familiar1"].Value.ToString(), out idUf1);
-
                 }
                 if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar2"].Value.ToString()))))
                 {
@@ -689,17 +692,17 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     int.TryParse(selectedRow.Cells["idUtente_familiar3"].Value.ToString(), out idUf3);
                 }
-                Console.WriteLine("iduf1:"+idUf1);
+                Console.WriteLine("iduf1:" + idUf1);
                 Console.WriteLine("iduf2:" + idUf2);
                 Console.WriteLine("iduf3:" + idUf3);
                 Console.WriteLine("controlo1:" + control1);
                 Console.WriteLine("controlo2:" + control2);
                 Console.WriteLine("controlo3:" + control3);
-
             }
 
 
         }
-        
+
+       
     }
 }
