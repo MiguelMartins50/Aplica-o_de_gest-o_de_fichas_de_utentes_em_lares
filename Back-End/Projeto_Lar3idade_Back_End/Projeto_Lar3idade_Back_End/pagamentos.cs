@@ -211,7 +211,7 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT pagamento.idPagamento, pagamento.estado, pagamento.data_limitel, pagamento.valor, utente.nome, familiar.nomel FROM pagamento JOIN utente ON pagamento.Utente_idUtente = utente.idUtente JOIN familiar ON pagamento.Familiar_idFamiliar = familiar.idFamiliar;";
+            cmd.CommandText = "SELECT pagamento.idPagamento, pagamento.estado, pagamento.data_limitel as \"Data Limite\", pagamento.valor, utente.nome, familiar.nomel as Responsavel FROM pagamento JOIN utente ON pagamento.Utente_idUtente = utente.idUtente JOIN familiar ON pagamento.Familiar_idFamiliar = familiar.idFamiliar;";
             cmd.ExecuteNonQuery();
             DataTable dta = new DataTable();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
@@ -271,7 +271,7 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT pagamento.idPagamento, pagamento.estado, pagamento.data_limitel, pagamento.valor, utente.nome, familiar.nomel " +
+            cmd.CommandText = "SELECT pagamento.idPagamento, pagamento.estado, pagamento.data_limitel, pagamento.valor, utente.nome, familiar.nomel as Nome " +
                               "FROM pagamento " +
                               "JOIN utente ON pagamento.Utente_idUtente = utente.idUtente " +
                               "JOIN familiar ON pagamento.Familiar_idFamiliar = familiar.idFamiliar " +
@@ -358,9 +358,9 @@ namespace Projeto_Lar3idade_Back_End
                 // Assuming you have columns named "estado", "data_limitel", "valor", "nome", "nomel" in your DataGridView
                 textBox_estado.Text = row.Cells["estado"].Value.ToString();
                 textBox_valor.Text = row.Cells["valor"].Value.ToString();
-                dateTimePicker_dataLimite.Value = Convert.ToDateTime(row.Cells["data_limitel"].Value);
+                dateTimePicker_dataLimite.Value = Convert.ToDateTime(row.Cells["Data Limite"].Value);
                 comboBox_utente.Text = row.Cells["nome"].Value.ToString();
-                comboBox_responsavel.Text = row.Cells["nomel"].Value.ToString();
+                comboBox_responsavel.Text = row.Cells["Responsavel"].Value.ToString();
             }
         }
 

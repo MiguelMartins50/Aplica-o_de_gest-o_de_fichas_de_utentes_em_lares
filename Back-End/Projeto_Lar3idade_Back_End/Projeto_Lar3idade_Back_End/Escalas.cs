@@ -170,24 +170,27 @@ namespace Projeto_Lar3idade_Back_End
             cmd.CommandType = CommandType.Text;
             if (tipo_func == "Funcionario")
             {
-                cmd.CommandText = "SELECT idFuncionario_Escala, Escala_servico_idEscala_servico,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM funcionario_escala WHERE Funcionario_idFuncionario = @funcionario AND Escala_servico_idEscala_servico = @idescala;";
+                cmd.CommandText = "SELECT idFuncionario_Escala as ID, Escala_servico_idEscala_servico,Dia, dia_da_semana as \"Dia da Semana\", horario_inicio as \"Horario Inicio\", horario_fim as \"Horario Fim\", estado FROM funcionario_escala WHERE Funcionario_idFuncionario = @funcionario AND Escala_servico_idEscala_servico = @idescala;";
                 cmd.Parameters.AddWithValue("@funcionario", id_func);
                 cmd.Parameters.AddWithValue("@idescala", idescala);
                 Console.WriteLine("IN_FUNC");
             }
             if (tipo_func == "Medico")
             {
-                cmd.CommandText = "SELECT idEscala_Medico,Escala_servico_idEscala_servico,Dia,dia_da_semana,horario_inicio,horario_fim,estado FROM escala_medico WHERE Medico_idMedico = @medico AND Escala_servico_idEscala_servico = @idescala;";
+                cmd.CommandText = "SELECT idEscala_Medico as ID,Escala_servico_idEscala_servico,Dia,dia_da_semana,horario_inicio,horario_fim,estado FROM escala_medico WHERE Medico_idMedico = @medico AND Escala_servico_idEscala_servico = @idescala;";
                 cmd.Parameters.AddWithValue("@medico", id_func);
                 cmd.Parameters.AddWithValue("@idescala", idescala);
                 Console.WriteLine("IN_MED");
             }
 
             cmd.ExecuteNonQuery();
+
             DataTable dta = new DataTable();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
             dataadapter.Fill(dta);
             dataGridView1.DataSource = dta;
+            dataGridView1.Columns["Escala_servico_idEscala_servico"].Visible = false;
+
 
         }
         private void button1_Click(object sender, EventArgs e)
@@ -423,13 +426,13 @@ namespace Projeto_Lar3idade_Back_End
             {
                 if (tipo_func == "Funcionario")
                 {
-                    int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idFuncionario_Escala"].Value);
+                    int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
                     Console.WriteLine("id_func: " + idescalaParaEditar);
                     PreencherCamposParaEdicao(idescalaParaEditar);
                 }
                 if (tipo_func == "Medico")
                 {
-                    int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idEscala_Medico"].Value);
+                    int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
                     Console.WriteLine("id_med: " + idescalaParaEditar);
 
                     PreencherCamposParaEdicao(idescalaParaEditar);

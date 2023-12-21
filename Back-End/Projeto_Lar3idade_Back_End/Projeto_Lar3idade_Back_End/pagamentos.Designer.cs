@@ -29,6 +29,7 @@ namespace Projeto_Lar3idade_Back_End
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker_dataLimite = new System.Windows.Forms.DateTimePicker();
@@ -56,7 +57,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(582, 138);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(14, 16);
+            this.label6.Size = new System.Drawing.Size(16, 17);
             this.label6.TabIndex = 47;
             this.label6.Text = "€";
             // 
@@ -138,7 +139,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(440, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(214, 26);
+            this.label1.Size = new System.Drawing.Size(221, 27);
             this.label1.TabIndex = 52;
             this.label1.Text = "Plano de mensalidade";
             // 
@@ -162,6 +163,9 @@ namespace Projeto_Lar3idade_Back_End
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(26, 223);

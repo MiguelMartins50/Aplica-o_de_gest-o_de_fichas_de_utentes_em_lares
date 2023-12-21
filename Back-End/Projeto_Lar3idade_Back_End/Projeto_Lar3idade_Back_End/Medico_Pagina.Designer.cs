@@ -75,7 +75,7 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(21, 227);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 26);
+            this.label2.Size = new System.Drawing.Size(106, 27);
             this.label2.TabIndex = 6;
             this.label2.Text = "Consultas";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -87,7 +87,7 @@
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(21, 152);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 26);
+            this.label1.Size = new System.Drawing.Size(85, 27);
             this.label1.TabIndex = 5;
             this.label1.Text = "Utentes";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -111,6 +111,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Medico_Pagina";
             this.Text = "Medico_Pagina";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

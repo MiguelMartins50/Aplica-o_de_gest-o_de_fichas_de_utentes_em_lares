@@ -29,6 +29,7 @@ namespace Projeto_Lar3idade_Back_End
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1_Utente = new System.Windows.Forms.ComboBox();
@@ -56,7 +57,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label3.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(448, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 26);
+            this.label3.Size = new System.Drawing.Size(88, 27);
             this.label3.TabIndex = 14;
             this.label3.Text = "Quartos";
             // 
@@ -219,6 +220,9 @@ namespace Projeto_Lar3idade_Back_End
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(29, 274);
