@@ -1,11 +1,42 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet,Image,Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+       <ImageBackground source={require('./Image/Image3.png')} resizeMode="cover" style={styles.image3}>
+        <Text style={styles.text}>Plataforma para Gestão de Fichas de Utentes em Lares</Text>
+       </ImageBackground>
+      <View>
+          <Image source={require('./Image/Logo.jpg')}
+          style={styles.logo} />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.login}>Login</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          keyboardType="email-address"
+          autoCapitalize="none" 
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          secureTextEntry
+        />
+      </View>
+
+      <TouchableOpacity style={styles.loginButton}>
+        <Text style={styles.loginButtonText}>Entrar</Text>
+      </TouchableOpacity>
+
       <StatusBar style="auto" />
+      <View>
+          <Image source={require('./Image/Image2.png')}
+          style={styles.Image2} />
+      </View>
     </View>
   );
 }
@@ -16,5 +47,66 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 16,
+    marginBottom:-440
   },
+  login: {
+    fontSize: 24,
+    marginBottom: 24,
+    textAlign:'center'
+  },
+  inputContainer: {
+    width: '100%',
+    marginBottom: 16,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    
+  },
+  loginButton: {
+    backgroundColor: '#3498db',
+    paddingVertical: 12,
+    paddingHorizontal: 140,
+    borderRadius: 8,
+    height: 40,
+    marginBottom:30
+  },
+  loginButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  logo:{
+    width: 100,  
+    height: 100, 
+    resizeMode: 'contain',
+    marginBottom: 20,
+    alignItems: 'center'
+  },
+  Image2:{
+    padding:100,
+    width:400,
+  },
+  image3:{
+    width:358,
+    height:350,
+    marginTop:-400
+  },
+  text: {
+    color: 'black',
+    fontSize: 30,
+    lineHeight: 60,
+    textAlign: 'center',
+    marginTop:110
+   
+   
+  },
+
+  
 });
+
