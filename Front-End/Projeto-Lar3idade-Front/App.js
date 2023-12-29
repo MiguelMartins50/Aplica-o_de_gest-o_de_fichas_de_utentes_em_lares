@@ -1,45 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,Image,Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
 
 
-export default function App() {
+
+const App = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://192.168.1.80:8800/tipo') 
+      .then(response => response.json())
+      .then(data => {
+        setData(data);
+      })
+      .catch(error => console.error('Error fetching data from server', error));
+  }, []);
+
   return (
-    <View style={styles.container}>
-       <ImageBackground source={require('./Image/Image3.png')} resizeMode="cover" style={styles.image3}>
-        <Text style={styles.text}>Plataforma para Gestão de Fichas de Utentes em Lares</Text>
-       </ImageBackground>
-      <View>
-          <Image source={require('./Image/Logo.jpg')}
-          style={styles.logo} />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.login}>Login</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="E-mail"
-          keyboardType="email-address"
-          autoCapitalize="none" 
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Senha"
-          secureTextEntry
-        />
-      </View>
+    <View> 
+      <Text></Text>
 
-      <TouchableOpacity style={styles.loginButton}>
-        <Text style={styles.loginButtonText}>Entrar</Text>
-      </TouchableOpacity>
-
-      <StatusBar style="auto" />
-      <View>
-          <Image source={require('./Image/Image2.png')}
-          style={styles.Image2} />
-      </View>
+      <Text>Data from MySQL:</Text>
+      {data.map(item => (
+        <Text key={item.idTipo}>{`${item.idTipo} | ${item.tipo}`}</Text>
+      ))}
     </View>
   );
-}
+};
+export default App;
+
 
 const styles = StyleSheet.create({
   container: {
