@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,Image,Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
 
-
 export default function App() {
   return (
     <View style={styles.container}>
@@ -70,16 +69,17 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor: '#3498db',
-    paddingVertical: 12,
-    paddingHorizontal: 140,
+    paddingVertical: 9,
+    paddingHorizontal: 150,
     borderRadius: 8,
     height: 40,
-    marginBottom:30
+    marginBottom:35
   },
   loginButtonText: {
     color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 17,
+    
+    
   },
   logo:{
     width: 100,  
@@ -89,11 +89,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   Image2:{
-    padding:100,
-    width:400,
+    padding:107,
+    width:440,
   },
   image3:{
-    width:358,
+    width:400,
     height:350,
     marginTop:-400
   },
@@ -103,8 +103,6 @@ const styles = StyleSheet.create({
     lineHeight: 60,
     textAlign: 'center',
     marginTop:110
-   
-   
   },
 
   
