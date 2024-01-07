@@ -2,11 +2,11 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
-export default function App() {
+export default function Utente() {
   return (
       <View style={styles.container}>
         <View style={styles.Imag1}>
-          <ImageBackground source={require('./Image/Image1.png')} style={styles.Image1}>
+          <ImageBackground source={require('../Image/Image1.png')} style={styles.Image1}>
             <TouchableOpacity style={styles.sairButton}>
               <Text style={styles.sairButtonText}>Sair</Text>
             </TouchableOpacity>
@@ -31,7 +31,7 @@ export default function App() {
         <StatusBar style="auto" />
 
         <View style={styles.Imag}>
-          <Image source={require('./Image/Image2.png')} style={styles.Image2} />
+          <Image source={require('../Image/Image2.png')} style={styles.Image2} />
         </View>
       </View>
    

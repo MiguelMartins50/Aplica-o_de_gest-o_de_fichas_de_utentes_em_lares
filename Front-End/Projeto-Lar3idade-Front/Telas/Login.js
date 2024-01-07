@@ -2,38 +2,50 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
 import { StyleSheet,Image,Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer} from '@react-navigation/native';
-import UtenteScreen from './Telas/Utente.js';
-import FamiliarScreen from './Telas/Familiar.js';
-import Login from './Telas/Login.js'
+import { useNavigation } from '@react-navigation/native'; 
 
-const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
+export default function Login({ navigation }) {
+  
 
-
-export const UtenteDrawer = () => (
-  <Drawer.Navigator >
-    <Drawer.Screen name="UtenteScreen" component={UtenteScreen} />
-  </Drawer.Navigator>
-);
-
-const FamiliarDrawer = () => (
-  <Drawer.Navigator>
-    <Drawer.Screen name="FamiliarScreen" component={FamiliarScreen} />
-  </Drawer.Navigator>
-);
-
-export default function App() {
+ 
+  const handleLogin = () => {
+  
+    navigation.navigate('UtenteDrawer');
+  };
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}} >
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="UtenteDrawer" component={UtenteDrawer} />
-        <Stack.Screen name="FamiliarDrawer" component={FamiliarDrawer} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+       <ImageBackground source={require('../Image/Image3.png')} resizeMode="cover" style={styles.image3}>
+        <Text style={styles.text}>Plataforma para Gestão de Fichas de Utentes em Lares</Text>
+       </ImageBackground>
+      <View>
+          <Image source={require('../Image/Logo.jpg')}
+          style={styles.logo} />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.login}>Login</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          keyboardType="email-address"
+          autoCapitalize="none" 
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          secureTextEntry
+        />
+      </View>
+
+      <TouchableOpacity style={styles.loginButton}  onPress={handleLogin}>
+        <Text style={styles.loginButtonText}>Entrar</Text>
+      </TouchableOpacity>
+
+      <StatusBar style="auto" />
+      <View>
+          <Image source={require('../Image/Image2.png')}
+          style={styles.Image2} />
+      </View>
+    </View>
   );
 }
 
