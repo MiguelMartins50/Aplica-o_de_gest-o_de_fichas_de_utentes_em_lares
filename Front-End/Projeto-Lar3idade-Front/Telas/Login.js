@@ -10,7 +10,7 @@ export default function Login({ navigation }) {
  
   const handleLogin = () => {
   
-    navigation.navigate('UtenteDrawer');
+    navigation.navigate('FamiliarDrawer');
   };
   return (
     <View style={styles.container}>
@@ -87,6 +87,9 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: '#fff',
     fontSize: 17,
+    width: '100%', // Ensure the text takes the full width of the button
+
+    
     
     
   },
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontSize: 30,
+    fontSize: 21,
     lineHeight: 60,
     textAlign: 'center',
     marginTop:110

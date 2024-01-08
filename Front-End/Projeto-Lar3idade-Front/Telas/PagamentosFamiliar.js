@@ -2,46 +2,23 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
-export default function Familiar({ navigation }) {
-
+export default function Visitas({ navigation }) {
+    const handleSair = () => {
   
-
-  const handleSair = () => {
-  
-    navigation.navigate('Login');
-  };
-  const handleVisitas = () => {
-  
-    navigation.navigate('VisitasFamiliar');
-  };
-  const handlePagamentos = () => {
-  
-    navigation.navigate('PagamentosFamiliar');
-  };
-  const handleInfo = () => {
-  
-    navigation.navigate('UtenteFamiliar');
-  };
+        navigation.navigate('Login');
+      };
   return (
       <View style={styles.container}>
         <View style={styles.Imag1}>
           <ImageBackground source={require('../Image/Image1.png')} style={styles.Image1}>
-            <TouchableOpacity style={styles.sairButton}onPress={handleSair}>
+          <TouchableOpacity style={styles.sairButton}onPress={handleSair}>
               <Text style={styles.sairButtonText}>Sair</Text>
             </TouchableOpacity>
             
           </ImageBackground>
         </View>
-        <Text style={styles.ButtonText}>Teste Visitas</Text>
-        <TouchableOpacity style={styles.Button}onPress={handlePagamentos}>
-          <Text style={styles.ButtonText}>Plano de Pagamentos</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button}onPress={handleInfo}>
-          <Text style={styles.ButtonText}>Informações de Utentes </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button}onPress={handleVisitas}>
-          <Text style={styles.ButtonText} >Visitas</Text>
-        </TouchableOpacity>
+
+        <Text tyle={styles.ButtonText}>Plano de Pagamentos</Text>
         
         
         <StatusBar style="auto" />
@@ -82,7 +59,7 @@ const styles = StyleSheet.create({
   Image1:{
     height:110,
     width:400,
-    marginTop:-155
+    marginTop:-175
     
     
   },
@@ -111,5 +88,10 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     textAlign:'center'
+  },
+  ButtonText: {
+    color: '#fff',
+    fontSize: 17,
+    
   },
 });

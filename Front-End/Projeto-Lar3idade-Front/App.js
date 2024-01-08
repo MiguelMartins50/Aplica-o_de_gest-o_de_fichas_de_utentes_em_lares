@@ -8,20 +8,26 @@ import { NavigationContainer} from '@react-navigation/native';
 import UtenteScreen from './Telas/Utente.js';
 import FamiliarScreen from './Telas/Familiar.js';
 import Login from './Telas/Login.js'
+import VisitasFamiliar from './Telas/VisitasFamiliar.js'
+import PagamentosFamiliar from './Telas/PagamentosFamiliar.js'
+import UtenteFamiliar from './Telas/UtenteFamiliar.js'
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 
 export const UtenteDrawer = () => (
-  <Drawer.Navigator >
+  <Drawer.Navigator initialRouteName="UtenteScreen" screenOptions={{headerShown: false}}>
     <Drawer.Screen name="UtenteScreen" component={UtenteScreen} />
   </Drawer.Navigator>
 );
 
 const FamiliarDrawer = () => (
-  <Drawer.Navigator>
+  <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerShown: false}}>
     <Drawer.Screen name="FamiliarScreen" component={FamiliarScreen} />
+    <Drawer.Screen name="VisitasFamiliar" component={VisitasFamiliar} />
+    <Drawer.Screen name="PagamentosFamiliar" component={PagamentosFamiliar} />
+    <Drawer.Screen name="UtenteFamiliar" component={UtenteFamiliar} />
   </Drawer.Navigator>
 );
 
