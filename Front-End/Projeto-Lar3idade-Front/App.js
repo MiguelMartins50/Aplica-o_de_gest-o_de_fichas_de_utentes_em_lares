@@ -13,6 +13,10 @@ import Visitas  from './Telas/Visitas.js';
 import Consultas  from './Telas/Consultas.js';
 import Atividades  from './Telas/Atividades.js';
 import PlanoPagamento  from './Telas/PlanoPagamento.js';
+import VisitasFamiliar from './Telas/VisitasFamiliar.js'
+import PagamentosFamiliar from './Telas/PagamentosFamiliar.js'
+import UtenteFamiliar from './Telas/UtenteFamiliar.js'
+
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -31,6 +35,9 @@ export const UtenteDrawer = () => (
 const FamiliarDrawer = () => (
   <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerShown: false}}>
     <Drawer.Screen name="FamiliarScreen" component={FamiliarScreen} />
+    <Drawer.Screen name="VisitasFamiliar" component={VisitasFamiliar} />
+    <Drawer.Screen name="PagamentosFamiliar" component={PagamentosFamiliar} />
+    <Drawer.Screen name="UtenteFamiliar" component={UtenteFamiliar} />
   </Drawer.Navigator>
 );
 
