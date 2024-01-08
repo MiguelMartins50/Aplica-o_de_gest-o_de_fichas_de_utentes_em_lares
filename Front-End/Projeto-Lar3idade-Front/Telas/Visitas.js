@@ -3,22 +3,16 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
 export default function Visitas({navigation}) {
-  return (
-      <View style={styles.container}>
-        <View style={styles.Imag1}>
-          <ImageBackground source={require('../Image/Image1.png')} style={styles.Image1}>
-            <TouchableOpacity style={styles.sairButton}>
-              <Text style={styles.sairButtonText}>Sair</Text>
-            </TouchableOpacity>
-          </ImageBackground>
-        </View>
+  return (<View style={styles.container}>
+    <View style={styles.Imag1}>
+    </View>
 
-        <View style={styles.Imag}>
-          <Image source={require('../Image/Image2.png')} style={styles.Image2} />
-        </View>
-      </View>
-   
-  );
+    <View style={styles.Imag}>
+      <Image source={require('../Image/Image2.png')} style={styles.Image2} />
+    </View>
+  </View>
+
+);
 }
 
 const styles = StyleSheet.create({
@@ -44,33 +38,28 @@ const styles = StyleSheet.create({
   ButtonText: {
     color: '#fff',
     fontSize: 17,
-    
-  },
-  Image1:{
-    height:110,
-    width:400,
-    
-    
+
   },
   Image2: {
     height:205,
     width:410,
-    padding:40
+    padding:20
    
   },
   Imag:{
-    padding:190
+    padding:50
   },
   Imag1:{
-    padding:340
+    padding:350,
     
   },
   sairButton: {
-    backgroundColor: 'white',
+    backgroundColor: '#3498db',
     padding: 2,
     width:60,
     borderRadius: 5,
-    alignSelf: 'flex-end', 
+    marginLeft:310,
+    top:-50,
     margin: 25,
   },
   sairButtonText: {

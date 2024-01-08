@@ -27,23 +27,50 @@ const UtenteDrawer = ({ navigation }) => {
   const handleSair = () => {
     navigation.navigate('Login');};
 return(
-  <Drawer.Navigator initialRouteName="Perfil" screenOptions={{headerStyle: {backgroundColor: '#3498db'}}}>
+  <Drawer.Navigator initialRouteName="Perfil" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
     <Drawer.Screen name="Perfil" component={UtenteScreen} options={{
-    title: 'Perfil',
     headerRight: () => (
       <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
       <Text style={styles.sairButtonText}>Sair</Text>
       </TouchableOpacity>
     ),
   }} />
-    <Drawer.Screen name="Prescrições Médicas" component={PrescricaoUtente}
+    <Drawer.Screen name="Prescrições Médicas" component={PrescricaoUtente} options={{
     
-    
-    />
-    <Drawer.Screen name="Visitas" component={Visitas} />
-    <Drawer.Screen name="Consultas" component={Consultas} />
-    <Drawer.Screen name="Atividades" component={Atividades} />
-    <Drawer.Screen name="Plano de pagamento" component={PlanoPagamento} />
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Visitas" component={Visitas}options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Consultas" component={Consultas} options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Atividades" component={Atividades} options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Plano de pagamento" component={PlanoPagamento} options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
   </Drawer.Navigator>
 )};
 
