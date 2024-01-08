@@ -4,7 +4,7 @@ import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from
 
 export default function Utente({ navigation }) {
   const navigateToPrescricaoUtente = () => {
-    navigation.navigate('Prescrições médicas');
+    navigation.navigate('Prescrições Médicas');
   };
   const navigateToVisitas = () => {
     navigation.navigate('Visitas');
@@ -13,7 +13,7 @@ export default function Utente({ navigation }) {
     navigation.navigate('Consultas');
   };
   const navigateToAtividades = () => {
-    navigation.navigate('Consultas');
+    navigation.navigate('Atividades');
   };
   const navigateToPlanoPagamento = () => {
     navigation.navigate('Plano de pagamento');
@@ -22,11 +22,6 @@ export default function Utente({ navigation }) {
   return (
       <View style={styles.container}>
         <View style={styles.Imag1}>
-          <ImageBackground source={require('../Image/Image1.png')} style={styles.Image1}>
-            <TouchableOpacity style={styles.sairButton}>
-              <Text style={styles.sairButtonText}>Sair</Text>
-            </TouchableOpacity>
-          </ImageBackground>
         </View>
 
         <TouchableOpacity style={styles.Button} onPress={navigateToPrescricaoUtente}>
@@ -77,12 +72,7 @@ const styles = StyleSheet.create({
   ButtonText: {
     color: '#fff',
     fontSize: 17,
-    
-  },
-  Image1:{
-    height:110,
-    width:400,
-    
+
   },
   Image2: {
     height:205,
@@ -94,15 +84,16 @@ const styles = StyleSheet.create({
     padding:50
   },
   Imag1:{
-    padding:195,
+    padding:180,
     
   },
   sairButton: {
-    backgroundColor: 'white',
+    backgroundColor: '#3498db',
     padding: 2,
     width:60,
     borderRadius: 5,
-    alignSelf: 'flex-end', 
+    marginLeft:310,
+    top:-50,
     margin: 25,
   },
   sairButtonText: {

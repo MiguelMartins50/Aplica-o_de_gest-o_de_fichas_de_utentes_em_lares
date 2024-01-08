@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
-import { StyleSheet,Image,Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet,Image,Text, View, TextInput, TouchableOpacity, ImageBackground,Button } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer} from '@react-navigation/native';
@@ -19,18 +19,33 @@ import UtenteFamiliar from './Telas/UtenteFamiliar.js'
 
 
 const Stack = createNativeStackNavigator();
+
 const Drawer = createDrawerNavigator();
 
-export const UtenteDrawer = () => (
-  <Drawer.Navigator initialRouteName="UtenteScreen" screenOptions={{headerShown: false}}>
-    <Drawer.Screen name="UtenteScreen" component={UtenteScreen} />
-    <Drawer.Screen name="Prescricões médicas" component={PrescricaoUtente} />
+
+const UtenteDrawer = ({ navigation }) => {
+  const handleSair = () => {
+    navigation.navigate('Login');};
+return(
+  <Drawer.Navigator initialRouteName="Perfil" screenOptions={{headerStyle: {backgroundColor: '#3498db'}}}>
+    <Drawer.Screen name="Perfil" component={UtenteScreen} options={{
+    title: 'Perfil',
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Prescrições Médicas" component={PrescricaoUtente}
+    
+    
+    />
     <Drawer.Screen name="Visitas" component={Visitas} />
     <Drawer.Screen name="Consultas" component={Consultas} />
     <Drawer.Screen name="Atividades" component={Atividades} />
     <Drawer.Screen name="Plano de pagamento" component={PlanoPagamento} />
   </Drawer.Navigator>
-);
+)};
 
 const FamiliarDrawer = () => (
   <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerShown: false}}>
@@ -118,7 +133,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop:110
   },
-
+  sairButton: {
+    backgroundColor: 'white',
+    padding: 2,
+    width:60,
+    borderRadius: 5,
+    marginLeft:310,
+ 
+  },
+  sairButtonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign:'center'
+  },
   
 });
 

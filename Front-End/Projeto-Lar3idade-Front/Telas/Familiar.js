@@ -4,7 +4,6 @@ import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from
 
 export default function Familiar({ navigation }) {
 
-  
 
   const handleSair = () => {
   
