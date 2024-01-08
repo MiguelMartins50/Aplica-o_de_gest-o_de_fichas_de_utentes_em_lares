@@ -5,11 +5,8 @@ import { StyleSheet,Image,Text, View, TextInput, TouchableOpacity, ImageBackgrou
 import { useNavigation } from '@react-navigation/native'; 
 
 export default function Login({ navigation }) {
-  
-
- 
   const handleLogin = () => {
-  
+    navigation.navigate('UtenteDrawer');
     navigation.navigate('FamiliarDrawer');
   };
   return (
@@ -79,7 +76,7 @@ const styles = StyleSheet.create({
   loginButton: {
     backgroundColor: '#3498db',
     paddingVertical: 9,
-    paddingHorizontal: 150,
+    paddingHorizontal: 140,
     borderRadius: 8,
     height: 40,
     marginBottom:35

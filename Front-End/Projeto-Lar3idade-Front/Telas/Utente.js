@@ -2,30 +2,41 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
-export default function Utente() {
+export default function Utente({ navigation }) {
+  const navigateToPrescricaoUtente = () => {
+    navigation.navigate('Prescrições Médicas');
+  };
+  const navigateToVisitas = () => {
+    navigation.navigate('Visitas');
+  };
+  const navigateToConsultas = () => {
+    navigation.navigate('Consultas');
+  };
+  const navigateToAtividades = () => {
+    navigation.navigate('Atividades');
+  };
+  const navigateToPlanoPagamento = () => {
+    navigation.navigate('Plano de pagamento');
+  };
+
   return (
       <View style={styles.container}>
         <View style={styles.Imag1}>
-          <ImageBackground source={require('../Image/Image1.png')} style={styles.Image1}>
-            <TouchableOpacity style={styles.sairButton}>
-              <Text style={styles.sairButtonText}>Sair</Text>
-            </TouchableOpacity>
-          </ImageBackground>
         </View>
 
-        <TouchableOpacity style={styles.Button}>
-          <Text style={styles.ButtonText}>Prescrições Médica</Text>
+        <TouchableOpacity style={styles.Button} onPress={navigateToPrescricaoUtente}>
+          <Text style={styles.ButtonText}>Prescrições Médicas</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button}onPress={navigateToVisitas}>
           <Text style={styles.ButtonText}>Visitas</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button} onPress={navigateToConsultas}>
           <Text style={styles.ButtonText}>Consultas </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button} onPress={navigateToAtividades} >
           <Text style={styles.ButtonText}>Atividades</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button} onPress={navigateToPlanoPagamento}>
           <Text style={styles.ButtonText}>Plano de pagamento</Text>
         </TouchableOpacity>
         <StatusBar style="auto" />
@@ -61,12 +72,7 @@ const styles = StyleSheet.create({
   ButtonText: {
     color: '#fff',
     fontSize: 17,
-    
-  },
-  Image1:{
-    height:110,
-    width:400,
-    
+
   },
   Image2: {
     height:205,
@@ -78,14 +84,16 @@ const styles = StyleSheet.create({
     padding:50
   },
   Imag1:{
-    padding:195,
+    padding:180,
+    
   },
   sairButton: {
-    backgroundColor: 'white',
+    backgroundColor: '#3498db',
     padding: 2,
     width:60,
     borderRadius: 5,
-    alignSelf: 'flex-end', 
+    marginLeft:310,
+    top:-50,
     margin: 25,
   },
   sairButtonText: {
