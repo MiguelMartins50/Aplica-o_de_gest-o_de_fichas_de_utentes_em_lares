@@ -8,19 +8,28 @@ import { NavigationContainer} from '@react-navigation/native';
 import UtenteScreen from './Telas/Utente.js';
 import FamiliarScreen from './Telas/Familiar.js';
 import Login from './Telas/Login.js'
+import PrescricaoUtente  from './Telas/PrescricaoUtente.js';
+import Visitas  from './Telas/Visitas.js';
+import Consultas  from './Telas/Consultas.js';
+import Atividades  from './Telas/Atividades.js';
+import PlanoPagamento  from './Telas/PlanoPagamento.js';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-
 export const UtenteDrawer = () => (
-  <Drawer.Navigator >
+  <Drawer.Navigator initialRouteName="UtenteScreen" screenOptions={{headerShown: false}}>
     <Drawer.Screen name="UtenteScreen" component={UtenteScreen} />
+    <Drawer.Screen name="Prescricões médicas" component={PrescricaoUtente} />
+    <Drawer.Screen name="Visitas" component={Visitas} />
+    <Drawer.Screen name="Consultas" component={Consultas} />
+    <Drawer.Screen name="Atividades" component={Atividades} />
+    <Drawer.Screen name="Plano de pagamento" component={PlanoPagamento} />
   </Drawer.Navigator>
 );
 
 const FamiliarDrawer = () => (
-  <Drawer.Navigator>
+  <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerShown: false}}>
     <Drawer.Screen name="FamiliarScreen" component={FamiliarScreen} />
   </Drawer.Navigator>
 );
@@ -32,6 +41,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="UtenteDrawer" component={UtenteDrawer} />
         <Stack.Screen name="FamiliarDrawer" component={FamiliarDrawer} />
+      
       </Stack.Navigator>
     </NavigationContainer>
   );

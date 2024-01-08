@@ -2,23 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
-export default function Utente({ navigation }) {
-  const navigateToPrescricaoUtente = () => {
-    navigation.navigate('Prescrições médicas');
-  };
-  const navigateToVisitas = () => {
-    navigation.navigate('Visitas');
-  };
-  const navigateToConsultas = () => {
-    navigation.navigate('Consultas');
-  };
-  const navigateToAtividades = () => {
-    navigation.navigate('Consultas');
-  };
-  const navigateToPlanoPagamento = () => {
-    navigation.navigate('Plano de pagamento');
-  };
-
+export default function Visitas({navigation}) {
   return (
       <View style={styles.container}>
         <View style={styles.Imag1}>
@@ -28,23 +12,6 @@ export default function Utente({ navigation }) {
             </TouchableOpacity>
           </ImageBackground>
         </View>
-
-        <TouchableOpacity style={styles.Button} onPress={navigateToPrescricaoUtente}>
-          <Text style={styles.ButtonText}>Prescrições Médicas</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button}onPress={navigateToVisitas}>
-          <Text style={styles.ButtonText}>Visitas</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button} onPress={navigateToConsultas}>
-          <Text style={styles.ButtonText}>Consultas </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button} onPress={navigateToAtividades} >
-          <Text style={styles.ButtonText}>Atividades</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button} onPress={navigateToPlanoPagamento}>
-          <Text style={styles.ButtonText}>Plano de pagamento</Text>
-        </TouchableOpacity>
-        <StatusBar style="auto" />
 
         <View style={styles.Imag}>
           <Image source={require('../Image/Image2.png')} style={styles.Image2} />
@@ -83,18 +50,19 @@ const styles = StyleSheet.create({
     height:110,
     width:400,
     
+    
   },
   Image2: {
     height:205,
     width:410,
-    padding:20
+    padding:40
    
   },
   Imag:{
-    padding:50
+    padding:190
   },
   Imag1:{
-    padding:195,
+    padding:340
     
   },
   sairButton: {
