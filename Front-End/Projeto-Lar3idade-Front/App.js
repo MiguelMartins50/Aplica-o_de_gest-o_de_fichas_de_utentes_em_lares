@@ -16,6 +16,7 @@ import PlanoPagamento  from './Telas/PlanoPagamento.js';
 import VisitasFamiliar from './Telas/VisitasFamiliar.js'
 import PagamentosFamiliar from './Telas/PagamentosFamiliar.js'
 import UtenteFamiliar from './Telas/UtenteFamiliar.js'
+import PerfilUtente from './Telas/PerfilUtente.js';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,8 +28,15 @@ const UtenteDrawer = ({ navigation }) => {
   const handleSair = () => {
     navigation.navigate('Login');};
 return(
-  <Drawer.Navigator initialRouteName="Perfil" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
-    <Drawer.Screen name="Perfil" component={UtenteScreen} options={{
+  <Drawer.Navigator initialRouteName="Home Utente" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
+    <Drawer.Screen name="Home Utente" component={UtenteScreen} options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+   <Drawer.Screen name="Perfil" component={PerfilUtente} options={{
     headerRight: () => (
       <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
       <Text style={styles.sairButtonText}>Sair</Text>
@@ -36,7 +44,6 @@ return(
     ),
   }} />
     <Drawer.Screen name="Prescrições Médicas" component={PrescricaoUtente} options={{
-    
     headerRight: () => (
       <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
       <Text style={styles.sairButtonText}>Sair</Text>
