@@ -10,7 +10,6 @@ export default function Login({ navigation }) {
   const [tableData, setTableData] = useState([]);
   const [textEmail, setTextEmail] = useState("");
   const [textPass, setTextPass] = useState("");
-  const [dataLoaded, setDataLoaded] = useState(false);
 
 
   
@@ -28,11 +27,10 @@ export default function Login({ navigation }) {
           const isUtenteMatch = utenteEmailColumn.some((email, index) => email === inputValueEmail && utenteSenhaColumn[index] === inputValueSenha);
   
           if (isUtenteMatch) {
-            console.log('Login successful for utente!');
-            console.log('Email and Senha:', inputValueEmail, inputValueSenha);
+            console.log('Login com utente!');
+            console.log('Email e Senha:', inputValueEmail, inputValueSenha);
             navigation.navigate('UtenteDrawer');
           } else {
-            // If no match in utente, check in familiar
             axios.get('http://192.168.1.80:8800/familiar')
               .then(familiarResponse => {
                 if (familiarResponse.data.length > 0) {
@@ -42,14 +40,14 @@ export default function Login({ navigation }) {
                   const isFamiliarMatch = familiarEmailColumn.some((email, index) => email === inputValueEmail && familiarSenhaColumn[index] === inputValueSenha);
   
                   if (isFamiliarMatch) {
-                    console.log('Login successful for familiar!');
-                    console.log('Email and Senha:', inputValueEmail, inputValueSenha);
+                    console.log('Login como Familiar');
+                    console.log('Email e Senha:', inputValueEmail, inputValueSenha);
                     navigation.navigate('FamiliarDrawer');
                   } else {
-                    console.log('Invalid email or senha for both utente and familiar.');
+                    console.log('Login invalido Para Ambos');
                   }
                 } else {
-                  console.log('Table data for familiar is empty.');
+                  console.log('Tabela Familiar vazia');
                 }
               })
               .catch(error => {
@@ -57,14 +55,21 @@ export default function Login({ navigation }) {
               });
           }
         } else {
-          console.log('Table data for utente is empty.');
+          console.log('Tabela Utente vazia');
         }
       })
       .catch(error => {
         console.error('Error fetching utente data:', error);
+      })
+      .finally(() => {
+        clearTextInputs()
       });
+      
   };
-  
+  const clearTextInputs = () => {
+    setTextEmail("");
+    setTextPass("");
+  };
   const handleInputChangeEmail = (inputMail) => {
     setTextEmail(inputMail);
   };
@@ -90,12 +95,15 @@ export default function Login({ navigation }) {
           keyboardType="email-address"
           autoCapitalize="none" 
           onChangeText={handleInputChangeEmail}
+          value={textEmail}
+
         />
         <TextInput
           style={styles.input}
           placeholder="Senha"
           secureTextEntry
           onChangeText={handleInputChangeSenha}
+          value={textPass}
         />
       </View>
       <TouchableOpacity style={styles.loginButton}  onPress={handleLogin}>
