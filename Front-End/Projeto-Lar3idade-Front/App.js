@@ -16,6 +16,7 @@ import PlanoPagamento  from './Telas/PlanoPagamento.js';
 import VisitasFamiliar from './Telas/VisitasFamiliar.js'
 import PagamentosFamiliar from './Telas/PagamentosFamiliar.js'
 import UtenteFamiliar from './Telas/UtenteFamiliar.js'
+import PerfilUtente from './Telas/PerfilUtente.js';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,23 +28,58 @@ const UtenteDrawer = ({ navigation }) => {
   const handleSair = () => {
     navigation.navigate('Login');};
 return(
-  <Drawer.Navigator initialRouteName="Perfil" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
-    <Drawer.Screen name="Perfil" component={UtenteScreen} options={{
-    title: 'Perfil',
+'Perfil',
+
+  <Drawer.Navigator initialRouteName="Home Utente" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
+    <Drawer.Screen name="Home Utente" component={UtenteScreen} options={{
     headerRight: () => (
       <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
       <Text style={styles.sairButtonText}>Sair</Text>
       </TouchableOpacity>
     ),
   }} />
-    <Drawer.Screen name="Prescrições Médicas" component={PrescricaoUtente}
-    
-    
-    />
-    <Drawer.Screen name="Visitas" component={Visitas} />
-    <Drawer.Screen name="Consultas" component={Consultas} />
-    <Drawer.Screen name="Atividades" component={Atividades} />
-    <Drawer.Screen name="Plano de pagamento" component={PlanoPagamento} />
+   <Drawer.Screen name="Perfil" component={PerfilUtente} options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Prescrições Médicas" component={PrescricaoUtente} options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Visitas" component={Visitas}options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Consultas" component={Consultas} options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Atividades" component={Atividades} options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="Plano de pagamento" component={PlanoPagamento} options={{
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
   </Drawer.Navigator>
 )};
 

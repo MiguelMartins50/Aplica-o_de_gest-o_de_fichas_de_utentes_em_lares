@@ -1,9 +1,10 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Image, Text, View, TouchableOpacity, } from 'react-native';
 
-export default function Visitas({navigation}) {
-  return (<View style={styles.container}>
+export default function PerfilUtente({navigation}) {
+  return (
+    <View style={styles.container}>
     <View style={styles.Imag1}>
     </View>
 
