@@ -23,14 +23,7 @@ export default function Familiar({ navigation }) {
   };
   return (
       <View style={styles.container}>
-        <View style={styles.Imag1}>
-          <ImageBackground source={require('../Image/Image1.png')} style={styles.Image1}>
-            <TouchableOpacity style={styles.sairButton}onPress={handleSair}>
-              <Text style={styles.sairButtonText}>Sair</Text>
-            </TouchableOpacity>
-            
-          </ImageBackground>
-        </View>
+       
         <Text style={styles.ButtonText}>Teste Visitas</Text>
         <TouchableOpacity style={styles.Button}onPress={handlePagamentos}>
           <Text style={styles.ButtonText}>Plano de Pagamentos</Text>
@@ -89,11 +82,13 @@ const styles = StyleSheet.create({
     height:205,
     width:410,
     padding:20,
-    marginBottom:-100
+    marginBottom:-250,
    
   },
   Imag:{
-    padding:50
+    padding:100,
+    marginBottom:-200,
+
   },
   Imag1:{
     padding:195,

@@ -2,23 +2,13 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
-export default function Visitas({ navigation }) {
-    const handleSair = () => {
+export default function UtenteFamiliar({ navigation }) {
   
-        navigation.navigate('Login');
-      };
   return (
       <View style={styles.container}>
-        <View style={styles.Imag1}>
-          <ImageBackground source={require('../Image/Image1.png')} style={styles.Image1}>
-          <TouchableOpacity style={styles.sairButton}onPress={handleSair}>
-              <Text style={styles.sairButtonText}>Sair</Text>
-            </TouchableOpacity>
-            
-          </ImageBackground>
-        </View>
-
-        <Text tyle={styles.ButtonText}>Imformações Utentes</Text>
+        
+        <View style={styles.Text2}><Text tyle={styles.ButtonText}>Familiares</Text></View>
+        
         
         
         <StatusBar style="auto" />
@@ -51,6 +41,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',  
     alignItems: 'center',    
   },
+  Text2: {
+    paddingVertical: 200,
+    paddingHorizontal: 20, 
+    borderRadius: 8, 
+
+    justifyContent: 'center',  
+    alignItems: 'center',    
+  },
   ButtonText: {
     color: '#fff',
     fontSize: 17,
@@ -67,7 +65,7 @@ const styles = StyleSheet.create({
     height:205,
     width:410,
     padding:20,
-    marginBottom:-100
+    marginBottom:-150
    
   },
   Imag:{

@@ -27,7 +27,7 @@ const UtenteDrawer = ({ navigation }) => {
   const handleSair = () => {
     navigation.navigate('Login');};
 return(
-  <Drawer.Navigator initialRouteName="Perfil" screenOptions={{headerStyle: {backgroundColor: '#3498db'}}}>
+  <Drawer.Navigator initialRouteName="Perfil" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
     <Drawer.Screen name="Perfil" component={UtenteScreen} options={{
     title: 'Perfil',
     headerRight: () => (
@@ -47,14 +47,48 @@ return(
   </Drawer.Navigator>
 )};
 
-const FamiliarDrawer = () => (
-  <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerShown: false}}>
-    <Drawer.Screen name="FamiliarScreen" component={FamiliarScreen} />
-    <Drawer.Screen name="VisitasFamiliar" component={VisitasFamiliar} />
-    <Drawer.Screen name="PagamentosFamiliar" component={PagamentosFamiliar} />
-    <Drawer.Screen name="UtenteFamiliar" component={UtenteFamiliar} />
+const FamiliarDrawer = ({ navigation }) => {
+  const handleSair = () => {
+    navigation.navigate('Login');};
+return(
+  <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}, headerTintColor: 'white',headerTitleStyle: {
+   
+    color: '#ffff', // Set your desired text color here
+  },}}>
+    <Drawer.Screen name="FamiliarScreen" component={FamiliarScreen} options={{
+    title: 'Perfil',
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }}/>
+    <Drawer.Screen name="VisitasFamiliar" component={VisitasFamiliar} options={{
+    title: 'Visitas',
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }}/>
+    <Drawer.Screen name="PagamentosFamiliar" component={PagamentosFamiliar}options={{
+    title: 'Planos de Pagamento',
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+    <Drawer.Screen name="UtenteFamiliar" component={UtenteFamiliar}options={{
+    title: 'Familiares',
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
   </Drawer.Navigator>
-);
+)};
 
 export default function App() {
   return (
@@ -138,8 +172,8 @@ const styles = StyleSheet.create({
     padding: 2,
     width:60,
     borderRadius: 5,
-    marginLeft:310,
- 
+    marginRight: 10, 
+
   },
   sairButtonText: {
     color: 'black',
