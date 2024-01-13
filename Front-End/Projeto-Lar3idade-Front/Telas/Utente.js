@@ -3,10 +3,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
 export default function Utente({ navigation, route }) {
+
   const { params } = route;
   const { utenteData, utenteNome } = params || {};
 
   console.log('Route Params:', route.params);
+
   
   useEffect(() => {
     console.log('UtenteDrawer - Route Params:', route.params);

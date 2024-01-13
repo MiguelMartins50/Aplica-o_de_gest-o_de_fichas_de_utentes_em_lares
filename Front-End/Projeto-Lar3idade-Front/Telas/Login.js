@@ -1,33 +1,34 @@
-import React, { useState , useEffect} from 'react';
+// Importe os módulos necessários
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
-import { StyleSheet,Image,Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; 
+import { StyleSheet, Image, Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
-
-export default function Login({ navigation }) {
+export default function Login({ route, navigation }) {
   const [tableData, setTableData] = useState([]);
   const [textEmail, setTextEmail] = useState("");
   const [textPass, setTextPass] = useState("");
 
-
-  
-  
   const handleLogin = () => {
-    axios.get('http://192.168.1.80:8800/utente')
+    axios.get('http://192.168.1.42:8800/utente')
       .then(utenteResponse => {
         if (utenteResponse.data.length > 0) {
+           // Assume que há apenas um utente logado (ou ajuste conforme necessário)
+
           const utenteEmailColumn = utenteResponse.data.map(entry => entry.email);
           const utenteSenhaColumn = utenteResponse.data.map(entry => entry.senha);
-  
+          const utenteNomeColumn = utenteResponse.data.map(entry => entry.nome);
+
           const inputValueEmail = textEmail.trim();
           const inputValueSenha = textPass.trim();
-  
+
           const isUtenteMatch = utenteEmailColumn.some((email, index) => email === inputValueEmail && utenteSenhaColumn[index] === inputValueSenha);
           const utenteMatch = utenteResponse.data.find(entry => entry.email === inputValueEmail && entry.senha === inputValueSenha);
           
           if (isUtenteMatch) {
+            console.log(isUtenteMatch);
             console.log('Login com utente!');
             console.log('Email e Senha:', inputValueEmail, inputValueSenha);
             console.log('UtenteData:', utenteMatch);
@@ -35,27 +36,29 @@ export default function Login({ navigation }) {
             navigation.navigate('UtenteDrawer', { screen: 'Home Utente', params: { utenteData: utenteMatch, utenteNome: utenteMatch.nome } });
             
           } else {
-            axios.get('http://192.168.1.80:8800/familiar')
+            axios.get('http://192.168.1.42:8800/familiar')
               .then(familiarResponse => {
                 if (familiarResponse.data.length > 0) {
                   const familiarEmailColumn = familiarResponse.data.map(entry => entry.email);
                   const familiarSenhaColumn = familiarResponse.data.map(entry => entry.senha);
-  
+
                   const isFamiliarMatch = familiarEmailColumn.some((email, index) => email === inputValueEmail && familiarSenhaColumn[index] === inputValueSenha);
-  
+
                   if (isFamiliarMatch) {
                     console.log('Login como Familiar');
                     console.log('Email e Senha:', inputValueEmail, inputValueSenha);
+
+                    // Se o login for bem-sucedido, navegue para o FamiliarDrawer
                     navigation.navigate('FamiliarDrawer');
                   } else {
-                    console.log('Login invalido Para Ambos');
+                    console.log('Login inválido para ambos');
                   }
                 } else {
                   console.log('Tabela Familiar vazia');
                 }
               })
               .catch(error => {
-                console.error('Error fetching familiar data:', error);
+                console.error('Erro ao buscar dados do familiar:', error);
               });
           }
         } else {
@@ -63,33 +66,33 @@ export default function Login({ navigation }) {
         }
       })
       .catch(error => {
-        console.error('Error fetching utente data:', error);
+        console.error('Erro ao buscar dados do utente:', error);
       })
       .finally(() => {
-        clearTextInputs()
+        clearTextInputs();
       });
-      
   };
+
   const clearTextInputs = () => {
     setTextEmail("");
     setTextPass("");
   };
+
   const handleInputChangeEmail = (inputMail) => {
     setTextEmail(inputMail);
   };
-  
+
   const handleInputChangeSenha = (inputSenha) => {
     setTextPass(inputSenha);
   };
-  
+
   return (
     <View style={styles.container}>
-       <ImageBackground source={require('../Image/Image3.png')} resizeMode="cover" style={styles.image3}>
+      <ImageBackground source={require('../Image/Image3.png')} resizeMode="cover" style={styles.image3}>
         <Text style={styles.text}>Plataforma para Gestão de Fichas de Utentes em Lares</Text>
-       </ImageBackground>
+      </ImageBackground>
       <View>
-          <Image source={require('../Image/Logo.jpg')}
-          style={styles.logo} />
+        <Image source={require('../Image/Logo.jpg')} style={styles.logo} />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.login}>Login</Text>
@@ -97,10 +100,9 @@ export default function Login({ navigation }) {
           style={styles.input}
           placeholder="E-mail"
           keyboardType="email-address"
-          autoCapitalize="none" 
+          autoCapitalize="none"
           onChangeText={handleInputChangeEmail}
           value={textEmail}
-
         />
         <TextInput
           style={styles.input}
@@ -110,14 +112,13 @@ export default function Login({ navigation }) {
           value={textPass}
         />
       </View>
-      <TouchableOpacity style={styles.loginButton}  onPress={handleLogin}>
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Entrar</Text>
       </TouchableOpacity>
 
       <StatusBar style="auto" />
       <View>
-          <Image source={require('../Image/Image2.png')}
-          style={styles.Image2} />
+        <Image source={require('../Image/Image2.png')} style={styles.Image2} />
       </View>
     </View>
   );
@@ -181,10 +182,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontSize: 21,
+    fontSize: 22,
     lineHeight: 60,
     textAlign: 'center',
-    marginTop:110
+    marginTop:110,
+    padding:10
   },
 
   
