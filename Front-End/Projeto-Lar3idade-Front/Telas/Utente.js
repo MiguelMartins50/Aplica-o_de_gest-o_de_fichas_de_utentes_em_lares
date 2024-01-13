@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
-export default function Utente({ navigation }) {
+export default function Utente({ navigation, route }) {
+  console.log('Route Params:', route.params);
+  const { utenteData, utenteNome } = route.params || {};
+  
+  useEffect(() => {
+    console.log('UtenteDrawer - Route Params:', route.params);
+    
+  }, [route.params]);
   const navigateToPrescricaoUtente = () => {
     navigation.navigate('Prescrições Médicas');
   };
@@ -23,7 +30,11 @@ export default function Utente({ navigation }) {
       <View style={styles.container}>
         <View style={styles.Imag1}>
         </View>
-
+        {utenteNome ? (
+        <Text>Bem-vindo, {utenteNome}!</Text>
+      ) : (
+        <Text>Carregando...</Text>
+      )}
         <TouchableOpacity style={styles.Button} onPress={navigateToPrescricaoUtente}>
           <Text style={styles.ButtonText}>Prescrições Médicas</Text>
         </TouchableOpacity>
