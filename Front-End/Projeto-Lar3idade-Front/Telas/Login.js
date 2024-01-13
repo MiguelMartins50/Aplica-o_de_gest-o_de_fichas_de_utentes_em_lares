@@ -25,11 +25,15 @@ export default function Login({ navigation }) {
           const inputValueSenha = textPass.trim();
   
           const isUtenteMatch = utenteEmailColumn.some((email, index) => email === inputValueEmail && utenteSenhaColumn[index] === inputValueSenha);
-  
+          const utenteMatch = utenteResponse.data.find(entry => entry.email === inputValueEmail && entry.senha === inputValueSenha);
+          
           if (isUtenteMatch) {
             console.log('Login com utente!');
             console.log('Email e Senha:', inputValueEmail, inputValueSenha);
-            navigation.navigate('UtenteDrawer');
+            console.log('UtenteData:', utenteMatch);
+            console.log('Nome do Utente:', utenteMatch.nome);
+            navigation.navigate('UtenteDrawer', { screen: 'Home Utente', params: { utenteData: utenteMatch, utenteNome: utenteMatch.nome } });
+            
           } else {
             axios.get('http://192.168.1.80:8800/familiar')
               .then(familiarResponse => {
