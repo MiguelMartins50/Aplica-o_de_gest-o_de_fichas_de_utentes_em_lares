@@ -16,7 +16,7 @@ export default function Atividade({ route, navigation }) {
     .catch(error => {
       console.error('Erro ao buscar atividades do utente:', error);
     });
-  }, [utenteId]);
+  }, []);
   
 
   return (

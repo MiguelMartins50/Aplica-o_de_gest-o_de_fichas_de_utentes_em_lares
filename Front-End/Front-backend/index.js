@@ -65,22 +65,18 @@ app.get("/atividade", (req, res) => {
 });
 app.get("/consulta", (req, res) => {
     const Utente_idUtente = req.query.Utente_idUtente;
-    let q = "SELECT consulta.*, medico.nome AS nomeMedico FROM mydb.consulta";
+    let q = "SELECT * FROM mydb.consulta";
 
     if (Utente_idUtente) {
-        q += ` JOIN mydb.utente ON consulta.Utente_idUtente = utente.idUtente`;
-        q += ` JOIN mydb.medico ON utente.Medico_idMedico = medico.idMedico`;
-        q += ` WHERE utente.idUtente = ${Utente_idUtente}`;
+        q += ` WHERE Utente_idUtente = ${Utente_idUtente}`;
     }
-
-    q += ` AND consulta.estado = 'Agendada'`;
+    q += ` AND estado = 'Agendada'`;
 
     db.query(q, (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
     });
 });
-
 app.get("/escala_medico", (req,res) =>{
     const q = "SELECT * FROM mydb.escala_medico;"
     db.query(q,(err,data)=>{
