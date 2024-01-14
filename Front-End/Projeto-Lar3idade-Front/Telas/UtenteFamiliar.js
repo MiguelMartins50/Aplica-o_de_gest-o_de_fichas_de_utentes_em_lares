@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
+import axios from 'axios';
 
-export default function UtenteFamiliar({ navigation }) {
-  
+export default function UtenteFamiliar({ navigation,route  }) {
+  const { params } = route;
+  const {FamiliarData, FamiliarID} = route.params || {};
+  const handleLogin = () => {
+    console.log(FamiliarData);
+    console.log(FamiliarID);
+    axios.get(`http://192.168.1.80:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`).then(UFResponse => {
+        if (UFResponse.data.length > 0) {
+          const UF = UFResponse.data;
+          console.log('UF:'+UF);
+          console.log('UFID:'+UF.Utente_idUtente)
+          axios.get(`http://192.168.1.80:8800/utente?idUtente=${UF.Utente_idUtente}`).then(UResponse => {
+            const U = UResponse.data;
+              console.log('U:'+JSON.stringify(U));
+            if (UResponse.data.length > 0) {
+              const U = UResponse.data;
+              console.log('U:'+JSON.stringify(U));
+            }
+          })
+        }
+      })
+      
+      
+      }
+      useEffect(()=>{
+        handleLogin();
+      })
   return (
       <View style={styles.container}>
         

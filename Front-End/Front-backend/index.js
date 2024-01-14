@@ -30,7 +30,11 @@ app.get("/funcionario", (req,res) =>{
     })
 })
 app.get("/utente", (req,res) =>{
-    const q = "SELECT * FROM mydb.utente;"
+    const idUtente = req.query.idUtente;
+    let q = "SELECT * FROM mydb.utente"
+    if (idUtente) {
+        q += ` WHERE idUtente = ${idUtente};`;
+    }
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
@@ -44,19 +48,31 @@ app.get("/familiar", (req,res) =>{
     })
 })
 app.get("/utente_familiar", (req,res) =>{
-    const q = "SELECT * FROM mydb.utente_familiar;"
+    const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
+
+    let q = "SELECT * FROM mydb.utente_familiar"
+    if (Familiar_idFamiliar) {
+        q += ` WHERE Familiar_idFamiliar = ${Familiar_idFamiliar};`;
+    }
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
 })
-app.get("/atividade", (req,res) =>{
-    const q = "SELECT * FROM mydb.atividade;"
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
+app.get("/atividade", (req, res) => {
+    const Utente_idUtente = req.query.Utente_idUtente;
+    let q = "SELECT * FROM mydb.atividade";
+
+    if (Utente_idUtente) {
+        q += ` WHERE Utente_idUtente = ${Utente_idUtente}`;
+    }
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 app.get("/consulta", (req,res) =>{
     const q = "SELECT * FROM mydb.consulta;"
     db.query(q,(err,data)=>{

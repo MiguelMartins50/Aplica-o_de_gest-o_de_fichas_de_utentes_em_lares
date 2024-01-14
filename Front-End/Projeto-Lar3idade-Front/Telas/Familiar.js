@@ -7,15 +7,15 @@ export default function Familiar({ navigation, route }) {
   const { params } = route;
   const {FamiliarData, FamiliarNome} = params || {};
   const [imageData, setImageData] = useState(null);
-
+  const [FamiliarID, setFamiliarID]= useState(null);
 
   useEffect(() => {
-    // Assuming FamiliarData.Imagem is the Buffer representing the image
     if (FamiliarData && FamiliarData.Imagem && FamiliarData.Imagem.data) {
       const base64String = base64.fromByteArray(new Uint8Array(FamiliarData.Imagem.data));
       setImageData(`data:image/png;base64,${base64String}`);
+      
     }
-  }, [FamiliarData]);
+  }, [navigation, FamiliarData, FamiliarNome]);
 
 
   const handleSair = () => {
@@ -31,7 +31,13 @@ export default function Familiar({ navigation, route }) {
   };
 
   const handleInfo = () => {
-    navigation.navigate('UtenteFamiliar');
+    console.log(FamiliarData);
+    console.log(FamiliarData.idFamiliar);
+    setFamiliarID(FamiliarData.idFamiliar);
+    console.log(FamiliarID);
+    console.log('FamiliarID');
+
+    navigation.navigate('UtenteFamiliar', { FamiliarData, FamiliarID });
   };
 
   return (
