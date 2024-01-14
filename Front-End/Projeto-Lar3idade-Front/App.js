@@ -24,9 +24,12 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 
-const UtenteDrawer = ({ navigation }) => {
+const UtenteDrawer = ({ route,navigation }) => {
   const handleSair = () => {
     navigation.navigate('Login');};
+    
+    const { utenteData, utenteNome } = route.params || {};
+
 return(
 'Perfil',
 
@@ -38,13 +41,19 @@ return(
       </TouchableOpacity>
     ),
   }} />
-   <Drawer.Screen name="PerfilUtente" component={PerfilUtente} options={{
+   <Drawer.Screen
+  name="PerfilUtente"
+  component={PerfilUtente}
+  options={{
+    title: 'Perfil Utente',
     headerRight: () => (
-      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
-      <Text style={styles.sairButtonText}>Sair</Text>
+      <TouchableOpacity onPress={handleSair} color="white" style={styles.sairButton}>
+        <Text style={styles.sairButtonText}>Sair</Text>
       </TouchableOpacity>
     ),
-  }} />
+  }}
+
+/>
     <Drawer.Screen name="Prescrições Médicas" component={PrescricaoUtente} options={{
     headerRight: () => (
       <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 

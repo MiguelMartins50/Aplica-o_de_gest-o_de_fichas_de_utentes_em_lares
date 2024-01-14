@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
+
 export default function Utente({ navigation, route }) {
 
   const { params } = route;
@@ -29,9 +30,11 @@ export default function Utente({ navigation, route }) {
   const navigateToPlanoPagamento = () => {
     navigation.navigate('Plano de pagamento');
   };
+  const navigateToPerfilUtente = () => {
+    navigation.navigate('PerfilUtente', { utenteData, utenteNome });
+  };
 
-  return (
-      <View style={styles.container}>
+  return (<View style={styles.container}>
         <View style={styles.Imag1}>
         </View>
         {utenteNome ? (
@@ -39,27 +42,31 @@ export default function Utente({ navigation, route }) {
       ) : (
         <Text>Carregando...</Text>
       )}
-        <TouchableOpacity style={styles.Button} onPress={navigateToPrescricaoUtente}>
-          <Text style={styles.ButtonText}>Prescrições Médicas</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button}onPress={navigateToVisitas}>
-          <Text style={styles.ButtonText}>Visitas</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button} onPress={navigateToConsultas}>
-          <Text style={styles.ButtonText}>Consultas </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button} onPress={navigateToAtividades} >
-          <Text style={styles.ButtonText}>Atividades</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Button} onPress={navigateToPlanoPagamento}>
-          <Text style={styles.ButtonText}>Plano de pagamento</Text>
-        </TouchableOpacity>
-        <StatusBar style="auto" />
-
-        <View style={styles.Imag}>
-          <Image source={require('../Image/Image2.png')} style={styles.Image2} />
-        </View>
-      </View>
+      <TouchableOpacity
+      style={styles.Button}
+      onPress={() =>navigation.navigate('PerfilUtente', { utenteData, utenteNome })}>
+      <Text style={styles.ButtonText}>Perfil Utente</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.Button} onPress={navigateToPrescricaoUtente}>
+      <Text style={styles.ButtonText}>Prescrições Médicas</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.Button}onPress={navigateToVisitas}>
+      <Text style={styles.ButtonText}>Visitas</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.Button} onPress={navigateToConsultas}>
+      <Text style={styles.ButtonText}>Consultas </Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.Button} onPress={navigateToAtividades} >
+      <Text style={styles.ButtonText}>Atividades</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.Button} onPress={navigateToPlanoPagamento}>
+      <Text style={styles.ButtonText}>Plano de pagamento</Text>
+    </TouchableOpacity>
+    <StatusBar style="auto" />
+    <View style={styles.Imag}>
+      <Image source={require('../Image/Image2.png')} style={styles.Image2} />
+    </View>
+  </View>
    
   );
 }

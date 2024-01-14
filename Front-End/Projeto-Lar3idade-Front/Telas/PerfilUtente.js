@@ -1,96 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Image, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, ImageBackground, Text, View, ScrollView } from 'react-native';
 
 export default function PerfilUtente({ route, navigation }) {
-  const [utenteData, setUtenteData] = useState([]);
+  const { params } = route;
+  const { utenteData, utenteNome } = params || {};
+  const numeroCC = utenteData?.numero_cc || {};
+  const dataValidade = utenteData?.data_validade || {};
+  const nif = utenteData?.nif || {};
+  const niss = utenteData?.niss || {};
+  const nUtenteSaude = utenteData?.n_utenteSaude || {};
+  const dataNascimmento = utenteData?.data_nascimento || {};
+  const idade = utenteData?.idade || {};
+  const estadoCivil = utenteData?.estado_civil || {};
+  const morada = utenteData?.morada || {};
+  const localidade = utenteData?.localidade || {};
+  const codPostal = utenteData?.cod_postal || {};
+  const telCasa = utenteData?.telefone_casa || {};
+  const tel = utenteData?.telemovel || {};
+  const email = utenteData?.email || {};
 
   useEffect(() => {
-    const utenteDataFromParams = route.params ? route.params.utenteData : null;
-    if (utenteDataFromParams) {
-      setUtenteData([utenteDataFromParams]);
-    } else {
-      console.error('Dados do utente logado não disponíveis.');
-    }
-  }, [route.params?.utenteData]);
-
-  // Certifique-se de que utenteData está definido antes de renderizar o componente
-  if (!utenteData || utenteData.length === 0) {
-    return (
-      <View style={styles.container}>
-        <Text>Carregando...</Text>
-      </View>
-    );
-  }
+    console.log('PerfilUtente - Route Params:', route.params);
+  }, [route.params]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.Imag1}></View>
-      <View style={styles.Imag}>
-        <View style={styles.utenteInfoContainer}>
-          <Text style={styles.heading}>Perfil do Utente</Text>
-          <FlatList
-            data={utenteData}
-            keyExtractor={(item) => item.idUtente.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.utenteItem}>
-                <Text>{`Nome: ${item.nome}`}</Text>
-                <Text>{`Email: ${item.email}`}</Text>
-              </View>
-            )}
-          />
-        </View>
-        <Image source={require('../Image/Image2.png')} style={styles.Image2} />
-      </View>
+      <ImageBackground source={require('../Image/Image2.png')} style={[styles.Image2, styles.bottomImage]} />
+
+      {utenteNome ? (
+        <ScrollView style={styles.PerfilUtente1}>
+          <Text style={styles.TEXTO}>Nome: {utenteNome}</Text>
+          <Text style={styles.TEXTO}>Número do CC: {numeroCC}</Text>
+          <Text style={styles.TEXTO}>Data de validade: {dataValidade}</Text>
+          <Text style={styles.TEXTO}>NIF: {nif}</Text>
+          <Text style={styles.TEXTO}>NISS: {niss}</Text>
+          <Text style={styles.TEXTO}>Nº Utente de Saúde: {nUtenteSaude}</Text>
+          <Text style={styles.TEXTO}>Data nascimento: {dataNascimmento}</Text>
+          <Text style={styles.TEXTO}>Idade: {idade}</Text>
+          <Text style={styles.TEXTO}>Estado Civil: {estadoCivil}</Text>
+          <Text style={styles.TEXTO}>Morada: {morada}</Text>
+          <Text style={styles.TEXTO}>Localidade: {localidade}</Text>
+          <Text style={styles.TEXTO}>Codigo Postal: {codPostal}</Text>
+          <Text style={styles.TEXTO}>Telefone casa: {telCasa}</Text>
+          <Text style={styles.TEXTO}>Telemóvel: {tel}</Text>
+          <Text style={styles.TEXTO}>Email: {email}</Text>
+        </ScrollView>
+      ) : (
+        <Text>Carregando...</Text>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-
-  Button: {
-    backgroundColor: '#3498db',
-    paddingVertical: 10,
-    paddingHorizontal: 20, 
-    borderRadius: 8,
-    height: 40,
-    width: 300,  
-    marginBottom: 20,
-    justifyContent: 'center',  
-    alignItems: 'center',    
-  },
-  ButtonText: {
-    color: '#fff',
-    fontSize: 17,
-
-  },
-  Image2: {
-    height:205,
-    width:410,
-    padding:20
-   
-  },
-  Imag:{
-    padding:50
-  },
-  Imag1:{
-    padding:350,
-    
-  },
-  sairButton: {
-    backgroundColor: '#3498db',
-    padding: 2,
-    width:60,
-    borderRadius: 5,
-    marginLeft:310,
-    top:-50,
-    margin: 25,
-  },
-  sairButtonText: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign:'center'
-  },
- 
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -98,18 +60,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
   },
-  heading: {
-    fontSize: 24,
+  TEXTO: {
+    marginBottom: 7,
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 6,
+    width:'auto',
+    borderRadius: 8,
     textAlign: 'center',
   },
-  utenteInfoContainer: {
-    marginTop: -300, 
+  PerfilUtente1: {
+    flex: 1,
+    padding: 10,
+    marginBottom: 50,
+    marginTop: 10, 
+    
   },
-  utenteItem: {
-    marginBottom: 16,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    padding: 16,
-    borderRadius: 8,
+  Image2: {
+    height: 205,
+    width: '110%', 
+    padding: 10,
+    marginTop: 20, 
+  },
+  bottomImage: {
+    position: 'absolute',
+    bottom: -125,
+  
   },
 });
