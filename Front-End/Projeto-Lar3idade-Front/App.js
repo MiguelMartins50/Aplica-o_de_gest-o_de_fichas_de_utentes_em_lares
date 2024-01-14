@@ -4,7 +4,7 @@ import 'react-native-gesture-handler';
 import { StyleSheet,Image,Text, View, TextInput, TouchableOpacity, ImageBackground,Button } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer, CommonActions} from '@react-navigation/native';
 import UtenteScreen from './Telas/Utente.js';
 import FamiliarScreen from './Telas/Familiar.js';
 import Login from './Telas/Login.js'
@@ -17,6 +17,7 @@ import VisitasFamiliar from './Telas/VisitasFamiliar.js'
 import PagamentosFamiliar from './Telas/PagamentosFamiliar.js'
 import UtenteFamiliar from './Telas/UtenteFamiliar.js'
 import PerfilUtente from './Telas/PerfilUtente.js';
+import PerfilFamiliar from './Telas/PerfilFamiliar.js';
 
 
 const Stack = createNativeStackNavigator();
@@ -26,34 +27,39 @@ const Drawer = createDrawerNavigator();
 
 const UtenteDrawer = ({ route,navigation }) => {
   const handleSair = () => {
-    navigation.navigate('Login');};
-    
+    navigation.navigate('Login');
+  };
     const { utenteData, utenteNome } = route.params || {};
-
 return(
-'Perfil',
+
 
   <Drawer.Navigator initialRouteName="Home Utente" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
-    <Drawer.Screen name="Home Utente" component={UtenteScreen} options={{
-    headerRight: () => (
-      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
-      <Text style={styles.sairButtonText}>Sair</Text>
-      </TouchableOpacity>
-    ),
-  }} />
-   <Drawer.Screen
-  name="PerfilUtente"
-  component={PerfilUtente}
-  options={{
-    title: 'Perfil Utente',
-    headerRight: () => (
-      <TouchableOpacity onPress={handleSair} color="white" style={styles.sairButton}>
-        <Text style={styles.sairButtonText}>Sair</Text>
-      </TouchableOpacity>
-    ),
-  }}
+    <Drawer.Screen
+        name="Home Utente"
+        component={UtenteScreen}
+        initialParams={{ utenteData, utenteNome }}
+        options={{
+          headerRight: () => (
+            <TouchableOpacity onPress={handleSair} color="white" style={styles.sairButton}>
+              <Text style={styles.sairButtonText}>Sair</Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="PerfilUtente"
+        component={PerfilUtente}
+        options={{
+          title: 'Perfil Utente',
+          headerRight: () => (
+            <TouchableOpacity onPress={handleSair} color="white" style={styles.sairButton}>
+              <Text style={styles.sairButtonText}>Sair</Text>
+            </TouchableOpacity>
+          ),
+        }}
+        
+      />
 
-/>
     <Drawer.Screen name="Prescrições Médicas" component={PrescricaoUtente} options={{
     headerRight: () => (
       <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
@@ -89,13 +95,18 @@ return(
       </TouchableOpacity>
     ),
   }} />
+  
   </Drawer.Navigator>
 )};
 
-const FamiliarDrawer = ({ navigation }) => {
+const FamiliarDrawer = ({ route,navigation }) => {
   const handleSair = () => {
-    navigation.navigate('Login');};
+    navigation.navigate('Login');
+  };
+  
+    const { FamiliarData, FamiliarNome } = route.params || {};
 return(
+  
   <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}, headerTintColor: 'white',headerTitleStyle: {
    
     color: '#ffff', // Set your desired text color here
@@ -105,6 +116,12 @@ return(
     headerRight: () => (
       <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
       <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }}/>
+   <Drawer.Screen name="PerfilFamiliar" component={PerfilFamiliar} options={{ title: 'Perfil Utente', headerRight: () => (
+      <TouchableOpacity onPress={handleSair} color="white" style={styles.sairButton}>
+        <Text style={styles.sairButtonText}>Sair</Text>
       </TouchableOpacity>
     ),
   }}/>
@@ -140,7 +157,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}} >
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="UtenteDrawer" component={UtenteDrawer} />
+        <Stack.Screen name="UtenteDrawer" component={UtenteDrawer}     />
         <Stack.Screen name="FamiliarDrawer" component={FamiliarDrawer} />
       
       </Stack.Navigator>
