@@ -78,6 +78,6 @@ const styles = StyleSheet.create({
   },
   texto:{
     marginBottom:10,
-    
+    fontSize:15
   }
 });

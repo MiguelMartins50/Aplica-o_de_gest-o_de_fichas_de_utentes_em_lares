@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
   },
   View1:{
     backgroundColor:'rgba(113, 161, 255, 0.5)',
-    padding:30,
-    
+    padding:10
   },
   texto:{
     marginBottom:10,
+    fontSize:15
     
   }
 });
