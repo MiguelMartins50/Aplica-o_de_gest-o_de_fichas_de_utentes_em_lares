@@ -12,7 +12,7 @@ export default function Login({ route, navigation }) {
   const [textPass, setTextPass] = useState("");
 
   const handleLogin = () => {
-    axios.get('http://192.168.1.42:8800/utente')
+    axios.get('http://192.168.1.80:8800/utente')
       .then(utenteResponse => {
         if (utenteResponse.data.length > 0) {
            // Assume que há apenas um utente logado (ou ajuste conforme necessário)
@@ -26,7 +26,7 @@ export default function Login({ route, navigation }) {
 
           const isUtenteMatch = utenteEmailColumn.some((email, index) => email === inputValueEmail && utenteSenhaColumn[index] === inputValueSenha);
           const utenteMatch = utenteResponse.data.find(entry => entry.email === inputValueEmail && entry.senha === inputValueSenha);
-          
+          console.log(isUtenteMatch);
           if (isUtenteMatch) {
             console.log(isUtenteMatch);
             console.log('Login com utente!');
@@ -36,18 +36,21 @@ export default function Login({ route, navigation }) {
             navigation.navigate('UtenteDrawer', { screen: 'Home Utente', params: { utenteData: utenteMatch, utenteNome: utenteMatch.nome } });
             
           } else {
-            axios.get('http://192.168.1.42:8800/familiar')
+            axios.get('http://192.168.1.80:8800/familiar')
               .then(familiarResponse => {
                 if (familiarResponse.data.length > 0) {
                   const familiarEmailColumn = familiarResponse.data.map(entry => entry.email);
                   const familiarSenhaColumn = familiarResponse.data.map(entry => entry.senha);
 
                   const isFamiliarMatch = familiarEmailColumn.some((email, index) => email === inputValueEmail && familiarSenhaColumn[index] === inputValueSenha);
+                  const FamiliarMatch = familiarResponse.data.find(entry => entry.email === inputValueEmail && entry.senha === inputValueSenha);
 
                   if (isFamiliarMatch) {
                     console.log('Login como Familiar');
                     console.log('Email e Senha:', inputValueEmail, inputValueSenha);
-
+                    console.log('UtenteData:', FamiliarMatch);
+                    console.log('Nome do Utente:', FamiliarMatch.nomel);
+                    navigation.navigate('FamiliarDrawer', { screen: 'FamiliarScreen', params: { FamiliarData: FamiliarMatch, FamiliarNome: FamiliarMatch.nomel } });
                     // Se o login for bem-sucedido, navegue para o FamiliarDrawer
                     navigation.navigate('FamiliarDrawer');
                   } else {
