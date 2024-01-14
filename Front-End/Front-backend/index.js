@@ -89,11 +89,8 @@ app.get("/consulta", (req, res) => {
         return res.json(data);
     });
 });
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 1d4ef94ab42d81d1ce704be5cc65af62bfd93247
 app.get("/escala_medico", (req,res) =>{
     const q = "SELECT * FROM mydb.escala_medico;"
     db.query(q,(err,data)=>{
