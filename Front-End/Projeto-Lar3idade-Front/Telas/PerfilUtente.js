@@ -30,12 +30,12 @@ export default function PerfilUtente({ route, navigation }) {
       {utenteNome ? (
         <ScrollView style={styles.PerfilUtente1}>
           <Text style={styles.TEXTO}>Nome: {utenteNome}</Text>
-          <Text style={styles.TEXTO}>Número do CC: {numeroCC}</Text>
-          <Text style={styles.TEXTO}>Data de validade: {dataValidade}</Text>
+          <Text style={styles.TEXTO}>Número de Cartão Cidadão: {numeroCC}</Text>
+          <Text style={styles.TEXTO}>Data de validade: {dataValidade ? new Date(dataValidade).toLocaleDateString() : ''}</Text>
           <Text style={styles.TEXTO}>NIF: {nif}</Text>
           <Text style={styles.TEXTO}>NISS: {niss}</Text>
           <Text style={styles.TEXTO}>Nº Utente de Saúde: {nUtenteSaude}</Text>
-          <Text style={styles.TEXTO}>Data nascimento: {dataNascimmento}</Text>
+          <Text style={styles.TEXTO}>Data nascimento: {dataNascimmento ? new Date(dataNascimmento).toLocaleDateString() : ''}</Text>
           <Text style={styles.TEXTO}>Idade: {idade}</Text>
           <Text style={styles.TEXTO}>Estado Civil: {estadoCivil}</Text>
           <Text style={styles.TEXTO}>Morada: {morada}</Text>

@@ -26,9 +26,7 @@
     "mysql2": "^3.6.5",
     "react": "18.2.0",
     "react-native": "0.72.6",
-
     "react-native-elements": "^3.4.3",
-
     "react-native-base64": "^0.2.1",
     "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "~2.12.0",
