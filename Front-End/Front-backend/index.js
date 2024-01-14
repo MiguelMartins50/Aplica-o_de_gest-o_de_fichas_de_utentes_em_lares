@@ -48,12 +48,14 @@ app.get("/familiar", (req,res) =>{
     })
 })
 app.get("/utente_familiar", (req,res) =>{
+
     const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
 
     let q = "SELECT * FROM mydb.utente_familiar"
     if (Familiar_idFamiliar) {
         q += ` WHERE Familiar_idFamiliar = ${Familiar_idFamiliar};`;
     }
+
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
@@ -73,13 +75,25 @@ app.get("/atividade", (req, res) => {
     });
 });
 
-app.get("/consulta", (req,res) =>{
-    const q = "SELECT * FROM mydb.consulta;"
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
+app.get("/consulta", (req, res) => {
+    const Utente_idUtente = req.query.Utente_idUtente;
+    let q = "SELECT consulta.*, medico.nome AS nomeMedico FROM mydb.consulta";
+
+    if (Utente_idUtente) {
+        q += ` JOIN mydb.utente ON consulta.Utente_idUtente = utente.idUtente`;
+        q += ` JOIN mydb.medico ON utente.Medico_idMedico = medico.idMedico`;
+        q += ` WHERE utente.idUtente = ${Utente_idUtente}`;
+    }
+
+    q += ` AND consulta.estado = 'Agendada'`;
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
+
 app.get("/escala_medico", (req,res) =>{
     const q = "SELECT * FROM mydb.escala_medico;"
     db.query(q,(err,data)=>{

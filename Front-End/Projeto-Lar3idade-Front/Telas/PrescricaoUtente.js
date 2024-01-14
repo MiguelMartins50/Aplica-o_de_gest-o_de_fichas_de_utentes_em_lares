@@ -1,21 +1,18 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Image, Text, View, TouchableOpacity, } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, ImageBackground, Text, View, FlatList } from 'react-native'; 
+import axios from 'axios'; 
 
-export default function PrescricaoUtente({navigation}) {
+export default function PrescricaoMedica({  navigation }) {
+ 
+
   return (
     <View style={styles.container}>
-    <View style={styles.Imag1}>
+      <ImageBackground source={require('../Image/Image2.png')} style={[styles.Image2, styles.bottomImage]} />
+      <Text>Prescrições Médicas</Text>
+  
     </View>
-
-    <View style={styles.Imag}>
-      <Image source={require('../Image/Image2.png')} style={styles.Image2} />
-    </View>
-  </View>
-
-);
+  );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -23,49 +20,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 16,
-  
   },
-  Button: {
-    backgroundColor: '#3498db',
-    paddingVertical: 10,
-    paddingHorizontal: 20, 
+  TEXTO: {
+    marginBottom: 7,
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 6,
+    width: 'auto',
     borderRadius: 8,
-    height: 40,
-    width: 300,  
-    marginBottom: 20,
-    justifyContent: 'center',  
-    alignItems: 'center',    
+    textAlign: 'center',
   },
-  ButtonText: {
-    color: '#fff',
-    fontSize: 17,
-
+  PerfilUtente1: {
+    flex: 1,
+    padding: 10,
+    marginBottom: 50,
+    marginTop: 10,
   },
   Image2: {
-    height:205,
-    width:410,
-    padding:20
-   
+    height: 205,
+    width: '110%',
+    padding: 10,
+    marginTop: 20,
   },
-  Imag:{
-    padding:50
-  },
-  Imag1:{
-    padding:350,
-    
-  },
-  sairButton: {
-    backgroundColor: '#3498db',
-    padding: 2,
-    width:60,
-    borderRadius: 5,
-    marginLeft:310,
-    top:-50,
-    margin: 25,
-  },
-  sairButtonText: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign:'center'
+  bottomImage: {
+    position: 'absolute',
+    bottom: -125,
   },
 });

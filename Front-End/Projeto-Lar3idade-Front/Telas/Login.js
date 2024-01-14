@@ -10,12 +10,12 @@ export default function Login({ route, navigation }) {
   const [tableData, setTableData] = useState([]);
   const [textEmail, setTextEmail] = useState("");
   const [textPass, setTextPass] = useState("");
+  const [showPassword, setShowPassword] = useState(false); 
 
   const handleLogin = () => {
-    axios.get('http://192.168.1.80:8800/utente')
+    axios.get('http://192.168.1.42:8800/utente')
       .then(utenteResponse => {
         if (utenteResponse.data.length > 0) {
-           // Assume que há apenas um utente logado (ou ajuste conforme necessário)
 
           const utenteEmailColumn = utenteResponse.data.map(entry => entry.email);
           const utenteSenhaColumn = utenteResponse.data.map(entry => entry.senha);
@@ -33,10 +33,10 @@ export default function Login({ route, navigation }) {
             console.log('Email e Senha:', inputValueEmail, inputValueSenha);
             console.log('UtenteData:', utenteMatch);
             console.log('Nome do Utente:', utenteMatch.nome);
-            navigation.navigate('UtenteDrawer', { screen: 'Home Utente', params: { utenteData: utenteMatch, utenteNome: utenteMatch.nome } });
+            navigation.navigate('UtenteDrawer', { screen: 'Home Utente', params: { utenteData: utenteMatch, utenteNome: utenteMatch.nome} });
             
           } else {
-            axios.get('http://192.168.1.80:8800/familiar')
+            axios.get('http://192.168.1.42:8800/familiar')
               .then(familiarResponse => {
                 if (familiarResponse.data.length > 0) {
                   const familiarEmailColumn = familiarResponse.data.map(entry => entry.email);
@@ -110,11 +110,19 @@ export default function Login({ route, navigation }) {
         <TextInput
           style={styles.input}
           placeholder="Senha"
-          secureTextEntry
+          secureTextEntry={!showPassword}
           onChangeText={handleInputChangeSenha}
           value={textPass}
         />
+        <TouchableOpacity
+      style={styles.showPasswordButton}
+      onPress={() => setShowPassword(!showPassword)}>
+      <Text style={styles.showPasswordText}>
+        {showPassword ? 'Ocultar' : 'Mostrar'}
+      </Text>
+    </TouchableOpacity>
       </View>
+      
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Entrar</Text>
       </TouchableOpacity>
@@ -135,6 +143,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
     marginBottom:-440
+  },
+  passwordContainer: {
+    position: 'relative',
+  },
+  showPasswordButton: {
+    position: 'absolute',
+    top: 120, 
+    right: 10, 
   },
   login: {
     fontSize: 24,

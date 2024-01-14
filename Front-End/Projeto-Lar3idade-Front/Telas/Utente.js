@@ -7,7 +7,7 @@ export default function Utente({ navigation, route }) {
 
   const { params } = route;
   const { utenteData, utenteNome } = params || {};
-
+  const [atividadeData, setAtividadeData] = useState([]);
   console.log('Route Params:', route.params);
 
   
@@ -22,10 +22,10 @@ export default function Utente({ navigation, route }) {
     navigation.navigate('Visitas');
   };
   const navigateToConsultas = () => {
-    navigation.navigate('Consultas');
+    navigation.navigate('Consultas',{ utenteData});
   };
   const navigateToAtividades = () => {
-    navigation.navigate('Atividades');
+    navigation.navigate('Atividades',{ utenteData});
   };
   const navigateToPlanoPagamento = () => {
     navigation.navigate('Plano de pagamento');
