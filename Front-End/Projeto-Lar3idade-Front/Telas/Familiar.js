@@ -15,7 +15,7 @@ export default function Familiar({ navigation, route }) {
       setImageData(`data:image/png;base64,${base64String}`);
       
     }
-  }, [navigation, FamiliarData, FamiliarNome]);
+  }, [navigation, FamiliarData]);
 
 
   const handleSair = () => {
@@ -30,14 +30,18 @@ export default function Familiar({ navigation, route }) {
     navigation.navigate('PagamentosFamiliar');
   };
 
-  const handleInfo = () => {
+  const handleInfo = async () => {
+    // Set FamiliarID in state
+    setFamiliarID(FamiliarData.idFamiliar);
+    
+    // Now FamiliarID should be updated
     console.log(FamiliarData);
     console.log(FamiliarData.idFamiliar);
-    setFamiliarID(FamiliarData.idFamiliar);
-    console.log(FamiliarID);
+    console.log(FamiliarID); // This may still log the old value due to the asynchronous nature of setFamiliarID
     console.log('FamiliarID');
-
-    navigation.navigate('UtenteFamiliar', { FamiliarData, FamiliarID });
+  
+    // Pass FamiliarID as a parameter when navigating
+    navigation.navigate('UtenteFamiliar', {FamiliarData, FamiliarID});
   };
 
   return (

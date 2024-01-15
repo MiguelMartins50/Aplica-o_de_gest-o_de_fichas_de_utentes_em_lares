@@ -18,6 +18,8 @@ import PagamentosFamiliar from './Telas/PagamentosFamiliar.js'
 import UtenteFamiliar from './Telas/UtenteFamiliar.js'
 import PerfilUtente from './Telas/PerfilUtente.js';
 import PerfilFamiliar from './Telas/PerfilFamiliar.js';
+import UFinfo from './Telas/UFinfo.js';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -142,6 +144,14 @@ return(
     ),
   }} />
     <Drawer.Screen name="UtenteFamiliar" component={UtenteFamiliar}options={{
+    title: 'Familiares',
+    headerRight: () => (
+      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
+      <Text style={styles.sairButtonText}>Sair</Text>
+      </TouchableOpacity>
+    ),
+  }} />
+  <Drawer.Screen name="Informação Utente" component={UFinfo}options={{
     title: 'Familiares',
     headerRight: () => (
       <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
