@@ -16,7 +16,7 @@ export default function Consultas({ route, navigation }) {
     .catch(error => {
       console.error('Erro ao buscar Consulta do utente:', error);
     });
-  }, [utenteId]);
+  }, []);
   
 
   return (

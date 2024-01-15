@@ -16,7 +16,7 @@ export default function Utente({ navigation, route }) {
     
   }, [route.params]);
   const navigateToPrescricaoUtente = () => {
-    navigation.navigate('Prescrições Médicas');
+    navigation.navigate('Prescrições Médicas',{ utenteData});
   };
   const navigateToVisitas = () => {
     navigation.navigate('Visitas');

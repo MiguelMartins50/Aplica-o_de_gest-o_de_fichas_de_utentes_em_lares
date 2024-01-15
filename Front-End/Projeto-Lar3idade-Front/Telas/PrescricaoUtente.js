@@ -8,7 +8,6 @@ export default function PrescricaoMedica({  navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground source={require('../Image/Image2.png')} style={[styles.Image2, styles.bottomImage]} />
-      <Text>Prescrições Médicas</Text>
   
     </View>
   );

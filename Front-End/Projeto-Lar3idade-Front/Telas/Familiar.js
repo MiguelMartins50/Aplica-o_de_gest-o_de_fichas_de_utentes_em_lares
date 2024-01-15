@@ -13,9 +13,9 @@ export default function Familiar({ navigation, route }) {
     if (FamiliarData && FamiliarData.Imagem && FamiliarData.Imagem.data) {
       const base64String = base64.fromByteArray(new Uint8Array(FamiliarData.Imagem.data));
       setImageData(`data:image/png;base64,${base64String}`);
-      
     }
   }, [navigation, FamiliarData]);
+
 
 
   const handleSair = () => {
