@@ -51,7 +51,7 @@ export default function Login({ route, navigation }) {
                     console.log('UtenteData:', FamiliarMatch);
                     console.log('Nome do Utente:', FamiliarMatch.nomel);
                     navigation.navigate('FamiliarDrawer', { screen: 'FamiliarScreen', params: { FamiliarData: FamiliarMatch, FamiliarNome: FamiliarMatch.nomel } });
-                    // Se o login for bem-sucedido, navegue para o FamiliarDrawer
+                   
                     navigation.navigate('FamiliarDrawer');
                   } else {
                     console.log('Login inválido para ambos');

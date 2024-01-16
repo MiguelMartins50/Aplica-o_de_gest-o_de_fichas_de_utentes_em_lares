@@ -20,12 +20,8 @@ import PerfilUtente from './Telas/PerfilUtente.js';
 import PerfilFamiliar from './Telas/PerfilFamiliar.js';
 import UFinfo from './Telas/UFinfo.js';
 
-
-
 const Stack = createNativeStackNavigator();
-
 const Drawer = createDrawerNavigator();
-
 
 const UtenteDrawer = ({ route,navigation }) => {
   const handleSair = () => {
@@ -111,7 +107,7 @@ return(
   
   <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}, headerTintColor: 'white',headerTitleStyle: {
    
-    color: '#ffff', // Set your desired text color here
+    color: '#ffff', 
   },}}>
     <Drawer.Screen name="FamiliarScreen" component={FamiliarScreen} options={{
     title: 'Perfil',

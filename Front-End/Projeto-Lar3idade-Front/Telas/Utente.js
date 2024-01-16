@@ -37,7 +37,7 @@ export default function Utente({ navigation, route }) {
         <View style={styles.Imag1}>
         </View>
         {utenteNome ? (
-        <Text>Bem-vindo, {utenteNome}!</Text>
+        <Text style={styles.BemVindo}>Bem-vindo, {utenteNome}!</Text>
       ) : (
         <Text>Carregando...</Text>
       )}
@@ -122,4 +122,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign:'center'
   },
+  BemVindo:{
+    fontSize:17,
+    marginBottom:20
+  }
 });
