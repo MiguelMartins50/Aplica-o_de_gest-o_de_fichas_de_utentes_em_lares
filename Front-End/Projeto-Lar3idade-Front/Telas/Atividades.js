@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
   },
   View1:{
     backgroundColor:'rgba(113, 161, 255, 0.5)',
-    padding:10
+    padding:10,
+    marginBottom:20
   },
   texto:{
     marginBottom:10,

@@ -126,13 +126,25 @@ app.get("/medico", (req,res) =>{
         return res.json(data)
     })
 })
-app.get("/pagamento", (req,res) =>{
-    const q = "SELECT * FROM mydb.pagamento;"
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
+app.get("/pagamento", (req, res) => {
+    const Utente_idUtente = req.query.Utente_idUtente;
+
+    let q = `
+        SELECT p.data_limitel, p.valor, p.estado
+        FROM pagamento p
+        JOIN utente u ON p.Utente_idUtente = u.idUtente
+    `;
+
+    if (Utente_idUtente) {
+        q += ` WHERE u.idUtente = ${Utente_idUtente}`;
+    }
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 app.get("/prescricao_medica", (req,res) =>{
     const q = "SELECT * FROM mydb.prescricao_medica;"
     db.query(q,(err,data)=>{
@@ -154,13 +166,25 @@ app.get("/tarefa", (req,res) =>{
         return res.json(data)
     })
 })
-app.get("/visita", (req,res) =>{
-    const q = "SELECT * FROM mydb.visita;"
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
+app.get("/visita", (req, res) => {
+    const Utente_idUtente = req.query.Utente_idUtente;
+
+    let q = `
+        SELECT f.nomel AS Nome_Familiar, v.data AS Data_HoraVisita
+        FROM visita v
+        JOIN familiar f ON v.Familiar_idFamiliar = f.idFamiliar
+        JOIN utente u ON v.Utente_idUtente = u.idUtente
+    `;
+
+    if (Utente_idUtente) {
+        q += ` WHERE u.idUtente = ${Utente_idUtente}`;
+    }
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
 app.post("/visita", (req,res) =>{
     const q= "INSERT INTO mydb.visita (Utente_idUtente, data ,Familiar_idFamiliar) VALUES (?)"
     const VALUES = [

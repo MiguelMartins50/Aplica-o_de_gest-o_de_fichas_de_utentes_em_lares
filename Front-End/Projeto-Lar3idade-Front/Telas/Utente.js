@@ -19,7 +19,7 @@ export default function Utente({ navigation, route }) {
     navigation.navigate('Prescrições Médicas',{ utenteData});
   };
   const navigateToVisitas = () => {
-    navigation.navigate('Visitas');
+    navigation.navigate('Visitas',{ utenteData});
   };
   const navigateToConsultas = () => {
     navigation.navigate('Consultas',{ utenteData});
@@ -28,7 +28,7 @@ export default function Utente({ navigation, route }) {
     navigation.navigate('Atividades',{ utenteData});
   };
   const navigateToPlanoPagamento = () => {
-    navigation.navigate('Plano de pagamento');
+    navigation.navigate('Plano de pagamento',{ utenteData});
   };
   const navigateToPerfilUtente = () => {
     navigation.navigate('PerfilUtente', { utenteData, utenteNome });

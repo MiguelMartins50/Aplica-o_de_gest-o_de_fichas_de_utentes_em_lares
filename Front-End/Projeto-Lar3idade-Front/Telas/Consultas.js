@@ -5,12 +5,10 @@ import axios from 'axios';
 export default function Consultas({ route, navigation }) {
   const [consultaData, setConsultasData] = useState([]);
   const { utenteData } = route.params;
-  const utenteId = utenteData.idUtente;
 
   useEffect(() => {
     axios.get(`http://192.168.1.42:8800/consulta?Utente_idUtente=${utenteData.idUtente}`)
     .then(consultaResponse => {
-      // Atualiza o estado com os dados da API
       setConsultasData(consultaResponse.data);
     })
     .catch(error => {
@@ -73,8 +71,8 @@ const styles = StyleSheet.create({
   View1:{
     backgroundColor:'rgba(113, 161, 255, 0.5)',
     padding:10,
-    marginTop:20
-    
+    marginTop:20,
+    marginBottom:6
   },
   texto:{
     marginBottom:10,

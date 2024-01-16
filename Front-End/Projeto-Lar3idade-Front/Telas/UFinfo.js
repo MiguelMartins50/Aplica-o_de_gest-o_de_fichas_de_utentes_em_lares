@@ -24,7 +24,7 @@ export default function UFinfo({ navigation, route }) {
         .catch((error) => {
           console.error('Erro ao buscar Consulta do utente:', error);
         });
-    }, [utenteId]);
+    }, []);
   
     useEffect(() => {
       const updateData = async () => {
