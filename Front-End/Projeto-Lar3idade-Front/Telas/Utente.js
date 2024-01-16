@@ -7,7 +7,6 @@ export default function Utente({ navigation, route }) {
 
   const { params } = route;
   const { utenteData, utenteNome } = params || {};
-  const [atividadeData, setAtividadeData] = useState([]);
   console.log('Route Params:', route.params);
 
   
@@ -31,7 +30,7 @@ export default function Utente({ navigation, route }) {
     navigation.navigate('Plano de pagamento',{ utenteData});
   };
   const navigateToPerfilUtente = () => {
-    navigation.navigate('PerfilUtente', { utenteData, utenteNome });
+    navigation.navigate('PerfilUtente',{ utenteData});
   };
 
   return (<View style={styles.container}>

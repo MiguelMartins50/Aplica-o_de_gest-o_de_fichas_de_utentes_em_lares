@@ -2,16 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, ImageBackground, Text, View, FlatList } from 'react-native'; 
 import axios from 'axios'; 
 
-export default function PrescricaoMedica({  navigation }) {
- 
+export default function PrescricaoUtente({ route, navigation }) {
+  const [PrescricaoData, setPrescricaoData] = useState([]);
+  const { utenteData } = route.params;
+
+  useEffect(() => {
+    axios.get(`http://192.168.1.42:8800/prescricao_medica?Utente_idUtente=${utenteData.idUtente}`)
+    .then(prescricaoResponse => {
+      setPrescricaoData(prescricaoResponse.data);
+    })
+    .catch(error => {
+      console.error('Erro ao buscar Prescricao do utente:', error);
+    });
+  }, []);
+  
 
   return (
     <View style={styles.container}>
       <ImageBackground source={require('../Image/Image2.png')} style={[styles.Image2, styles.bottomImage]} />
-  
+      <FlatList
+        data={PrescricaoData}
+        keyExtractor={(item, index) => (item.id ? item.id.toString() : index.toString())}
+        renderItem={({ item }) => (
+          <View style={styles.View1} key={item.id ? item.id.toString() : null}>
+            <Text style={styles.texto}>ID da consulta: {item.idConsulta}</Text>
+            <Text style={styles.texto}>Estado: {item.estado}</Text>
+            <Text style={styles.texto}>Descrição: {item.descricao}</Text>
+          </View>
+        )}
+      />
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -45,4 +68,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -125,
   },
+  View1:{
+    backgroundColor:'rgba(113, 161, 255, 0.5)',
+    padding:10,
+    marginTop:20,
+    marginBottom:6
+  },
+  texto:{
+    marginBottom:10,
+    fontSize:15
+  }
 });
