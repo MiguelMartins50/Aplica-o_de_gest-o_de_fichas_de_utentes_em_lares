@@ -23,23 +23,20 @@ export default function Familiar({ navigation, route }) {
   };
 
   const handleVisitas = () => {
-    navigation.navigate('VisitasFamiliar');
+    setFamiliarID(FamiliarData.idFamiliar);  
+
+    navigation.navigate('VisitasFamiliar',{FamiliarData,FamiliarID});
   };
 
   const handlePagamentos = () => {
-    navigation.navigate('PagamentosFamiliar');
+    setFamiliarID(FamiliarData.idFamiliar);  
+
+    navigation.navigate('PagamentosFamiliar',{FamiliarData,FamiliarID});
   };
 
   const handleInfo = async () => {
     // Set FamiliarID in state
-    setFamiliarID(FamiliarData.idFamiliar);
-    
-    // Now FamiliarID should be updated
-    console.log(FamiliarData);
-    console.log(FamiliarData.idFamiliar);
-    console.log(FamiliarID); // This may still log the old value due to the asynchronous nature of setFamiliarID
-    console.log('FamiliarID');
-  
+    setFamiliarID(FamiliarData.idFamiliar);  
     // Pass FamiliarID as a parameter when navigating
     navigation.navigate('UtenteFamiliar', {FamiliarData, FamiliarID});
   };

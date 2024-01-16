@@ -127,7 +127,12 @@ app.get("/medico", (req,res) =>{
     })
 })
 app.get("/pagamento", (req,res) =>{
-    const q = "SELECT * FROM mydb.pagamento;"
+    const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
+    
+    let q = "SELECT * FROM mydb.pagamento"
+    if (Familiar_idFamiliar) {
+        q += ` WHERE Familiar_idFamiliar = ${Familiar_idFamiliar}`;
+    }
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
@@ -155,7 +160,11 @@ app.get("/tarefa", (req,res) =>{
     })
 })
 app.get("/visita", (req,res) =>{
-    const q = "SELECT * FROM mydb.visita;"
+    const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
+    let q = "SELECT visita.*, utente.nome AS nomeutente FROM mydb.visita JOIN mydb.utente ON visita.Utente_idUtente = utente.idUtente"
+    if (Familiar_idFamiliar) {
+        q += ` WHERE Familiar_idFamiliar = ${Familiar_idFamiliar}`;
+    }
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)

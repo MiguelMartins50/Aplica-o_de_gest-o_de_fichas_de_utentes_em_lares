@@ -1,95 +1,161 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground, FlatList } from 'react-native';
+import axios from 'axios'; 
+import SelectDropdown from 'react-native-select-dropdown'
 
-export default function PagamentosFamiliar({ navigation }) {
+export default function PagamentosFamiliar({ navigation, route }) {
+  const FamiliarData = route.params && route.params.FamiliarData;
+  const familiarID = FamiliarData.idFamiliar;
+  const [PagamentoData, setPagamentoData] = useState([]);
+
+  const [selectedYear, setSelectedYear] = useState(null);
+
+  const years = [
+    2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
+    2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029,
+    2030, 2031, 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2039,
+    2040, 2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048, 2049,
+    2050
+  ];
+  useEffect(() => {
+    axios.get(`http://192.168.1.80:8800/pagamento?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+      .then(PagamentoResponse => {
+        if (PagamentoResponse.data && Array.isArray(PagamentoResponse.data)) {
+          const filteredPagamento = selectedYear
+          ? PagamentoResponse.data.filter(item => new Date(item.data_limitel).getFullYear() === selectedYear)
+          : PagamentoResponse.data; 
+          console.log(PagamentoResponse.data);
+          console.log('Filtered Payments:', filteredPagamento);
+          console.log('Selected Month Index:', selectedYear);
+          setPagamentoData(filteredPagamento);
+          console.log('PagamentoData:', PagamentoData);
+
+        } else {
+          console.log('Consulta do utente não retornou dados válidos:', PagamentoResponse.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar Consulta do utente:', error);
+      });
+  }, [selectedYear]);
   
-  return (
-      <View style={styles.container}>
-        
-        <View style={styles.Text2}><Text tyle={styles.ButtonText}>Planos de Pagamento</Text></View>
-        
-        
-        
-        <StatusBar style="auto" />
 
-        <View style={styles.Imag}>
-          <Image source={require('../Image/Image2.png')} style={styles.Image2} />
-        </View>
-      </View>
-   
-  );
+  useEffect(() => {
+    console.log('PagamentoData:');
+    console.log(PagamentoData);
+
+  }, [PagamentoData]);
+
+return (
+ 
+      <FlatList
+        style={styles.container}
+        ListHeaderComponent={
+          <View style={styles.View1}>
+            <View style={styles.Text2}>
+              <Text style={styles.ButtonText}>Planos de Pagamento</Text>
+            </View>
+            <SelectDropdown
+            data={years}
+            onSelect={(year, index) => setSelectedYear(year)}
+            buttonTextAfterSelection={(year, index) => year}
+            rowTextForSelection={(year, index) => year}
+            defaultButtonText="Selecione um ano"
+            />
+
+            <View style={styles.clearButtonContainer}>
+              <TouchableOpacity onPress={() => setSelectedYear(null)}>
+                <Text style={styles.clearButtonText}>Limpar Seleção</Text>
+              </TouchableOpacity>
+            </View>
+            
+          </View>
+        }
+        data={PagamentoData}
+        keyExtractor={(item) => (item.id ? item.id.toString() : String(Math.random()))}
+        renderItem={({ item }) => (
+          <View style={styles.View3}>
+            <Text style={styles.texto}>Valor: {item.valor}</Text>
+            <Text style={styles.texto}>Data e Hora: {new Date(item.data_limitel).toLocaleString()}</Text>
+            <Text style={styles.texto}>Estado: {item.estado}</Text>
+          </View>
+        )}
+      />
+    
+);
+
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: {  
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    padding: 15,   
+  },
+  image: {
+    width: 100,
+    height: 100,
+    resizeMode: 'cover',
+    borderRadius: 50,
+  },
+  View1: {
+    marginTop: 1,
+    padding: 10,
     justifyContent: 'center',
-    padding: 16,
-  
+    alignItems: 'center',
   },
-  Button: {
-    backgroundColor: '#3498db',
-    paddingVertical: 10,
-    paddingHorizontal: 20, 
-    borderRadius: 8,
-    height: 40,
-    width: 300,  
+  View3: {
+    backgroundColor:'rgba(113, 161, 255, 0.5)',
+    padding: 10,
+    borderWidth: 5,
+    borderColor:'white',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  NomeGrauContainer: {
     marginBottom: 20,
-    justifyContent: 'center',  
-    alignItems: 'center',    
+    alignItems: 'center',
   },
-  Text2: {
-    paddingVertical: 200,
-    paddingHorizontal: 20, 
-    borderRadius: 8, 
-
-    justifyContent: 'center',  
-    alignItems: 'center',    
+  NomeText: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
-  ButtonText: {
-    color: '#fff',
-    fontSize: 17,
-    
+  GrauText: {
+    fontSize: 16,
   },
-  Image1:{
-    height:110,
-    width:400,
-    marginTop:-175
-    
-    
+  blackbar: {
+    width: 500,
+    height: 10,
+    backgroundColor: 'black',
+    marginTop: 20,
+  },
+  View2: {
+    backgroundColor:'rgba(113, 161, 255, 0.5)',
+    padding: 10,
+    marginTop: 20,
+    width: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+  },
+  texto: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  Imag: {
+    padding: 20,
+    marginTop: 20,
   },
   Image2: {
-    height:205,
-    width:410,
-    padding:20,
-    marginBottom:-150
-   
-  },
-  Imag:{
-    padding:50
-  },
-  Imag1:{
-    padding:195,
-  },
-  sairButton: {
-    backgroundColor: 'white',
-    padding: 2,
-    width:60,
-    borderRadius: 5,
-    alignSelf: 'flex-end', 
-    margin: 40,
-  },
-  sairButtonText: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign:'center'
-  },
-  ButtonText: {
-    color: '#fff',
-    fontSize: 17,
-    
+    height: 205,
+    width: 410,
+    padding: 20,
+    marginTop:200,
+    marginBottom: -300,
   },
 });

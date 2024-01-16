@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground,FlatList } from 'react-native';
+import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground,FlatList,ScrollView } from 'react-native';
 import base64 from 'base64-js';
 import axios from 'axios'; 
 
@@ -43,44 +43,43 @@ export default function UFinfo({ navigation, route }) {
       };
   
       updateData();
-    }, [UtenteData]);
+    }, [UtenteData]); 
+    useEffect(() => {
+      console.log(consultaData);
+  
+    }, [consultaData]);
   
     return (
-        <View style={styles.container}>
-        <View style={styles.View1}>
-          {imageData && <Image style={styles.image} source={{ uri: imageData }} />}
-          <View style={styles.NomeGrauContainer}>
-            {NomeData ? <Text style={styles.NomeText}>Nome: {NomeData}</Text> : <Text>Carregando...</Text>}
-            {GrauData ? <Text style={styles.GrauText}>Grau de dependencia: {GrauData}</Text> : <Text>Carregando...</Text>}
+      <FlatList
+        style={styles.container}
+        ListHeaderComponent={
+          <View style={styles.View1}>
+            {imageData && <Image style={styles.image} source={{ uri: imageData }} />}
+            <View style={styles.NomeGrauContainer}>
+              {NomeData ? <Text style={styles.NomeText}>Nome: {NomeData}</Text> : <Text>Carregando...</Text>}
+              {GrauData ? <Text style={styles.GrauText}>Grau de dependencia: {GrauData}</Text> : <Text>Carregando...</Text>}
+            </View>
           </View>
-        </View>
-        <View style={styles.View2}>
-          <FlatList
-            data={consultaData}
-            keyExtractor={(item, index) => (item.id ? item.id.toString() : index.toString())}
-            renderItem={({ item }) => (
-              <View style={styles.View1} key={item.id ? item.id.toString() : null}>
-                <Text style={styles.texto}>Médico: {item.nomeMedico}</Text>
-                <Text style={styles.texto}>Data e Hora: {new Date(item.data).toLocaleString()}</Text>
-                <Text style={styles.texto}>Estado: {item.estado}</Text>
-              </View>
-            )}
-          />
-        </View>
-      <View style={styles.Imag}>
-        <Image source={require('../Image/Image2.png')} style={styles.Image2} />
-      </View>
-    </View>
-  );
-}
+        }
+        data={consultaData}
+        keyExtractor={(item) => item.idConsulta.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.View3}>
+            <Text style={styles.texto}>Médico: {item.nomeMedico}</Text>
+            <Text style={styles.texto}>Data e Hora: {new Date(item.data).toLocaleString()}</Text>
+            <Text style={styles.texto}>Estado: {item.estado}</Text>
+          </View>
+        )}
+      />
+    );
+  }
+
   
 const styles = StyleSheet.create({
-    container: {
+    container: {  
       flex: 1,
       backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 16,
+      padding: 15,   
     },
     image: {
       width: 100,
@@ -89,7 +88,13 @@ const styles = StyleSheet.create({
       borderRadius: 50,
     },
     View1: {
-      marginTop: -200,
+      marginTop: 1,
+      padding: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    View3: {
+      backgroundColor:'rgba(113, 161, 255, 0.5)',
       padding: 10,
       justifyContent: 'center',
       alignItems: 'center',
