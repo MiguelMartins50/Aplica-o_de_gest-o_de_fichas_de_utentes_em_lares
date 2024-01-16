@@ -50,7 +50,7 @@ export default function VisitasFamiliar({navigation, route}) {
           .get(`http://192.168.1.80:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
           .then((VisitaResponse) => {
             const filteredVisita = selectedYear
-              ? VisitaResponse.data.filter((item) => new Date(item.data).getFullYear() === selectedYear)
+              ? VisitaResponse.data.filter((item) => new Date(item.Data_HoraVisita).getFullYear() === selectedYear)
               : VisitaResponse.data;
             setVisitaData(filteredVisita);
           })

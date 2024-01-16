@@ -190,14 +190,19 @@ app.get("/tarefa", (req,res) =>{
 
 app.get("/visita", (req, res) => {
     const Utente_idUtente = req.query.Utente_idUtente;
+    const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
+
 
     let q = `
-        SELECT f.nomel AS Nome_Familiar, v.data AS Data_HoraVisita, utente.nome AS nomeutente
+        SELECT f.nomel AS Nome_Familiar,f.idFamiliar, u.idUtente, v.data AS Data_HoraVisita, u.nome AS nomeutente
         FROM visita v
         JOIN familiar f ON v.Familiar_idFamiliar = f.idFamiliar
         JOIN utente u ON v.Utente_idUtente = u.idUtente
     `;
 
+    if (Familiar_idFamiliar) {
+        q += ` WHERE f.idFamiliar = ${Familiar_idFamiliar}`;
+    }
     if (Utente_idUtente) {
         q += ` WHERE u.idUtente = ${Utente_idUtente}`;
     }
@@ -207,6 +212,7 @@ app.get("/visita", (req, res) => {
         return res.json(data);
     });
 });
+
 
 app.post("/visita", (req,res) =>{
     const q= "INSERT INTO mydb.visita (Utente_idUtente, data ,Familiar_idFamiliar) VALUES (?)"
