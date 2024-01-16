@@ -13,7 +13,7 @@ export default function Login({ route, navigation }) {
   const [showPassword, setShowPassword] = useState(false); 
 
   const handleLogin = () => {
-    axios.get('http://192.168.1.80:8800/utente')
+    axios.get('http://192.168.1.42:8800/utente')
       .then(utenteResponse => {
         if (utenteResponse.data.length > 0) {
 
@@ -36,7 +36,7 @@ export default function Login({ route, navigation }) {
             navigation.navigate('UtenteDrawer', { screen: 'Home Utente', params: { utenteData: utenteMatch, utenteNome: utenteMatch.nome} });
             
           } else {
-            axios.get('http://192.168.1.80:8800/familiar')
+            axios.get('http://192.168.1.42:8800/familiar')
               .then(familiarResponse => {
                 if (familiarResponse.data.length > 0) {
                   const familiarEmailColumn = familiarResponse.data.map(entry => entry.email);
@@ -51,7 +51,7 @@ export default function Login({ route, navigation }) {
                     console.log('UtenteData:', FamiliarMatch);
                     console.log('Nome do Utente:', FamiliarMatch.nomel);
                     navigation.navigate('FamiliarDrawer', { screen: 'FamiliarScreen', params: { FamiliarData: FamiliarMatch, FamiliarNome: FamiliarMatch.nomel } });
-                    // Se o login for bem-sucedido, navegue para o FamiliarDrawer
+                   
                     navigation.navigate('FamiliarDrawer');
                   } else {
                     console.log('Login inválido para ambos');

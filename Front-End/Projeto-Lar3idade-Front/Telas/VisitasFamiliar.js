@@ -71,7 +71,7 @@ export default function VisitasFamiliar({navigation, route}) {
       .then(VisitaResponse => {
         if (VisitaResponse.data && Array.isArray(VisitaResponse.data)) {
           const filteredVisita = selectedYear
-          ? VisitaResponse.data.filter(item => new Date(item.data).getFullYear() === selectedYear)
+          ? VisitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getFullYear() === selectedYear)
           : VisitaResponse.data; 
           console.log(VisitaResponse.data);
           console.log('Filtered Payments:', filteredVisita);
@@ -128,12 +128,12 @@ export default function VisitasFamiliar({navigation, route}) {
       <View style={styles.View3}>
         <Text style={styles.texto}>Utente: {item.nomeutente}</Text>
         <Text style={styles.texto}>
-          Dia: {('0' + (new Date(item.data).getDate())).slice(-2)}/
-          {('0' + (new Date(item.data).getMonth() + 1)).slice(-2)}
+          Dia: {('0' + (new Date(item.Data_HoraVisita).getDate())).slice(-2)}/
+          {('0' + (new Date(item.Data_HoraVisita).getMonth() + 1)).slice(-2)}
         </Text>
         <Text style={styles.texto}>
-          Hora: {('0' + new Date(item.data).getHours()).slice(-2)}/
-          {('0' + new Date(item.data).getMinutes()).slice(-2)}
+          Hora: {('0' + new Date(item.Data_HoraVisita).getHours()).slice(-2)}/
+          {('0' + new Date(item.Data_HoraVisita).getMinutes()).slice(-2)}
         </Text>
           <TouchableOpacity style={styles.deleteButton} onPress={() => handleDeleteVisita(item.idVisita)}>
             <Text style={styles.deleteButtonText}>Cancelar</Text>

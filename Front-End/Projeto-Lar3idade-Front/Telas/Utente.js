@@ -7,7 +7,6 @@ export default function Utente({ navigation, route }) {
 
   const { params } = route;
   const { utenteData, utenteNome } = params || {};
-  const [atividadeData, setAtividadeData] = useState([]);
   console.log('Route Params:', route.params);
 
   
@@ -19,7 +18,7 @@ export default function Utente({ navigation, route }) {
     navigation.navigate('Prescrições Médicas',{ utenteData});
   };
   const navigateToVisitas = () => {
-    navigation.navigate('Visitas');
+    navigation.navigate('Visitas',{ utenteData});
   };
   const navigateToConsultas = () => {
     navigation.navigate('Consultas',{ utenteData});
@@ -28,17 +27,17 @@ export default function Utente({ navigation, route }) {
     navigation.navigate('Atividades',{ utenteData});
   };
   const navigateToPlanoPagamento = () => {
-    navigation.navigate('Plano de pagamento');
+    navigation.navigate('Plano de pagamento',{ utenteData});
   };
   const navigateToPerfilUtente = () => {
-    navigation.navigate('PerfilUtente', { utenteData, utenteNome });
+    navigation.navigate('PerfilUtente',{ utenteData});
   };
 
   return (<View style={styles.container}>
         <View style={styles.Imag1}>
         </View>
         {utenteNome ? (
-        <Text>Bem-vindo, {utenteNome}!</Text>
+        <Text style={styles.BemVindo}>Bem-vindo, {utenteNome}!</Text>
       ) : (
         <Text>Carregando...</Text>
       )}
@@ -123,4 +122,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign:'center'
   },
+  BemVindo:{
+    fontSize:17,
+    marginBottom:20
+  }
 });

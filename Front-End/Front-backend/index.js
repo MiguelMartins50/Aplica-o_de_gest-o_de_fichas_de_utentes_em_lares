@@ -22,6 +22,7 @@ app.get("/tipo", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.get("/funcionario", (req,res) =>{
     const q = "SELECT * FROM mydb.funcionario;"
     db.query(q,(err,data)=>{
@@ -29,6 +30,7 @@ app.get("/funcionario", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.get("/utente", (req,res) =>{
     const idUtente = req.query.idUtente;
     let q = "SELECT * FROM mydb.utente"
@@ -40,6 +42,7 @@ app.get("/utente", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.get("/familiar", (req,res) =>{
     const q = "SELECT * FROM mydb.familiar;"
     db.query(q,(err,data)=>{
@@ -47,6 +50,7 @@ app.get("/familiar", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.get("/utente_familiar", (req,res) =>{
 
     const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
@@ -61,6 +65,7 @@ app.get("/utente_familiar", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.get("/atividade", (req, res) => {
     const Utente_idUtente = req.query.Utente_idUtente;
     let q = "SELECT * FROM mydb.atividade";
@@ -95,9 +100,6 @@ app.get("/consulta", (req, res) => {
     });
 });
 
-
-
-
 app.get("/escala_medico", (req,res) =>{
     const q = "SELECT * FROM mydb.escala_medico;"
     db.query(q,(err,data)=>{
@@ -105,6 +107,7 @@ app.get("/escala_medico", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.get("/escala_servico", (req,res) =>{
     const q = "SELECT * FROM mydb.escala_servico;"
     db.query(q,(err,data)=>{
@@ -112,6 +115,7 @@ app.get("/escala_servico", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.get("/funcionario_escala", (req,res) =>{
     const q = "SELECT * FROM mydb.funcionario_escala;"
     db.query(q,(err,data)=>{
@@ -119,6 +123,7 @@ app.get("/funcionario_escala", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.get("/medico", (req,res) =>{
     const q = "SELECT * FROM mydb.medico;"
     db.query(q,(err,data)=>{
@@ -126,25 +131,46 @@ app.get("/medico", (req,res) =>{
         return res.json(data)
     })
 })
-app.get("/pagamento", (req,res) =>{
-    const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
-    
-    let q = "SELECT * FROM mydb.pagamento"
-    if (Familiar_idFamiliar) {
-        q += ` WHERE Familiar_idFamiliar = ${Familiar_idFamiliar}`;
+
+app.get("/pagamento", (req, res) => {
+    const Utente_idUtente = req.query.Utente_idUtente;
+
+    let q = `
+        SELECT p.data_limitel, p.valor, p.estado
+        FROM pagamento p
+        JOIN utente u ON p.Utente_idUtente = u.idUtente
+    `;
+
+    if (Utente_idUtente) {
+        q += ` WHERE u.idUtente = ${Utente_idUtente}`;
     }
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
-app.get("/prescricao_medica", (req,res) =>{
-    const q = "SELECT * FROM mydb.prescricao_medica;"
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
+app.get("/prescricao_medica", (req, res) => {
+    const Utente_idUtente = req.query.Utente_idUtente;
+
+    let q = `
+        SELECT c.idConsulta, pm.estado, pm.descricao
+        FROM prescricao_medica pm
+        JOIN consulta c ON pm.Consulta_idConsulta = c.idConsulta
+        JOIN utente u ON c.Utente_idUtente = u.idUtente
+    `;
+
+    if (Utente_idUtente) {
+        q += ` WHERE u.idUtente = ${Utente_idUtente}`;
+    }
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 app.get("/quarto", (req,res) =>{
     const q = "SELECT * FROM mydb.quarto;"
     db.query(q,(err,data)=>{
@@ -152,6 +178,7 @@ app.get("/quarto", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.get("/tarefa", (req,res) =>{
     const q = "SELECT * FROM mydb.tarefa;"
     db.query(q,(err,data)=>{
@@ -159,17 +186,28 @@ app.get("/tarefa", (req,res) =>{
         return res.json(data)
     })
 })
-app.get("/visita", (req,res) =>{
-    const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
-    let q = "SELECT visita.*, utente.nome AS nomeutente FROM mydb.visita JOIN mydb.utente ON visita.Utente_idUtente = utente.idUtente"
-    if (Familiar_idFamiliar) {
-        q += ` WHERE Familiar_idFamiliar = ${Familiar_idFamiliar}`;
+
+
+app.get("/visita", (req, res) => {
+    const Utente_idUtente = req.query.Utente_idUtente;
+
+    let q = `
+        SELECT f.nomel AS Nome_Familiar, v.data AS Data_HoraVisita, utente.nome AS nomeutente
+        FROM visita v
+        JOIN familiar f ON v.Familiar_idFamiliar = f.idFamiliar
+        JOIN utente u ON v.Utente_idUtente = u.idUtente
+    `;
+
+    if (Utente_idUtente) {
+        q += ` WHERE u.idUtente = ${Utente_idUtente}`;
     }
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 app.post("/visita", (req,res) =>{
     const q= "INSERT INTO mydb.visita (Utente_idUtente, data ,Familiar_idFamiliar) VALUES (?)"
     const VALUES = [
@@ -182,6 +220,7 @@ app.post("/visita", (req,res) =>{
         return res.json(data)
     })
 })
+
 app.put("/visita/:id", (req, res) => {
     const q = "UPDATE mydb.visita SET Utente_idUtente = ?, data = ?, Familiar_idFamiliar = ? WHERE idVisita = ?";
     const idVisita = req.params.id;
@@ -194,6 +233,7 @@ app.put("/visita/:id", (req, res) => {
         return res.json(data);
     });
 });
+
 app.delete("/visita/:id", (req, res) => {
     const q = "DELETE FROM mydb.visita WHERE idVisita = ?";
     const idVisita = req.params.id;
