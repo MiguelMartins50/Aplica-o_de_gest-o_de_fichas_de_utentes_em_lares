@@ -102,8 +102,12 @@ const styles = StyleSheet.create({
   },
   View1:{
     backgroundColor:'rgba(113, 161, 255, 0.5)',
-    padding:10,
-    marginBottom:20
+    padding: 10,
+    borderWidth: 5,
+    borderColor:'white',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   texto:{
     marginBottom:10,

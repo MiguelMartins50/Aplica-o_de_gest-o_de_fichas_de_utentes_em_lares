@@ -106,9 +106,13 @@ const styles = StyleSheet.create({
     bottom: -125,
   },
   View1: {
-    backgroundColor: 'rgba(113, 161, 255, 0.5)',
+    backgroundColor:'rgba(113, 161, 255, 0.5)',
     padding: 10,
-    marginBottom: 20,
+    borderWidth: 5,
+    borderColor:'white',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   texto: {
     marginBottom: 10,

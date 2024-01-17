@@ -5,7 +5,7 @@ import base64 from 'base64-js';
 
 export default function Familiar({ navigation, route }) {
   const { params } = route;
-  const {FamiliarData, FamiliarNome} = params || {};
+  const {FamiliarData, FamiliarNome, FamiliarMatch} = params || {};
   const [imageData, setImageData] = useState(null);
   const [FamiliarID, setFamiliarID]= useState(null);
 
@@ -15,8 +15,6 @@ export default function Familiar({ navigation, route }) {
       setImageData(`data:image/png;base64,${base64String}`);
     }
   }, [navigation, FamiliarData]);
-
-
 
   const handleSair = () => {
     navigation.navigate('Login');
@@ -43,11 +41,15 @@ export default function Familiar({ navigation, route }) {
     <View style={styles.container}>
       {imageData && <Image style={styles.image} source={{ uri: imageData }} />}
       {FamiliarNome ? (
-        <Text>Bem-vindo, {FamiliarNome}!</Text>
+        <Text style={styles.BemVindo}>Bem-vindo, {FamiliarNome}!</Text>
       ) : (
         <Text>Carregando...</Text>
       )}
-      <Text style={styles.ButtonText}>Teste Visitas</Text>
+      <TouchableOpacity
+      style={styles.Button}
+      onPress={() =>navigation.navigate('PerfilFamiliar', {FamiliarData, FamiliarID})}>
+      <Text style={styles.ButtonText}>Perfil Familiar</Text>
+    </TouchableOpacity>
       <TouchableOpacity style={styles.Button} onPress={handlePagamentos}>
         <Text style={styles.ButtonText}>Plano de Pagamentos</Text>
       </TouchableOpacity>
@@ -57,9 +59,7 @@ export default function Familiar({ navigation, route }) {
       <TouchableOpacity style={styles.Button} onPress={handleVisitas}>
         <Text style={styles.ButtonText}>Visitas</Text>
       </TouchableOpacity>
-
       <StatusBar style="auto" />
-
       <View style={styles.Imag}>
         <Image source={require('../Image/Image2.png')} style={styles.Image2} />
       </View>
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   Imag:{
     padding:100,
-    marginBottom:-200,
+    marginBottom:-270,
 
   },
   Imag1:{
@@ -133,5 +133,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginBottom: 20,
     alignItems: 'center'
+  },
+  BemVindo:{
+    fontSize:17,
+    marginBottom:20
   }
 });

@@ -4,7 +4,6 @@ import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from
 
 
 export default function Utente({ navigation, route }) {
-
   const { params } = route;
   const { utenteData, utenteNome } = params || {};
   console.log('Route Params:', route.params);

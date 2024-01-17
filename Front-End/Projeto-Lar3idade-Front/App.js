@@ -107,10 +107,7 @@ const FamiliarDrawer = ({ route,navigation }) => {
     const { FamiliarData, FamiliarNome } = route.params || {};
 return(
   
-  <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}, headerTintColor: 'white',headerTitleStyle: {
-   
-    color: '#ffff', 
-  },}}>
+  <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
     <Drawer.Screen name="FamiliarScreen" component={FamiliarScreen} options={{
     title: 'Perfil',
     headerRight: () => (
