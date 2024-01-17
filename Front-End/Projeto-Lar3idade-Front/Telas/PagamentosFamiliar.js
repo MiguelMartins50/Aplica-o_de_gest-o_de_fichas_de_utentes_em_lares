@@ -6,9 +6,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 
 export default function PagamentosFamiliar({ navigation, route }) {
   const FamiliarData = route.params && route.params.FamiliarData;
-  const familiarID = FamiliarData.idFamiliar;
   const [PagamentoData, setPagamentoData] = useState([]);
-
   const [selectedYear, setSelectedYear] = useState(null);
 
   const years = [
@@ -20,7 +18,7 @@ export default function PagamentosFamiliar({ navigation, route }) {
     2050
   ];
   useEffect(() => {
-    axios.get(`http://192.168.1.80:8800/pagamento?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.42:8800/pagamento?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(PagamentoResponse => {
         if (PagamentoResponse.data && Array.isArray(PagamentoResponse.data)) {
           const filteredPagamento = selectedYear

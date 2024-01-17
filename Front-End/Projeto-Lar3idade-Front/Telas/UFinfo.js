@@ -13,16 +13,14 @@ export default function UFinfo({ navigation, route }) {
     const [GrauData, setGrauData] = useState(null);
     const [consultaData, setConsultasData] = useState([]);
   
-    const utenteId = UtenteData.idUtente;
-  
     useEffect(() => {
       axios
-        .get(`http://192.168.1.80:8800/consulta?Utente_idUtente=${UtenteData.idUtente}`)
+        .get(`http://192.168.1.42:8800/consulta?Utente_idUtente=${UtenteData.idUtente}`)
         .then((consultaResponse) => {
           setConsultasData(consultaResponse.data);
         })
         .catch((error) => {
-          console.error('Erro ao buscar Consulta do utente:', error);
+          console.error('Erro ao buscar informação do utente:', error);
         });
     }, []);
   

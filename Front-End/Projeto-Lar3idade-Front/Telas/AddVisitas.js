@@ -21,17 +21,14 @@ export default function AddVistas({navigation, route}) {
   const [SelectedUtente, setSelectedUtente] = useState('');
 
   useEffect(() => {
-    axios.get(`http://192.168.1.80:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.42:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(consultaResponse => {
-        // Atualiza o estado com os dados da API
         setUFData(consultaResponse.data);
-        // Ensure that the property exists before trying to access it
         if (consultaResponse.data && consultaResponse.data[0] && consultaResponse.data[0].Utente_idUtente) {
           const utenteId = consultaResponse.data[0].Utente_idUtente;
   
-          axios.get(`http://192.168.1.80:8800/utente?idUtente=${utenteId}`)
+          axios.get(`http://192.168.1.42:8800/utente?idUtente=${utenteId}`)
             .then(utenteResponse => {
-              // Atualiza o estado com os dados da API
               setUData(utenteResponse.data);
               
             })
@@ -68,8 +65,6 @@ export default function AddVistas({navigation, route}) {
         setShowDatePicker(false);
         setSelectedDate(currentDate);
         updateCombinedDateTime(currentDate ,currentTime);
-
-        // You can perform any additional actions with the selected date if needed
       };
       const handleTimeChange = (event, selected) => {
         const currentTime = selected || selectedTime;
@@ -90,13 +85,12 @@ export default function AddVistas({navigation, route}) {
           Familiar_idFamiliar: FamiliarData.idFamiliar,
         };
     
-        axios.post('http://192.168.1.80:8800/visita', visitaData)
+        axios.post('http://192.168.1.42:8800/visita', visitaData)
           .then(response => {
             console.log('Visita added successfully:', response.data);
           })
           .catch(error => {
             console.error('Error adding visita:', error);
-            // Handle errors if needed
           });
       };
 return (<View style={styles.container}>
@@ -106,12 +100,12 @@ return (<View style={styles.container}>
           <SelectDropdown
         data={UData.map(utente => ({ id: utente.idUtente, name: utente.nome }))}
         onSelect={(selectedItem, index) => {
-          // Extract the selected ID
+        
           const selectedId = selectedItem.id;
           console.log('Selected Utente ID:', selectedId);
           setSelectedUtente(selectedId);
           
-          // Handle other actions if needed
+          
         }}
         buttonTextAfterSelection={(selectedItem, index) => selectedItem.name}
         rowTextForSelection={(selectedItem, index) => selectedItem.name}

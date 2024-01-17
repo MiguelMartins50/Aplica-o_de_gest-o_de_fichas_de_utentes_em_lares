@@ -13,17 +13,14 @@ export default function UtenteFamiliar({ navigation,route  }) {
 
 
   useEffect(() => {
-    axios.get(`http://192.168.1.80:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.42:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(consultaResponse => {
-        // Atualiza o estado com os dados da API
         setUFData(consultaResponse.data);
-        // Ensure that the property exists before trying to access it
         if (consultaResponse.data && consultaResponse.data[0] && consultaResponse.data[0].Utente_idUtente) {
           const utenteId = consultaResponse.data[0].Utente_idUtente;
   
-          axios.get(`http://192.168.1.80:8800/utente?idUtente=${utenteId}`)
+          axios.get(`http://192.168.1.42:8800/utente?idUtente=${utenteId}`)
             .then(utenteResponse => {
-              // Atualiza o estado com os dados da API
               setUData(utenteResponse.data);
             })
             .catch(error => {

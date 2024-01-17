@@ -3,9 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground ,FlatList, Alert, } from 'react-native';
 import axios from 'axios'; 
 import SelectDropdown from 'react-native-select-dropdown'
+
 export default function VisitasFamiliar({navigation, route}) {
   const FamiliarData = route.params && route.params.FamiliarData;
-  const familiarID = FamiliarData.idFamiliar;
   const [VisitaData, setVisitaData] = useState([]);
   const [selectedYear, setSelectedYear] = useState(null);
 
@@ -43,11 +43,10 @@ export default function VisitasFamiliar({navigation, route}) {
   };
   const confirmDelete = (idVisita) => {
     axios
-      .delete(`http://192.168.1.80:8800/visita/${idVisita}`)
+      .delete(`http://192.168.1.42:8800/visita/${idVisita}`)
       .then(() => {
-        // Refresh the data after deletion
         axios
-          .get(`http://192.168.1.80:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+          .get(`http://192.168.1.42:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
           .then((VisitaResponse) => {
             const filteredVisita = selectedYear
               ? VisitaResponse.data.filter((item) => new Date(item.Data_HoraVisita).getFullYear() === selectedYear)
@@ -67,7 +66,7 @@ export default function VisitasFamiliar({navigation, route}) {
       });
   };
   useEffect(() => {
-    axios.get(`http://192.168.1.80:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.42:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(VisitaResponse => {
         if (VisitaResponse.data && Array.isArray(VisitaResponse.data)) {
           const filteredVisita = selectedYear

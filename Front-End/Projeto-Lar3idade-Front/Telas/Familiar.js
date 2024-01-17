@@ -35,9 +35,7 @@ export default function Familiar({ navigation, route }) {
   };
 
   const handleInfo = async () => {
-    // Set FamiliarID in state
     setFamiliarID(FamiliarData.idFamiliar);  
-    // Pass FamiliarID as a parameter when navigating
     navigation.navigate('UtenteFamiliar', {FamiliarData, FamiliarID});
   };
 
