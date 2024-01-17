@@ -194,7 +194,7 @@ app.get("/visita", (req, res) => {
 
 
     let q = `
-        SELECT f.nomel AS Nome_Familiar,f.idFamiliar, u.idUtente, v.data AS Data_HoraVisita, u.nome AS nomeutente
+        SELECT v.idVisita ,f.nomel AS Nome_Familiar,f.idFamiliar, u.idUtente, v.data AS Data_HoraVisita, u.nome AS nomeutente
         FROM visita v
         JOIN familiar f ON v.Familiar_idFamiliar = f.idFamiliar
         JOIN utente u ON v.Utente_idUtente = u.idUtente

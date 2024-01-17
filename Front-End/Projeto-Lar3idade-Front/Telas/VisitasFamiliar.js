@@ -34,7 +34,7 @@ export default function VisitasFamiliar({navigation, route}) {
         },
         {
           text: 'Sim',
-          onPress: () => confirmDelete(idVisita),
+          onPress: () => {console.log(idVisita); confirmDelete(idVisita);},
           style: 'destructive',
         },
       ],
@@ -42,9 +42,11 @@ export default function VisitasFamiliar({navigation, route}) {
     );
   };
   const confirmDelete = (idVisita) => {
+    console.log(idVisita)
     axios
       .delete(`http://192.168.1.42:8800/visita/${idVisita}`)
       .then(() => {
+
         axios
           .get(`http://192.168.1.42:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
           .then((VisitaResponse) => {
@@ -134,7 +136,7 @@ export default function VisitasFamiliar({navigation, route}) {
           Hora: {('0' + new Date(item.Data_HoraVisita).getHours()).slice(-2)}/
           {('0' + new Date(item.Data_HoraVisita).getMinutes()).slice(-2)}
         </Text>
-          <TouchableOpacity style={styles.deleteButton} onPress={() => handleDeleteVisita(item.idVisita)}>
+          <TouchableOpacity style={styles.deleteButton} onPress={() =>{console.log(item.idVisita); handleDeleteVisita(item.idVisita);}} >
             <Text style={styles.deleteButtonText}>Cancelar</Text>
           </TouchableOpacity>
       </View> 

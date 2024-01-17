@@ -116,7 +116,7 @@ return(
       </TouchableOpacity>
     ),
   }}/>
-   <Drawer.Screen name="PerfilFamiliar" component={PerfilFamiliar} options={{ title: 'Perfil Utente', headerRight: () => (
+   <Drawer.Screen name="PerfilFamiliar" component={PerfilFamiliar} options={{ title: 'Perfil Familiar', headerRight: () => (
       <TouchableOpacity onPress={handleSair} color="white" style={styles.sairButton}>
         <Text style={styles.sairButtonText}>Sair</Text>
       </TouchableOpacity>

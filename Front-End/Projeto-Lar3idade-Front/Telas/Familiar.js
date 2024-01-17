@@ -5,7 +5,7 @@ import base64 from 'base64-js';
 
 export default function Familiar({ navigation, route }) {
   const { params } = route;
-  const {FamiliarData, FamiliarNome, FamiliarMatch} = params || {};
+  const {FamiliarData, FamiliarNome} = params || {};
   const [imageData, setImageData] = useState(null);
   const [FamiliarID, setFamiliarID]= useState(null);
 

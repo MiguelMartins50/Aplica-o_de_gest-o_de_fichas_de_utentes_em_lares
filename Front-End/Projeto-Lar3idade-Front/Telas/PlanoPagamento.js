@@ -39,8 +39,6 @@ export default function PlanoPagamento({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('../Image/Image2.png')} style={[styles.Image2, styles.bottomImage]} />
-
       <SelectDropdown
         ref={selectRef}
         data={years}
@@ -95,12 +93,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     marginTop: 10,
   },
-  Image2: {
-    height: 205,
-    width: '110%',
-    padding: 10,
-    marginTop: 20,
-  },
+
   bottomImage: {
     position: 'absolute',
     bottom: -125,
