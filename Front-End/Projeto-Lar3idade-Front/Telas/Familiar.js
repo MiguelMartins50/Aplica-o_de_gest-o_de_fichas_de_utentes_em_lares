@@ -19,7 +19,10 @@ export default function Familiar({ navigation, route }) {
   const handleSair = () => {
     navigation.navigate('Login');
   };
+  const handlePerfil = () => {
 
+    navigation.navigate('PerfilFamiliar',{FamiliarData,FamiliarNome});
+  };
   const handleVisitas = () => {
     setFamiliarID(FamiliarData.idFamiliar);  
 
@@ -47,8 +50,8 @@ export default function Familiar({ navigation, route }) {
       )}
       <TouchableOpacity
       style={styles.Button}
-      onPress={() =>navigation.navigate('PerfilFamiliar', {FamiliarData, FamiliarID})}>
-      <Text style={styles.ButtonText}>Perfil Familiar</Text>
+      onPress={handlePerfil}>
+      <Text style={styles.ButtonText}>Perfil</Text>
     </TouchableOpacity>
       <TouchableOpacity style={styles.Button} onPress={handlePagamentos}>
         <Text style={styles.ButtonText}>Plano de Pagamentos</Text>

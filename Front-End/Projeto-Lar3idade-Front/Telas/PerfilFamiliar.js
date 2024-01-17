@@ -5,11 +5,6 @@ import base64 from 'base64-js';
 export default function PerfilUtente({ route, navigation }) {
   const { params } = route;
   const { FamiliarData, FamiliarNome } = params || {};
-  const numeroCC = FamiliarData?.numero_cc || {};
-  const dataValidade = FamiliarData?.data_validade || {};
-  const telCasa = FamiliarData?.telefone_casa || {};
-  const tel = FamiliarData?.telemovel || {};
-  const email = FamiliarData?.email || {};
   const [imageData, setImageData] = useState(null);
 
   useEffect(() => {
@@ -27,11 +22,11 @@ export default function PerfilUtente({ route, navigation }) {
         <ScrollView style={styles.PerfilUtente1}>
           {imageData && <Image style={styles.image} source={{ uri: imageData }} />}
           <Text style={styles.TEXTO}>Nome: {FamiliarNome}</Text>
-          <Text style={styles.TEXTO}>Número do CC: {numeroCC}</Text>
-          <Text style={styles.TEXTO}>Data de validade: {dataValidade}</Text>
-          <Text style={styles.TEXTO}>Telemóvel: {tel}</Text>
-          <Text style={styles.TEXTO}>Telefone casa: {telCasa}</Text>
-          <Text style={styles.TEXTO}>Email: {email}</Text>
+          <Text style={styles.TEXTO}>Número do CC: {FamiliarData.numero_cc}</Text>
+          <Text style={styles.TEXTO}>Data de validade: { FamiliarData.data_validade}</Text>
+          <Text style={styles.TEXTO}>Telemóvel: {FamiliarData.telemovel}</Text>
+          <Text style={styles.TEXTO}>Telefone casa: {FamiliarData.telefone_casa }</Text>
+          <Text style={styles.TEXTO}>Email: {FamiliarData.email}</Text>
         </ScrollView>
       ) : (
         <Text>Carregando...</Text>
