@@ -5,6 +5,7 @@ import axios from 'axios';
 import SelectDropdown from 'react-native-select-dropdown'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import { Alert } from 'react-native';
 
 export default function AddVistas({navigation, route}) {
   const FamiliarData = route.params && route.params.FamiliarData;
@@ -86,13 +87,21 @@ export default function AddVistas({navigation, route}) {
         };
     
         axios.post('http://192.168.1.42:8800/visita', visitaData)
-          .then(response => {
-            console.log('Visita added successfully:', response.data);
-          })
-          .catch(error => {
-            console.error('Error adding visita:', error);
-          });
-      };
+      .then(response => {
+        console.log('Visita added successfully:', response.data);
+        Alert.alert(
+          'Sucesso',
+          'Visita adicionada com sucesso.',
+          [
+            { text: 'OK', onPress: () => navigation.navigate('VisitasFamiliar') }
+          ],
+          { cancelable: false }
+        );
+      })
+      .catch(error => {
+        console.error('Error adding visita:', error);
+      });
+  };
 return (<View style={styles.container}>
     <View style={styles.Text2}>
             <Text style={styles.ButtonText}>Visitas</Text>

@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground ,FlatList, Alert, } from 'react-native';
-import axios from 'axios'; 
-import SelectDropdown from 'react-native-select-dropdown'
+import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground, FlatList, Alert } from 'react-native';
+import axios from 'axios';
+import SelectDropdown from 'react-native-select-dropdown';
 
-export default function VisitasFamiliar({navigation, route}) {
+export default function VisitasFamiliar({ navigation, route }) {
   const FamiliarData = route.params && route.params.FamiliarData;
   const [VisitaData, setVisitaData] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(null);
 
-  const years = [
-    2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
-    2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029,
-    2030, 2031, 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2039,
-    2040, 2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048, 2049,
-    2050
+  const months = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
   ];
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [selectedDeleteId, setSelectedDeleteId] = useState(null);
+
   const handleAdd = () => {
     console.log('aqui');
-    navigation.navigate('AddVisitas',{FamiliarData});
+    navigation.navigate('AddVisitas', { FamiliarData });
   };
+
   const handleDeleteVisita = (idVisita) => {
     Alert.alert(
       'Confirm Delete',
@@ -34,15 +32,16 @@ export default function VisitasFamiliar({navigation, route}) {
         },
         {
           text: 'Sim',
-          onPress: () => {console.log(idVisita); confirmDelete(idVisita);},
+          onPress: () => { console.log(idVisita); confirmDelete(idVisita); },
           style: 'destructive',
         },
       ],
       { cancelable: true }
     );
   };
+
   const confirmDelete = (idVisita) => {
-    console.log(idVisita)
+    console.log(idVisita);
     axios
       .delete(`http://192.168.1.42:8800/visita/${idVisita}`)
       .then(() => {
@@ -50,8 +49,8 @@ export default function VisitasFamiliar({navigation, route}) {
         axios
           .get(`http://192.168.1.42:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
           .then((VisitaResponse) => {
-            const filteredVisita = selectedYear
-              ? VisitaResponse.data.filter((item) => new Date(item.Data_HoraVisita).getFullYear() === selectedYear)
+            const filteredVisita = selectedMonth
+              ? VisitaResponse.data.filter((item) => new Date(item.Data_HoraVisita).getMonth() === selectedMonth)
               : VisitaResponse.data;
             setVisitaData(filteredVisita);
           })
@@ -67,16 +66,17 @@ export default function VisitasFamiliar({navigation, route}) {
         setSelectedDeleteId(null);
       });
   };
+
   useEffect(() => {
     axios.get(`http://192.168.1.42:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(VisitaResponse => {
         if (VisitaResponse.data && Array.isArray(VisitaResponse.data)) {
-          const filteredVisita = selectedYear
-          ? VisitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getFullYear() === selectedYear)
-          : VisitaResponse.data; 
+          const filteredVisita = selectedMonth
+            ? VisitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getMonth() === selectedMonth)
+            : VisitaResponse.data;
           console.log(VisitaResponse.data);
           console.log('Filtered Payments:', filteredVisita);
-          console.log('Selected Month Index:', selectedYear);
+          console.log('Selected Month Index:', selectedMonth);
           setVisitaData(filteredVisita);
           console.log('PagamentoData:', VisitaData);
 
@@ -87,65 +87,63 @@ export default function VisitasFamiliar({navigation, route}) {
       .catch((error) => {
         console.error('Erro ao buscar Consulta do utente:', error);
       });
-  }, [selectedYear]);
-  
+  }, [selectedMonth]);
 
   useEffect(() => {
     console.log('PagamentoData:');
     console.log(VisitaData);
 
   }, [VisitaData]);
+
   return (
     <FlatList
-    style={styles.container}
-    ListHeaderComponent={
-      <View style={styles.View4}>
-        <TouchableOpacity onPress={handleAdd}>
-          <Image source={require('../Image/add.png')} resizeMode="cover" style={styles.image3}/>
-        </TouchableOpacity>
-        <View style={styles.View1}>
-          <View style={styles.Text2}>
-            <Text style={styles.ButtonText}>Visitas</Text>
-          </View>
-          <SelectDropdown
-            data={years}
-            onSelect={(year, index) => setSelectedYear(year)}
-            buttonTextAfterSelection={(year, index) => year}
-            rowTextForSelection={(year, index) => year}
-            defaultButtonText="Selecione um ano"
-          />
-    
-          <View style={styles.clearButtonContainer}>
-            <TouchableOpacity onPress={() => setSelectedYear(null)}>
-              <Text style={styles.clearButtonText}>Limpar Seleção</Text>
-            </TouchableOpacity>
+      style={styles.container}
+      ListHeaderComponent={
+        <View style={styles.View4}>
+          <TouchableOpacity onPress={handleAdd}>
+            <Image source={require('../Image/add.png')} resizeMode="cover" style={styles.image3} />
+          </TouchableOpacity>
+          <View style={styles.View1}>
+            <View style={styles.Text2}>
+              <Text style={styles.ButtonText}>Visitas</Text>
+            </View>
+            <SelectDropdown
+              data={months}
+              onSelect={(month, index) => setSelectedMonth(index)}
+              buttonTextAfterSelection={(month, index) => month}
+              rowTextForSelection={(month, index) => month}
+              defaultButtonText="Selecione um mês"
+            />
+
+            <View style={styles.clearButtonContainer}>
+              <TouchableOpacity onPress={() => setSelectedMonth(null)}>
+                <Text style={styles.clearButtonText}>Limpar Seleção</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    }
-    data={VisitaData}
-    keyExtractor={(item) => (item.id ? item.id.toString() : String(Math.random()))}
-    renderItem={({ item }) => (
-      <View style={styles.View3}>
-        <Text style={styles.texto}>Utente: {item.nomeutente}</Text>
-        <Text style={styles.texto}>
-          Dia: {('0' + (new Date(item.Data_HoraVisita).getDate())).slice(-2)}/
-          {('0' + (new Date(item.Data_HoraVisita).getMonth() + 1)).slice(-2)}
-        </Text>
-        <Text style={styles.texto}>
-          Hora: {('0' + new Date(item.Data_HoraVisita).getHours()).slice(-2)}/
-          {('0' + new Date(item.Data_HoraVisita).getMinutes()).slice(-2)}
-        </Text>
-          <TouchableOpacity style={styles.deleteButton} onPress={() =>{console.log(item.idVisita); handleDeleteVisita(item.idVisita);}} >
+      }
+      data={VisitaData}
+      keyExtractor={(item) => (item.id ? item.id.toString() : String(Math.random()))}
+      renderItem={({ item }) => (
+        <View style={styles.View3}>
+          <Text style={styles.texto}>Utente: {item.nomeutente}</Text>
+          <Text style={styles.texto}>
+            Dia: {('0' + (new Date(item.Data_HoraVisita).getDate())).slice(-2)}/
+            {('0' + (new Date(item.Data_HoraVisita).getMonth() + 1)).slice(-2)}
+          </Text>
+          <Text style={styles.texto}>
+            Hora: {('0' + new Date(item.Data_HoraVisita).getHours()).slice(-2)}/
+            {('0' + new Date(item.Data_HoraVisita).getMinutes()).slice(-2)}
+          </Text>
+          <TouchableOpacity style={styles.deleteButton} onPress={() => { console.log(item.idVisita); handleDeleteVisita(item.idVisita); }} >
             <Text style={styles.deleteButtonText}>Cancelar</Text>
           </TouchableOpacity>
-      </View> 
-      
-    )}
-  />
+        </View>
 
-
-);
+      )}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
