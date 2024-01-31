@@ -29,7 +29,7 @@ namespace Projeto_Lar3idade_Back_End
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker_dataLimite = new System.Windows.Forms.DateTimePicker();
@@ -41,7 +41,6 @@ namespace Projeto_Lar3idade_Back_End
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox_estado = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Mostrar = new System.Windows.Forms.Button();
             this.button_Search = new System.Windows.Forms.Button();
@@ -49,15 +48,16 @@ namespace Projeto_Lar3idade_Back_End
             this.button_delete = new System.Windows.Forms.Button();
             this.button_update = new System.Windows.Forms.Button();
             this.button_insert = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(582, 138);
+            this.label6.Location = new System.Drawing.Point(559, 137);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(16, 17);
+            this.label6.Size = new System.Drawing.Size(14, 16);
             this.label6.TabIndex = 47;
             this.label6.Text = "€";
             // 
@@ -82,7 +82,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.textBox_valor.Location = new System.Drawing.Point(445, 133);
             this.textBox_valor.Name = "textBox_valor";
-            this.textBox_valor.Size = new System.Drawing.Size(131, 22);
+            this.textBox_valor.Size = new System.Drawing.Size(108, 22);
             this.textBox_valor.TabIndex = 44;
             // 
             // label4
@@ -139,7 +139,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(440, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(221, 27);
+            this.label1.Size = new System.Drawing.Size(214, 26);
             this.label1.TabIndex = 52;
             this.label1.Text = "Plano de mensalidade";
             // 
@@ -147,24 +147,17 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(638, 134);
+            this.label7.Location = new System.Drawing.Point(655, 132);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 22);
             this.label7.TabIndex = 53;
             this.label7.Text = "Estado";
             // 
-            // textBox_estado
-            // 
-            this.textBox_estado.Location = new System.Drawing.Point(708, 132);
-            this.textBox_estado.Name = "textBox_estado";
-            this.textBox_estado.Size = new System.Drawing.Size(173, 22);
-            this.textBox_estado.TabIndex = 54;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -239,11 +232,20 @@ namespace Projeto_Lar3idade_Back_End
             this.button_insert.UseVisualStyleBackColor = false;
             this.button_insert.Click += new System.EventHandler(this.button_insert_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(725, 131);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(199, 24);
+            this.comboBox1.TabIndex = 155;
+            // 
             // pagamentos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.Mostrar);
             this.Controls.Add(this.button_Search);
@@ -251,7 +253,6 @@ namespace Projeto_Lar3idade_Back_End
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.button_update);
             this.Controls.Add(this.button_insert);
-            this.Controls.Add(this.textBox_estado);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox_responsavel);
@@ -284,7 +285,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox_estado;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button Mostrar;
         private System.Windows.Forms.Button button_Search;
@@ -292,5 +292,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.Button button_update;
         private System.Windows.Forms.Button button_insert;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

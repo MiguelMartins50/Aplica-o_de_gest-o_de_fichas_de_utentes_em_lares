@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +24,6 @@ namespace Projeto_Lar3idade_Back_End
         private Dictionary<string, string> Utente_ = new Dictionary<string, string>();
         private Dictionary<string, string> resp_ = new Dictionary<string, string>();
         private MySqlConnection conexao;
-       
 
         public pagamentos()
         {
@@ -33,6 +33,8 @@ namespace Projeto_Lar3idade_Back_End
             LoadComboBox();
             display_data();
             dataGridView1.CellClick += dataGridView1_CellClick;
+            comboBox1.Items.AddRange(new string[] { "Pago", "Não Pago" });
+
         }
         private void LoadComboBox()
         {
@@ -109,7 +111,7 @@ namespace Projeto_Lar3idade_Back_End
         {
             string valor = textBox_valor.Text;
             DateTime datalimite = dateTimePicker_dataLimite.Value;
-            string estado = textBox_estado.Text;
+            string estado = comboBox1.Text;
 
             try
             {
@@ -155,7 +157,7 @@ namespace Projeto_Lar3idade_Back_End
                         comando.Parameters.AddWithValue("@estado", estado);
 
                         comando.ExecuteNonQuery();
-                        
+
                         MessageBox.Show("Plano de mensalidade adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
@@ -171,7 +173,7 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void Limpar()
         {
-            textBox_estado.Clear();
+            comboBox1.SelectedIndex = -1;
             textBox_valor.Clear();
             dateTimePicker_dataLimite.Value = DateTime.Now;
             comboBox_utente.SelectedIndex = -1;
@@ -180,7 +182,7 @@ namespace Projeto_Lar3idade_Back_End
         private void LoadComboBox2(int selectedUtenteId)
         {
             comboBox_responsavel.Items.Clear();
-            comboBox_responsavel.SelectedIndex = -1; 
+            comboBox_responsavel.SelectedIndex = -1;
             using (conexao)
             {
                 conexao.Open();
@@ -231,7 +233,7 @@ namespace Projeto_Lar3idade_Back_End
 
                     string valor = textBox_valor.Text;
                     DateTime datalimite = dateTimePicker_dataLimite.Value;
-                    string estado = textBox_estado.Text;
+                    string estado = comboBox1.Text;
 
                     using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                     {
@@ -288,11 +290,12 @@ namespace Projeto_Lar3idade_Back_End
             // Clear fields only if there are search results
             if (dt.Rows.Count > 0)
             {
-                textBox_estado.Clear();
+
                 textBox_valor.Clear();
                 dateTimePicker_dataLimite.Value = DateTime.Now;
                 comboBox_utente.SelectedIndex = -1;
                 comboBox_responsavel.SelectedIndex = -1;
+                comboBox1.SelectedIndex = -1;
             }
             else
             {
@@ -347,16 +350,14 @@ namespace Projeto_Lar3idade_Back_End
 
         }
 
-        
+
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Check if a valid row is clicked
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
-                // Assuming you have columns named "estado", "data_limitel", "valor", "nome", "nomel" in your DataGridView
-                textBox_estado.Text = row.Cells["estado"].Value.ToString();
+                comboBox1.Text = row.Cells["estado"].Value.ToString();
                 textBox_valor.Text = row.Cells["valor"].Value.ToString();
                 dateTimePicker_dataLimite.Value = Convert.ToDateTime(row.Cells["Data Limite"].Value);
                 comboBox_utente.Text = row.Cells["nome"].Value.ToString();
@@ -364,6 +365,9 @@ namespace Projeto_Lar3idade_Back_End
             }
         }
 
-        
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

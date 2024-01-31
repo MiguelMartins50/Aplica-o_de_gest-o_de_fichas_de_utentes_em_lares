@@ -18,11 +18,14 @@ namespace Projeto_Lar3idade_Back_End
         public funcionario()
         {
             InitializeComponent();
+
+            comboBox1.Items.AddRange(new string[] {"Administrador","Médico(a)", "Enfermeiro(a)", "Funcionário de Limpeza", "Cuidador(a)", "Fisioterapeuta", "Recepcionista" });
+
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
             display_data();
             dataGridView1.CellClick += dataGridView1_CellClick;
-          
+
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -33,7 +36,7 @@ namespace Projeto_Lar3idade_Back_End
             cmd.CommandType = CommandType.Text;
 
             // Obtém o último idFuncionario e soma 1
-            cmd.CommandText = "INSERT INTO mydb.funcionario(idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email, senha,funcao) SELECT COALESCE(MAX(idFuncionario), 0) + 1, '" + textBox_Name.Text + "','" + textBox_Cc.Text + "','" + dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd") + "', '" + textBox_Tel.Text + "','" + textBox_Salario.Text + "', '" + textBox_Email.Text + "', '" + textBox_Senha.Text + "', '"+textBox_Funcao+"' FROM mydb.funcionario";
+            cmd.CommandText = "INSERT INTO mydb.funcionario(idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email, senha,funcao) SELECT COALESCE(MAX(idFuncionario), 0) + 1, '" + textBox_Name.Text + "','" + textBox_Cc.Text + "','" + dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd") + "', '" + textBox_Tel.Text + "','" + textBox_Salario.Text + "', '" + textBox_Email.Text + "', '" + textBox_Senha.Text + "', '" + comboBox1.Text + "' FROM mydb.funcionario";
             cmd.ExecuteNonQuery();
             conexao.Close();
             textBox_Name.Text = "";
@@ -42,10 +45,10 @@ namespace Projeto_Lar3idade_Back_End
             textBox_Tel.Text = "";
             textBox_Salario.Text = "";
             textBox_Email.Text = "";
-            textBox_Senha.Text = "";
-            textBox_Funcao.Text ="";
+            comboBox1.SelectedIndex = -1;
+
             display_data();
-           MessageBox.Show("Funcionario adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Funcionario adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void display_data()
         {
@@ -65,7 +68,7 @@ namespace Projeto_Lar3idade_Back_End
         {
             display_data();
             LimparTextBoxes();
-
+            comboBox1.SelectedIndex = -1;
         }
         private void LimparTextBoxes()
         {
@@ -129,7 +132,7 @@ namespace Projeto_Lar3idade_Back_End
                 cmd.CommandType = CommandType.Text;
 
                 // Certifique-se de fornecer o valor do IdFuncionario a ser atualizado
-                if ( !string.IsNullOrEmpty(textBox_Name.Text) && !string.IsNullOrEmpty(textBox_Cc.Text))
+                if (!string.IsNullOrEmpty(textBox_Name.Text) && !string.IsNullOrEmpty(textBox_Cc.Text))
                 {
                     // Obtém o valor do idFuncionario dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
@@ -144,7 +147,7 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.Parameters.AddWithValue("@Email", textBox_Email.Text);
                     cmd.Parameters.AddWithValue("@Senha", textBox_Senha.Text);
                     cmd.Parameters.AddWithValue("@IdFuncionario", idupt);
-                    cmd.Parameters.AddWithValue("@Funcao", textBox_Funcao.Text);
+                    cmd.Parameters.AddWithValue("@Funcao", comboBox1.SelectedItem.ToString());
 
                     // Executando o comando
                     cmd.ExecuteNonQuery();
@@ -158,7 +161,7 @@ namespace Projeto_Lar3idade_Back_End
                     textBox_Salario.Text = "";
                     textBox_Email.Text = "";
                     textBox_Senha.Text = "";
-                    textBox_Funcao.Text = "";
+                    comboBox1.SelectedIndex = -1;
                     display_data();
 
                     MessageBox.Show("Dados atualizados com sucesso");
@@ -201,7 +204,7 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_Salario.Text = "";
                 textBox_Email.Text = "";
                 textBox_Senha.Text = "";
-                textBox_Funcao.Text = "";
+                comboBox1.SelectedIndex = -1;
             }
             else
             {
@@ -230,19 +233,19 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_Salario.Text = reader["salario_hora"].ToString();
                 textBox_Email.Text = reader["email"].ToString();
                 textBox_Senha.Text = reader["senha"].ToString();
-                textBox_Funcao.Text = reader["funcao"].ToString();
+                comboBox1.Text = reader["funcao"].ToString();
             }
 
             conexao.Close();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {      
+        {
             // Verifica se uma célula da linha foi clicada
             if (e.RowIndex >= 0)
             {
-                
-              // Obtém o valor do idFuncionario da célula clicada
+
+                // Obtém o valor do idFuncionario da célula clicada
                 int idFuncionarioSelecionado = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idFuncionario"].Value);
                 Console.WriteLine("rowcount:" + Convert.ToInt32(dataGridView1.SelectedRows.Count));
                 Console.WriteLine("id:" + Convert.ToInt32(idFuncionarioSelecionado));
@@ -250,8 +253,17 @@ namespace Projeto_Lar3idade_Back_End
                 // Obtém os dados do funcionário com base no idFuncionario
                 ExibirDadosFuncionario(idFuncionarioSelecionado);
             }
-    
+
         }
-       
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
