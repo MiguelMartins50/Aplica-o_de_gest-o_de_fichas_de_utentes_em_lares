@@ -72,10 +72,8 @@ export default function UtenteFamiliar({ navigation,route  }) {
     </View>
   )}
 />
-
-        <ImageBackground source={require('../Image/Image2.png')} style={[styles.Image2, styles.bottomImage]} />
-
-  </View>
+<ImageBackground source={require('../Image/Image2.png')} style={[styles.Image2, styles.bottomImage]} />
+</View>
    
   );
 }

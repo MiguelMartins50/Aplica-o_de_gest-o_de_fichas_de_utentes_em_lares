@@ -45,7 +45,6 @@ export default function VisitasFamiliar({ navigation, route }) {
     axios
       .delete(`http://192.168.1.42:8800/visita/${idVisita}`)
       .then(() => {
-
         axios
           .get(`http://192.168.1.42:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
           .then((VisitaResponse) => {
@@ -74,12 +73,7 @@ export default function VisitasFamiliar({ navigation, route }) {
           const filteredVisita = selectedMonth
             ? VisitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getMonth() === selectedMonth)
             : VisitaResponse.data;
-          console.log(VisitaResponse.data);
-          console.log('Filtered Payments:', filteredVisita);
-          console.log('Selected Month Index:', selectedMonth);
           setVisitaData(filteredVisita);
-          console.log('PagamentoData:', VisitaData);
-
         } else {
           console.log('Consulta do utente não retornou dados válidos:', VisitaResponse.data);
         }
@@ -88,12 +82,6 @@ export default function VisitasFamiliar({ navigation, route }) {
         console.error('Erro ao buscar Consulta do utente:', error);
       });
   }, [selectedMonth]);
-
-  useEffect(() => {
-    console.log('PagamentoData:');
-    console.log(VisitaData);
-
-  }, [VisitaData]);
 
   return (
     <FlatList
@@ -140,7 +128,6 @@ export default function VisitasFamiliar({ navigation, route }) {
             <Text style={styles.deleteButtonText}>Cancelar</Text>
           </TouchableOpacity>
         </View>
-
       )}
     />
   );
@@ -247,3 +234,5 @@ const styles = StyleSheet.create({
 
   }
 });
+
+export { VisitasFamiliar };

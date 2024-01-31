@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
+import base64 from 'base64-js';
 
 export default function Utente({ navigation, route }) {
   const { params } = route;
   const { utenteData, utenteNome } = params || {};
+  const [imageData, setImageData] = useState(null);
   console.log('Route Params:', route.params);
 
   
@@ -13,6 +15,13 @@ export default function Utente({ navigation, route }) {
     console.log('UtenteDrawer - Route Params:', route.params);
     
   }, [route.params]);
+  useEffect(() => {
+    if (utenteData && utenteData.Imagem && utenteData.Imagem.data) {
+      const base64String = base64.fromByteArray(new Uint8Array(utenteData.Imagem.data));
+      setImageData(`data:image/png;base64,${base64String}`);
+    }
+  }, [navigation, utenteData]);
+
   const navigateToPrescricaoUtente = () => {
     navigation.navigate('Prescrições Médicas',{ utenteData});
   };
@@ -35,6 +44,7 @@ export default function Utente({ navigation, route }) {
   return (<View style={styles.container}>
         <View style={styles.Imag1}>
         </View>
+        {imageData && <Image style={styles.image} source={{ uri: imageData }} />}
         {utenteNome ? (
         <Text style={styles.BemVindo}>Bem-vindo, {utenteNome}!</Text>
       ) : (
@@ -106,6 +116,13 @@ const styles = StyleSheet.create({
   Imag1:{
     padding:180,
     
+  },
+  image:{
+    width: 100,  
+    height: 100, 
+    resizeMode: 'contain',
+    marginBottom: 20,
+    alignItems: 'center'
   },
   sairButton: {
     backgroundColor: '#3498db',
