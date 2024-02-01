@@ -17,8 +17,7 @@ namespace Projeto_Lar3idade_Back_End
     {
         private int idAdd;
         private int idAddUt;
-        private int idAddUt2;
-        private int idAddUt3;
+        
         private int idUt1;
         private int idUt2;
         private int idUt3;
@@ -31,7 +30,9 @@ namespace Projeto_Lar3idade_Back_End
         private int doublecontrol1 = 0;
         private int doublecontrol2 = 0;
         private int doublecontrol3 = 0;
+        private string relacao = "";
 
+        private List<string> Lista_utente_Familiar = new List<string>(); 
 
         private MySqlConnection conexao;
         private Dictionary<string, string> utente_ = new Dictionary<string, string>();
@@ -58,8 +59,7 @@ namespace Projeto_Lar3idade_Back_End
         {
 
             comboBox1_Utente.Items.Add("-----------------");
-            comboBox2_Utente.Items.Add("-----------------");
-            comboBox3_Utente.Items.Add("-----------------");
+            
 
 
             using (conexao)
@@ -76,8 +76,7 @@ namespace Projeto_Lar3idade_Back_End
                             string nome = reader["nome"].ToString();
                             string id = reader["idUtente"].ToString();
                             comboBox1_Utente.Items.Add(reader["nome"].ToString());
-                            comboBox2_Utente.Items.Add(reader["nome"].ToString());
-                            comboBox3_Utente.Items.Add(reader["nome"].ToString());
+                           
                             utente_[nome] = id;
 
                         }
@@ -100,9 +99,7 @@ namespace Projeto_Lar3idade_Back_End
             string ocupacao = textBox_ocupacao.Text;
             string email = textBox_email.Text;
             string senha = textBox3_senha.Text;
-            string parentesco = textBox1_parentesco.Text;
-            string parentesco2 = textBox2_parentesco.Text;
-            string parentesco3 = textBox3_parentesco.Text;
+            
 
             try
             {
@@ -152,8 +149,7 @@ namespace Projeto_Lar3idade_Back_End
                             }
                         }
                     }
-                    idAddUt2 = idAddUt + 1;
-                    idAddUt3= idAddUt2 + 1;
+                    
                    
 
                     // Crie um comando MySqlCommand
@@ -179,53 +175,30 @@ namespace Projeto_Lar3idade_Back_End
                         MessageBox.Show("Responsavél adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
-                    if (control1 == 1)
+
+                    foreach (string entry in Lista_utente_Familiar)
                     {
+                        // Split the entry to extract the necessary information
+                        string[] parts = entry.Split(',');
+
+                        // Extract the Utente_id and Parentesco from the parts array
+                        string utenteId = parts[0].Split(':')[1].Trim();
+                        string parentesco = parts[2].Split(':')[1].Trim();
+
+
+                        // Create and execute the command
                         using (MySqlCommand comando = new MySqlCommand(query4, conexao))
                         {
-                            // Adicione os parâmetros com os valores obtidos do formulário
-                            comando.Parameters.AddWithValue("@parentesco", parentesco);
                             comando.Parameters.AddWithValue("@idUtente_familiar", idAddUt);
-                            comando.Parameters.AddWithValue("@Utente_idUtente", idUt1);
+                            comando.Parameters.AddWithValue("@Utente_idUtente", utenteId);
                             comando.Parameters.AddWithValue("@Familiar_idFamiliar", idAdd);
+                            comando.Parameters.AddWithValue("@parentesco", parentesco);
 
-
-                            // Execute a consulta de inserção
                             comando.ExecuteNonQuery();
-
+                            idAddUt =idAddUt + 1;
                         }
                     }
-                    if (control2 == 1)
-                    {
-                        using (MySqlCommand comando = new MySqlCommand(query4, conexao))
-                        {
-                            // Adicione os parâmetros com os valores obtidos do formulário
-                            comando.Parameters.AddWithValue("@parentesco", parentesco2);
-                            comando.Parameters.AddWithValue("@idUtente_familiar", idAddUt2);
-                            comando.Parameters.AddWithValue("@Utente_idUtente", idUt2);
-                            comando.Parameters.AddWithValue("@Familiar_idFamiliar", idAdd);
 
-                            // Execute a consulta de inserção
-                            comando.ExecuteNonQuery();
-
-                        }
-                    }
-                    if (control3 == 1)
-                    {
-                        using (MySqlCommand comando = new MySqlCommand(query4, conexao))
-                        {
-                            // Adicione os parâmetros com os valores obtidos do formulário
-                            comando.Parameters.AddWithValue("@parentesco", parentesco3);
-                            comando.Parameters.AddWithValue("@idUtente_familiar", idAddUt3);
-                            comando.Parameters.AddWithValue("@Utente_idUtente", idUt3);
-                            comando.Parameters.AddWithValue("@Familiar_idFamiliar", idAdd);
-
-
-                            // Execute a consulta de inserção
-                            comando.ExecuteNonQuery();
-
-                        }
-                    } 
 
                 }
             }
@@ -250,25 +223,19 @@ namespace Projeto_Lar3idade_Back_End
             textBox_email.Clear();
             textBox3_senha.Clear();
             textBox1_parentesco.Clear();
-            textBox2_parentesco.Clear();
-            textBox3_parentesco.Clear();
+            textBox_UtenteFamiliar.Clear();
             // Limpar outras ComboBoxes e controles conforme necessário
             comboBox1_Utente.SelectedIndex = -1;
-            comboBox2_Utente.SelectedIndex = -1;
-            comboBox3_Utente.SelectedIndex = -1;
+            
         }
 
         private void button_update_Click(object sender, EventArgs e)
         {
             try
             {
-                // Verifica se há uma linha selecionada no DataGridView
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    // Obtém o idFamiliar da linha selecionada
                     int idFamiliarParaAtualizar = ObterIdFamiliarSelecionado();
-
-                    // Obtém os valores dos controles do formulário
                     string nomel = textBox_Name.Text;
                     DateTime data_nascimento = dateTimePicker_dataNascimento.Value;
                     string numero_cc = textBox_Cc.Text;
@@ -280,15 +247,9 @@ namespace Projeto_Lar3idade_Back_End
                     string ocupacao = textBox_ocupacao.Text;
                     string email = textBox_email.Text;
                     string senha = textBox3_senha.Text;
-                    string parentesco = textBox1_parentesco.Text;
-                    string parentesco2 = textBox2_parentesco.Text;
-                    string parentesco3 = textBox3_parentesco.Text;
-
                     using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                     {
                         conexao.Open();
-
-                        // Query SQL para atualizar o familiar
                         string queryUpdateFamiliar = "UPDATE mydb.familiar SET " +
                                                      "nomel = @nomel, " +
                                                      "numero_cc = @numero_cc, " +
@@ -302,24 +263,30 @@ namespace Projeto_Lar3idade_Back_End
                                                      "email = @email, " +
                                                      "senha = @senha " +
                                                      "WHERE idFamiliar = @idFamiliar";
-
-                        // Query SQL para atualizar a relação com o utente
-                        string queryUpdateRelacaoUtente = "UPDATE mydb.utente_familiar SET " +
-                                                          "`Utente_idUtente` = @Utente_idUtente, `Familiar_idFamiliar` = @Familiar_idFamiliar,parentesco = @parentesco " +
-                                                          "WHERE idUtente_familiar = @idUtente_familiar";
-                        string query4 = "LOCK TABLES utente_familiar WRITE;" +
-                                    "ALTER TABLE utente_familiar DISABLE KEYS;" +
-                                    "INSERT INTO mydb.utente_familiar (idUtente_familiar, Utente_idUtente, Familiar_idFamiliar,parentesco)" +
-                                    "VALUES (@idUtente_familiar, @Utente_idUtente, @Familiar_idFamiliar, @parentesco);" +
-                                    "ALTER TABLE utente_familiar ENABLE KEYS;" +
-                                    "UNLOCK TABLES;";
                         string query3 = "SELECT * FROM utente_familiar ORDER BY idUtente_familiar DESC LIMIT 1";
+                        using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                        {
+                            using (MySqlDataReader reader = procurarId.ExecuteReader())
+                            {
+                                // Create a list to store data
+                                List<string[]> data = new List<string[]>();
+
+                                // Iterate through the results
+                                while (reader.Read())
+                                {
+                                    // Add data to the list
+                                    idAddUt = 1 + int.Parse(reader["idUtente_familiar"].ToString());
+
+                                }
+                            }
+                        }
+
+                        string queryInsertRelacaoUtente = "INSERT INTO mydb.utente_familiar (idUtente_familiar,Utente_idUtente, Familiar_idFamiliar,parentesco)" +
+                                                          "VALUES (@idUtente_familiar,@Utente_idUtente, @Familiar_idFamiliar, @parentesco)";
 
                         using (MySqlCommand comandoUpdateFamiliar = new MySqlCommand(queryUpdateFamiliar, conexao))
-                        using (MySqlCommand comandoUpdateRelacaoUtente = new MySqlCommand(queryUpdateRelacaoUtente, conexao))
-                        using (MySqlCommand comandoUpdateinserirRelacaoUtente = new MySqlCommand(query4, conexao))
+                        using (MySqlCommand comandoInsertRelacaoUtente = new MySqlCommand(queryInsertRelacaoUtente, conexao))
                         {
-                            // Adicione os parâmetros com os valores obtidos do formulário
                             comandoUpdateFamiliar.Parameters.AddWithValue("@idFamiliar", idFamiliarParaAtualizar);
                             comandoUpdateFamiliar.Parameters.AddWithValue("@nomel", nomel);
                             comandoUpdateFamiliar.Parameters.AddWithValue("@numero_cc", numero_cc);
@@ -333,151 +300,40 @@ namespace Projeto_Lar3idade_Back_End
                             comandoUpdateFamiliar.Parameters.AddWithValue("@email", email);
                             comandoUpdateFamiliar.Parameters.AddWithValue("@senha", senha);
 
-                            // Execute a consulta de atualização do familiar
                             comandoUpdateFamiliar.ExecuteNonQuery();
 
-                            if (control1 == 1)
+                            foreach (string entry in Lista_utente_Familiar)
                             {
-                                if(doublecontrol1 == 1)
+                                string[] parts = entry.Split(',');
+                                string utenteId = parts[0].Split(':')[1].Trim();
+                                string parentesco = parts[2].Split(':')[1].Trim();
+
+                                // Check if the entry already exists
+                                string queryCheckExistence = "SELECT COUNT(*) FROM mydb.utente_familiar WHERE Utente_idUtente = @Utente_idUtente AND Familiar_idFamiliar = @Familiar_idFamiliar";
+                                using (MySqlCommand commandoVerificar = new MySqlCommand(queryCheckExistence, conexao))
                                 {
-                                    Console.WriteLine("inserirUpdate 1");
-                                    using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                                    commandoVerificar.Parameters.AddWithValue("@Utente_idUtente", utenteId);
+                                    commandoVerificar.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+                                    int count = Convert.ToInt32(commandoVerificar.ExecuteScalar());
+                                    if (count == 0)
                                     {
-                                        using (MySqlDataReader reader = procurarId.ExecuteReader())
-                                        {
-                                            // Create a list to store data
-                                            List<string[]> data = new List<string[]>();
-
-                                            // Iterate through the results
-                                            while (reader.Read())
-                                            {
-                                                // Add data to the list
-                                                idAddUt = 1 + int.Parse(reader["idUtente_familiar"].ToString());
-
-                                            }
-                                        }
+                                        comandoInsertRelacaoUtente.Parameters.Clear();
+                                        comandoInsertRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idAddUt);
+                                        comandoInsertRelacaoUtente.Parameters.AddWithValue("@Utente_idUtente", utenteId);
+                                        comandoInsertRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
+                                        comandoInsertRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco);
+                                        comandoInsertRelacaoUtente.ExecuteNonQuery();
+                                        idAddUt = idAddUt + 1;
                                     }
-                                    // Adicione os parâmetros com os valores obtidos do formulário
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco);
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idAddUt);
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Utente_idUtente", idUt1);
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
-
-
-                                    // Execute a consulta de inserção
-                                    comandoUpdateinserirRelacaoUtente.ExecuteNonQuery();
+                                    
                                 }
-                                else
-                                {
-                                    // Limpar os parâmetros antes de adicioná-los novamente
-                                    comandoUpdateRelacaoUtente.Parameters.Clear();
-
-                                    // Adicione os parâmetros com os valores obtidos do formulário
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@@Utente_idUtente", idUt1);
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco);
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf1);
-
-                                    // Execute a consulta de atualização da relação com o utente
-                                    comandoUpdateRelacaoUtente.ExecuteNonQuery();
-                                }
-                                
                             }
 
-                            if (control2 == 1)
+                            string deleteQuery = "DELETE FROM mydb.utente_familiar " +"WHERE Familiar_idFamiliar = @idFamiliar " +"AND Utente_idUtente NOT IN (" +string.Join(",", Lista_utente_Familiar.Select(entry => entry.Split(',')[0].Split(':')[1].Trim())) + ")";
+                            using (MySqlCommand comandoDeleteRelacaoUtente = new MySqlCommand(deleteQuery, conexao))
                             {
-                                if(doublecontrol2 == 1)
-                                {
-                                    Console.WriteLine("inserirUpdate 2");
-
-                                    using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
-                                    {
-                                        using (MySqlDataReader reader = procurarId.ExecuteReader())
-                                        {
-                                            // Create a list to store data
-                                            List<string[]> data = new List<string[]>();
-
-                                            // Iterate through the results
-                                            while (reader.Read())
-                                            {
-                                                // Add data to the list
-                                                idAddUt = 1 + int.Parse(reader["idUtente_familiar"].ToString());
-
-                                            }
-                                        }
-                                    }
-                                    // Adicione os parâmetros com os valores obtidos do formulário
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco2);
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idAddUt);
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Utente_idUtente", idUt2);
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
-
-
-                                    // Execute a consulta de inserção
-                                    comandoUpdateinserirRelacaoUtente.ExecuteNonQuery();
-                                }
-                                else
-                                {
-                                    // Limpar os parâmetros antes de adicioná-los novamente
-                                    comandoUpdateRelacaoUtente.Parameters.Clear();
-
-                                    // Adicione os parâmetros com os valores obtidos do formulário
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@@Utente_idUtente", idUt2);
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco2);
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf2);
-
-                                    // Execute a consulta de atualização da relação com o utente
-                                    comandoUpdateRelacaoUtente.ExecuteNonQuery();
-                                }
-                                
-                            }
-
-                            if (control3 == 1)
-                            {
-                                if (doublecontrol3 == 1)
-                                {
-                                    using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
-                                    {
-                                        using (MySqlDataReader reader = procurarId.ExecuteReader())
-                                        {
-                                            // Create a list to store data
-                                            List<string[]> data = new List<string[]>();
-
-                                            // Iterate through the results
-                                            while (reader.Read())
-                                            {
-                                                // Add data to the list
-                                                idAddUt3 = 1 + int.Parse(reader["idUtente_familiar"].ToString());
-
-                                            }
-                                        }
-                                    }
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco3);
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idAddUt);
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Utente_idUtente", idUt3);
-                                    comandoUpdateinserirRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
-
-
-                                    // Execute a consulta de inserção
-                                    comandoUpdateinserirRelacaoUtente.ExecuteNonQuery();
-
-                                }
-                                else
-                                {
-                                    comandoUpdateRelacaoUtente.Parameters.Clear();
-
-                                    // Adicione os parâmetros com os valores obtidos do formulário
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@@Utente_idUtente", idUt3);
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@Familiar_idFamiliar", idFamiliarParaAtualizar);
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@parentesco", parentesco3);
-                                    comandoUpdateRelacaoUtente.Parameters.AddWithValue("@idUtente_familiar", idUf3);
-
-                                    // Execute a consulta de atualização da relação com o utente
-                                    comandoUpdateRelacaoUtente.ExecuteNonQuery();
-                                }
-                                // Limpar os parâmetros antes de adicioná-los novamente
-                               
+                                comandoDeleteRelacaoUtente.Parameters.AddWithValue("@idFamiliar", idFamiliarParaAtualizar);
+                                comandoDeleteRelacaoUtente.ExecuteNonQuery();
                             }
 
                             MessageBox.Show("Responsável atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -495,10 +351,11 @@ namespace Projeto_Lar3idade_Back_End
             }
             finally
             {
-                display_data();  // Atualize a exibição dos dados após a atualização
+                display_data();
             }
             LimparTextBoxes();
         }
+
 
 
 
@@ -598,15 +455,13 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_telemovel.Text = "";
                 textBox_email.Text = "";
                 textBox1_parentesco.Text = "";
-                textBox2_parentesco.Text="";
-                textBox3_parentesco.Text = "";
+                
                 textBox_morada.Text = "";
                 textBox_codPostal.Text = "";
                 textBox_ocupacao.Text = "";
                 textBox3_senha.Text = "";
                 comboBox1_Utente.SelectedIndex = 0;
-                comboBox2_Utente.SelectedIndex = 0;
-                comboBox3_Utente.SelectedIndex = 0;              
+                           
                 
 
             }
@@ -630,15 +485,13 @@ namespace Projeto_Lar3idade_Back_End
                 using (MySqlCommand cmd = conexao.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT f.idFamiliar, f.nomel, f.numero_cc, f.data_validade, f.telemovel, f.data_nascimento, f.morada, f.cod_postal, f.ocupacao, f.tel_casa, f.senha, f.email, MAX(CASE WHEN u.row_num = 1 THEN u.nome END) AS Utente1,MAX(CASE WHEN u.row_num = 1 THEN uf.idUtente_familiar END) AS idUtente_familiar1, MAX(CASE WHEN u.row_num = 1 THEN uf.parentesco END) AS Utente1_Parentesco, MAX(CASE WHEN u.row_num = 2 THEN u.nome END) AS Utente2,MAX(CASE WHEN u.row_num = 2 THEN uf.idUtente_familiar END) AS idUtente_familiar2, MAX(CASE WHEN u.row_num = 2 THEN uf.parentesco END) AS Utente2_Parentesco, MAX(CASE WHEN u.row_num = 3 THEN u.nome END) AS Utente3,MAX(CASE WHEN u.row_num = 3 THEN uf.idUtente_familiar END) AS idUtente_familiar3, MAX(CASE WHEN u.row_num = 3 THEN uf.parentesco END) AS Utente3_Parentesco FROM familiar f JOIN utente_familiar uf ON f.idFamiliar = uf.Familiar_idFamiliar JOIN (SELECT u.*, uf.Familiar_idFamiliar, ROW_NUMBER() OVER (PARTITION BY uf.Familiar_idFamiliar ORDER BY u.idUtente) AS row_num FROM utente u JOIN utente_familiar uf ON u.idUtente = uf.Utente_idUtente) u ON uf.Utente_idUtente = u.idUtente AND uf.Familiar_idFamiliar = u.Familiar_idFamiliar GROUP BY f.idFamiliar, f.nomel, f.numero_cc, f.data_validade, f.telemovel, f.data_nascimento, f.morada, f.cod_postal, f.ocupacao, f.tel_casa, f.senha, f.email;";
+                    cmd.CommandText = "SELECT * FROM mydb.familiar;";
                     cmd.ExecuteNonQuery();
                     DataTable dta = new DataTable();
                     MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
                     dataadapter.Fill(dta);
                     dataGridView1.DataSource = dta;
-                    dataGridView1.Columns["idUtente_familiar1"].Visible = false;
-                    dataGridView1.Columns["idUtente_familiar2"].Visible = false;
-                    dataGridView1.Columns["idUtente_familiar3"].Visible = false;
+                    
 
                 }
 
@@ -679,164 +532,141 @@ namespace Projeto_Lar3idade_Back_End
                         control1 = 1;
                         // Use specificColumnData as needed (e.g., assign it to a variable)
                         idUt1 = int.Parse(id.ToString());
+                        relacao = textBox1_parentesco.Text;
                         Console.WriteLine(idUt1);
+                        Console.WriteLine(relacao);
+
                     }
                 }
             }
 
         }
 
-        private void comboBox2_Utente_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox2_Utente.SelectedItem != null)
-            {
-                string selectedValue = comboBox2_Utente.SelectedItem.ToString();
 
-                if (selectedValue == "-----------------")
-                {
-                    // Clear the ComboBox selection
-                    comboBox2_Utente.SelectedIndex = -1;
-                    control2 = 0;
-                    // Additional actions if needed when the ComboBox is emptied
-                    Console.WriteLine("ComboBox is now empty!");
-                }
-                else
-                {
-                    // Retrieve the stored specific column data for the selected item
-                    if (utente_.TryGetValue(selectedValue, out string id))
-                    {
-                        control2 = 1;
-                        // Use specificColumnData as needed (e.g., assign it to a variable)
-                        idUt2 = int.Parse(id.ToString());
-                        Console.WriteLine(idUt2);
-                    }
-                }
-            }
-        }
-
-        private void comboBox3_Utente_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox3_Utente.SelectedItem != null)
-            {
-                string selectedValue = comboBox3_Utente.SelectedItem.ToString();
-
-                if (selectedValue == "-----------------")
-                {
-                    // Clear the ComboBox selection
-                    comboBox3_Utente.SelectedIndex = -1;
-                    control3 = 0;
-                    // Additional actions if needed when the ComboBox is emptied
-                    Console.WriteLine("ComboBox is now empty!");
-                }
-                else
-                {
-                    // Retrieve the stored specific column data for the selected item
-                    if (utente_.TryGetValue(selectedValue, out string id))
-                    {
-                        control3 = 1;
-                        // Use specificColumnData as needed (e.g., assign it to a variable)
-                        idUt3 = int.Parse(id.ToString());
-                        Console.WriteLine(idUt3);
-                    }
-                }
-            }
-
-        }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Certifique-se de que a célula clicada não seja o cabeçalho e que haja pelo menos uma linha
-            if (e.RowIndex >= 0 && dataGridView1.Rows.Count > 0)
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
             {
-                // Obtém os valores da linha clicada
-                DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
-                // Preenche os TextBoxes com os valores da linha
-                textBox_Name.Text = selectedRow.Cells["nomel"].Value.ToString();
-                textBox_Cc.Text = selectedRow.Cells["numero_cc"].Value.ToString();
-                dateTimePicker_DtaValidade.Value = Convert.ToDateTime(selectedRow.Cells["data_validade"].Value);
-                textBox_telCasa.Text = selectedRow.Cells["tel_casa"].Value.ToString();
-                dateTimePicker_dataNascimento.Value = Convert.ToDateTime(selectedRow.Cells["data_nascimento"].Value);
-                textBox_telemovel.Text = selectedRow.Cells["telemovel"].Value.ToString();
-                textBox_email.Text = selectedRow.Cells["email"].Value.ToString();
-                textBox_morada.Text = selectedRow.Cells["morada"].Value.ToString();
-                textBox_codPostal.Text = selectedRow.Cells["cod_postal"].Value.ToString();
-                textBox_ocupacao.Text = selectedRow.Cells["ocupacao"].Value.ToString();
-                textBox3_senha.Text = selectedRow.Cells["senha"].Value.ToString();
+                // Extract Familiar_id from the selected row
+                int familiarId = Convert.ToInt32(row.Cells["idFamiliar"].Value);
 
-                // ComboBox para Utente1
-                if (!string.IsNullOrWhiteSpace(selectedRow.Cells["Utente1"].Value?.ToString()))
-                {
-                    comboBox1_Utente.SelectedItem = selectedRow.Cells["Utente1"].Value.ToString();
-                }
-                else
-                {
-                    comboBox1_Utente.SelectedIndex = -1; // Define como vazio
-                }
-                textBox1_parentesco.Text = selectedRow.Cells["Utente1_Parentesco"].Value.ToString();
+                // Get all information related to Utente and Utente_Familiar based on Familiar_id
+                List<string> utenteFamiliarInfos = GetUtenteFamiliarInfosFromDatabase(familiarId);
 
-                // ComboBox para Utente2
-                if (!string.IsNullOrWhiteSpace(selectedRow.Cells["Utente2"].Value?.ToString()))
-                {
-                    comboBox2_Utente.SelectedItem = selectedRow.Cells["Utente2"].Value.ToString();
-                }
-                else
-                {
-                    comboBox2_Utente.SelectedIndex = -1; // Define como vazio
-                }
-                textBox2_parentesco.Text = selectedRow.Cells["Utente2_Parentesco"].Value.ToString();
+                // Populate textBox_utentefamiliar
+                textBox_UtenteFamiliar.Text = string.Join(Environment.NewLine, utenteFamiliarInfos);
 
-                // ComboBox para Utente3
-                if (!string.IsNullOrWhiteSpace(selectedRow.Cells["Utente3"].Value?.ToString()))
-                {
-                    comboBox3_Utente.SelectedItem = selectedRow.Cells["Utente3"].Value.ToString();
-                }
-                else
-                {
-                    comboBox3_Utente.SelectedIndex = -1; // Define como vazio
-                }
-                textBox3_parentesco.Text = selectedRow.Cells["Utente3_Parentesco"].Value.ToString();
+                // Update utenteFamiliarList
+                Lista_utente_Familiar.Clear();
+                Lista_utente_Familiar.AddRange(utenteFamiliarInfos);
 
-                if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar1"].Value.ToString()))))
-                {
-                    int.TryParse(selectedRow.Cells["idUtente_familiar1"].Value.ToString(), out idUf1);
-                }
-                else
-                {
-                    doublecontrol1 = 1;
-                    Console.WriteLine("Aqui 1");
-                }
-                if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar2"].Value.ToString()))))
-                {
-                    int.TryParse(selectedRow.Cells["idUtente_familiar2"].Value.ToString(), out idUf2);
-                }
-                else
-                {
-                    doublecontrol2 = 1;
-
-                    Console.WriteLine("Aqui 2");
-                }
-                if (((!string.IsNullOrWhiteSpace(selectedRow.Cells["idUtente_familiar3"].Value.ToString()))))
-                {
-                    int.TryParse(selectedRow.Cells["idUtente_familiar3"].Value.ToString(), out idUf3);
-                }
-                else
-                {
-                    doublecontrol3 = 1;
-
-                    Console.WriteLine("Aqui 3");
-                }
-                Console.WriteLine("iduf1:" + idUf1);
-                Console.WriteLine("iduf2:" + idUf2);
-                Console.WriteLine("iduf3:" + idUf3);
-                Console.WriteLine("controlo1:" + control1);
-                Console.WriteLine("controlo2:" + control2);
-                Console.WriteLine("controlo3:" + control3);
+                // Set values from DataGridView to TextBoxes
+                textBox_Name.Text = row.Cells["nomel"].Value.ToString();
+                textBox_Cc.Text = row.Cells["numero_cc"].Value.ToString();
+                dateTimePicker_DtaValidade.Value = Convert.ToDateTime(row.Cells["data_validade"].Value);
+                textBox_telCasa.Text = row.Cells["tel_casa"].Value.ToString();
+                dateTimePicker_dataNascimento.Value = Convert.ToDateTime(row.Cells["data_nascimento"].Value);
+                textBox_telemovel.Text = row.Cells["telemovel"].Value.ToString();
+                textBox_email.Text = row.Cells["email"].Value.ToString();
+                textBox_morada.Text = row.Cells["morada"].Value.ToString();
+                textBox_codPostal.Text = row.Cells["cod_postal"].Value.ToString();
+                textBox_ocupacao.Text = row.Cells["ocupacao"].Value.ToString();
+                textBox3_senha.Text = row.Cells["senha"].Value.ToString();
             }
-
-
         }
 
-       
+        private List<string> GetUtenteFamiliarInfosFromDatabase(int familiarId)
+        {
+            List<string> infos = new List<string>();
+
+            try
+            {
+                using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                {
+                    conexao.Open();
+
+                    string selectQuery = "SELECT u.idUtente, u.nome, uf.parentesco " +
+                                         "FROM utente u " +
+                                         "INNER JOIN utente_familiar uf ON u.idUtente = uf.Utente_idUtente " +
+                                         "WHERE uf.Familiar_idFamiliar = @Familiar_id";
+
+                    using (MySqlCommand cmd = new MySqlCommand(selectQuery, conexao))
+                    {
+                        cmd.Parameters.AddWithValue("@Familiar_id", familiarId);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Extract ID, nome, and parentesco for each Utente_Familiar relation
+                                int utenteId = reader.GetInt32("idUtente");
+                                string nome = reader.GetString("nome");
+                                string parentesco = reader.GetString("parentesco");
+
+                                // Create the information string and add it to the list
+                                string info = $"ID: {utenteId}, Nome: {nome}, Parentesco: {parentesco}";
+                                infos.Add(info);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao obter informações do Utente e Utente_Familiar: " + ex.Message);
+            }
+
+            return infos;
+        }
+
+        private void button_Associate_Click(object sender, EventArgs e)
+        {
+            if (comboBox1_Utente.SelectedItem != null && !string.IsNullOrEmpty(textBox1_parentesco.Text))
+            {
+                string nomeUtente = comboBox1_Utente.SelectedItem.ToString();
+                string idUtente = utente_[nomeUtente]; 
+                string parentesco = textBox1_parentesco.Text;
+
+                string utenteFamiliarInfo = $"ID: {idUtente}, Nome: {nomeUtente}, Parentesco: {parentesco}";
+
+                Lista_utente_Familiar.Add(utenteFamiliarInfo);
+
+                textBox_UtenteFamiliar.Text = string.Join(Environment.NewLine, Lista_utente_Familiar);
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um utente e insira o parentesco.");
+            }
+        }
+
+        private void button_Disassociate_Click(object sender, EventArgs e)
+        {
+            if (comboBox1_Utente.SelectedItem != null)
+            {
+                string nomeUtente = comboBox1_Utente.SelectedItem.ToString();
+
+                int index = Lista_utente_Familiar.FindIndex(entry => entry.Contains(nomeUtente));
+
+                if (index != -1)
+                {
+                    Lista_utente_Familiar.RemoveAt(index);
+
+                    textBox_UtenteFamiliar.Text = string.Join(Environment.NewLine, Lista_utente_Familiar);
+                }
+                else
+                {
+                    MessageBox.Show("A entrada selecionada não foi encontrada para desassociar.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um utente para desassociar.");
+            }
+        }
+
+
     }
 }
