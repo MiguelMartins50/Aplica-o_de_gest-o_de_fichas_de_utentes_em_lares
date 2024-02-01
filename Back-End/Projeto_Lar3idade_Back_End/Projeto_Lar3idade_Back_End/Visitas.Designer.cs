@@ -57,7 +57,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(123, 82);
+            this.comboBox1.Location = new System.Drawing.Point(123, 150);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(579, 24);
             this.comboBox1.TabIndex = 1;
@@ -66,7 +66,7 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(123, 167);
+            this.comboBox2.Location = new System.Drawing.Point(123, 85);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(579, 24);
             this.comboBox2.TabIndex = 2;
@@ -129,9 +129,9 @@
             this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Location = new System.Drawing.Point(283, 299);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(81, 32);
+            this.button4.Size = new System.Drawing.Size(135, 32);
             this.button4.TabIndex = 8;
-            this.button4.Text = "Atualizar";
+            this.button4.Text = "Atualizar/Limpar";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -139,7 +139,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(42, 81);
+            this.label2.Location = new System.Drawing.Point(42, 150);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 25);
             this.label2.TabIndex = 9;
@@ -149,7 +149,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(37, 167);
+            this.label3.Location = new System.Drawing.Point(31, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 25);
             this.label3.TabIndex = 10;

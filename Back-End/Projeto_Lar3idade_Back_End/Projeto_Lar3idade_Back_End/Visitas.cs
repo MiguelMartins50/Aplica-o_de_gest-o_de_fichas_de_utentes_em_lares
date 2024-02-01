@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 
 namespace Projeto_Lar3idade_Back_End
@@ -30,8 +31,8 @@ namespace Projeto_Lar3idade_Back_End
             dateTimePicker1.ShowUpDown = true;
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
-            LoadComboBox();
             display_data();
+            LoadComboBox();
         }
         private void display_data()
         {
@@ -58,100 +59,98 @@ namespace Projeto_Lar3idade_Back_End
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
         }
-        private void LoadComboBox()
+        
+
+        private bool VisitaJaAgendada()
         {
             try
             {
                 conexao.Open();
+                MySqlCommand cmd = conexao.CreateCommand();
+                cmd.CommandType = CommandType.Text;
 
-                // Carregar dados para a ComboBox de Quartos
-                string queryuntente = "SELECT idUtente,nome FROM utente";
-                using (MySqlCommand cmdQuarto = new MySqlCommand(queryuntente, conexao))
+                // Consulta para verificar se já existe uma visita agendada para o mesmo responsável (familiar) dentro de um intervalo de 30 minutos
+                cmd.CommandText = "SELECT COUNT(*) FROM visita WHERE Familiar_idFamiliar = @idFamiliar " +
+                                  "AND data BETWEEN @startInterval AND @endInterval";
+
+                cmd.Parameters.AddWithValue("@idFamiliar", idresponsavel);
+
+                // Definir o intervalo de 30 minutos
+                DateTime startInterval = dateTimePicker1.Value.AddMinutes(-15);
+                DateTime endInterval = dateTimePicker1.Value.AddMinutes(15);
+
+                cmd.Parameters.AddWithValue("@startInterval", startInterval.ToString("yyyy-MM-dd HH:mm:ss"));
+                cmd.Parameters.AddWithValue("@endInterval", endInterval.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                // Se estiver editando uma visita existente, exclua a visita atual da contagem
+                if (idVisita > 0)
                 {
-                    using (MySqlDataReader readerQuarto = cmdQuarto.ExecuteReader())
-                    {
-                        while (readerQuarto.Read())
-                        {
-                            string idUtente = readerQuarto["idUtente"].ToString();
-                            string utenteNome = readerQuarto["nome"].ToString();
-                            comboBox1.Items.Add(utenteNome);
-                            utente_[utenteNome] = idUtente;
-                        }
-                    }
+                    cmd.CommandText += " AND idVisita != @idVisita";
+                    cmd.Parameters.AddWithValue("@idVisita", idVisita);
                 }
 
-                // Carregar dados para a ComboBox de Médicos
-                string queryMedico = "SELECT idFamiliar, nomel FROM familiar";
-                using (MySqlCommand cmdMedico = new MySqlCommand(queryMedico, conexao))
-                {
-                    using (MySqlDataReader readerMedico = cmdMedico.ExecuteReader())
-                    {
-                        while (readerMedico.Read())
-                        {
-                            string idresponsavel = readerMedico["idFamiliar"].ToString();
-                            string nomeresponavel = readerMedico["nomel"].ToString();
-                            comboBox2.Items.Add(nomeresponavel);
-                            responsavel_[nomeresponavel] = idresponsavel;
-                        }
-                    }
-                }
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                return count > 0; // Retorna true se já existir uma visita agendada para o mesmo responsável dentro do intervalo de 30 minutos, false caso contrário
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar ComboBoxes: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao verificar se a visita já está agendada: " + ex.Message);
+                return false;
             }
             finally
             {
                 conexao.Close();
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                conexao.Open();
-                string query3 = "SELECT * FROM visita ORDER BY idVisita DESC LIMIT 1";
-
-                using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                // Verifica se já existe uma visita agendada para o mesmo responsável e utente dentro do intervalo de 30 minutos
+                if (VisitaJaAgendada())
                 {
-                    using (MySqlDataReader reader = procurarId.ExecuteReader())
-                    {
-                        // Create a list to store data
-                        List<string[]> data = new List<string[]>();
-
-                        // Iterate through the results
-                        while (reader.Read())
-                        {
-                            // Add data to the list
-                            idVisita = 1 + int.Parse(reader["idVisita"].ToString());
-
-                        }
-                    }
+                    MessageBox.Show("Já existe uma visita agendada para este responsável e utente dentro deste intervalo de 30 minutos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                MySqlCommand cmd = conexao.CreateCommand();
-                cmd.CommandType = CommandType.Text;
+                else
+                {
+                    // Obtém o ID do responsável (familiar) selecionado na comboBox2
+                    string selectedResponsavel = comboBox2.SelectedItem.ToString();
+                    if (responsavel_.TryGetValue(selectedResponsavel, out string idResponsavel))
+                    {
+                        idresponsavel = int.Parse(idResponsavel);
+                    }
 
-                cmd.CommandText = "INSERT INTO mydb.visita (idVisita, Utente_idUtente, Familiar_idFamiliar, data) VALUES(@idVisita, @Utente_idUtente, @Familiar_idFamiliar, @data)";
+                    // Obtém o ID do utente selecionado na comboBox1
+                    string selectedUtente = comboBox1.SelectedItem.ToString();
+                    if (utente_.TryGetValue(selectedUtente, out string idUtente))
+                    {
+                        idutente = int.Parse(idUtente);
+                    }
 
-                cmd.Parameters.AddWithValue("@idVisita", idVisita);
-                cmd.Parameters.AddWithValue("@Familiar_idFamiliar", idresponsavel);
-                cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
-                cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                
-
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Consulta agendada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Abre a conexão com o banco de dados
+                    conexao.Open();
+                    MySqlCommand cmd = conexao.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "INSERT INTO mydb.visita (Utente_idUtente, Familiar_idFamiliar, data) VALUES(@Utente_idUtente, @Familiar_idFamiliar, @data)";
+                    cmd.Parameters.AddWithValue("@Familiar_idFamiliar", idresponsavel);
+                    cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
+                    cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Consulta agendada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao adicionar consulta: " + ex.Message + "\n" + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao adicionar consulta: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 conexao.Close();
             }
 
-            LimparTextBoxes();
+            LimparComboBoxes();
             display_data();
         }
 
@@ -178,13 +177,10 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@idVisita", idVisita);
 
-
-                    // Executando o comando
                     cmd.ExecuteNonQuery();
                     conexao.Close();
 
-                    // Limpando os campos e atualizando a exibição dos dados
-                    LimparTextBoxes();
+                    LimparComboBoxes();
                     display_data();
 
                     MessageBox.Show("Consulta alterada com sucesso");
@@ -203,11 +199,11 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Close();
             }
         }
-        private void LimparTextBoxes()
+        private void LimparComboBoxes()
         {
-            // Limpar outras ComboBoxes e controles conforme necessário
-            comboBox1.SelectedIndex = -1;
-            comboBox2.SelectedIndex = -1;
+            comboBox1.Text = "";
+            comboBox2.Text = "";
+            dataGridView1.ClearSelection();
         }
         private void button3_Click(object sender, EventArgs e)
         {
@@ -235,19 +231,19 @@ namespace Projeto_Lar3idade_Back_End
                                 MessageBox.Show("Visita desmarcada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                                 display_data();
-                                LimparTextBoxes();
+                                LimparComboBoxes();
                             }
                         }
                     }
 
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Erro ao excluir tarefa: " + ex.Message);
+                        MessageBox.Show("Erro ao desmarcar uma visita: " + ex.Message);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Por favor, selecione uma tarefa para excluir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Por favor, selecione uma linha para excluir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             
@@ -255,7 +251,9 @@ namespace Projeto_Lar3idade_Back_End
 
         private void button4_Click(object sender, EventArgs e)
         {
+            LimparComboBoxes();
             display_data();
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -289,31 +287,102 @@ namespace Projeto_Lar3idade_Back_End
                 MessageBox.Show("Nenhum resultado encontrado.");
             }
         }
-
+        
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox2.SelectedItem != null)
             {
-                string selectedValue = comboBox2.SelectedItem.ToString();
+                string selectedResponsavel = comboBox2.SelectedItem.ToString();
 
-                if (responsavel_.TryGetValue(selectedValue, out string id))
+                if (responsavel_.TryGetValue(selectedResponsavel, out string idResponsavel))
                 {
-                    idresponsavel = int.Parse(id);
+                    idresponsavel = int.Parse(idResponsavel);
+
+                    comboBox1.Items.Clear(); 
+
+                    try
+                    {
+                        conexao.Open();
+                        
+                        string query = "SELECT u.nome FROM utente u INNER JOIN utente_familiar uf ON u.idUtente = uf.Utente_idUtente WHERE uf.Familiar_idFamiliar = @idFamiliar";
+                        using (MySqlCommand cmd = new MySqlCommand(query, conexao))
+                        {
+                            cmd.Parameters.AddWithValue("@idFamiliar", idresponsavel);
+
+                            using (MySqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    string utenteNome = reader["nome"].ToString();
+                                    comboBox1.Items.Add(utenteNome);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao carregar utentes relacionados: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        
+                        conexao.Close();
+                    }
                 }
             }
         }
+        private void LoadComboBox()
+        {
+            try
+            {
+                conexao.Open();
+
+                
+                string queryUtente = "SELECT idUtente, nome FROM utente";
+                using (MySqlCommand cmdUtente = new MySqlCommand(queryUtente, conexao))
+                {
+                    using (MySqlDataReader readerUtente = cmdUtente.ExecuteReader())
+                    {
+                        while (readerUtente.Read())
+                        {
+                            string idUtente = readerUtente["idUtente"].ToString();
+                            string utenteNome = readerUtente["nome"].ToString();
+                            comboBox1.Items.Add(utenteNome);
+                            utente_[utenteNome] = idUtente;
+                        }
+                    }
+                }
+
+                
+                string queryFamiliar = "SELECT idFamiliar, nomel FROM familiar";
+                using (MySqlCommand cmdFamiliar = new MySqlCommand(queryFamiliar, conexao))
+                {
+                    using (MySqlDataReader readerFamiliar = cmdFamiliar.ExecuteReader())
+                    {
+                        while (readerFamiliar.Read())
+                        {
+                            string idFamiliar = readerFamiliar["idFamiliar"].ToString();
+                            string nomeFamiliar = readerFamiliar["nomel"].ToString();
+                            comboBox2.Items.Add(nomeFamiliar);
+                            responsavel_[nomeFamiliar] = idFamiliar;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar ComboBoxes: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem != null)
-            {
-                string selectedValue = comboBox1.SelectedItem.ToString();
-
-                if (utente_.TryGetValue(selectedValue, out string id))
-                {
-                    idutente = int.Parse(id);
-                }
-            }
+           
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -342,7 +411,7 @@ namespace Projeto_Lar3idade_Back_End
                 dataadapter.Fill(dta);
                 if (dta.Rows.Count > 0)
                 {
-                    // Assuming that Medico_idMedico is of integer type, you may need to cast it accordingly
+                    
                     idresponsavel = Convert.ToInt32(dta.Rows[0]["Familiar_idFamiliar"]);
                     idutente = Convert.ToInt32(dta.Rows[0]["Utente_idUtente"]);
                     nome_responsavel = Convert.ToString(dta.Rows[0]["Familiar"]);
