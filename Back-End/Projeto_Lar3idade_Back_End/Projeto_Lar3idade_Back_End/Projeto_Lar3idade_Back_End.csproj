@@ -185,6 +185,18 @@
     <Compile Include="Edit_respinsavel.Designer.cs">
       <DependentUpon>Edit_respinsavel.cs</DependentUpon>
     </Compile>
+    <Compile Include="enviar_func.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="enviar_func.Designer.cs">
+      <DependentUpon>enviar_func.cs</DependentUpon>
+    </Compile>
+    <Compile Include="enviar_medico.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="enviar_medico.Designer.cs">
+      <DependentUpon>enviar_medico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Escalas.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -232,6 +244,18 @@
     </Compile>
     <Compile Include="Medico_Utente.Designer.cs">
       <DependentUpon>Medico_Utente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="notificacao_admin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="notificacao_admin.Designer.cs">
+      <DependentUpon>notificacao_admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="notificacao_func.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="notificacao_func.Designer.cs">
+      <DependentUpon>notificacao_func.cs</DependentUpon>
     </Compile>
     <Compile Include="pagamentos.cs">
       <SubType>UserControl</SubType>
@@ -316,6 +340,12 @@
     <EmbeddedResource Include="Edit_respinsavel.resx">
       <DependentUpon>Edit_respinsavel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="enviar_func.resx">
+      <DependentUpon>enviar_func.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="enviar_medico.resx">
+      <DependentUpon>enviar_medico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Escalas.resx">
       <DependentUpon>Escalas.cs</DependentUpon>
     </EmbeddedResource>
@@ -339,6 +369,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Medico_Utente.resx">
       <DependentUpon>Medico_Utente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="notificacao_admin.resx">
+      <DependentUpon>notificacao_admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="notificacao_func.resx">
+      <DependentUpon>notificacao_func.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pagamentos.resx">
       <DependentUpon>pagamentos.cs</DependentUpon>

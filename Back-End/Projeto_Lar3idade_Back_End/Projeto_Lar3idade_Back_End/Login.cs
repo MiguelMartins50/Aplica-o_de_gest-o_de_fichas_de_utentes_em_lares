@@ -32,7 +32,8 @@ namespace Projeto_Lar3idade_Back_End
         {
             string email = textBox1.Text;
             string senha = textBox2.Text;
-            int userID ;
+            int userID;
+            string nome = "";
             // Verifique se os campos de e-mail e senha não estão vazios
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
 
@@ -84,20 +85,25 @@ namespace Projeto_Lar3idade_Back_End
                 else
                 {
                     // If login as funcionario fails, check in the "medico" table
-                    string queryMedico = $"SELECT idMedico FROM mydb.medico WHERE email='{email}' AND password='{senha}'";
-                    MySqlCommand cmdMedico = new MySqlCommand(queryMedico, conexao);
+                    string queryidMedico = $"SELECT idMedico FROM mydb.medico WHERE email='{email}' AND password='{senha}'";
+                    MySqlCommand cmdidMedico = new MySqlCommand(queryidMedico, conexao);
 
-                    object resultMedico = cmdMedico.ExecuteScalar();
+                    object resultidMedico = cmdidMedico.ExecuteScalar();
+                    string querynomeMedico = $"SELECT nome FROM mydb.medico WHERE email='{email}' AND password='{senha}'";
+                    MySqlCommand cmdnomeMedico = new MySqlCommand(querynomeMedico, conexao);
+
+                    object resultnomeMedico = cmdnomeMedico.ExecuteScalar();
 
                     // Check if login as medico is successful
-                    if (resultMedico != null)
+                    if (resultidMedico != null)
                     {
-                        userID = Convert.ToInt32(resultMedico);
-                        Console.WriteLine("idMedico"+ userID);
+                        nome = Convert.ToString(resultnomeMedico);
+                        userID = Convert.ToInt32(resultidMedico);
+                        Console.WriteLine("idMedico" + userID);
                         MessageBox.Show("Login bem-sucedido como medico!");
 
                         // link pra outra tela para medico (replace 'YourMedicoForm' with the actual form for medico)
-                        Medico_Pagina Medico_Pagina = new Medico_Pagina(userID);
+                        Medico_Pagina Medico_Pagina = new Medico_Pagina(userID, nome);
                         Medico_Pagina.Show();
 
                         // Feche este formulário de login 
