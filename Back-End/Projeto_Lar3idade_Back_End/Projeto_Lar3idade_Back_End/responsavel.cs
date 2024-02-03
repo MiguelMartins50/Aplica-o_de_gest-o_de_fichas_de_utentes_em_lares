@@ -226,7 +226,9 @@ namespace Projeto_Lar3idade_Back_End
             textBox_UtenteFamiliar.Clear();
             // Limpar outras ComboBoxes e controles conforme necessário
             comboBox1_Utente.SelectedIndex = -1;
-            
+            Lista_utente_Familiar.Clear();
+
+
         }
 
         private void button_update_Click(object sender, EventArgs e)
@@ -632,9 +634,15 @@ namespace Projeto_Lar3idade_Back_End
 
                 string utenteFamiliarInfo = $"ID: {idUtente}, Nome: {nomeUtente}, Parentesco: {parentesco}";
 
-                Lista_utente_Familiar.Add(utenteFamiliarInfo);
-
-                textBox_UtenteFamiliar.Text = string.Join(Environment.NewLine, Lista_utente_Familiar);
+                if (!Lista_utente_Familiar.Contains(utenteFamiliarInfo))
+                {
+                    Lista_utente_Familiar.Add(utenteFamiliarInfo);
+                    textBox_UtenteFamiliar.Text = string.Join(Environment.NewLine, Lista_utente_Familiar);
+                }
+                else
+                {
+                    MessageBox.Show("Esta associação já foi adicionada.");
+                }
             }
             else
             {
