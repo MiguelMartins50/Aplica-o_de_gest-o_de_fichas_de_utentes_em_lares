@@ -52,8 +52,8 @@ namespace Projeto_Lar3idade_Back_End
                     using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                     {
                         conexao.Open();
-                        string query = "INSERT INTO mydb.notificacao_func (remetente,assunto, messagem, idremetente, funcionario_idFuncionario,proccessada)" +
-                                        "VALUES (@remetente, @assunto, @messagem, @idremetente, @funcionario_idFuncionario,@proccessada)";
+                        string query = "INSERT INTO mydb.notificacao_func (remetente,assunto, messagem, idremetente, funcionario_idFuncionario,proccessada,Data_envio)" +
+                                        "VALUES (@remetente, @assunto, @messagem, @idremetente, @funcionario_idFuncionario,@proccessada,@Data_envio)";
                         string assunto = textBox1.Text;
                         string mensagem = textBox2.Text;
 
@@ -69,6 +69,8 @@ namespace Projeto_Lar3idade_Back_End
                             comando.Parameters.AddWithValue("@idremetente", iduser);
                             comando.Parameters.AddWithValue("@funcionario_idFuncionario", 10);
                             comando.Parameters.AddWithValue("@proccessada", 0);
+                            comando.Parameters.AddWithValue("@Data_envio", DateTime.Now);
+
 
 
                             comando.ExecuteNonQuery();

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 
 
@@ -48,6 +49,7 @@ namespace Projeto_Lar3idade_Back_End
 
             // Adicione o evento CellClick ao DataGridView
             dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellFormatting += dataGridView1_CellFormatting;
 
         }
 
@@ -477,8 +479,7 @@ namespace Projeto_Lar3idade_Back_End
         {
             try
             {
-
-                // Abra a conexão se não estiver aberta
+                // Open the connection if it's not already open
                 if (conexao.State == ConnectionState.Closed)
                 {
                     conexao.Open();
@@ -492,25 +493,70 @@ namespace Projeto_Lar3idade_Back_End
                     DataTable dta = new DataTable();
                     MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
                     dataadapter.Fill(dta);
+
+                    // Assign the data source to the DataGridView
                     dataGridView1.DataSource = dta;
-                    
 
+                    // Resize images in the DataGridView column
+                    ResizeDataGridViewColumnImages("Imagem");
                 }
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao exibir dados: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error displaying data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                //  para garantir que seja fechada, independentemente de ocorrer uma exceção ou não.
+                // Ensure the connection is closed
                 if (conexao.State == ConnectionState.Open)
                 {
                     conexao.Close();
                 }
             }
         }
+
+        private void ResizeDataGridViewColumnImages(string columnName)
+        {
+            // Check if the specified column exists
+            if (dataGridView1.Columns.Contains(columnName))
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    // Get the value from the cell in the specified column
+                    object cellValue = row.Cells[columnName].Value;
+
+                    // Check if the cell value is not null and is of type byte[]
+                    if (cellValue != null && cellValue.GetType() == typeof(byte[]))
+                    {
+                        byte[] imageData = (byte[])cellValue;
+
+                        // Convert the byte array to an Image
+                        Image originalImage;
+                        using (MemoryStream ms = new MemoryStream(imageData))
+                        {
+                            originalImage = Image.FromStream(ms);
+                        }
+
+                        // Resize the image to 30x30 pixels
+                        Image resizedImage = new Bitmap(60, 60);
+                        using (Graphics g = Graphics.FromImage(resizedImage))
+                        {
+                            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                            g.DrawImage(originalImage, 0, 0, 60, 60);
+                        }
+
+                        // Set the resized image back to the cell
+                        row.Cells[columnName].Value = resizedImage;
+                    }
+                    else
+                    {
+                        // If the cell value is null or not of type byte[], set the cell value to null
+                        row.Cells[columnName].Value = null;
+                    }
+                }
+            }
+        }
+
 
         private void comboBox1_Utente_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -674,6 +720,27 @@ namespace Projeto_Lar3idade_Back_End
                 MessageBox.Show("Por favor, selecione um utente para desassociar.");
             }
         }
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Check if the current cell is in the column containing the images
+            if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewImageColumn)
+            {
+                // Check if the cell value is an image
+                if (e.Value != null && e.Value is Image)
+                {
+                    // Resize the image to 30x30 pixels
+                    Image originalImage = (Image)e.Value;
+                    Image resizedImage = new Bitmap(30, 30);
+                    using (Graphics g = Graphics.FromImage(resizedImage))
+                    {
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                        g.DrawImage(originalImage, 0, 0, 30, 30);
+                    }
+                    e.Value = resizedImage;
+                }
+            }
+        }
+
 
 
     }

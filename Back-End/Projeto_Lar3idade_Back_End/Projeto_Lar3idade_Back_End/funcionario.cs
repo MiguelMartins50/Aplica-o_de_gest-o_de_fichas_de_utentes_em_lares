@@ -15,11 +15,12 @@ namespace Projeto_Lar3idade_Back_End
     {
         private MySqlConnection conexao;
         private int idupt;
+        private string funcao = "";
         public funcionario()
         {
             InitializeComponent();
 
-            comboBox1.Items.AddRange(new string[] {"Administrador","Médico(a)", "Cuidador(a)", "Recepcionista" });
+            comboBox1.Items.AddRange(new string[] {"Médico(a)", "Cuidador(a)", "Recepcionista" });
 
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
@@ -35,9 +36,39 @@ namespace Projeto_Lar3idade_Back_End
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
 
-            // Obtém o último idFuncionario e soma 1
-            cmd.CommandText = "INSERT INTO mydb.funcionario(idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email, senha,funcao) SELECT COALESCE(MAX(idFuncionario), 0) + 1, '" + textBox_Name.Text + "','" + textBox_Cc.Text + "','" + dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd") + "', '" + textBox_Tel.Text + "','" + textBox_Salario.Text + "', '" + textBox_Email.Text + "', '" + textBox_Senha.Text + "', '" + comboBox1.Text + "' FROM mydb.funcionario";
+            if (funcao == "Médico(a)")
+            {
+                // Get the current maximum idMedico from the medico table
+                MySqlCommand getMaxIdCmd = new MySqlCommand("SELECT COALESCE(MAX(idMedico), 0) + 1 FROM mydb.medico", conexao);
+                int newMedicoId = Convert.ToInt32(getMaxIdCmd.ExecuteScalar());
+
+                // Use the fetched ID for the new insertion
+                cmd.CommandText = "INSERT INTO mydb.medico(idMedico, nome, numero_cc, Data_validade, telemovel, salario_hora, email, password) VALUES (@idMedico, @nome, @numero_cc, @Data_validade, @telemovel, @salario_hora, @email, @senha)";
+                cmd.Parameters.AddWithValue("@idMedico", newMedicoId);
+            }
+            else
+            {
+                // Get the current maximum idFuncionario from the funcionario table
+                MySqlCommand getMaxIdCmd = new MySqlCommand("SELECT COALESCE(MAX(idFuncionario), 0) + 1 FROM mydb.funcionario", conexao);
+                int newFuncionarioId = Convert.ToInt32(getMaxIdCmd.ExecuteScalar());
+
+                // Use the fetched ID for the new insertion
+                cmd.CommandText = "INSERT INTO mydb.funcionario(idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email, senha, funcao) VALUES (@idFuncionario, @nome, @numero_cc, @data_validade, @telemovel, @salario_hora, @email, @senha, @funcao)";
+                cmd.Parameters.AddWithValue("@idFuncionario", newFuncionarioId);
+            }
+
+            // Add parameters to avoid SQL Injection and problems with special characters
+            cmd.Parameters.AddWithValue("@nome", textBox_Name.Text);
+            cmd.Parameters.AddWithValue("@numero_cc", textBox_Cc.Text);
+            cmd.Parameters.AddWithValue("@Data_validade", dateTimePicker_DtaValidade.Value);
+            cmd.Parameters.AddWithValue("@telemovel", textBox_Tel.Text);
+            cmd.Parameters.AddWithValue("@salario_hora", textBox_Salario.Text);
+            cmd.Parameters.AddWithValue("@email", textBox_Email.Text);
+            cmd.Parameters.AddWithValue("@senha", textBox_Senha.Text);
+            cmd.Parameters.AddWithValue("@funcao", comboBox1.Text);
+
             cmd.ExecuteNonQuery();
+
             conexao.Close();
             textBox_Name.Text = "";
             textBox_Cc.Text = "";
@@ -48,6 +79,8 @@ namespace Projeto_Lar3idade_Back_End
             comboBox1.SelectedIndex = -1;
 
             display_data();
+            LimparTextBoxes();
+
             MessageBox.Show("Funcionario adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void display_data()
@@ -55,7 +88,18 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Select * from mydb.funcionario";
+            cmd.CommandText = @"SELECT idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email, senha, Funcao
+                              FROM (
+                              SELECT idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email,senha,Funcao
+                              FROM funcionario 
+
+                              UNION                                 
+                              
+                              SELECT idMedico AS idFuncionario, nome , numero_cc , Data_validade AS data_validade, telemovel, salario_hora, email, password as senha,'Médico(a)' as Funcao
+                              FROM medico 
+    
+                              ) AS resultado
+                              Order by idFuncionario;";
             cmd.ExecuteNonQuery();
             DataTable dta = new DataTable();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
@@ -98,8 +142,17 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.CommandType = CommandType.Text;
 
                     // Utilizando parâmetros para prevenir injeção de SQL
-                    cmd.CommandText = "DELETE FROM mydb.funcionario WHERE idFuncionario = @IdFuncionario";
-                    cmd.Parameters.AddWithValue("@IdFuncionario", idFuncionarioParaExcluir);
+                    if(funcao == "Médico(a)")
+                    {
+                        cmd.CommandText = "DELETE FROM mydb.medico WHERE idMedico = @idMedico";
+                        cmd.Parameters.AddWithValue("@idMedico", idFuncionarioParaExcluir);
+                    }
+                    else
+                    {
+                        cmd.CommandText = "DELETE FROM mydb.funcionario WHERE idFuncionario = @IdFuncionario";
+                        cmd.Parameters.AddWithValue("@IdFuncionario", idFuncionarioParaExcluir);
+                    }
+                    
 
                     // Executando o comando DELETE
                     cmd.ExecuteNonQuery();
@@ -108,6 +161,7 @@ namespace Projeto_Lar3idade_Back_End
 
                     // Atualizando a exibição dos dados no DataGridView
                     display_data();
+                    LimparTextBoxes();
 
                     MessageBox.Show("Dados Apagados com sucesso");
                 }
@@ -136,18 +190,37 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     // Obtém o valor do idFuncionario dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
-                    cmd.CommandText = "UPDATE mydb.funcionario SET nome = @Nome, numero_cc = @NumeroCC, data_validade = @DataValidade, telemovel = @Telemovel, salario_hora = @SalarioHora, email = @Email, senha = @Senha,funcao = @Funcao WHERE idFuncionario = @IdFuncionario";
+                    if(funcao == "Médico(a)")
+                    {
+                        cmd.CommandText = "UPDATE mydb.medico SET nome = @Nome, numero_cc = @NumeroCC, Data_validade = @DataValidade, telemovel = @Telemovel, salario_hora = @SalarioHora, email = @Email, password = @Senha WHERE idMedico = @idMedico";
 
-                    // Adicionando parâmetros
-                    cmd.Parameters.AddWithValue("@Nome", textBox_Name.Text);
-                    cmd.Parameters.AddWithValue("@NumeroCC", textBox_Cc.Text);
-                    cmd.Parameters.AddWithValue("@DataValidade", dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("@Telemovel", textBox_Tel.Text);
-                    cmd.Parameters.AddWithValue("@SalarioHora", textBox_Salario.Text);
-                    cmd.Parameters.AddWithValue("@Email", textBox_Email.Text);
-                    cmd.Parameters.AddWithValue("@Senha", textBox_Senha.Text);
-                    cmd.Parameters.AddWithValue("@IdFuncionario", idupt);
-                    cmd.Parameters.AddWithValue("@Funcao", comboBox1.SelectedItem.ToString());
+                        // Adicionando parâmetros
+                        cmd.Parameters.AddWithValue("@Nome", textBox_Name.Text);
+                        cmd.Parameters.AddWithValue("@NumeroCC", textBox_Cc.Text);
+                        cmd.Parameters.AddWithValue("@DataValidade", dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd"));
+                        cmd.Parameters.AddWithValue("@Telemovel", textBox_Tel.Text);
+                        cmd.Parameters.AddWithValue("@SalarioHora", textBox_Salario.Text);
+                        cmd.Parameters.AddWithValue("@Email", textBox_Email.Text);
+                        cmd.Parameters.AddWithValue("@Senha", textBox_Senha.Text);
+                        cmd.Parameters.AddWithValue("@idMedico", idupt);
+                        cmd.Parameters.AddWithValue("@Funcao", comboBox1.SelectedItem.ToString());
+                    }
+                    else
+                    {
+                        cmd.CommandText = "UPDATE mydb.funcionario SET nome = @Nome, numero_cc = @NumeroCC, data_validade = @DataValidade, telemovel = @Telemovel, salario_hora = @SalarioHora, email = @Email, senha = @Senha,funcao = @Funcao WHERE idFuncionario = @IdFuncionario";
+
+                        // Adicionando parâmetros
+                        cmd.Parameters.AddWithValue("@Nome", textBox_Name.Text);
+                        cmd.Parameters.AddWithValue("@NumeroCC", textBox_Cc.Text);
+                        cmd.Parameters.AddWithValue("@DataValidade", dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd"));
+                        cmd.Parameters.AddWithValue("@Telemovel", textBox_Tel.Text);
+                        cmd.Parameters.AddWithValue("@SalarioHora", textBox_Salario.Text);
+                        cmd.Parameters.AddWithValue("@Email", textBox_Email.Text);
+                        cmd.Parameters.AddWithValue("@Senha", textBox_Senha.Text);
+                        cmd.Parameters.AddWithValue("@IdFuncionario", idupt);
+                        cmd.Parameters.AddWithValue("@Funcao", comboBox1.SelectedItem.ToString());
+                    }
+                    
 
                     // Executando o comando
                     cmd.ExecuteNonQuery();
@@ -163,6 +236,7 @@ namespace Projeto_Lar3idade_Back_End
                     textBox_Senha.Text = "";
                     comboBox1.SelectedIndex = -1;
                     display_data();
+                    LimparTextBoxes();
 
                     MessageBox.Show("Dados atualizados com sucesso");
                 }
@@ -184,7 +258,19 @@ namespace Projeto_Lar3idade_Back_End
 
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT * FROM funcionario WHERE nome LIKE @searchText OR SUBSTRING_INDEX(nome, ' ', 1) LIKE @searchText";
+            cmd.CommandText = @"SELECT idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email, senha, Funcao
+                              FROM (
+                              SELECT idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email,senha,Funcao
+                              FROM funcionario 
+
+                              UNION
+
+                              SELECT idMedico AS idFuncionario, nome , numero_cc , Data_validade AS data_validade, telemovel, salario_hora, email, password as senha,'Médico(a)' as Funcao
+                              FROM medico 
+    
+                              ) AS resultado
+                              WHERE nome LIKE @searchText OR SUBSTRING_INDEX(nome, ' ', 1) LIKE @searchText
+                              Order by idFuncionario";
             cmd.Parameters.AddWithValue("@searchText", "%" + textBox_Search.Text + "%");
             cmd.ExecuteNonQuery();
             DataTable dt = new DataTable();
@@ -238,6 +324,33 @@ namespace Projeto_Lar3idade_Back_End
 
             conexao.Close();
         }
+        private void ExibirDadosMedico(int idmedico)
+        {
+            conexao.Open();
+
+            MySqlCommand cmd = conexao.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT * FROM mydb.medico WHERE idMedico = @idMedico";
+            cmd.Parameters.AddWithValue("@idMedico", idmedico);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            // Verifica se há dados a serem lidos
+            if (reader.Read())
+            {
+                // Exibe os dados nos TextBoxes
+                textBox_Name.Text = reader["nome"].ToString();
+                textBox_Cc.Text = reader["numero_cc"].ToString();
+                dateTimePicker_DtaValidade.Value = Convert.ToDateTime(reader["Data_validade"]);
+                textBox_Tel.Text = reader["telemovel"].ToString();
+                textBox_Salario.Text = reader["salario_hora"].ToString();
+                textBox_Email.Text = reader["email"].ToString();
+                textBox_Senha.Text = reader["password"].ToString();
+                comboBox1.SelectedIndex = 0;
+            }
+
+            conexao.Close();
+        }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -247,11 +360,20 @@ namespace Projeto_Lar3idade_Back_End
 
                 // Obtém o valor do idFuncionario da célula clicada
                 int idFuncionarioSelecionado = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idFuncionario"].Value);
+                 funcao = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Funcao"].Value);
                 Console.WriteLine("rowcount:" + Convert.ToInt32(dataGridView1.SelectedRows.Count));
                 Console.WriteLine("id:" + Convert.ToInt32(idFuncionarioSelecionado));
                 idupt = idFuncionarioSelecionado;
                 // Obtém os dados do funcionário com base no idFuncionario
-                ExibirDadosFuncionario(idFuncionarioSelecionado);
+                if(funcao == "Médico(a)")
+                {
+                    ExibirDadosMedico(idFuncionarioSelecionado);
+                }
+                else
+                {
+                    ExibirDadosFuncionario(idFuncionarioSelecionado);
+                }
+                
             }
 
         }
@@ -268,7 +390,10 @@ namespace Projeto_Lar3idade_Back_End
 
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-
+            if (comboBox1.SelectedItem != null)
+            {
+                funcao = comboBox1.SelectedItem.ToString();
+            }
         }
     }
 }

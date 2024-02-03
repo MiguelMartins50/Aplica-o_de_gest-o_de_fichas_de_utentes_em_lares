@@ -37,8 +37,8 @@ namespace Projeto_Lar3idade_Back_End
                     using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                     {
                         conexao.Open();
-                        string query = "INSERT INTO mydb.notificacao_medico (remetente,assunto, messagem, idmedico, idFunc,proccessada)" +
-                                        "VALUES (@remetente, @assunto, @messagem, @idmedico, @idFunc,@proccessada)";
+                        string query = "INSERT INTO mydb.notificacao_medico (remetente,assunto, messagem, idmedico, idFunc,proccessada,Data_envio)" +
+                                        "VALUES (@remetente, @assunto, @messagem, @idmedico, @idFunc,@proccessada,@Data_envio)";
                         string assunto = textBox1.Text;
                         string mensagem = textBox2.Text;
 
@@ -54,6 +54,8 @@ namespace Projeto_Lar3idade_Back_End
                             comando.Parameters.AddWithValue("@idmedico", iduser);
                             comando.Parameters.AddWithValue("@idFunc", 10);
                             comando.Parameters.AddWithValue("@proccessada", 0);
+                            comando.Parameters.AddWithValue("@Data_envio", DateTime.Now);
+
 
 
                             comando.ExecuteNonQuery();
