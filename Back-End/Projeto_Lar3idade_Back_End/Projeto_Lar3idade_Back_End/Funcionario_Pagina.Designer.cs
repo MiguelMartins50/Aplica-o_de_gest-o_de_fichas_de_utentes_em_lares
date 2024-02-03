@@ -84,7 +84,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(40, 175);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 26);
+            this.label1.Size = new System.Drawing.Size(141, 27);
             this.label1.TabIndex = 3;
             this.label1.Text = "Gerir Utentes";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -95,7 +95,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(40, 250);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(188, 26);
+            this.label2.Size = new System.Drawing.Size(194, 27);
             this.label2.TabIndex = 4;
             this.label2.Text = "Agendar Consultas";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -106,7 +106,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label3.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(40, 325);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(195, 26);
+            this.label3.Size = new System.Drawing.Size(202, 27);
             this.label3.TabIndex = 5;
             this.label3.Text = "Agendar Atividades";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -117,7 +117,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label4.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(40, 475);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 26);
+            this.label4.Size = new System.Drawing.Size(131, 27);
             this.label4.TabIndex = 6;
             this.label4.Text = "Gerir Visitas";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -128,7 +128,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label5.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(40, 400);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(190, 26);
+            this.label5.Size = new System.Drawing.Size(197, 27);
             this.label5.TabIndex = 7;
             this.label5.Text = "Escalas de Serviço ";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -139,7 +139,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label6.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(40, 550);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 26);
+            this.label6.Size = new System.Drawing.Size(82, 27);
             this.label6.TabIndex = 8;
             this.label6.Text = "Tarefas";
             this.label6.Click += new System.EventHandler(this.label6_Click);
@@ -201,7 +201,6 @@ namespace Projeto_Lar3idade_Back_End
             this.MaximizeBox = false;
             this.Name = "Funcionario_Pagina";
             this.Text = "Medico";
-            this.Load += new System.EventHandler(this.Funcionario_Pagina_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
