@@ -57,18 +57,17 @@ namespace Projeto_Lar3idade_Back_End
             this.label17 = new System.Windows.Forms.Label();
             this.textBox_ocupacao = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox2_parentesco = new System.Windows.Forms.TextBox();
             this.textBox_email = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox3_parentesco = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox1_Utente = new System.Windows.Forms.ComboBox();
-            this.comboBox2_Utente = new System.Windows.Forms.ComboBox();
-            this.comboBox3_Utente = new System.Windows.Forms.ComboBox();
             this.textBox1_parentesco = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox3_senha = new System.Windows.Forms.TextBox();
+            this.textBox_UtenteFamiliar = new System.Windows.Forms.TextBox();
+            this.button_Associate = new System.Windows.Forms.Button();
+            this.button_desassociate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -79,7 +78,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(432, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 26);
+            this.label1.Size = new System.Drawing.Size(133, 27);
             this.label1.TabIndex = 2;
             this.label1.Text = "Responsável";
             // 
@@ -323,13 +322,6 @@ namespace Projeto_Lar3idade_Back_End
             this.label7.TabIndex = 125;
             this.label7.Text = "Ocupação";
             // 
-            // textBox2_parentesco
-            // 
-            this.textBox2_parentesco.Location = new System.Drawing.Point(814, 262);
-            this.textBox2_parentesco.Name = "textBox2_parentesco";
-            this.textBox2_parentesco.Size = new System.Drawing.Size(185, 22);
-            this.textBox2_parentesco.TabIndex = 130;
-            // 
             // textBox_email
             // 
             this.textBox_email.Location = new System.Drawing.Point(81, 194);
@@ -346,13 +338,6 @@ namespace Projeto_Lar3idade_Back_End
             this.label19.Size = new System.Drawing.Size(57, 22);
             this.label19.TabIndex = 127;
             this.label19.Text = "Email";
-            // 
-            // textBox3_parentesco
-            // 
-            this.textBox3_parentesco.Location = new System.Drawing.Point(814, 292);
-            this.textBox3_parentesco.Name = "textBox3_parentesco";
-            this.textBox3_parentesco.Size = new System.Drawing.Size(185, 22);
-            this.textBox3_parentesco.TabIndex = 134;
             // 
             // label8
             // 
@@ -383,24 +368,6 @@ namespace Projeto_Lar3idade_Back_End
             this.comboBox1_Utente.TabIndex = 135;
             this.comboBox1_Utente.SelectedIndexChanged += new System.EventHandler(this.comboBox1_Utente_SelectedIndexChanged);
             // 
-            // comboBox2_Utente
-            // 
-            this.comboBox2_Utente.FormattingEnabled = true;
-            this.comboBox2_Utente.Location = new System.Drawing.Point(81, 260);
-            this.comboBox2_Utente.Name = "comboBox2_Utente";
-            this.comboBox2_Utente.Size = new System.Drawing.Size(554, 24);
-            this.comboBox2_Utente.TabIndex = 136;
-            this.comboBox2_Utente.SelectedIndexChanged += new System.EventHandler(this.comboBox2_Utente_SelectedIndexChanged);
-            // 
-            // comboBox3_Utente
-            // 
-            this.comboBox3_Utente.FormattingEnabled = true;
-            this.comboBox3_Utente.Location = new System.Drawing.Point(81, 290);
-            this.comboBox3_Utente.Name = "comboBox3_Utente";
-            this.comboBox3_Utente.Size = new System.Drawing.Size(554, 24);
-            this.comboBox3_Utente.TabIndex = 137;
-            this.comboBox3_Utente.SelectedIndexChanged += new System.EventHandler(this.comboBox3_Utente_SelectedIndexChanged);
-            // 
             // textBox1_parentesco
             // 
             this.textBox1_parentesco.Location = new System.Drawing.Point(814, 232);
@@ -425,21 +392,55 @@ namespace Projeto_Lar3idade_Back_End
             this.textBox3_senha.Size = new System.Drawing.Size(222, 22);
             this.textBox3_senha.TabIndex = 142;
             // 
+            // textBox_UtenteFamiliar
+            // 
+            this.textBox_UtenteFamiliar.BackColor = System.Drawing.Color.White;
+            this.textBox_UtenteFamiliar.Location = new System.Drawing.Point(81, 261);
+            this.textBox_UtenteFamiliar.Multiline = true;
+            this.textBox_UtenteFamiliar.Name = "textBox_UtenteFamiliar";
+            this.textBox_UtenteFamiliar.ReadOnly = true;
+            this.textBox_UtenteFamiliar.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_UtenteFamiliar.Size = new System.Drawing.Size(554, 65);
+            this.textBox_UtenteFamiliar.TabIndex = 143;
+            // 
+            // button_Associate
+            // 
+            this.button_Associate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
+            this.button_Associate.ForeColor = System.Drawing.SystemColors.Control;
+            this.button_Associate.Location = new System.Drawing.Point(814, 257);
+            this.button_Associate.Name = "button_Associate";
+            this.button_Associate.Size = new System.Drawing.Size(86, 30);
+            this.button_Associate.TabIndex = 144;
+            this.button_Associate.Text = "Associar";
+            this.button_Associate.UseVisualStyleBackColor = false;
+            this.button_Associate.Click += new System.EventHandler(this.button_Associate_Click);
+            // 
+            // button_desassociate
+            // 
+            this.button_desassociate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button_desassociate.ForeColor = System.Drawing.SystemColors.Control;
+            this.button_desassociate.Location = new System.Drawing.Point(901, 257);
+            this.button_desassociate.Name = "button_desassociate";
+            this.button_desassociate.Size = new System.Drawing.Size(98, 30);
+            this.button_desassociate.TabIndex = 145;
+            this.button_desassociate.Text = "Desassociar";
+            this.button_desassociate.UseVisualStyleBackColor = false;
+            this.button_desassociate.Click += new System.EventHandler(this.button_Disassociate_Click);
+            // 
             // responsavel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.button_desassociate);
+            this.Controls.Add(this.button_Associate);
+            this.Controls.Add(this.textBox_UtenteFamiliar);
             this.Controls.Add(this.textBox3_senha);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.textBox1_parentesco);
-            this.Controls.Add(this.comboBox3_Utente);
-            this.Controls.Add(this.comboBox2_Utente);
             this.Controls.Add(this.comboBox1_Utente);
-            this.Controls.Add(this.textBox3_parentesco);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox2_parentesco);
             this.Controls.Add(this.textBox_email);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.textBox_ocupacao);
@@ -507,17 +508,16 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBox_ocupacao;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox2_parentesco;
         private System.Windows.Forms.TextBox textBox_email;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox textBox3_parentesco;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBox1_Utente;
-        private System.Windows.Forms.ComboBox comboBox2_Utente;
-        private System.Windows.Forms.ComboBox comboBox3_Utente;
         private System.Windows.Forms.TextBox textBox1_parentesco;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox3_senha;
+        private System.Windows.Forms.TextBox textBox_UtenteFamiliar;
+        private System.Windows.Forms.Button button_Associate;
+        private System.Windows.Forms.Button button_desassociate;
     }
 }

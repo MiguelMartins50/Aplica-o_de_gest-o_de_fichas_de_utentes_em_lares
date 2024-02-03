@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.medico_Utente1 = new Projeto_Lar3idade_Back_End.Medico_Utente();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -112,12 +113,24 @@
             this.label3.Text = "Escalas de Serviço";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(21, 339);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(133, 27);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Notificações";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // Medico_Pagina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.medico_Utente1);
             this.Controls.Add(this.label2);
@@ -144,5 +157,6 @@
         private System.Windows.Forms.Label label1;
         private Medico_Utente medico_Utente1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

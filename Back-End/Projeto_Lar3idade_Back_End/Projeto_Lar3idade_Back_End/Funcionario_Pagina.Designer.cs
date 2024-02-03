@@ -42,6 +42,7 @@ namespace Projeto_Lar3idade_Back_End
             this.consultas1 = new Projeto_Lar3idade_Back_End.consultas();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
             this.visitas1 = new Projeto_Lar3idade_Back_End.Visitas();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -167,12 +168,24 @@ namespace Projeto_Lar3idade_Back_End
             this.visitas1.Size = new System.Drawing.Size(1022, 735);
             this.visitas1.TabIndex = 11;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(39, 615);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(133, 27);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Notificações";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
             // Funcionario_Pagina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.visitas1);
             this.Controls.Add(this.consultas1);
             this.Controls.Add(this.utentes1);
@@ -211,5 +224,6 @@ namespace Projeto_Lar3idade_Back_End
         private consultas consultas1;
         private Atividades_func atividades_func1;
         private Visitas visitas1;
+        private System.Windows.Forms.Label label7;
     }
 }

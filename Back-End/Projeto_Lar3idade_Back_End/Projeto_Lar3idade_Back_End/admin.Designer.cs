@@ -49,6 +49,8 @@ namespace Projeto_Lar3idade_Back_End
             this.responsavel1 = new Projeto_Lar3idade_Back_End.responsavel();
             this.tarefas1 = new Projeto_Lar3idade_Back_End.tarefas();
             this.utentes1 = new Projeto_Lar3idade_Back_End.utentes();
+            this.label9 = new System.Windows.Forms.Label();
+            this.notificacao_admin1 = new Projeto_Lar3idade_Back_End.notificacao_admin();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -88,7 +90,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(40, 175);
+            this.label1.Location = new System.Drawing.Point(40, 133);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(141, 27);
             this.label1.TabIndex = 1;
@@ -99,7 +101,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(40, 250);
+            this.label2.Location = new System.Drawing.Point(40, 208);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(192, 27);
             this.label2.TabIndex = 2;
@@ -110,7 +112,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(40, 325);
+            this.label3.Location = new System.Drawing.Point(40, 283);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(198, 27);
             this.label3.TabIndex = 3;
@@ -121,7 +123,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(40, 400);
+            this.label4.Location = new System.Drawing.Point(40, 358);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(185, 27);
             this.label4.TabIndex = 4;
@@ -132,7 +134,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(40, 475);
+            this.label5.Location = new System.Drawing.Point(40, 433);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 27);
             this.label5.TabIndex = 5;
@@ -143,7 +145,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(40, 550);
+            this.label6.Location = new System.Drawing.Point(40, 508);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(191, 27);
             this.label6.TabIndex = 6;
@@ -154,7 +156,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(40, 625);
+            this.label7.Location = new System.Drawing.Point(40, 583);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(128, 27);
             this.label7.TabIndex = 7;
@@ -165,7 +167,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(40, 700);
+            this.label8.Location = new System.Drawing.Point(40, 658);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(88, 27);
             this.label8.TabIndex = 8;
@@ -236,12 +238,33 @@ namespace Projeto_Lar3idade_Back_End
             this.utentes1.Size = new System.Drawing.Size(1022, 735);
             this.utentes1.TabIndex = 9;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(40, 718);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(124, 27);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "Notificação";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
+            // notificacao_admin1
+            // 
+            this.notificacao_admin1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.notificacao_admin1.Location = new System.Drawing.Point(296, 66);
+            this.notificacao_admin1.Name = "notificacao_admin1";
+            this.notificacao_admin1.Size = new System.Drawing.Size(1022, 735);
+            this.notificacao_admin1.TabIndex = 19;
+            // 
             // admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.notificacao_admin1);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.atividades1);
             this.Controls.Add(this.escalas1);
             this.Controls.Add(this.funcionario1);
@@ -292,5 +315,7 @@ namespace Projeto_Lar3idade_Back_End
         private funcionario funcionario1;
         private Escalas escalas1;
         private atividades atividades1;
+        private System.Windows.Forms.Label label9;
+        private notificacao_admin notificacao_admin1;
     }
 }

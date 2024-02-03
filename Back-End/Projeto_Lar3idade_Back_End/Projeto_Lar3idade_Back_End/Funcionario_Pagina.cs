@@ -14,12 +14,24 @@ namespace Projeto_Lar3idade_Back_End
     {
         private Tarefas_Func tarefas_Func1;
         private Escalas_func escalas_Func1;
+        private notificacao_func notificacao_Func1;
+        private enviar_func enviar_func1;
         public int iduser { get; set; }
         private string tipo_func = "funcionario";
+        private int tipo = 0;
+        private string nome = "";
         public Funcionario_Pagina(int IDuser)
         {
             InitializeComponent();
             this.iduser = IDuser;
+            enviar_func1 = new enviar_func(iduser);
+            enviar_func1.Location = new Point(215, 60);
+            enviar_func1.Size = new Size(1022, 700);
+            this.Controls.Add(enviar_func1);
+            notificacao_Func1 = new notificacao_func(iduser, tipo, nome);
+            notificacao_Func1.Location = new Point(215, 60);
+            notificacao_Func1.Size = new Size(1022, 700);
+            this.Controls.Add(notificacao_Func1);
             atividades_func1 = new Atividades_func(iduser);
             atividades_func1.Location = new Point(215, 60); 
             atividades_func1.Size = new Size(1022, 700);
@@ -37,11 +49,29 @@ namespace Projeto_Lar3idade_Back_End
             escalas_Func1.Hide();
             tarefas_Func1.Hide();
             visitas1.Hide();
-
+            notificacao_Func1.Hide();
+            enviar_func1.Hide();
             Console.WriteLine("Id Utilizador do funcionario nº1:" + iduser);
             Console.WriteLine("Id Utilizador do funcionario nº2:" + IDuser);
+<<<<<<< HEAD
+=======
+            escalas_Func1.NavigateToEnviarFuncClicked += EscalasFunc_NavigateToEnviarFuncClicked;
+            enviar_func1.NavigateToEscalsFuncClicked += EnviarFunc_NavigateToEscalasFuncClicked;
+
+>>>>>>> 56839d1c6f78a45db81012a4ab482373cef160a4
         }
 
+
+        private void EscalasFunc_NavigateToEnviarFuncClicked(object sender, EventArgs e)
+        {
+            escalas_Func1.Hide();
+            enviar_func1.Show();
+        }
+        private void EnviarFunc_NavigateToEscalasFuncClicked(object sender, EventArgs e)
+        {
+            escalas_Func1.Show();
+            enviar_func1.Hide();
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -52,12 +82,16 @@ namespace Projeto_Lar3idade_Back_End
             utentes1.Show();
             atividades_func1.Hide();
             escalas_Func1.Hide();
+            notificacao_Func1.Hide();
+
             label5.BackColor = this.BackColor;
             label2.BackColor = this.BackColor;
             label1.BackColor = Color.White;
+            label7.BackColor = this.BackColor;
+
             label3.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
-            
+
 
         }
         private void label2_Click(object sender, EventArgs e)
@@ -67,11 +101,15 @@ namespace Projeto_Lar3idade_Back_End
             utentes1.Hide();
             atividades_func1.Hide();
             escalas_Func1.Hide();
+            notificacao_Func1.Hide();
+
             label5.BackColor = this.BackColor;
             label2.BackColor = Color.White;
             label1.BackColor = this.BackColor;
             label3.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+
             label4.BackColor = this.BackColor;
             visitas1.Hide();
 
@@ -84,12 +122,16 @@ namespace Projeto_Lar3idade_Back_End
             utentes1.Hide();
             atividades_func1.Show();
             escalas_Func1.Hide();
+            notificacao_Func1.Hide();
+
             label5.BackColor = this.BackColor;
             label2.BackColor = this.BackColor;
             label1.BackColor = this.BackColor;
             label3.BackColor = Color.White;
             label6.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+
             visitas1.Hide();
 
         }
@@ -100,6 +142,8 @@ namespace Projeto_Lar3idade_Back_End
             consultas1.Hide();
             utentes1.Hide();
             atividades_func1.Hide();
+            notificacao_Func1.Hide();
+
             escalas_Func1.Show();
             label2.BackColor = this.BackColor;
             label1.BackColor = this.BackColor;
@@ -107,6 +151,8 @@ namespace Projeto_Lar3idade_Back_End
             label5.BackColor = Color.White;
             label6.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+
             visitas1.Hide();
         }
 
@@ -118,16 +164,22 @@ namespace Projeto_Lar3idade_Back_End
             utentes1.Hide();
             atividades_func1.Hide();
             escalas_Func1.Hide();
+            notificacao_Func1.Hide();
+
             label2.BackColor = this.BackColor;
             label1.BackColor = this.BackColor;
             label3.BackColor = this.BackColor;
             label5.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
             label4.BackColor = Color.White;
+            label7.BackColor = this.BackColor;
+
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
+            notificacao_Func1.Hide();
+
             tarefas_Func1.Show();
             consultas1.Hide();
             utentes1.Hide();
@@ -139,6 +191,8 @@ namespace Projeto_Lar3idade_Back_End
             label6.BackColor = Color.White;
             label5.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+
             visitas1.Hide();
         }
 
@@ -149,9 +203,28 @@ namespace Projeto_Lar3idade_Back_End
             this.Hide();
         }
 
+<<<<<<< HEAD
         private void Funcionario_Pagina_Load(object sender, EventArgs e)
         {
 
+=======
+        private void label7_Click(object sender, EventArgs e)
+        {
+            notificacao_Func1.Show();
+            tarefas_Func1.Hide();
+            consultas1.Hide();
+            utentes1.Hide();
+            atividades_func1.Hide();
+            escalas_Func1.Hide();
+            label2.BackColor = this.BackColor;
+            label1.BackColor = this.BackColor;
+            label3.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
+            label5.BackColor = this.BackColor;
+            label4.BackColor = this.BackColor;
+            label7.BackColor = Color.White;
+            visitas1.Hide();
+>>>>>>> 56839d1c6f78a45db81012a4ab482373cef160a4
         }
     }
 }
