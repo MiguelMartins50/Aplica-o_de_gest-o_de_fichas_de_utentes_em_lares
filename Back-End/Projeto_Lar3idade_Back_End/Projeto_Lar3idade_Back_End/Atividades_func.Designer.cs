@@ -106,7 +106,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(76, 30);
             this.button_delete.TabIndex = 123;
-            this.button_delete.Text = "Delete";
+            this.button_delete.Text = "Apagar";
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
@@ -117,7 +117,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button_update.Name = "button_update";
             this.button_update.Size = new System.Drawing.Size(69, 30);
             this.button_update.TabIndex = 122;
-            this.button_update.Text = "Update";
+            this.button_update.Text = "Alterar";
             this.button_update.UseVisualStyleBackColor = false;
             this.button_update.Click += new System.EventHandler(this.button_update_Click);
             // 
@@ -128,7 +128,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button_insert.Name = "button_insert";
             this.button_insert.Size = new System.Drawing.Size(87, 30);
             this.button_insert.TabIndex = 121;
-            this.button_insert.Text = "Insert";
+            this.button_insert.Text = "Adicionar";
             this.button_insert.UseVisualStyleBackColor = false;
             this.button_insert.Click += new System.EventHandler(this.button_insert_Click);
             // 
@@ -220,7 +220,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(415, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(188, 27);
+            this.label1.Size = new System.Drawing.Size(183, 26);
             this.label1.TabIndex = 129;
             this.label1.Text = "Atividades do lar  ";
             // 

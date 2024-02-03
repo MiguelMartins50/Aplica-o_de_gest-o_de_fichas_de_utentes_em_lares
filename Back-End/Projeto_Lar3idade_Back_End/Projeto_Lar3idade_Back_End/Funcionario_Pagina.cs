@@ -40,8 +40,6 @@ namespace Projeto_Lar3idade_Back_End
 
             Console.WriteLine("Id Utilizador do funcionario nº1:" + iduser);
             Console.WriteLine("Id Utilizador do funcionario nº2:" + IDuser);
-
-
         }
 
 
@@ -149,6 +147,11 @@ namespace Projeto_Lar3idade_Back_End
             Login login = new Login();
             login.Show();
             this.Hide();
+        }
+
+        private void Funcionario_Pagina_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

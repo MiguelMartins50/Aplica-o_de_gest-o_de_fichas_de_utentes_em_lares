@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
+using System.IO;
 
 namespace Projeto_Lar3idade_Back_End
 {
     public partial class utentes : UserControl
     {
-      
-        private MySqlConnection conexao;
 
+        private MySqlConnection conexao;
+        private string imagePath; // Variável de membro para armazenar o caminho do arquivo selecionado
         private Dictionary<string, string> medico_ = new Dictionary<string, string>();
         private int idQuarto;
         private int idMedico;
@@ -20,7 +22,7 @@ namespace Projeto_Lar3idade_Back_End
 
         public utentes()
         {
-           
+
             InitializeComponent();
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
@@ -84,8 +86,21 @@ namespace Projeto_Lar3idade_Back_End
                 MySqlCommand cmd = conexao.CreateCommand();
                 cmd.CommandType = CommandType.Text;
 
-                cmd.CommandText = "INSERT INTO mydb.utente (idUtente,Medico_idMedico, nome, numero_cc, data_validade, nif, niss, n_utenteSaude, genero, data_nascimento, idade, estado_civil, morada, localidade, cod_postal, telefone_casa, telemovel, grau_dependencia, email, senha, Quarto_idQuarto) " +
-                                  "SELECT COALESCE(MAX(idUtente), 0) + 1, @MedicoId, @Nome, @NumeroCC, @DataValidade, @Nif, @Niss, @NUtenteSaude, @Genero, @DataNascimento, @Idade, @EstadoCivil, @Morada, @Localidade, @CodPostal, @TelefoneCasa, @Telemovel, @GrauDependencia, @Email, @Senha, @QuartoId " +
+                // Converta a imagem em bytes
+                byte[] imageBytes = null;
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    using (FileStream stream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                    {
+                        using (BinaryReader reader = new BinaryReader(stream))
+                        {
+                            imageBytes = reader.ReadBytes((int)stream.Length);
+                        }
+                    }
+                }
+
+                cmd.CommandText = "INSERT INTO mydb.utente (idUtente,Medico_idMedico, nome, numero_cc, data_validade, nif, niss, n_utenteSaude, genero, data_nascimento, idade, estado_civil, morada, localidade, cod_postal, telefone_casa, telemovel, grau_dependencia, email, senha, Quarto_idQuarto, Imagem) " +
+                                  "SELECT COALESCE(MAX(idUtente), 0) + 1, @MedicoId, @Nome, @NumeroCC, @DataValidade, @Nif, @Niss, @NUtenteSaude, @Genero, @DataNascimento, @Idade, @EstadoCivil, @Morada, @Localidade, @CodPostal, @TelefoneCasa, @Telemovel, @GrauDependencia, @Email, @Senha, @QuartoId,@Imagem " +
                                   "FROM mydb.utente";
 
                 cmd.Parameters.AddWithValue("@MedicoId", idMedico);
@@ -108,6 +123,7 @@ namespace Projeto_Lar3idade_Back_End
                 cmd.Parameters.AddWithValue("@Email", textBox_email.Text);
                 cmd.Parameters.AddWithValue("@Senha", textBox_senha.Text);
                 cmd.Parameters.AddWithValue("@QuartoId", idQuarto);
+                cmd.Parameters.AddWithValue("@Imagem", imageBytes);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Utente adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -144,6 +160,9 @@ namespace Projeto_Lar3idade_Back_End
             radioButton2.Checked = false;
             radioButton3.Checked = false;
             radioButton4.Checked = false;
+
+            //Limpar panel
+            panel1.BackgroundImage = null;
         }
 
         private string ObterGrauDependenciaSelecionado()
@@ -220,7 +239,7 @@ namespace Projeto_Lar3idade_Back_End
             {
                 MessageBox.Show("Nenhum resultado encontrado.");
             }
-            
+
         }
 
         private void button_delete_Click(object sender, EventArgs e)
@@ -230,27 +249,43 @@ namespace Projeto_Lar3idade_Back_End
                 // Verifica se há uma linha selecionada no DataGridView
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    // Obtém o valor do idUtente da linha selecionada
-                    int idUtenteParaExcluir = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["idUtente"].Value);
+                    // Pergunta ao usuário se ele tem certeza de que deseja apagar o utente
+                    DialogResult result = MessageBox.Show("Tem certeza que deseja apagar este utente?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    conexao.Open();
+                    // Se o usuário confirmar a exclusão
+                    if (result == DialogResult.Yes)
+                    {
+                        // Obtém o valor do idUtente da célula "idUtente" na linha selecionada
+                        object cellValue = dataGridView1.SelectedRows[0].Cells["idUtente"].Value;
 
-                    MySqlCommand cmd = conexao.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
+                        if (cellValue != null && cellValue != DBNull.Value)
+                        {
+                            // Converte o valor da célula para um inteiro
+                            int idUtenteParaExcluir = Convert.ToInt32(cellValue);
 
-                    // Utilizando parâmetros para prevenir injeção de SQL
-                    cmd.CommandText = "DELETE FROM mydb.utente WHERE idUtente = @IdUtente";
-                    cmd.Parameters.AddWithValue("@IdUtente", idUtenteParaExcluir);
+                            conexao.Open();
 
-                    // Executando o comando DELETE
-                    cmd.ExecuteNonQuery();
+                            MySqlCommand cmd = conexao.CreateCommand();
+                            cmd.CommandType = CommandType.Text;
 
-                    conexao.Close();
+                            // Utilizando parâmetros para prevenir injeção de SQL
+                            cmd.CommandText = "DELETE FROM mydb.utente WHERE idUtente = @IdUtente";
+                            cmd.Parameters.AddWithValue("@IdUtente", idUtenteParaExcluir);
 
-                    // Atualizando a exibição dos dados no DataGridView
-                    display_data();
+                            cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Utente apagado com sucesso");
+                            conexao.Close();
+
+                            // Atualizando a exibição dos dados no DataGridView
+                            display_data();
+
+                            MessageBox.Show("Utente apagado com sucesso");
+                        }
+                        else
+                        {
+                            MessageBox.Show("O valor do ID do utente está vazio.");
+                        }
+                    }
                 }
                 else
                 {
@@ -263,12 +298,13 @@ namespace Projeto_Lar3idade_Back_End
             }
         }
 
+
         private void display_data()
         {
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT utente.*, medico.nome AS nome_medico FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico ORDER BY idUtente ASC;";
+            cmd.CommandText = "SELECT medico.nome AS nome_medico, utente.* FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico ORDER BY utente.idUtente ASC;";
 
             cmd.ExecuteNonQuery();
             DataTable dta = new DataTable();
@@ -303,9 +339,22 @@ namespace Projeto_Lar3idade_Back_End
                 // Certifique-se de fornecer o valor do IdUtente a ser atualizado
                 if (!string.IsNullOrEmpty(textBox_Name.Text) && !string.IsNullOrEmpty(textBox_Cc.Text))
                 {
+                    // Converta a imagem em bytes
+                    byte[] imageBytes = null;
+                    if (!string.IsNullOrEmpty(imagePath))
+                    {
+                        using (FileStream stream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                        {
+                            using (BinaryReader reader = new BinaryReader(stream))
+                            {
+                                imageBytes = reader.ReadBytes((int)stream.Length);
+                            }
+                        }
+                    }
+
                     // Obtém o valor do idUtente dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
-                    cmd.CommandText = "UPDATE mydb.utente SET Medico_idMedico = @MedicoId, nome = @Nome, numero_cc = @NumeroCC, data_validade = @DataValidade, nif = @Nif, niss = @Niss, n_utenteSaude = @NUtenteSaude, genero = @Genero, data_nascimento = @DataNascimento, idade = @Idade, estado_civil = @EstadoCivil, morada = @Morada, localidade = @Localidade, cod_postal = @CodPostal, telefone_casa = @TelefoneCasa, telemovel = @Telemovel, grau_dependencia = @GrauDependencia, email = @Email, senha = @Senha, Quarto_idQuarto = @QuartoId WHERE idUtente = @IdUtente";
+                    cmd.CommandText = "UPDATE mydb.utente SET Medico_idMedico = @MedicoId, nome = @Nome, numero_cc = @NumeroCC, data_validade = @DataValidade, nif = @Nif, niss = @Niss, n_utenteSaude = @NUtenteSaude, genero = @Genero, data_nascimento = @DataNascimento, idade = @Idade, estado_civil = @EstadoCivil, morada = @Morada, localidade = @Localidade, cod_postal = @CodPostal, telefone_casa = @TelefoneCasa, telemovel = @Telemovel, grau_dependencia = @GrauDependencia, email = @Email, senha = @Senha, Quarto_idQuarto = @QuartoId, Imagem =@Imagem WHERE idUtente = @IdUtente";
 
                     // Adicionando parâmetros
                     cmd.Parameters.AddWithValue("@MedicoId", idMedico);
@@ -328,8 +377,8 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.Parameters.AddWithValue("@Email", textBox_email.Text);
                     cmd.Parameters.AddWithValue("@Senha", textBox_senha.Text);
                     cmd.Parameters.AddWithValue("@QuartoId", idQuarto);
-                   cmd.Parameters.AddWithValue("@IdUtente", idUtente);
-
+                    cmd.Parameters.AddWithValue("@IdUtente", idUtente);
+                    cmd.Parameters.AddWithValue("@Imagem", imageBytes);
                     // Executando o comando
                     cmd.ExecuteNonQuery();
                     conexao.Close();
@@ -355,14 +404,24 @@ namespace Projeto_Lar3idade_Back_End
             }
         }
 
-
+ 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                int idUtenteParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idUtente"].Value);
-                PreencherCamposParaEdicao(idUtenteParaEditar);
+                object cellValue = dataGridView1.Rows[e.RowIndex].Cells["idUtente"].Value;
+                if (cellValue != DBNull.Value)
+                {
+                    int idUtenteParaEditar = Convert.ToInt32(cellValue);
+                    PreencherCamposParaEdicao(idUtenteParaEditar);
+                }
+                else
+                {
+                // Lidar com o caso em que o valor da célula é DBNull
+                 MessageBox.Show("O valor do ID do utente está vazio.");
+                }
             }
+            
         }
         private void PreencherCamposParaEdicao(int idUtenteParaEditar)
         {
@@ -411,6 +470,22 @@ namespace Projeto_Lar3idade_Back_End
                         textBox_email.Text = reader["email"].ToString();
                         textBox_senha.Text = reader["senha"].ToString();
                         comboBox_quarto.Text = reader["Quarto_idQuarto"].ToString();
+
+                        // Carregar imagem no Panel1
+                        if (reader["Imagem"] != DBNull.Value)
+                        {
+                            byte[] imageBytes = (byte[])reader["Imagem"];
+                            using (MemoryStream ms = new MemoryStream(imageBytes))
+                            {
+                                Image image = Image.FromStream(ms);
+                                panel1.BackgroundImage = image;
+                                panel1.BackgroundImageLayout = ImageLayout.Zoom; // Redimensiona a imagem para caber no controle Panel
+                            }
+                        }
+                        else
+                        {
+                            panel1.BackgroundImage = null; // Limpar o Panel1 se não houver imagem
+                        }
                     }
                 }
             }
@@ -423,9 +498,6 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Close();
             }
         }
-
-
-
 
         private void SelecionarRadioButtonPorGrauDependencia(string grauDependencia)
         {
@@ -446,10 +518,37 @@ namespace Projeto_Lar3idade_Back_End
                     break;
             }
         }
-        
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Defina o filtro de arquivo para imagens apenas
+            openFileDialog1.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Obtenha o caminho do arquivo selecionado
+                imagePath = openFileDialog1.FileName;
+
+                try
+                {
+                    // Carregue a imagem no controle Panel
+                    Image image = Image.FromFile(imagePath);
+                    panel1.BackgroundImage = image;
+                    panel1.BackgroundImageLayout = ImageLayout.Zoom; // Redimensiona a imagem para caber no controle Panel
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao carregar a imagem: " + ex.Message);
+                }
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+          
+        }
     }
 }
-
 

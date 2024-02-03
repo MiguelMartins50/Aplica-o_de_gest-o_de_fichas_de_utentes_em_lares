@@ -40,7 +40,7 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT c.idConsulta,u.nome as Utente, c.Utente_idUtente,c.Medico_idMedico,m.nome as Medico,c.data,c.estado FROM mydb.consulta c JOIN mydb.utente u ON c.Utente_idUtente = u.idUtente JOIN mydb.medico m ON c.Medico_idMedico = m.idMedico;";
+            cmd.CommandText = "SELECT c.idConsulta, u.nome as Utente, c.Utente_idUtente, c.Medico_idMedico, m.nome as Medico, c.data, c.estado FROM mydb.consulta c JOIN mydb.utente u ON c.Utente_idUtente = u.idUtente JOIN mydb.medico m ON c.Medico_idMedico = m.idMedico WHERE c.estado = 'Agendada';\r\n";
             cmd.ExecuteNonQuery();
             DataTable dta = new DataTable();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
@@ -66,7 +66,6 @@ namespace Projeto_Lar3idade_Back_End
             {
                 conexao.Open();
 
-                // Carregar dados para a ComboBox de Quartos
                 string queryuntente = "SELECT idUtente,nome FROM utente";
                 using (MySqlCommand cmdQuarto = new MySqlCommand(queryuntente, conexao))
                 {
@@ -82,7 +81,7 @@ namespace Projeto_Lar3idade_Back_End
                     }
                 }
 
-                // Carregar dados para a ComboBox de Médicos
+
                 string queryMedico = "SELECT idMedico, nome FROM medico";
                 using (MySqlCommand cmdMedico = new MySqlCommand(queryMedico, conexao))
                 {
@@ -107,11 +106,13 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Close();
             }
         }
-       
+
 
         private void button3_Click(object sender, EventArgs e)
         {
+            LimparComboBoxes();
             display_data();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -129,21 +130,17 @@ namespace Projeto_Lar3idade_Back_End
                     // Obtém o valor do idUtente dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
                     cmd.CommandText = "UPDATE mydb.consulta SET  Utente_idUtente = @Utente_idUtente, Medico_idMedico = @Medico_idMedico, data = @data WHERE idconsulta = @idconsulta";
-                  
 
-                    // Adicionando parâmetros
                     cmd.Parameters.AddWithValue("@Medico_idMedico", idMedico);
                     cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
                     cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@idConsulta", idconsulta);
-                    
 
-                    // Executando o comando
                     cmd.ExecuteNonQuery();
                     conexao.Close();
 
-                    // Limpando os campos e atualizando a exibição dos dados
-                    LimparTextBoxes();
+
+                    LimparComboBoxes();
                     display_data();
 
                     MessageBox.Show("Consulta alterada com sucesso");
@@ -162,17 +159,61 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Close();
             }
         }
-        private void LimparTextBoxes()
+        private void LimparComboBoxes()
         {
-            // Limpar outras ComboBoxes e controles conforme necessário
-            comboBox1.SelectedIndex = -1;
-            comboBox2.SelectedIndex = -1;
+            comboBox1.Text = "";
+            comboBox2.Text = "";
+            dataGridView1.ClearSelection();
+
         }
+
+        private bool ConsultaJaAgendada()
+        {
+            try
+            {
+                conexao.Open();
+                MySqlCommand cmd = conexao.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT COUNT(*) FROM consulta " +
+                                  "WHERE Medico_idMedico = @idMedico AND data BETWEEN @startInterval AND @endInterval " +
+                                  "OR Utente_idUtente = @idUtente AND data BETWEEN @startInterval AND @endInterval";
+
+                cmd.Parameters.AddWithValue("@idMedico", idMedico);
+                cmd.Parameters.AddWithValue("@idUtente", idutente);
+
+
+                DateTime startInterval = dateTimePicker1.Value.AddMinutes(-5);
+                DateTime endInterval = dateTimePicker1.Value.AddMinutes(5);
+
+                cmd.Parameters.AddWithValue("@startInterval", startInterval.ToString("yyyy-MM-dd HH:mm:ss"));
+                cmd.Parameters.AddWithValue("@endInterval", endInterval.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                return count > 0; // Retorna true se já existir uma consulta agendada para o mesmo médico ou utente dentro do intervalo de 10 minutos, false caso contrário
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao verificar se a consulta já está agendada: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
+                if (ConsultaJaAgendada())
+                {
+                    MessageBox.Show("Já existe uma consulta agendada para este utente ou médico neste horário. Por favor, faça outro agendamento com um intervalo de 10 minutos.");
+                    return;
+                }
                 conexao.Open();
                 string query3 = "SELECT * FROM consulta ORDER BY idConsulta DESC LIMIT 1";
 
@@ -217,7 +258,7 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Close();
             }
 
-            LimparTextBoxes();
+            LimparComboBoxes();
             display_data();
 
         }
@@ -280,8 +321,8 @@ namespace Projeto_Lar3idade_Back_End
                     idutente = Convert.ToInt32(dta.Rows[0]["Utente_idUtente"]);
                     nome_Medico = Convert.ToString(dta.Rows[0]["Medico"]);
                     nome_utente = Convert.ToString(dta.Rows[0]["Utente"]);
-                    Console.WriteLine("idM "+idMedico);
-                    Console.WriteLine("idu "+idutente);
+                    Console.WriteLine("idM " + idMedico);
+                    Console.WriteLine("idu " + idutente);
 
                 }
                 using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -295,13 +336,13 @@ namespace Projeto_Lar3idade_Back_End
                         comboBox1.Text = nome_Medico;
                         comboBox2.Text = nome_utente;
                         dateTimePicker1.Value = Convert.ToDateTime(reader["data"]);
-                        
+
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao obter dados da consulta para edição: " + ex.Message+ "\n"+ ex.StackTrace);
+                MessageBox.Show("Erro ao obter dados da consulta para edição: " + ex.Message + "\n" + ex.StackTrace);
             }
             finally
             {
@@ -343,6 +384,44 @@ namespace Projeto_Lar3idade_Back_End
                 MessageBox.Show("Nenhum resultado encontrado.");
             }
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (idconsulta > 0)
+            {
+                // Exibe uma caixa de diálogo de confirmação
+                DialogResult result = MessageBox.Show("Tens certeza que deseja apagar esta consulta?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // Verifica a resposta do usuário
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        conexao.Open();
+                        MySqlCommand cmd = conexao.CreateCommand();
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "DELETE FROM mydb.consulta WHERE idConsulta = @idConsulta";
+                        cmd.Parameters.AddWithValue("@idConsulta", idconsulta);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Consulta excluída com sucesso!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao excluir consulta: " + ex.Message);
+                    }
+                    finally
+                    {
+                        conexao.Close();
+                        LimparComboBoxes();
+                        display_data();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione uma consulta para excluir.");
+            }
         }
     }
 }

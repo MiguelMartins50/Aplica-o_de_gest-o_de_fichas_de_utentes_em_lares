@@ -19,7 +19,7 @@ namespace Projeto_Lar3idade_Back_End
         {
             InitializeComponent();
 
-            comboBox1.Items.AddRange(new string[] {"Administrador","Médico(a)", "Enfermeiro(a)", "Funcionário de Limpeza", "Cuidador(a)", "Fisioterapeuta", "Recepcionista" });
+            comboBox1.Items.AddRange(new string[] {"Administrador","Médico(a)", "Cuidador(a)", "Recepcionista" });
 
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
@@ -262,6 +262,11 @@ namespace Projeto_Lar3idade_Back_End
         }
 
         private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
         }
