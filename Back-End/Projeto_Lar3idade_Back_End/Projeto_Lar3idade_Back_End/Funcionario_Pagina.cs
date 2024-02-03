@@ -53,17 +53,9 @@ namespace Projeto_Lar3idade_Back_End
             enviar_func1.Hide();
             Console.WriteLine("Id Utilizador do funcionario nº1:" + iduser);
             Console.WriteLine("Id Utilizador do funcionario nº2:" + IDuser);
-<<<<<<< HEAD
             escalas_Func1.NavigateToEnviarFuncClicked += EscalasFunc_NavigateToEnviarFuncClicked;
             enviar_func1.NavigateToEscalsFuncClicked += EnviarFunc_NavigateToEscalasFuncClicked;
 
-=======
-
-            escalas_Func1.NavigateToEnviarFuncClicked += EscalasFunc_NavigateToEnviarFuncClicked;
-            enviar_func1.NavigateToEscalsFuncClicked += EnviarFunc_NavigateToEscalasFuncClicked;
-
-
->>>>>>> 65fcce679446455da2779a28582da5ef5bec4db4
         }
 
 
@@ -224,10 +216,6 @@ namespace Projeto_Lar3idade_Back_End
             label4.BackColor = this.BackColor;
             label7.BackColor = Color.White;
             visitas1.Hide();
-<<<<<<< HEAD
-=======
-
->>>>>>> 65fcce679446455da2779a28582da5ef5bec4db4
         }
     }
 }
