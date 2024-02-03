@@ -29,7 +29,7 @@ namespace Projeto_Lar3idade_Back_End
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker_dataLimite = new System.Windows.Forms.DateTimePicker();
@@ -156,8 +156,8 @@ namespace Projeto_Lar3idade_Back_End
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -206,7 +206,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(76, 30);
             this.button_delete.TabIndex = 150;
-            this.button_delete.Text = "Delete";
+            this.button_delete.Text = "Apagar";
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
@@ -217,18 +217,18 @@ namespace Projeto_Lar3idade_Back_End
             this.button_update.Name = "button_update";
             this.button_update.Size = new System.Drawing.Size(69, 30);
             this.button_update.TabIndex = 149;
-            this.button_update.Text = "Update";
+            this.button_update.Text = "Alterar";
             this.button_update.UseVisualStyleBackColor = false;
             this.button_update.Click += new System.EventHandler(this.button_update_Click);
             // 
             // button_insert
             // 
-            this.button_insert.BackColor = System.Drawing.Color.LimeGreen;
+            this.button_insert.BackColor = System.Drawing.Color.Lime;
             this.button_insert.Location = new System.Drawing.Point(26, 183);
             this.button_insert.Name = "button_insert";
             this.button_insert.Size = new System.Drawing.Size(87, 30);
             this.button_insert.TabIndex = 148;
-            this.button_insert.Text = "Insert";
+            this.button_insert.Text = "Adicionar";
             this.button_insert.UseVisualStyleBackColor = false;
             this.button_insert.Click += new System.EventHandler(this.button_insert_Click);
             // 

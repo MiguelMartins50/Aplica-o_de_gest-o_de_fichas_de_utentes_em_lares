@@ -68,6 +68,8 @@ namespace Projeto_Lar3idade_Back_End
             this.textBox_UtenteFamiliar = new System.Windows.Forms.TextBox();
             this.button_Associate = new System.Windows.Forms.Button();
             this.button_desassociate = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -78,13 +80,13 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(432, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 27);
+            this.label1.Size = new System.Drawing.Size(129, 26);
             this.label1.TabIndex = 2;
             this.label1.Text = "Responsável";
             // 
             // dateTimePicker_dataNascimento
             // 
-            this.dateTimePicker_dataNascimento.Location = new System.Drawing.Point(799, 39);
+            this.dateTimePicker_dataNascimento.Location = new System.Drawing.Point(799, 26);
             this.dateTimePicker_dataNascimento.Name = "dateTimePicker_dataNascimento";
             this.dateTimePicker_dataNascimento.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker_dataNascimento.TabIndex = 115;
@@ -93,7 +95,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(662, 39);
+            this.label11.Location = new System.Drawing.Point(662, 26);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(140, 22);
             this.label11.TabIndex = 114;
@@ -119,6 +121,7 @@ namespace Projeto_Lar3idade_Back_End
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 111;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // button_Search
             // 
@@ -159,7 +162,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(90, 30);
             this.button_delete.TabIndex = 107;
-            this.button_delete.Text = "Delete";
+            this.button_delete.Text = "Apagar";
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
@@ -170,13 +173,13 @@ namespace Projeto_Lar3idade_Back_End
             this.button_update.Name = "button_update";
             this.button_update.Size = new System.Drawing.Size(86, 30);
             this.button_update.TabIndex = 106;
-            this.button_update.Text = "Update";
+            this.button_update.Text = "Alterar";
             this.button_update.UseVisualStyleBackColor = false;
             this.button_update.Click += new System.EventHandler(this.button_update_Click);
             // 
             // textBox_Cc
             // 
-            this.textBox_Cc.Location = new System.Drawing.Point(177, 80);
+            this.textBox_Cc.Location = new System.Drawing.Point(181, 58);
             this.textBox_Cc.Name = "textBox_Cc";
             this.textBox_Cc.Size = new System.Drawing.Size(279, 22);
             this.textBox_Cc.TabIndex = 103;
@@ -185,7 +188,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 79);
+            this.label3.Location = new System.Drawing.Point(14, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(161, 22);
             this.label3.TabIndex = 102;
@@ -193,7 +196,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // textBox_Name
             // 
-            this.textBox_Name.Location = new System.Drawing.Point(155, 40);
+            this.textBox_Name.Location = new System.Drawing.Point(155, 27);
             this.textBox_Name.Name = "textBox_Name";
             this.textBox_Name.Size = new System.Drawing.Size(501, 22);
             this.textBox_Name.TabIndex = 101;
@@ -202,7 +205,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 40);
+            this.label2.Location = new System.Drawing.Point(10, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(139, 22);
             this.label2.TabIndex = 100;
@@ -211,18 +214,18 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // button_insert
             // 
-            this.button_insert.BackColor = System.Drawing.Color.LimeGreen;
+            this.button_insert.BackColor = System.Drawing.Color.Lime;
             this.button_insert.Location = new System.Drawing.Point(32, 332);
             this.button_insert.Name = "button_insert";
             this.button_insert.Size = new System.Drawing.Size(90, 30);
             this.button_insert.TabIndex = 99;
-            this.button_insert.Text = "Insert";
+            this.button_insert.Text = "Adicionar ";
             this.button_insert.UseVisualStyleBackColor = false;
             this.button_insert.Click += new System.EventHandler(this.button_insert_Click);
             // 
             // dateTimePicker_DtaValidade
             // 
-            this.dateTimePicker_DtaValidade.Location = new System.Drawing.Point(602, 80);
+            this.dateTimePicker_DtaValidade.Location = new System.Drawing.Point(606, 58);
             this.dateTimePicker_DtaValidade.Name = "dateTimePicker_DtaValidade";
             this.dateTimePicker_DtaValidade.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker_DtaValidade.TabIndex = 105;
@@ -231,7 +234,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(474, 80);
+            this.label4.Location = new System.Drawing.Point(478, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(122, 22);
             this.label4.TabIndex = 116;
@@ -239,7 +242,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // textBox_morada
             // 
-            this.textBox_morada.Location = new System.Drawing.Point(92, 117);
+            this.textBox_morada.Location = new System.Drawing.Point(96, 95);
             this.textBox_morada.Name = "textBox_morada";
             this.textBox_morada.Size = new System.Drawing.Size(301, 22);
             this.textBox_morada.TabIndex = 118;
@@ -248,7 +251,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(10, 116);
+            this.label5.Location = new System.Drawing.Point(14, 94);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 22);
             this.label5.TabIndex = 117;
@@ -256,7 +259,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // textBox_codPostal
             // 
-            this.textBox_codPostal.Location = new System.Drawing.Point(524, 116);
+            this.textBox_codPostal.Location = new System.Drawing.Point(528, 94);
             this.textBox_codPostal.Name = "textBox_codPostal";
             this.textBox_codPostal.Size = new System.Drawing.Size(147, 22);
             this.textBox_codPostal.TabIndex = 120;
@@ -265,7 +268,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(396, 116);
+            this.label6.Location = new System.Drawing.Point(400, 94);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(122, 22);
             this.label6.TabIndex = 119;
@@ -273,7 +276,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // textBox_telemovel
             // 
-            this.textBox_telemovel.Location = new System.Drawing.Point(511, 156);
+            this.textBox_telemovel.Location = new System.Drawing.Point(515, 134);
             this.textBox_telemovel.Name = "textBox_telemovel";
             this.textBox_telemovel.Size = new System.Drawing.Size(133, 22);
             this.textBox_telemovel.TabIndex = 124;
@@ -282,7 +285,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(403, 157);
+            this.label16.Location = new System.Drawing.Point(407, 135);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(94, 22);
             this.label16.TabIndex = 123;
@@ -290,7 +293,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // textBox_telCasa
             // 
-            this.textBox_telCasa.Location = new System.Drawing.Point(137, 157);
+            this.textBox_telCasa.Location = new System.Drawing.Point(141, 135);
             this.textBox_telCasa.Name = "textBox_telCasa";
             this.textBox_telCasa.Size = new System.Drawing.Size(209, 22);
             this.textBox_telCasa.TabIndex = 122;
@@ -299,7 +302,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(12, 156);
+            this.label17.Location = new System.Drawing.Point(16, 134);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(119, 22);
             this.label17.TabIndex = 121;
@@ -307,7 +310,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // textBox_ocupacao
             // 
-            this.textBox_ocupacao.Location = new System.Drawing.Point(777, 156);
+            this.textBox_ocupacao.Location = new System.Drawing.Point(777, 95);
             this.textBox_ocupacao.Name = "textBox_ocupacao";
             this.textBox_ocupacao.Size = new System.Drawing.Size(222, 22);
             this.textBox_ocupacao.TabIndex = 126;
@@ -316,7 +319,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(682, 157);
+            this.label7.Location = new System.Drawing.Point(681, 94);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 22);
             this.label7.TabIndex = 125;
@@ -324,7 +327,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // textBox_email
             // 
-            this.textBox_email.Location = new System.Drawing.Point(81, 194);
+            this.textBox_email.Location = new System.Drawing.Point(85, 285);
             this.textBox_email.Name = "textBox_email";
             this.textBox_email.Size = new System.Drawing.Size(554, 22);
             this.textBox_email.TabIndex = 128;
@@ -333,7 +336,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(15, 194);
+            this.label19.Location = new System.Drawing.Point(16, 285);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(57, 22);
             this.label19.TabIndex = 127;
@@ -343,7 +346,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(641, 232);
+            this.label8.Location = new System.Drawing.Point(645, 165);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(167, 22);
             this.label8.TabIndex = 133;
@@ -353,7 +356,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(15, 232);
+            this.label9.Location = new System.Drawing.Point(19, 165);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(60, 22);
             this.label9.TabIndex = 131;
@@ -362,7 +365,7 @@ namespace Projeto_Lar3idade_Back_End
             // comboBox1_Utente
             // 
             this.comboBox1_Utente.FormattingEnabled = true;
-            this.comboBox1_Utente.Location = new System.Drawing.Point(81, 230);
+            this.comboBox1_Utente.Location = new System.Drawing.Point(85, 163);
             this.comboBox1_Utente.Name = "comboBox1_Utente";
             this.comboBox1_Utente.Size = new System.Drawing.Size(554, 24);
             this.comboBox1_Utente.TabIndex = 135;
@@ -370,7 +373,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // textBox1_parentesco
             // 
-            this.textBox1_parentesco.Location = new System.Drawing.Point(814, 232);
+            this.textBox1_parentesco.Location = new System.Drawing.Point(818, 165);
             this.textBox1_parentesco.Name = "textBox1_parentesco";
             this.textBox1_parentesco.Size = new System.Drawing.Size(185, 22);
             this.textBox1_parentesco.TabIndex = 138;
@@ -379,7 +382,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(700, 194);
+            this.label13.Location = new System.Drawing.Point(681, 134);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(57, 22);
             this.label13.TabIndex = 141;
@@ -387,7 +390,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // textBox3_senha
             // 
-            this.textBox3_senha.Location = new System.Drawing.Point(777, 194);
+            this.textBox3_senha.Location = new System.Drawing.Point(777, 135);
             this.textBox3_senha.Name = "textBox3_senha";
             this.textBox3_senha.Size = new System.Drawing.Size(222, 22);
             this.textBox3_senha.TabIndex = 142;
@@ -395,7 +398,7 @@ namespace Projeto_Lar3idade_Back_End
             // textBox_UtenteFamiliar
             // 
             this.textBox_UtenteFamiliar.BackColor = System.Drawing.Color.White;
-            this.textBox_UtenteFamiliar.Location = new System.Drawing.Point(81, 261);
+            this.textBox_UtenteFamiliar.Location = new System.Drawing.Point(85, 193);
             this.textBox_UtenteFamiliar.Multiline = true;
             this.textBox_UtenteFamiliar.Name = "textBox_UtenteFamiliar";
             this.textBox_UtenteFamiliar.ReadOnly = true;
@@ -407,7 +410,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.button_Associate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
             this.button_Associate.ForeColor = System.Drawing.SystemColors.Control;
-            this.button_Associate.Location = new System.Drawing.Point(814, 257);
+            this.button_Associate.Location = new System.Drawing.Point(818, 190);
             this.button_Associate.Name = "button_Associate";
             this.button_Associate.Size = new System.Drawing.Size(86, 30);
             this.button_Associate.TabIndex = 144;
@@ -419,7 +422,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.button_desassociate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.button_desassociate.ForeColor = System.Drawing.SystemColors.Control;
-            this.button_desassociate.Location = new System.Drawing.Point(901, 257);
+            this.button_desassociate.Location = new System.Drawing.Point(905, 190);
             this.button_desassociate.Name = "button_desassociate";
             this.button_desassociate.Size = new System.Drawing.Size(98, 30);
             this.button_desassociate.TabIndex = 145;
@@ -427,11 +430,31 @@ namespace Projeto_Lar3idade_Back_End
             this.button_desassociate.UseVisualStyleBackColor = false;
             this.button_desassociate.Click += new System.EventHandler(this.button_Disassociate_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(818, 277);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(127, 30);
+            this.button1.TabIndex = 146;
+            this.button1.Text = "Carregar imagem";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
+            this.panel1.Location = new System.Drawing.Point(680, 194);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(122, 113);
+            this.panel1.TabIndex = 147;
+            // 
             // responsavel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.button_desassociate);
             this.Controls.Add(this.button_Associate);
             this.Controls.Add(this.textBox_UtenteFamiliar);
@@ -519,5 +542,7 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.TextBox textBox_UtenteFamiliar;
         private System.Windows.Forms.Button button_Associate;
         private System.Windows.Forms.Button button_desassociate;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

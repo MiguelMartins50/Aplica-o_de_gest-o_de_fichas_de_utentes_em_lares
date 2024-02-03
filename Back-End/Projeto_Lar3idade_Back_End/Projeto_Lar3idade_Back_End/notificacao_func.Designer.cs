@@ -40,7 +40,7 @@ namespace Projeto_Lar3idade_Back_End
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
-            this.button3.ForeColor = System.Drawing.SystemColors.Control;
+            this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button3.Location = new System.Drawing.Point(896, 57);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(88, 31);
@@ -94,7 +94,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(416, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 27);
+            this.label1.Size = new System.Drawing.Size(127, 26);
             this.label1.TabIndex = 68;
             this.label1.Text = "Notificações";
             // 
