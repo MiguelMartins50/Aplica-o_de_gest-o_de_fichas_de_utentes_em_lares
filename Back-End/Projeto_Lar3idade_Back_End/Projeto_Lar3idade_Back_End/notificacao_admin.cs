@@ -116,15 +116,19 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = @"SELECT 'func' AS tipo, idnotificacao_func,  funcionario_idFuncionario,idremetente, remetente, assunto, messagem, proccessada 
-                    FROM notificacao_func 
-                    WHERE funcionario_idFuncionario = 10
+            cmd.CommandText = @"SELECT tipo, idnotificacao, funcionario_idFuncionario, idremetente, remetente, assunto, messagem, proccessada, data_envio
+                                FROM (
+                                SELECT 'func' AS tipo, idnotificacao_func AS idnotificacao, funcionario_idFuncionario, idremetente, remetente, assunto, messagem, proccessada, data_envio
+                                FROM notificacao_func 
+                                WHERE funcionario_idFuncionario = 10
 
-                    UNION
+                                UNION
 
-                    SELECT 'medico' AS tipo, idnotificacao_medico, idFunc AS funcionario_idFuncionario,idmedico AS idremetente, remetente, assunto, messagem, proccessada 
-                    FROM notificacao_medico 
-                    WHERE remetente <> 'Admin'";
+                                SELECT 'medico' AS tipo, idnotificacao_medico AS idnotificacao, idFunc AS funcionario_idFuncionario, idmedico AS idremetente, remetente, assunto, messagem, proccessada, data_envio
+                                FROM notificacao_medico 
+                                WHERE remetente <> 'Admin'
+                                ) AS resultado
+                                ORDER BY data_envio;";
 
             cmd.Parameters.AddWithValue("@funcionario_idFuncionario", 10);
             cmd.ExecuteNonQuery();
@@ -139,6 +143,10 @@ namespace Projeto_Lar3idade_Back_End
             dataGridView1.Columns["idremetente"].Visible = false;
             dataGridView1.Columns["funcionario_idFuncionario"].Visible = false;
             dataGridView1.Columns["tipo"].Visible = false;
+            dataGridView1.Columns["idnotificacao"].Visible = false;
+            dataGridView1.Columns["data_envio"].HeaderText = "Data";
+
+
 
 
             conexao.Close();

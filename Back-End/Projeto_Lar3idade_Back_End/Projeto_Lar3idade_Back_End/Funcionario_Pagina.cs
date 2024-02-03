@@ -33,7 +33,7 @@ namespace Projeto_Lar3idade_Back_End
             notificacao_Func1.Size = new Size(1022, 700);
             this.Controls.Add(notificacao_Func1);
             atividades_func1 = new Atividades_func(iduser);
-            atividades_func1.Location = new Point(215, 60); 
+            atividades_func1.Location = new Point(215, 60);
             atividades_func1.Size = new Size(1022, 700);
             this.Controls.Add(atividades_func1);
             escalas_Func1 = new Escalas_func(iduser, tipo_func);
@@ -53,9 +53,17 @@ namespace Projeto_Lar3idade_Back_End
             enviar_func1.Hide();
             Console.WriteLine("Id Utilizador do funcionario nº1:" + iduser);
             Console.WriteLine("Id Utilizador do funcionario nº2:" + IDuser);
+<<<<<<< HEAD
             escalas_Func1.NavigateToEnviarFuncClicked += EscalasFunc_NavigateToEnviarFuncClicked;
             enviar_func1.NavigateToEscalsFuncClicked += EnviarFunc_NavigateToEscalasFuncClicked;
 
+=======
+
+            escalas_Func1.NavigateToEnviarFuncClicked += EscalasFunc_NavigateToEnviarFuncClicked;
+            enviar_func1.NavigateToEscalsFuncClicked += EnviarFunc_NavigateToEscalasFuncClicked;
+
+
+>>>>>>> 65fcce679446455da2779a28582da5ef5bec4db4
         }
 
 
@@ -216,6 +224,10 @@ namespace Projeto_Lar3idade_Back_End
             label4.BackColor = this.BackColor;
             label7.BackColor = Color.White;
             visitas1.Hide();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 65fcce679446455da2779a28582da5ef5bec4db4
         }
     }
 }
