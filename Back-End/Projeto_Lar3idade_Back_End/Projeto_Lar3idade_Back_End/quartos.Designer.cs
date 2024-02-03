@@ -58,7 +58,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label3.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(448, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 27);
+            this.label3.Size = new System.Drawing.Size(86, 26);
             this.label3.TabIndex = 14;
             this.label3.Text = "Quartos";
             // 
@@ -154,7 +154,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(76, 30);
             this.button_delete.TabIndex = 143;
-            this.button_delete.Text = "Delete";
+            this.button_delete.Text = "Apagar";
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
@@ -165,18 +165,18 @@ namespace Projeto_Lar3idade_Back_End
             this.button_update.Name = "button_update";
             this.button_update.Size = new System.Drawing.Size(69, 30);
             this.button_update.TabIndex = 142;
-            this.button_update.Text = "Update";
+            this.button_update.Text = "Alterar";
             this.button_update.UseVisualStyleBackColor = false;
             this.button_update.Click += new System.EventHandler(this.button_update_Click);
             // 
             // button_insert
             // 
-            this.button_insert.BackColor = System.Drawing.Color.LimeGreen;
+            this.button_insert.BackColor = System.Drawing.Color.Lime;
             this.button_insert.Location = new System.Drawing.Point(29, 234);
             this.button_insert.Name = "button_insert";
             this.button_insert.Size = new System.Drawing.Size(87, 30);
             this.button_insert.TabIndex = 141;
-            this.button_insert.Text = "Insert";
+            this.button_insert.Text = "Adicionar";
             this.button_insert.UseVisualStyleBackColor = false;
             this.button_insert.Click += new System.EventHandler(this.button_insert_Click);
             // 

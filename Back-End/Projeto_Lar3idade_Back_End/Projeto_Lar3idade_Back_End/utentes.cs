@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Drawing;
+using System.Drawing; // manipulação de imagem
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
-using System.IO;
+using System.IO; // operações com arquivos
 
 namespace Projeto_Lar3idade_Back_End
 {
@@ -590,6 +590,11 @@ namespace Projeto_Lar3idade_Back_End
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
           
+        }
+
+        private void label22_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

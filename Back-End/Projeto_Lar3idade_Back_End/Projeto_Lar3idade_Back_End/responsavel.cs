@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.IO; // operações com arquivos
+using System.Drawing;  // manipulação de imagem
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,8 @@ namespace Projeto_Lar3idade_Back_End
     {
         private int idAdd;
         private int idAddUt;
-        
+        private string imagePath; // Variável de membro para armazenar o caminho do arquivo selecionado
+
         private int idUt1;
         private int idUt2;
         private int idUt3;
@@ -101,15 +103,27 @@ namespace Projeto_Lar3idade_Back_End
             string ocupacao = textBox_ocupacao.Text;
             string email = textBox_email.Text;
             string senha = textBox3_senha.Text;
-            
 
             try
             {
+                byte[] imageBytes = null;
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    using (FileStream stream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                    {
+                        using (BinaryReader reader = new BinaryReader(stream))
+                        {
+                            imageBytes = reader.ReadBytes((int)stream.Length);
+                        }
+                    }
+                }
                 using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                 {
                     conexao.Open();
-                    string query = "INSERT INTO mydb.familiar (idFamiliar, nomel, numero_cc, data_validade, telemovel, data_nascimento,morada,cod_postal,ocupacao,tel_casa, email, senha)" +
-                                  "VALUES (@idFamiliar,@nomel, @numero_cc, @data_validade, @telemovel, @data_nascimento, @morada,@cod_postal,@ocupacao,@tel_casa,@email, @senha)";
+
+
+                    string query = "INSERT INTO mydb.familiar (idFamiliar, nomel, numero_cc, data_validade, telemovel, data_nascimento,morada,cod_postal,ocupacao,tel_casa, email, senha, Imagem)" +
+                                  "VALUES (@idFamiliar,@nomel, @numero_cc, @data_validade, @telemovel, @data_nascimento, @morada,@cod_postal,@ocupacao,@tel_casa,@email, @senha,@Imagem)";
 
                     string query2 = "SELECT * FROM familiar ORDER BY idFamiliar DESC LIMIT 1";
                     string query3 = "SELECT * FROM utente_familiar ORDER BY idUtente_familiar DESC LIMIT 1";
@@ -170,8 +184,8 @@ namespace Projeto_Lar3idade_Back_End
                         comando.Parameters.AddWithValue("@tel_casa", tel_casa);
                         comando.Parameters.AddWithValue("@email", email);
                         comando.Parameters.AddWithValue("@senha", senha);
+                        comando.Parameters.AddWithValue("@Imagem", imageBytes);
 
-                        // Execute a consulta de inserção
                         comando.ExecuteNonQuery();
 
                         MessageBox.Show("Responsavél adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -228,8 +242,14 @@ namespace Projeto_Lar3idade_Back_End
             textBox_UtenteFamiliar.Clear();
             // Limpar outras ComboBoxes e controles conforme necessário
             comboBox1_Utente.SelectedIndex = -1;
+<<<<<<< HEAD
+
+            //Limpar panel
+            panel1.BackgroundImage = null;
+=======
             Lista_utente_Familiar.Clear();
 
+>>>>>>> 65fcce679446455da2779a28582da5ef5bec4db4
 
         }
 
@@ -251,6 +271,19 @@ namespace Projeto_Lar3idade_Back_End
                     string ocupacao = textBox_ocupacao.Text;
                     string email = textBox_email.Text;
                     string senha = textBox3_senha.Text;
+
+                    byte[] imageBytes = null;
+                    if (!string.IsNullOrEmpty(imagePath))
+                    {
+                        using (FileStream stream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                        {
+                            using (BinaryReader reader = new BinaryReader(stream))
+                            {
+                                imageBytes = reader.ReadBytes((int)stream.Length);
+                            }
+                        }
+                    }
+
                     using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                     {
                         conexao.Open();
@@ -265,7 +298,8 @@ namespace Projeto_Lar3idade_Back_End
                                                      "ocupacao = @ocupacao, " +
                                                      "tel_casa = @tel_casa, " +
                                                      "email = @email, " +
-                                                     "senha = @senha " +
+                                                     "senha = @senha, " + 
+                                                     "Imagem = @Imagem " + 
                                                      "WHERE idFamiliar = @idFamiliar";
                         string query3 = "SELECT * FROM utente_familiar ORDER BY idUtente_familiar DESC LIMIT 1";
                         using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
@@ -303,6 +337,7 @@ namespace Projeto_Lar3idade_Back_End
                             comandoUpdateFamiliar.Parameters.AddWithValue("@tel_casa", tel_casa);
                             comandoUpdateFamiliar.Parameters.AddWithValue("@email", email);
                             comandoUpdateFamiliar.Parameters.AddWithValue("@senha", senha);
+                            comandoUpdateFamiliar.Parameters.AddWithValue("@Imagem", imageBytes);
 
                             comandoUpdateFamiliar.ExecuteNonQuery();
 
@@ -409,7 +444,8 @@ namespace Projeto_Lar3idade_Back_End
             }
             finally
             {
-                display_data();  // Atualize a exibição dos dados após a exclusão
+                display_data();
+                LimparTextBoxes();
             }
         }
         
@@ -465,8 +501,9 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_ocupacao.Text = "";
                 textBox3_senha.Text = "";
                 comboBox1_Utente.SelectedIndex = 0;
-                           
-                
+                //Limpar panel
+                panel1.BackgroundImage = null;
+
 
             }
             else
@@ -598,6 +635,7 @@ namespace Projeto_Lar3idade_Back_End
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
+
                 // Extract Familiar_id from the selected row
                 int familiarId = Convert.ToInt32(row.Cells["idFamiliar"].Value);
 
@@ -623,6 +661,26 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_codPostal.Text = row.Cells["cod_postal"].Value.ToString();
                 textBox_ocupacao.Text = row.Cells["ocupacao"].Value.ToString();
                 textBox3_senha.Text = row.Cells["senha"].Value.ToString();
+
+                // Carrega a imagem associada à linha selecionada no Panel1
+                if (row.Cells["Imagem"].Value != DBNull.Value)
+                {
+                    byte[] imageBytes = (byte[])row.Cells["Imagem"].Value;
+                    // Converte os bytes da imagem em um objeto Image
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        Image image = Image.FromStream(ms);
+                        // Define a imagem como plano de fundo do Panel1 com layout de zoom
+                        panel1.BackgroundImage = image;
+                        panel1.BackgroundImageLayout = ImageLayout.Zoom;
+                    }
+                }
+                else
+                {
+                    // Limpa o plano de fundo do Panel1 se não houver imagem associada
+                    panel1.BackgroundImage = null;
+                }
+
             }
         }
 
@@ -675,7 +733,7 @@ namespace Projeto_Lar3idade_Back_End
             if (comboBox1_Utente.SelectedItem != null && !string.IsNullOrEmpty(textBox1_parentesco.Text))
             {
                 string nomeUtente = comboBox1_Utente.SelectedItem.ToString();
-                string idUtente = utente_[nomeUtente]; 
+                string idUtente = utente_[nomeUtente];
                 string parentesco = textBox1_parentesco.Text;
 
                 string utenteFamiliarInfo = $"ID: {idUtente}, Nome: {nomeUtente}, Parentesco: {parentesco}";
@@ -742,6 +800,36 @@ namespace Projeto_Lar3idade_Back_End
         }
 
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Defina o filtro de arquivo para imagens apenas
+            openFileDialog1.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Obtenha o caminho do arquivo selecionado
+                imagePath = openFileDialog1.FileName;
+
+                try
+                {
+                    // Carregue a imagem no controle Panel
+                    Image image = Image.FromFile(imagePath);
+                    panel1.BackgroundImage = image;
+                    panel1.BackgroundImageLayout = ImageLayout.Zoom; // Redimensiona a imagem para caber no controle Panel
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao carregar a imagem: " + ex.Message);
+                }
+            }
+        }
     }
 }

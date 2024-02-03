@@ -201,6 +201,10 @@ namespace Projeto_Lar3idade_Back_End
             this.MaximizeBox = false;
             this.Name = "Funcionario_Pagina";
             this.Text = "Medico";
+<<<<<<< HEAD
+//          this.Load += new System.EventHandler(this.Funcionario_Pagina_Load);
+=======
+>>>>>>> 65fcce679446455da2779a28582da5ef5bec4db4
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

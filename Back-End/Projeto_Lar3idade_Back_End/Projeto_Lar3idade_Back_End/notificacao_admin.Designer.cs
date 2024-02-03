@@ -42,7 +42,7 @@ namespace Projeto_Lar3idade_Back_End
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
-            this.button3.ForeColor = System.Drawing.SystemColors.Control;
+            this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button3.Location = new System.Drawing.Point(890, 70);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(88, 31);
@@ -54,7 +54,7 @@ namespace Projeto_Lar3idade_Back_End
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.ForeColor = System.Drawing.SystemColors.Control;
+            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button2.Location = new System.Drawing.Point(907, 664);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(88, 31);
@@ -65,8 +65,8 @@ namespace Projeto_Lar3idade_Back_End
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.BackColor = System.Drawing.Color.Lime;
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.Location = new System.Drawing.Point(796, 664);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 31);
@@ -120,7 +120,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(410, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 27);
+            this.label1.Size = new System.Drawing.Size(127, 26);
             this.label1.TabIndex = 63;
             this.label1.Text = "Notificações";
             // 
