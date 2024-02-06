@@ -278,6 +278,7 @@ namespace Projeto_Lar3idade_Back_End
 
                             // Atualizando a exibição dos dados no DataGridView
                             display_data();
+                            LimparTextBoxes();
 
                             MessageBox.Show("Utente apagado com sucesso");
                         }
