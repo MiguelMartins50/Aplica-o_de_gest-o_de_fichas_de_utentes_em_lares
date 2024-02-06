@@ -318,9 +318,51 @@ namespace Projeto_Lar3idade_Back_End
                 medico_nome = Convert.ToString(dta.Rows[0]["nome_medico"]);
             }
             dataGridView1.DataSource = dta;
+            ResizeDataGridViewColumnImages("Imagem");
+
             conexao.Close();
         }
+        private void ResizeDataGridViewColumnImages(string columnName)
+        {
+            // Check if the specified column exists
+            if (dataGridView1.Columns.Contains(columnName))
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    // Get the value from the cell in the specified column
+                    object cellValue = row.Cells[columnName].Value;
 
+                    // Check if the cell value is not null and is of type byte[]
+                    if (cellValue != null && cellValue.GetType() == typeof(byte[]))
+                    {
+                        byte[] imageData = (byte[])cellValue;
+
+                        // Convert the byte array to an Image
+                        Image originalImage;
+                        using (MemoryStream ms = new MemoryStream(imageData))
+                        {
+                            originalImage = Image.FromStream(ms);
+                        }
+
+                        // Resize the image to 30x30 pixels
+                        Image resizedImage = new Bitmap(60, 60);
+                        using (Graphics g = Graphics.FromImage(resizedImage))
+                        {
+                            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                            g.DrawImage(originalImage, 0, 0, 60, 60);
+                        }
+
+                        // Set the resized image back to the cell
+                        row.Cells[columnName].Value = resizedImage;
+                    }
+                    else
+                    {
+                        // If the cell value is null or not of type byte[], set the cell value to null
+                        row.Cells[columnName].Value = null;
+                    }
+                }
+            }
+        }
 
         private void Mostrar_Click(object sender, EventArgs e)
         {

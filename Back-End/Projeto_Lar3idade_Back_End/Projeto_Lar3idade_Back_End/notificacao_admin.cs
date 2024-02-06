@@ -164,10 +164,10 @@ namespace Projeto_Lar3idade_Back_End
                     {
                         Console.WriteLine("aqui1");
                         conexao.Open();
-                        string query = "INSERT INTO mydb.notificacao_func (remetente,assunto, messagem, idremetente, funcionario_idFuncionario,proccessada)" +
-                                        "VALUES (@remetente, @assunto, @messagem, @idremetente, @funcionario_idFuncionario,@proccessada)";
-                        string query2 = "INSERT INTO mydb.notificacao_medico (remetente,assunto, messagem, idmedico, idFunc,proccessada)" +
-                                        "VALUES (@remetente, @assunto, @messagem, @idmedico, @idFunc,@proccessada)";
+                        string query = "INSERT INTO mydb.notificacao_func (remetente,assunto, messagem, idremetente, funcionario_idFuncionario,proccessada,Data_envio)" +
+                                        "VALUES (@remetente, @assunto, @messagem, @idremetente, @funcionario_idFuncionario,@proccessada,@Data_envio)";
+                        string query2 = "INSERT INTO mydb.notificacao_medico (remetente,assunto, messagem, idmedico, idFunc,proccessada,Data_envio)" +
+                                        "VALUES (@remetente, @assunto, @messagem, @idmedico, @idFunc,@proccessada,@Data_envio)";
                         string mensagem = "Caro " + remetente + ",\n\n Agradecemos por compartilhar suas necessidades conosco.Fico feliz em informar que sua solicitação de alteração das Escalas foi aprovada.Por favor, confirme se está tudo em ordem e se há mais alguma coisa que possamos fazer para auxiliá-lo.";
                         Console.WriteLine("aqui2");
 
@@ -183,6 +183,8 @@ namespace Projeto_Lar3idade_Back_End
                                 comando.Parameters.AddWithValue("@idremetente", 10);
                                 comando.Parameters.AddWithValue("@funcionario_idFuncionario", idsend);
                                 comando.Parameters.AddWithValue("@proccessada", 0);
+                                comando.Parameters.AddWithValue("@Data_envio", DateTime.Now);
+
 
 
                                 comando.ExecuteNonQuery();
@@ -203,6 +205,7 @@ namespace Projeto_Lar3idade_Back_End
                                 comando.Parameters.AddWithValue("@idFunc", 10);
                                 comando.Parameters.AddWithValue("@idmedico", idsend);
                                 comando.Parameters.AddWithValue("@proccessada", 0);
+                                comando.Parameters.AddWithValue("@Data_envio", DateTime.Now);
 
 
                                 comando.ExecuteNonQuery();
@@ -269,10 +272,10 @@ namespace Projeto_Lar3idade_Back_End
                     using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                     {
                         conexao.Open();
-                        string query = "INSERT INTO mydb.notificacao_func (remetente,assunto, messagem, idremetente, funcionario_idFuncionario,proccessada)" +
-                                        "VALUES (@remetente, @assunto, @messagem, @idremetente, @funcionario_idFuncionario,@proccessada)";
-                        string query2 = "INSERT INTO mydb.notificacao_medico (remetente,assunto, messagem, idmedico, idFunc,proccessada)" +
-                                        "VALUES (@remetente, @assunto, @messagem, @idmedico, @idFunc,@proccessada)";
+                        string query = "INSERT INTO mydb.notificacao_func (remetente,assunto, messagem, idremetente, funcionario_idFuncionario,proccessada,Data_envio)" +
+                                        "VALUES (@remetente, @assunto, @messagem, @idremetente, @funcionario_idFuncionario,@proccessada,@Data_envio)";
+                        string query2 = "INSERT INTO mydb.notificacao_medico (remetente,assunto, messagem, idmedico, idFunc,proccessada,Data_envio)" +
+                                        "VALUES (@remetente, @assunto, @messagem, @idmedico, @idFunc,@proccessada,@Data_envio)";
                         string mensagem = "Caro " + remetente + ",\n\n Agradecemos por compartilhar suas preocupações conosco. Compreendemos a importância de um horário flexível para atender às suas necessidades pessoais. No entanto, neste momento, não podemos atender ao seu pedido de alteração das Escalas.";
 
 
@@ -286,6 +289,7 @@ namespace Projeto_Lar3idade_Back_End
                                 comando.Parameters.AddWithValue("@idremetente", 10);
                                 comando.Parameters.AddWithValue("@funcionario_idFuncionario", idsend);
                                 comando.Parameters.AddWithValue("@proccessada", 0);
+                                comando.Parameters.AddWithValue("@Data_envio", DateTime.Now);
 
 
                                 comando.ExecuteNonQuery();
@@ -305,6 +309,7 @@ namespace Projeto_Lar3idade_Back_End
                                 comando.Parameters.AddWithValue("@idFunc", 10);
                                 comando.Parameters.AddWithValue("@idmedico", idsend);
                                 comando.Parameters.AddWithValue("@proccessada", 0);
+                                comando.Parameters.AddWithValue("@Data_envio", DateTime.Now);
 
 
 
