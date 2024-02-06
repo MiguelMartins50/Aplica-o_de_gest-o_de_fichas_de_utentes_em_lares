@@ -48,8 +48,7 @@ namespace Projeto_Lar3idade_Back_End
             conexao = new MySqlConnection(connectionString);
             this.iduser = userid;
             this.tipo_func = func_tipo;
-            comboBox3.Items.Add("folga");
-            comboBox3.Items.Add("falta Justificada");
+            
             Console.WriteLine("id Utlizador da Escalas:" + iduser);
             display_data();
             Loadcomboboxes();
@@ -72,14 +71,7 @@ namespace Projeto_Lar3idade_Back_End
         }
 
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox3.SelectedItem != null)
-            {
-                estado = comboBox3.SelectedItem.ToString();
-            }
-
-        }
+       
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {

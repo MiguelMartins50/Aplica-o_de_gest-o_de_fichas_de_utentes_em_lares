@@ -105,6 +105,8 @@ namespace Projeto_Lar3idade_Back_End
                             Lastmonth = Convert.ToDateTime(reader["data_final"]);
                             string id = Convert.ToString(reader["idEscala_servico"]);
                             Console.WriteLine(data_inicio);
+                            Console.WriteLine(Lastmonth);
+
                             Console.WriteLine(data_fim);
                             string month = data_inicio.ToString("MMMM yyyy", new System.Globalization.CultureInfo("pt-BR"));
                             comboBox1.Items.Add(data_inicio.ToString("MMMM yyyy", new System.Globalization.CultureInfo("pt-BR")));
@@ -203,15 +205,56 @@ namespace Projeto_Lar3idade_Back_End
 
 
         }
+        private void databuscar()
+        {
+            try
+            {
+                if (conexao.State != ConnectionState.Open)
+                {
+                    conexao.Open();
+                }
+                string Querryid_func = "SELECT data_inicial FROM escala_servico where idEscala_servico = @idEscala_servico";
+                using (MySqlCommand cmd = new MySqlCommand(Querryid_func, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@idEscala_servico", idescala);
 
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read()) // Check if there are records before trying to read
+                        {
+                             DateTime datatemp = Convert.ToDateTime(reader["data_inicial"]);
+                             Lastmonth = datatemp.AddDays(-1);
+                             Console.WriteLine("buscardata:" + Lastmonth);
+                        }
+                        else
+                        {
+                            MessageBox.Show("ultimo id nao encontrado-ESCALA-FUNCIONARIO");
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error creating escala_servico and associated entries: " + ex.Message);
+            }
+            finally
+            {
+                // Close the connection
+                conexao.Close();
+            }
+
+        }
         private void CriarEscalaServico()
         {
+            databuscar();
+            Console.WriteLine(Lastmonth);
             int count = 1;
             Console.WriteLine($"Month: {Lastmonth.Month}, Year: {Lastmonth.Year}");
             int counter = 0;
             int dateadd;
             DateTime data_create = Lastmonth.AddDays(1);
-            if (Lastmonth.Month == 2)
+            if (Lastmonth.Month + 1 == 2)
             {
 
                 // February
@@ -222,7 +265,7 @@ namespace Projeto_Lar3idade_Back_End
                 Console.WriteLine("F");
 
             }
-            else if (Lastmonth.Month == 4 || Lastmonth.Month == 6 || Lastmonth.Month == 9 || Lastmonth.Month == 11)
+            else if (Lastmonth.Month + 1 == 4 || Lastmonth.Month + 1 == 6 || Lastmonth.Month + 1 == 9 || Lastmonth.Month + 1 == 11)
             {
                 // April, June, September, November
                 dateadd = 30;
@@ -277,9 +320,9 @@ namespace Projeto_Lar3idade_Back_End
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@dia", data_create);
                             string dia_da_semana = data_create.ToString("dddd", new System.Globalization.CultureInfo("pt-BR"));
                             cmdInsertFuncionarioEscala.Parameters.AddWithValue("@dia_da_semana", dia_da_semana);
-                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@horario_inicio", "00:00:00"); // Replace with your logic for setting the start time
-                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@horario_fim", "00:00:00"); // Replace with your logic for setting the end time
-                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@estado", "Sem Estado"); // Replace with your logic for setting the estado
+                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@horario_inicio", "08:00:00"); // Replace with your logic for setting the start time
+                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@horario_fim", "17:00:00"); // Replace with your logic for setting the end time
+                            cmdInsertFuncionarioEscala.Parameters.AddWithValue("@estado", "trabalho"); // Replace with your logic for setting the estado
                             cmdInsertFuncionarioEscala.ExecuteNonQuery();
                         }
                         Console.WriteLine("Acabou de criar uma escala_funcionario");
@@ -324,9 +367,9 @@ namespace Projeto_Lar3idade_Back_End
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@dia", data_create);
                             string dia_da_semana = data_create.ToString("dddd", new System.Globalization.CultureInfo("pt-BR"));
                             cmdInsertEscalaMedico.Parameters.AddWithValue("@dia_da_semana", dia_da_semana);
-                            cmdInsertEscalaMedico.Parameters.AddWithValue("@horario_inicio", "00:00:00"); // Replace with your logic for setting the start time
-                            cmdInsertEscalaMedico.Parameters.AddWithValue("@horario_fim", "00:00:00"); // Replace with your logic for setting the end time
-                            cmdInsertEscalaMedico.Parameters.AddWithValue("@estado", "Sem Estado"); // Replace with your logic for setting the estado
+                            cmdInsertEscalaMedico.Parameters.AddWithValue("@horario_inicio", "08:00:00"); // Replace with your logic for setting the start time
+                            cmdInsertEscalaMedico.Parameters.AddWithValue("@horario_fim", "17:00:00"); // Replace with your logic for setting the end time
+                            cmdInsertEscalaMedico.Parameters.AddWithValue("@estado", "trabalho"); // Replace with your logic for setting the estado
                             cmdInsertEscalaMedico.ExecuteNonQuery();
 
                         }
