@@ -49,6 +49,7 @@ namespace Projeto_Lar3idade_Back_End
             escalas_Func1.Hide();
             tarefas_Func1.Hide();
             visitas1.Hide();
+            responsavel1.Hide();
             notificacao_Func1.Hide();
             enviar_func1.Hide();
             Console.WriteLine("Id Utilizador do funcionario nº1:" + iduser);
@@ -80,12 +81,12 @@ namespace Projeto_Lar3idade_Back_End
             atividades_func1.Hide();
             escalas_Func1.Hide();
             notificacao_Func1.Hide();
-
+            responsavel1.Hide();
             label5.BackColor = this.BackColor;
             label2.BackColor = this.BackColor;
             label1.BackColor = Color.White;
             label7.BackColor = this.BackColor;
-
+            label9.BackColor = this.BackColor;
             label3.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
 
@@ -99,14 +100,14 @@ namespace Projeto_Lar3idade_Back_End
             atividades_func1.Hide();
             escalas_Func1.Hide();
             notificacao_Func1.Hide();
-
+            responsavel1.Hide();
             label5.BackColor = this.BackColor;
             label2.BackColor = Color.White;
             label1.BackColor = this.BackColor;
             label3.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
-
+            label9.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             visitas1.Hide();
 
@@ -120,7 +121,7 @@ namespace Projeto_Lar3idade_Back_End
             atividades_func1.Show();
             escalas_Func1.Hide();
             notificacao_Func1.Hide();
-
+            responsavel1.Hide();
             label5.BackColor = this.BackColor;
             label2.BackColor = this.BackColor;
             label1.BackColor = this.BackColor;
@@ -128,7 +129,7 @@ namespace Projeto_Lar3idade_Back_End
             label6.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
-
+            label9.BackColor = this.BackColor;
             visitas1.Hide();
 
         }
@@ -140,7 +141,7 @@ namespace Projeto_Lar3idade_Back_End
             utentes1.Hide();
             atividades_func1.Hide();
             notificacao_Func1.Hide();
-
+            responsavel1.Hide();
             escalas_Func1.Show();
             label2.BackColor = this.BackColor;
             label1.BackColor = this.BackColor;
@@ -149,7 +150,7 @@ namespace Projeto_Lar3idade_Back_End
             label6.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
-
+            label9.BackColor = this.BackColor;
             visitas1.Hide();
         }
 
@@ -162,7 +163,7 @@ namespace Projeto_Lar3idade_Back_End
             atividades_func1.Hide();
             escalas_Func1.Hide();
             notificacao_Func1.Hide();
-
+            responsavel1.Hide();
             label2.BackColor = this.BackColor;
             label1.BackColor = this.BackColor;
             label3.BackColor = this.BackColor;
@@ -170,13 +171,13 @@ namespace Projeto_Lar3idade_Back_End
             label6.BackColor = this.BackColor;
             label4.BackColor = Color.White;
             label7.BackColor = this.BackColor;
-
+            label9.BackColor = this.BackColor;
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
             notificacao_Func1.Hide();
-
+            responsavel1.Hide();
             tarefas_Func1.Show();
             consultas1.Hide();
             utentes1.Hide();
@@ -189,7 +190,7 @@ namespace Projeto_Lar3idade_Back_End
             label5.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
-
+            label9.BackColor = this.BackColor;
             visitas1.Hide();
         }
 
@@ -202,6 +203,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void label7_Click(object sender, EventArgs e)
         {
+            responsavel1.Hide();
             notificacao_Func1.Show();
             tarefas_Func1.Hide();
             consultas1.Hide();
@@ -215,7 +217,29 @@ namespace Projeto_Lar3idade_Back_End
             label5.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label7.BackColor = Color.White;
+            label9.BackColor = this.BackColor;
             visitas1.Hide();
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+            responsavel1.Show();
+            notificacao_Func1.Hide();
+            tarefas_Func1.Hide();
+            consultas1.Hide();
+            utentes1.Hide();
+            atividades_func1.Hide();
+            escalas_Func1.Hide();
+            label2.BackColor = this.BackColor;
+            label1.BackColor = this.BackColor;
+            label3.BackColor = this.BackColor;
+            label6.BackColor = this.BackColor;
+            label5.BackColor = this.BackColor;
+            label4.BackColor = this.BackColor;
+            label7.BackColor = this.BackColor;
+            label9.BackColor = Color.White;
+            visitas1.Hide();
+
         }
     }
 }
