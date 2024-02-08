@@ -86,7 +86,7 @@ namespace Projeto_Lar3idade_Back_End
             label2.BackColor = this.BackColor;
             label1.BackColor = Color.White;
             label7.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label8.BackColor = this.BackColor;
             label3.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
 
@@ -107,7 +107,7 @@ namespace Projeto_Lar3idade_Back_End
             label3.BackColor = this.BackColor;
             label6.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label8.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             visitas1.Hide();
 
@@ -129,7 +129,7 @@ namespace Projeto_Lar3idade_Back_End
             label6.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label8.BackColor = this.BackColor;
             visitas1.Hide();
 
         }
@@ -150,7 +150,7 @@ namespace Projeto_Lar3idade_Back_End
             label6.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label8.BackColor = this.BackColor;
             visitas1.Hide();
         }
 
@@ -171,7 +171,7 @@ namespace Projeto_Lar3idade_Back_End
             label6.BackColor = this.BackColor;
             label4.BackColor = Color.White;
             label7.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label8.BackColor = this.BackColor;
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -190,7 +190,7 @@ namespace Projeto_Lar3idade_Back_End
             label5.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
-            label9.BackColor = this.BackColor;
+            label8.BackColor = this.BackColor;
             visitas1.Hide();
         }
 
@@ -217,11 +217,11 @@ namespace Projeto_Lar3idade_Back_End
             label5.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label7.BackColor = Color.White;
-            label9.BackColor = this.BackColor;
+            label8.BackColor = this.BackColor;
             visitas1.Hide();
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void label8_Click(object sender, EventArgs e)
         {
             responsavel1.Show();
             notificacao_Func1.Hide();
@@ -237,9 +237,8 @@ namespace Projeto_Lar3idade_Back_End
             label5.BackColor = this.BackColor;
             label4.BackColor = this.BackColor;
             label7.BackColor = this.BackColor;
-            label9.BackColor = Color.White;
+            label8.BackColor = Color.White;
             visitas1.Hide();
-
         }
     }
 }

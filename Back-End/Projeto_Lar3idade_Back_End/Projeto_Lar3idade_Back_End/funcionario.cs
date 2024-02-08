@@ -20,7 +20,7 @@ namespace Projeto_Lar3idade_Back_End
         {
             InitializeComponent();
 
-            comboBox1.Items.AddRange(new string[] {"Médico(a)", "Cuidador(a)", "Recepcionista" });
+            comboBox1.Items.AddRange(new string[] { "Médico(a)", "Cuidador(a)", "Recepcionista" });
 
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
@@ -142,7 +142,7 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.CommandType = CommandType.Text;
 
                     // Utilizando parâmetros para prevenir injeção de SQL
-                    if(funcao == "Médico(a)")
+                    if (funcao == "Médico(a)")
                     {
                         cmd.CommandText = "DELETE FROM mydb.medico WHERE idMedico = @idMedico";
                         cmd.Parameters.AddWithValue("@idMedico", idFuncionarioParaExcluir);
@@ -152,7 +152,7 @@ namespace Projeto_Lar3idade_Back_End
                         cmd.CommandText = "DELETE FROM mydb.funcionario WHERE idFuncionario = @IdFuncionario";
                         cmd.Parameters.AddWithValue("@IdFuncionario", idFuncionarioParaExcluir);
                     }
-                    
+
 
                     // Executando o comando DELETE
                     cmd.ExecuteNonQuery();
@@ -190,7 +190,7 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     // Obtém o valor do idFuncionario dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
-                    if(funcao == "Médico(a)")
+                    if (funcao == "Médico(a)")
                     {
                         cmd.CommandText = "UPDATE mydb.medico SET nome = @Nome, numero_cc = @NumeroCC, Data_validade = @DataValidade, telemovel = @Telemovel, salario_hora = @SalarioHora, email = @Email, password = @Senha WHERE idMedico = @idMedico";
 
@@ -220,7 +220,7 @@ namespace Projeto_Lar3idade_Back_End
                         cmd.Parameters.AddWithValue("@IdFuncionario", idupt);
                         cmd.Parameters.AddWithValue("@Funcao", comboBox1.SelectedItem.ToString());
                     }
-                    
+
 
                     // Executando o comando
                     cmd.ExecuteNonQuery();
@@ -360,12 +360,12 @@ namespace Projeto_Lar3idade_Back_End
 
                 // Obtém o valor do idFuncionario da célula clicada
                 int idFuncionarioSelecionado = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idFuncionario"].Value);
-                 funcao = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Funcao"].Value);
+                funcao = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Funcao"].Value);
                 Console.WriteLine("rowcount:" + Convert.ToInt32(dataGridView1.SelectedRows.Count));
                 Console.WriteLine("id:" + Convert.ToInt32(idFuncionarioSelecionado));
                 idupt = idFuncionarioSelecionado;
                 // Obtém os dados do funcionário com base no idFuncionario
-                if(funcao == "Médico(a)")
+                if (funcao == "Médico(a)")
                 {
                     ExibirDadosMedico(idFuncionarioSelecionado);
                 }
@@ -373,7 +373,7 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     ExibirDadosFuncionario(idFuncionarioSelecionado);
                 }
-                
+
             }
 
         }
@@ -397,3 +397,4 @@ namespace Projeto_Lar3idade_Back_End
         }
     }
 }
+
