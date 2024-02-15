@@ -38,7 +38,7 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Open();
 
                 // Carregar dados para a ComboBox de Quartos
-                string queryQuarto = "SELECT idQuarto FROM quarto WHERE estado = 'Livre'";
+                string queryQuarto = "SELECT idQuarto , Numero FROM quarto WHERE estado = 'Livre'";
                 using (MySqlCommand cmdQuarto = new MySqlCommand(queryQuarto, conexao))
                 {
                     using (MySqlDataReader readerQuarto = cmdQuarto.ExecuteReader())
@@ -46,7 +46,9 @@ namespace Projeto_Lar3idade_Back_End
                         while (readerQuarto.Read())
                         {
                             string idQuarto = readerQuarto["idQuarto"].ToString();
-                            comboBox_quarto.Items.Add(idQuarto);
+                            string NQuarto = readerQuarto["Numero"].ToString();
+                            string titulo = "ID:" + idQuarto + " Nº:" + NQuarto;
+                            comboBox_quarto.Items.Add(titulo);
                         }
                     }
                 }
@@ -478,8 +480,8 @@ namespace Projeto_Lar3idade_Back_End
 
                 MySqlCommand cmd = conexao.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT utente.*, medico.nome AS nome_medico FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico WHERE idUtente = @IdUtente";
-                cmd.Parameters.AddWithValue("@IdUtente", idUtenteParaEditar);
+                cmd.CommandText = "   SELECT utente.*, medico.nome , Quarto.Numero AS nome_medico FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico INNER JOIN   Quarto ON utente.Quarto_idQuarto = Quarto.idQuarto WHERE idUtente = @idUtente";
+                cmd.Parameters.AddWithValue("@idUtente", idUtenteParaEditar);
                 DataTable dta = new DataTable();
                 MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
                 dataadapter.Fill(dta);
@@ -516,7 +518,7 @@ namespace Projeto_Lar3idade_Back_End
                         SelecionarRadioButtonPorGrauDependencia(reader["grau_dependencia"].ToString());
                         textBox_email.Text = reader["email"].ToString();
                         textBox_senha.Text = reader["senha"].ToString();
-                        comboBox_quarto.Text = reader["Quarto_idQuarto"].ToString();
+                        comboBox_quarto.Text = "ID:"+reader["Quarto_idQuarto"].ToString()+" Nº:"+ reader["Quarto_idQuarto"].ToString();
 
                         // Carregar imagem no Panel1
                         if (reader["Imagem"] != DBNull.Value)

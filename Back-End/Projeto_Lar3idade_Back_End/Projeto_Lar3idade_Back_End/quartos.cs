@@ -313,8 +313,13 @@ namespace Projeto_Lar3idade_Back_End
 
                             
                         }
-                        
-                        
+                        string query5 = "UPDATE utente SET Quarto_idQuarto = NULL WHERE Quarto_idQuarto = @idQuarto AND idUtente NOT IN (" + string.Join(",", Lista_utente.Select(entry => entry.Split(',')[0].Split(':')[1].Trim())) + ")";
+                        using (MySqlCommand comandoReset = new MySqlCommand(query5, conexao))
+                        {
+                            comandoReset.Parameters.AddWithValue("@idQuarto", idQuarto);
+                            comandoReset.ExecuteNonQuery();
+                        }
+
                         foreach (string entry in Lista_utente)
                         {
                             string[] parts = entry.Split(',');
