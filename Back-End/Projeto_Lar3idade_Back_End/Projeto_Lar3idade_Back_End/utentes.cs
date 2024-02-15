@@ -305,7 +305,11 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT medico.nome AS nome_medico, utente.* FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico ORDER BY utente.idUtente ASC;";
+            cmd.CommandText = "SELECT u.idUtente, m.nome AS nome_medico,u.nome AS nome_utente, u.numero_cc, " +
+                "u.data_validade,u.nif, u.niss, u.n_utenteSaude, u.genero,  u.data_nascimento,  u.idade, u.estado_civil," +
+                "u.morada, u.localidade, u.cod_postal, u.telefone_casa, u.telemovel, u.grau_dependencia, u.email, u.senha,   " +
+                "q.Numero AS numero_quarto, u.Imagem, u.Medico_idMedico FROM utente u JOIN medico m ON u.Medico_idMedico = m.idMedico JOIN quarto q " +
+                "ON u.Quarto_idQuarto = q.idQuarto;";
 
             cmd.ExecuteNonQuery();
             DataTable dta = new DataTable();

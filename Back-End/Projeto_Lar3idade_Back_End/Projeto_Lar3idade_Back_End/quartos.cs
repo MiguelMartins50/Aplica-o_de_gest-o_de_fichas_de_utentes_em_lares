@@ -80,6 +80,7 @@ namespace Projeto_Lar3idade_Back_End
             comboBox_estado.SelectedIndex = -1;
             comboBox1_Utente.SelectedIndex = -1;
             textBox_numero.Clear();
+            textBox_utentes.Clear();
 
         }
 

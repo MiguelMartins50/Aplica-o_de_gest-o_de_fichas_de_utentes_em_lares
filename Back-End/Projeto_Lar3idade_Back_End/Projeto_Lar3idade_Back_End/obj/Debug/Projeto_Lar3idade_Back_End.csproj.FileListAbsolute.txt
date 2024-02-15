@@ -429,3 +429,7 @@ C:\Users\fabio\OneDrive\Ambiente de Trabalho\Project\projeto_final\Back-End\Proj
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Project\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.exe
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Project\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.pdb
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Project\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\Projeto_Lar3idade_Back_End.pdb
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.enviar_func.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.enviar_medico.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.notificacao_admin.resources
+C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.notificacao_func.resources
