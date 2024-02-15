@@ -495,7 +495,7 @@ namespace Projeto_Lar3idade_Back_End
                     {
                         // Atualize a variável idUtente com o valor do idUtenteParaEditar
                         idUtente = idUtenteParaEditar;
-
+                        idQuarto = Convert.ToInt32( reader["Quarto_idQuarto"].ToString());
                         // Preenche os campos com os dados do utente
                         comboBox_medico.Text = medico_nome;
                         textBox_Name.Text = reader["nome"].ToString();
