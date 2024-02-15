@@ -385,7 +385,7 @@ namespace Projeto_Lar3idade_Back_End
 
                 // Display the updated data
                 display_data();
-                MessageBox.Show("Escala_servico and associated entries created successfully");
+                MessageBox.Show("Escalas foram Criadas com Sucesso");
             }
             catch (Exception ex)
             {

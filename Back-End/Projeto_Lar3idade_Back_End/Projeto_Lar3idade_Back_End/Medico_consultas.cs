@@ -59,7 +59,7 @@ namespace Projeto_Lar3idade_Back_End
             }
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT c.idConsulta,u.nome AS Utente,c.Utente_idUtente,c.data,c.estado,c.relatorio,p.descricao,p.idPrescricao_medica,p.estado AS \"estado da prescricao\" FROM mydb.consulta c JOIN mydb.utente u ON c.Utente_idUtente = u.idUtente JOIN mydb.medico m ON c.Medico_idMedico = m.idMedico LEFT JOIN mydb.prescricao_medica p ON p.Consulta_idConsulta = c.idConsulta WHERE c.Medico_idMedico = @iduser;";
+            cmd.CommandText = "SELECT c.idConsulta,u.nome AS Utente,c.Utente_idUtente,c.data,c.estado,c.relatorio,p.descricao,p.idPrescricao_medica,p.estado AS \"estado da prescricao\" FROM mydb.consulta c JOIN mydb.utente u ON c.Utente_idUtente = u.idUtente JOIN mydb.medico m ON c.Medico_idMedico = m.idMedico LEFT JOIN mydb.prescricao_medica p ON p.Consulta_idConsulta = c.idConsulta WHERE c.Medico_idMedico =@iduser ORDER BY CASE WHEN c.estado = 'Agendada' THEN 0 ELSE 1 END;";
             cmd.Parameters.AddWithValue("@iduser", user_ID);
             cmd.ExecuteNonQuery();
             DataTable dta = new DataTable();

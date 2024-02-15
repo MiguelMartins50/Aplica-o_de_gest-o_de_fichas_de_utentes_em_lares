@@ -483,6 +483,8 @@ namespace Projeto_Lar3idade_Back_End
 
                 // Set values from DataGridView to TextBoxes
                 textBox_camas.Text = row.Cells["quantidade_cama"].Value.ToString();
+                textBox_numero.Text = row.Cells["Numero"].Value.ToString();
+
                 comboBox_estado.SelectedItem = row.Cells["estado"].Value.ToString();
             }
         }

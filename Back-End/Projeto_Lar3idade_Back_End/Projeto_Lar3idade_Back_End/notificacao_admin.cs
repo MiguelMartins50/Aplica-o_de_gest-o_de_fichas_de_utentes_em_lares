@@ -62,7 +62,7 @@ namespace Projeto_Lar3idade_Back_End
             {
 
                 // Obtém o valor do idFuncionario da célula clicada
-                idupt = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idNotificacao_Func"].Value);
+                idupt = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idnotificacao"].Value);
                 assunto = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["assunto"].Value);
                 idsend = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idremetente"].Value);
                 remetente = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["remetente"].Value);
