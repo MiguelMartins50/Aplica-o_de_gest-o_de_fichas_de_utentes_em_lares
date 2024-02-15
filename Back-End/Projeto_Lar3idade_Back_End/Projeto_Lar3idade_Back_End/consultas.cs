@@ -18,6 +18,8 @@ namespace Projeto_Lar3idade_Back_End
         private Dictionary<string, string> medico_ = new Dictionary<string, string>();
         private Dictionary<string, string> utente_ = new Dictionary<string, string>();
         private int idconsulta;
+        private int idpres;
+
         private int idMedico;
         private int idutente;
         private string nome_Medico = "";
@@ -215,11 +217,11 @@ namespace Projeto_Lar3idade_Back_End
                     return;
                 }
                 conexao.Open();
-                string query3 = "SELECT * FROM consulta ORDER BY idConsulta DESC LIMIT 1";
+                string query4 = "SELECT * FROM prescricao_medica ORDER BY idPrescricao_medica DESC LIMIT 1";
 
-                using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                using (MySqlCommand procurarIdpres = new MySqlCommand(query4, conexao))
                 {
-                    using (MySqlDataReader reader = procurarId.ExecuteReader())
+                    using (MySqlDataReader reader = procurarIdpres.ExecuteReader())
                     {
                         // Create a list to store data
                         List<string[]> data = new List<string[]>();
@@ -228,26 +230,59 @@ namespace Projeto_Lar3idade_Back_End
                         while (reader.Read())
                         {
                             // Add data to the list
-                            idconsulta = 1 + int.Parse(reader["idConsulta"].ToString());
+                            idpres = 1 + int.Parse(reader["idPrescricao_medica"].ToString());
 
                         }
                     }
+                    string query3 = "SELECT * FROM consulta ORDER BY idConsulta DESC LIMIT 1";
+
+                    using (MySqlCommand procurarId = new MySqlCommand(query3, conexao))
+                    {
+                        using (MySqlDataReader reader = procurarId.ExecuteReader())
+                        {
+                            // Create a list to store data
+                            List<string[]> data = new List<string[]>();
+
+                            // Iterate through the results
+                            while (reader.Read())
+                            {
+                                // Add data to the list
+                                idconsulta = 1 + int.Parse(reader["idConsulta"].ToString());
+
+                            }
+                        }
+                    }
+                    MySqlCommand cmd = conexao.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.CommandText = "INSERT INTO mydb.consulta (idConsulta, Utente_idUtente, Medico_idMedico, data, estado, relatorio) " +
+                          "VALUES (@idConsulta, @Utente_idUtente, @Medico_idMedico, @data, @estado, @relatorio)";
+
+                    cmd.Parameters.AddWithValue("@idConsulta", idconsulta);
+                    cmd.Parameters.AddWithValue("@Medico_idMedico", idMedico);
+                    cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
+                    cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.Parameters.AddWithValue("@estado", "Agendada");
+                    cmd.Parameters.AddWithValue("@relatorio", "");
+
+                    cmd.ExecuteNonQuery();
+                    string insertPrescricaoQuery = "INSERT INTO prescricao_medica (idPrescricao_medica, estado, descricao, Consulta_idConsulta) " +
+                                                   "VALUES (@idPrescricao_medica, @estadoPrescricao, @descricao, @idConsulta)";
+                    using (MySqlCommand cmdPrescricao = new MySqlCommand(insertPrescricaoQuery, conexao))
+                    {
+                        cmdPrescricao.Parameters.AddWithValue("@idPrescricao_medica", idpres);
+                        cmdPrescricao.Parameters.AddWithValue("@estadoPrescricao", "Ativo");
+                        cmdPrescricao.Parameters.AddWithValue("@descricao", " ");
+                        cmdPrescricao.Parameters.AddWithValue("@idConsulta", idconsulta);
+                        cmdPrescricao.ExecuteNonQuery();
+
+
+
+                        display_data();
+                        LoadComboBox();
+                    }
+                    MessageBox.Show("Consulta agendada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                MySqlCommand cmd = conexao.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-
-                cmd.CommandText = "INSERT INTO mydb.consulta (idConsulta, Utente_idUtente, Medico_idMedico, data, estado, relatorio) " +
-                      "VALUES (@idConsulta, @Utente_idUtente, @Medico_idMedico, @data, @estado, @relatorio)";
-
-                cmd.Parameters.AddWithValue("@idConsulta", idconsulta);
-                cmd.Parameters.AddWithValue("@Medico_idMedico", idMedico);
-                cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
-                cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                cmd.Parameters.AddWithValue("@estado", "Agendada");
-                cmd.Parameters.AddWithValue("@relatorio", "");
-
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Consulta agendada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
