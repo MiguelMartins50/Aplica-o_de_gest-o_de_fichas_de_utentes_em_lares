@@ -15,7 +15,7 @@ export default function UFinfo({ navigation, route }) {
   
     useEffect(() => {
       axios
-        .get(`http://192.168.1.42:8800/consulta?Utente_idUtente=${UtenteData.idUtente}`)
+        .get(`http://192.168.1.15:8800/consulta?Utente_idUtente=${UtenteData.idUtente}`)
         .then((consultaResponse) => {
           setConsultasData(consultaResponse.data);
         })
@@ -94,6 +94,9 @@ const styles = StyleSheet.create({
     View3: {
       backgroundColor:'rgba(113, 161, 255, 0.5)',
       padding: 10,
+      borderWidth: 5,
+      borderColor:'white',
+      borderRadius: 30,
       justifyContent: 'center',
       alignItems: 'center',
     },

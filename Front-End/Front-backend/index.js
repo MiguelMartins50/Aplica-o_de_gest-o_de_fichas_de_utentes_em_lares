@@ -133,23 +133,21 @@ app.get("/medico", (req,res) =>{
 })
 
 app.get("/pagamento", (req, res) => {
-    const Utente_idUtente = req.query.Utente_idUtente;
+    const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
 
     let q = `
         SELECT p.data_limitel, p.valor, p.estado
         FROM pagamento p
         JOIN utente u ON p.Utente_idUtente = u.idUtente
+        WHERE p.Familiar_idFamiliar = ${Familiar_idFamiliar}
     `;
-
-    if (Utente_idUtente) {
-        q += ` WHERE u.idUtente = ${Utente_idUtente}`;
-    }
 
     db.query(q, (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
     });
 });
+
 
 app.get("/prescricao_medica", (req, res) => {
     const Utente_idUtente = req.query.Utente_idUtente;
@@ -159,10 +157,11 @@ app.get("/prescricao_medica", (req, res) => {
         FROM prescricao_medica pm
         JOIN consulta c ON pm.Consulta_idConsulta = c.idConsulta
         JOIN utente u ON c.Utente_idUtente = u.idUtente
+        WHERE pm.estado = 'ativo'
     `;
 
     if (Utente_idUtente) {
-        q += ` WHERE u.idUtente = ${Utente_idUtente}`;
+        q += ` AND u.idUtente = ${Utente_idUtente}`;
     }
 
     db.query(q, (err, data) => {
@@ -170,6 +169,7 @@ app.get("/prescricao_medica", (req, res) => {
         return res.json(data);
     });
 });
+
 
 app.get("/quarto", (req,res) =>{
     const q = "SELECT * FROM mydb.quarto;"
@@ -191,7 +191,7 @@ app.get("/tarefa", (req,res) =>{
 app.get("/visita", (req, res) => {
     const Utente_idUtente = req.query.Utente_idUtente;
     const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
-
+    const Visita_Data = req.query.data;
 
     let q = `
         SELECT v.idVisita ,f.nomel AS Nome_Familiar,f.idFamiliar, u.idUtente, v.data AS Data_HoraVisita, u.nome AS nomeutente
@@ -205,6 +205,10 @@ app.get("/visita", (req, res) => {
     }
     if (Utente_idUtente) {
         q += ` WHERE u.idUtente = ${Utente_idUtente}`;
+    }
+    if (Visita_Data) {
+       
+        q += ` WHERE v.data = '${Visita_Data}'`;
     }
 
     db.query(q, (err, data) => {

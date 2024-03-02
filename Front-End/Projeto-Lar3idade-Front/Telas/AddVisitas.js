@@ -22,13 +22,13 @@ export default function AddVistas({navigation, route}) {
   const [SelectedUtente, setSelectedUtente] = useState('');
 
   useEffect(() => {
-    axios.get(`http://192.168.1.42:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.15:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(consultaResponse => {
         setUFData(consultaResponse.data);
         if (consultaResponse.data && consultaResponse.data[0] && consultaResponse.data[0].Utente_idUtente) {
           const utenteId = consultaResponse.data[0].Utente_idUtente;
   
-          axios.get(`http://192.168.1.42:8800/utente?idUtente=${utenteId}`)
+          axios.get(`http://192.168.1.15:8800/utente?idUtente=${utenteId}`)
             .then(utenteResponse => {
               setUData(utenteResponse.data);
               
@@ -79,29 +79,43 @@ export default function AddVistas({navigation, route}) {
 
 
       const handleAddVisita = () => {
-        const formattedDateTime = moment(combinedDateTime, 'DD/MM/YYYY HH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
+        const formattedDateTime = moment(combinedDateTime, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
         const visitaData = {
           Utente_idUtente: SelectedUtente,
           data: formattedDateTime,
           Familiar_idFamiliar: FamiliarData.idFamiliar,
         };
-    
-        axios.post('http://192.168.1.42:8800/visita', visitaData)
-      .then(response => {
-        console.log('Visita added successfully:', response.data);
-        Alert.alert(
-          'Sucesso',
-          'Visita adicionada com sucesso.',
-          [
-            { text: 'OK', onPress: () => navigation.navigate('VisitasFamiliar') }
-          ],
-          { cancelable: false }
-        );
-      })
-      .catch(error => {
-        console.error('Error adding visita:', error);
-      });
-  };
+      console.log(formattedDateTime);
+      console.log(Visita.data)
+        // Verificar se já existe uma visita marcada para o mesmo horário
+        if (VisitaData.some(visita => visita.data === formattedDateTime)) {
+          Alert.alert(
+            'Erro',
+            'Já existe uma visita marcada para este horário. Por favor, selecione outro horário.',
+            [
+              { text: 'OK' }
+            ],
+            { cancelable: false }
+          );
+        } else {
+          axios.post('http://192.168.1.15:8800/visita', visitaData)
+            .then(response => {
+              console.log('Visita added successfully:', response.data);
+              Alert.alert(
+                'Sucesso',
+                'Visita adicionada com sucesso.',
+                [
+                  { text: 'OK', onPress: () => navigation.navigate('VisitasFamiliar', { FamiliarData, familiarID }) }
+                ],
+                { cancelable: false }
+              );
+            })
+            .catch(error => {
+              console.error('Error adding visita:', error);
+            });
+        }
+      };
+      
 return (<View style={styles.container}>
     <View style={styles.Text2}>
             <Text style={styles.ButtonText}>Visitas</Text>
