@@ -60,7 +60,7 @@ namespace Projeto_Lar3idade_Back_End
             // Verifica se uma célula da linha foi clicada
             if (e.RowIndex >= 0)
             {
-
+                
                 // Obtém o valor do idFuncionario da célula clicada
                 idupt = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["idnotificacao"].Value);
                 assunto = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["assunto"].Value);
@@ -76,6 +76,30 @@ namespace Projeto_Lar3idade_Back_End
                 Console.WriteLine("process:" + process);
                 // Obtém os dados do funcionário com base no idFuncionario
                 ExibirDadosFuncionario(idupt);
+                conexao.Open();
+                if (dataGridView1.CurrentRow.Cells["proccessada"].Value.ToString() == "0")
+                {
+                    // Your existing code to update the database goes here
+
+                    // Update the database
+                    if (tipo == "func")
+                    {
+                        MySqlCommand cmd = new MySqlCommand("UPDATE notificacao_func SET proccessada = 1 WHERE idNotificacao_Func = @id", conexao);
+                        cmd.Parameters.AddWithValue("@id", idupt);
+                        cmd.ExecuteNonQuery();
+                    }
+                    else if (tipo == "medico")
+                    {
+                        MySqlCommand cmd = new MySqlCommand("UPDATE notificacao_medico SET proccessada = 1 WHERE idnotificacao_medico = @id", conexao);
+                        cmd.Parameters.AddWithValue("@id", idupt);
+                        cmd.ExecuteNonQuery();
+                    }
+                    conexao.Close();
+                    // Update the data source and refresh the DataGridView
+                    DataGridViewRow selectedRow = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex];
+                    selectedRow.Cells["proccessada"].Value = 1;
+                    selectedRow.Cells["proccessada"].Style.ForeColor = Color.Green;
+                }
             }
 
         }
