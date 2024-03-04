@@ -228,8 +228,8 @@ app.post("/visita", (req,res) =>{
     db.query(q,[VALUES],(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
-    })
-})
+    });
+});
 
 app.put("/visita/:id", (req, res) => {
     const q = "UPDATE mydb.visita SET Utente_idUtente = ?, data = ?, Familiar_idFamiliar = ? WHERE idVisita = ?";

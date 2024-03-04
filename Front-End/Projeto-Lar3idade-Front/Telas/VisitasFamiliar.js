@@ -18,7 +18,7 @@ export default function VisitasFamiliar({ navigation, route }) {
 
   const handleAdd = () => {
     console.log('aqui');
-    navigation.navigate('AddVisitas', { FamiliarData });
+    navigation.navigate('AddVisitas', { FamiliarData});
   };
 
   const handleDeleteVisita = (idVisita) => {
@@ -67,7 +67,7 @@ export default function VisitasFamiliar({ navigation, route }) {
       });
   };
   const handleRefresh = () => { console.log(FamiliarData.idFamiliar)
-    axios.get(`http://192.168.1.15:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.152.1:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(VisitaResponse => {
         if (VisitaResponse.data && Array.isArray(VisitaResponse.data)) {
           const filteredVisita = selectedMonth
@@ -84,7 +84,7 @@ export default function VisitasFamiliar({ navigation, route }) {
   };
 
   useEffect(() => {
-    axios.get(`http://192.168.1.15:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.152.1:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(VisitaResponse => {
         if (VisitaResponse.data && Array.isArray(VisitaResponse.data)) {
           const filteredVisita = selectedMonth

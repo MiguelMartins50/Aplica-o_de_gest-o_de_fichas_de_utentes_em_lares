@@ -21,14 +21,33 @@ export default function AddVistas({navigation, route}) {
   const [showTimePicker, setShowTimePicker] = useState(false);  
   const [SelectedUtente, setSelectedUtente] = useState('');
 
+  const [VData, setVDATA] = useState([]);
+
   useEffect(() => {
-    axios.get(`http://192.168.1.15:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    console.log('Selected Utente :', SelectedUtente);
+    // Fetch visits associated with the selected Utente
+    axios.get(`http://192.168.152.1:8800/visita?Utente_idUtente=${SelectedUtente}`)
+      .then(response => {
+        setVDATA(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching visits for Utente:', error);
+      });
+  }, [SelectedUtente]);
+
+  useEffect(() => {
+    console.log('Updated VData:', VData);
+    
+  }, [VData]);
+  
+  useEffect(() => {
+    axios.get(`http://192.168.152.1:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(consultaResponse => {
         setUFData(consultaResponse.data);
         if (consultaResponse.data && consultaResponse.data[0] && consultaResponse.data[0].Utente_idUtente) {
           const utenteId = consultaResponse.data[0].Utente_idUtente;
   
-          axios.get(`http://192.168.1.15:8800/utente?idUtente=${utenteId}`)
+          axios.get(`http://192.168.152.1:8800/utente?idUtente=${utenteId}`)
             .then(utenteResponse => {
               setUData(utenteResponse.data);
               
@@ -77,35 +96,41 @@ export default function AddVistas({navigation, route}) {
         setCombinedDateTime(`${selectedDate.toLocaleDateString()} ${selectedTime.toLocaleTimeString()}`);
       }, [selectedDate, selectedTime]);
 
-
       const handleAddVisita = () => {
-        const formattedDateTime = moment(combinedDateTime, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
+        const formattedDateTime = moment(combinedDateTime, 'DD/MM/YYYY HH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
         const visitaData = {
           Utente_idUtente: SelectedUtente,
           data: formattedDateTime,
           Familiar_idFamiliar: FamiliarData.idFamiliar,
         };
-      console.log(formattedDateTime);
-      console.log(Visita.data)
-        // Verificar se já existe uma visita marcada para o mesmo horário
-        if (VisitaData.some(visita => visita.data === formattedDateTime)) {
+      
+        // Compare the selected date and time with dates in VData
+        const selectedDateTime = moment(formattedDateTime);
+        const matchedVisits = VData.filter(visita => {
+          const visitaDateTime = moment(visita.data);
+          return selectedDateTime.isSame(visitaDateTime, 'minute');
+        });
+      
+        if (matchedVisits.length > 0) {
+          // If there are matching visits, display an alert
           Alert.alert(
             'Erro',
-            'Já existe uma visita marcada para este horário. Por favor, selecione outro horário.',
+            'Já existe uma visita marcada para este dia e hora.',
             [
-              { text: 'OK' }
+              { text: 'OK', onPress: () => console.log('OK pressed') }
             ],
             { cancelable: false }
           );
         } else {
-          axios.post('http://192.168.1.15:8800/visita', visitaData)
+          // If no matching visits, add the visit
+          axios.post('http://192.168.1.80:8800/visita', visitaData)
             .then(response => {
               console.log('Visita added successfully:', response.data);
               Alert.alert(
                 'Sucesso',
                 'Visita adicionada com sucesso.',
                 [
-                  { text: 'OK', onPress: () => navigation.navigate('VisitasFamiliar', { FamiliarData, familiarID }) }
+                  { text: 'OK', onPress: () => navigation.navigate('VisitasFamiliar', FamiliarData,familiarID) }
                 ],
                 { cancelable: false }
               );
@@ -115,7 +140,9 @@ export default function AddVistas({navigation, route}) {
             });
         }
       };
-      
+    
+    
+    
 return (<View style={styles.container}>
     <View style={styles.Text2}>
             <Text style={styles.ButtonText}>Visitas</Text>
