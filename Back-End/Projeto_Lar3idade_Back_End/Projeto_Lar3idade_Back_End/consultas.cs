@@ -278,9 +278,11 @@ namespace Projeto_Lar3idade_Back_End
 
 
 
-                        display_data();
-                        LoadComboBox();
+                        
                     }
+                    conexao.Close();
+                    display_data();
+                    LoadComboBox();
                     MessageBox.Show("Consulta agendada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
