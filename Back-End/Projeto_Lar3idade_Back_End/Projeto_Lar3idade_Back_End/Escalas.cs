@@ -444,10 +444,19 @@ namespace Projeto_Lar3idade_Back_End
 
             }
         }
+        private void LimparTextBoxes()
+        {
+            // Limpar textBox1 e textBox2
+            textBox1.Clear();
+            textBox2.Clear();
+
+            // Limpar comboBox3
+            comboBox3.SelectedIndex = -1;
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            LimparTextBoxes();
             control = 0;
             display_data();
             comboBox1.Items.Clear();

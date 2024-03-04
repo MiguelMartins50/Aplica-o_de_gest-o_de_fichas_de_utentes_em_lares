@@ -158,6 +158,15 @@ namespace Projeto_Lar3idade_Back_End
         {
             try
             {
+                // Verifica se já existe uma visita agendada para o mesmo responsável e utente dentro do intervalo de 30 minutos
+                if (VisitaJaAgendada())
+                {
+                    MessageBox.Show("Já existe uma visita agendada para este responsável e utente dentro deste intervalo de 30 minutos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; // Retorna imediatamente para evitar a execução do restante do código
+                }
+
+                // Se não houver visita agendada para o mesmo responsável e utente, continua com o código de atualização
+
                 conexao.Open();
 
                 MySqlCommand cmd = conexao.CreateCommand();
@@ -169,7 +178,6 @@ namespace Projeto_Lar3idade_Back_End
                     // Obtém o valor do idUtente dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
                     cmd.CommandText = "UPDATE mydb.visita SET Utente_idUtente = @Utente_idUtente, Familiar_idFamiliar = @Familiar_idFamiliar, data = @data WHERE idVisita = @idVisita;";
-
 
                     // Adicionando parâmetros
                     cmd.Parameters.AddWithValue("@Familiar_idFamiliar", idresponsavel);
@@ -199,6 +207,7 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Close();
             }
         }
+
         private void LimparComboBoxes()
         {
             comboBox1.Text = "";

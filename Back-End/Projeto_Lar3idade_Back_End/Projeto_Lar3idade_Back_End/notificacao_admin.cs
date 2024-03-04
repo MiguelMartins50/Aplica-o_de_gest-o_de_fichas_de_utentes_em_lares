@@ -105,36 +105,51 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void ExibirDadosFuncionario(int idnotificacao)
         {
-            conexao.Open();
-            MySqlCommand cmd = conexao.CreateCommand();
-
-            if (tipo == "func")
+            try
             {
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select * from notificacao_func where idNotificacao_Func = @idNotificacao_Func";
-                cmd.Parameters.AddWithValue("@idNotificacao_Func", idnotificacao);
+                // Verifica se a conexão está fechada
+                if (conexao.State == ConnectionState.Closed)
+                {
+                    conexao.Open();
+                }
+
+                MySqlCommand cmd = conexao.CreateCommand();
+
+                if (tipo == "func")
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "select * from notificacao_func where idNotificacao_Func = @idNotificacao_Func";
+                    cmd.Parameters.AddWithValue("@idNotificacao_Func", idnotificacao);
+                }
+                else if (tipo == "medico")
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "select * from notificacao_medico where idnotificacao_medico = @idnotificacao_medico";
+                    cmd.Parameters.AddWithValue("@idnotificacao_medico", idnotificacao);
+                }
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    textBox1.Text = reader["assunto"].ToString();
+                    textBox2.Text = reader["messagem"].ToString().Replace("\n", Environment.NewLine);
+                }
             }
-            if (tipo == "medico")
+            catch (Exception ex)
             {
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select * from notificacao_medico where idnotificacao_medico = @idnotificacao_medico";
-                cmd.Parameters.AddWithValue("@idnotificacao_medico", idnotificacao);
+                MessageBox.Show("Erro ao exibir dados do funcionário: " + ex.Message);
             }
-
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            // Verifica se há dados a serem lidos
-            if (reader.Read())
+            finally
             {
-                // Exibe os dados nos TextBoxes
-                textBox1.Text = reader["assunto"].ToString();
-                textBox2.Text = reader["messagem"].ToString().Replace("\n", Environment.NewLine);
-
+                // Verifica se a conexão está aberta antes de tentar fechá-la
+                if (conexao.State == ConnectionState.Open)
+                {
+                    conexao.Close();
+                }
             }
-
-            conexao.Close();
         }
+
         private void display_data()
         {
             conexao.Open();

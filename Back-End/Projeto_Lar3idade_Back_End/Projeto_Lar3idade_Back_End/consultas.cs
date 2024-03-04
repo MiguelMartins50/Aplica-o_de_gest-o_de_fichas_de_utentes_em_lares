@@ -121,6 +121,12 @@ namespace Projeto_Lar3idade_Back_End
         {
             try
             {
+                if (ConsultaJaAgendada())
+                {
+                    MessageBox.Show("Já existe uma consulta agendada para este utente ou médico neste horário. Por favor, faça outro agendamento com um intervalo de 10 minutos.");
+                    return;
+                }
+
                 conexao.Open();
 
                 MySqlCommand cmd = conexao.CreateCommand();
@@ -131,7 +137,7 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     // Obtém o valor do idUtente dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
-                    cmd.CommandText = "UPDATE mydb.consulta SET  Utente_idUtente = @Utente_idUtente, Medico_idMedico = @Medico_idMedico, data = @data WHERE idconsulta = @idconsulta";
+                    cmd.CommandText = "UPDATE mydb.consulta SET Utente_idUtente = @Utente_idUtente, Medico_idMedico = @Medico_idMedico, data = @data WHERE idconsulta = @idconsulta";
 
                     cmd.Parameters.AddWithValue("@Medico_idMedico", idMedico);
                     cmd.Parameters.AddWithValue("@Utente_idUtente", idutente);
@@ -140,7 +146,6 @@ namespace Projeto_Lar3idade_Back_End
 
                     cmd.ExecuteNonQuery();
                     conexao.Close();
-
 
                     LimparComboBoxes();
                     display_data();
@@ -216,7 +221,9 @@ namespace Projeto_Lar3idade_Back_End
                     MessageBox.Show("Já existe uma consulta agendada para este utente ou médico neste horário. Por favor, faça outro agendamento com um intervalo de 10 minutos.");
                     return;
                 }
+
                 conexao.Open();
+
                 string query4 = "SELECT * FROM prescricao_medica ORDER BY idPrescricao_medica DESC LIMIT 1";
 
                 using (MySqlCommand procurarIdpres = new MySqlCommand(query4, conexao))
@@ -428,7 +435,7 @@ namespace Projeto_Lar3idade_Back_End
             if (idconsulta > 0)
             {
                 // Exibe uma caixa de diálogo de confirmação
-                DialogResult result = MessageBox.Show("Tens certeza que deseja apagar esta consulta?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Tem certeza que deseja apagar esta consulta?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 // Verifica a resposta do usuário
                 if (result == DialogResult.Yes)
@@ -436,11 +443,21 @@ namespace Projeto_Lar3idade_Back_End
                     try
                     {
                         conexao.Open();
-                        MySqlCommand cmd = conexao.CreateCommand();
-                        cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "DELETE FROM mydb.consulta WHERE idConsulta = @idConsulta";
-                        cmd.Parameters.AddWithValue("@idConsulta", idconsulta);
-                        cmd.ExecuteNonQuery();
+
+                        // Exclui os registros relacionados na tabela prescricao_medica primeiro
+                        MySqlCommand cmdDeletePrescricao = conexao.CreateCommand();
+                        cmdDeletePrescricao.CommandType = CommandType.Text;
+                        cmdDeletePrescricao.CommandText = "DELETE FROM mydb.prescricao_medica WHERE Consulta_idConsulta = @idConsulta";
+                        cmdDeletePrescricao.Parameters.AddWithValue("@idConsulta", idconsulta);
+                        cmdDeletePrescricao.ExecuteNonQuery();
+
+                        // Agora podemos excluir a consulta na tabela consulta
+                        MySqlCommand cmdDeleteConsulta = conexao.CreateCommand();
+                        cmdDeleteConsulta.CommandType = CommandType.Text;
+                        cmdDeleteConsulta.CommandText = "DELETE FROM mydb.consulta WHERE idConsulta = @idConsulta";
+                        cmdDeleteConsulta.Parameters.AddWithValue("@idConsulta", idconsulta);
+                        cmdDeleteConsulta.ExecuteNonQuery();
+
                         MessageBox.Show("Consulta excluída com sucesso!");
                     }
                     catch (Exception ex)
@@ -462,3 +479,4 @@ namespace Projeto_Lar3idade_Back_End
         }
     }
 }
+
