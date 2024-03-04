@@ -13,7 +13,7 @@ export default function Login({ route, navigation }) {
   const [showPassword, setShowPassword] = useState(false); 
 
   const handleLogin = () => {
-    axios.get('http://192.168.1.42:8800/utente')
+    axios.get('http://192.168.1.15:8800/utente')
       .then(utenteResponse => {
         if (utenteResponse.data.length > 0) {
 
@@ -36,7 +36,7 @@ export default function Login({ route, navigation }) {
             navigation.navigate('UtenteDrawer', { screen: 'Home Utente', params: { utenteData: utenteMatch, utenteNome: utenteMatch.nome} });
             
           } else {
-            axios.get('http://192.168.1.42:8800/familiar')
+            axios.get('http://192.168.1.15:8800/familiar')
               .then(familiarResponse => {
                 if (familiarResponse.data.length > 0) {
                   const familiarEmailColumn = familiarResponse.data.map(entry => entry.email);

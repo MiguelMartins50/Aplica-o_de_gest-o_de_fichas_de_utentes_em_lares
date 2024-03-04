@@ -7,7 +7,7 @@ export default function Consultas({ route, navigation }) {
   const { utenteData } = route.params;
 
   useEffect(() => {
-    axios.get(`http://192.168.1.42:8800/consulta?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.15:8800/consulta?Utente_idUtente=${utenteData.idUtente}`)
     .then(consultaResponse => {
       setConsultasData(consultaResponse.data);
     })

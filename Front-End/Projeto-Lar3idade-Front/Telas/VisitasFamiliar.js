@@ -18,7 +18,7 @@ export default function VisitasFamiliar({ navigation, route }) {
 
   const handleAdd = () => {
     console.log('aqui');
-    navigation.navigate('AddVisitas', { FamiliarData });
+    navigation.navigate('AddVisitas', { FamiliarData});
   };
 
   const handleDeleteVisita = (idVisita) => {
@@ -43,15 +43,16 @@ export default function VisitasFamiliar({ navigation, route }) {
   const confirmDelete = (idVisita) => {
     console.log(idVisita);
     axios
-      .delete(`http://192.168.1.42:8800/visita/${idVisita}`)
+    .delete(`http://192.168.1.15:8800/visita/${idVisita}`)
       .then(() => {
         axios
-          .get(`http://192.168.1.42:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+        .get(`http://192.168.1.15:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
           .then((VisitaResponse) => {
-            const filteredVisita = selectedMonth
-              ? VisitaResponse.data.filter((item) => new Date(item.Data_HoraVisita).getMonth() === selectedMonth)
-              : VisitaResponse.data;
-            setVisitaData(filteredVisita);
+            const filteredVisita = selectedMonth !== null
+            ? VisitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getMonth() === selectedMonth)
+            : VisitaResponse.data;
+          setVisitaData(filteredVisita);
+
           })
           .catch((error) => {
             console.error('Error fetching Visita data:', error);
@@ -65,9 +66,25 @@ export default function VisitasFamiliar({ navigation, route }) {
         setSelectedDeleteId(null);
       });
   };
+  const handleRefresh = () => { console.log(FamiliarData.idFamiliar)
+    axios.get(`http://192.168.152.1:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+      .then(VisitaResponse => {
+        if (VisitaResponse.data && Array.isArray(VisitaResponse.data)) {
+          const filteredVisita = selectedMonth
+            ? VisitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getMonth() === selectedMonth)
+            : VisitaResponse.data;
+          setVisitaData(filteredVisita);
+        } else {
+          console.log('Consulta do utente não retornou dados válidos:', VisitaResponse.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar Consulta do utente:', error);
+      });
+  };
 
   useEffect(() => {
-    axios.get(`http://192.168.1.42:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.152.1:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(VisitaResponse => {
         if (VisitaResponse.data && Array.isArray(VisitaResponse.data)) {
           const filteredVisita = selectedMonth
@@ -88,12 +105,16 @@ export default function VisitasFamiliar({ navigation, route }) {
       style={styles.container}
       ListHeaderComponent={
         <View style={styles.View4}>
+          
           <TouchableOpacity onPress={handleAdd}>
             <Image source={require('../Image/add.png')} resizeMode="cover" style={styles.image3} />
           </TouchableOpacity>
+          
           <View style={styles.View1}>
             <View style={styles.Text2}>
-              <Text style={styles.ButtonText}>Visitas</Text>
+            <TouchableOpacity style={styles.loginButton} onPress={handleRefresh}>
+                <Text style={styles.loginButtonText}>Atualizar</Text>
+              </TouchableOpacity>
             </View>
             <SelectDropdown
               data={months}
@@ -103,9 +124,9 @@ export default function VisitasFamiliar({ navigation, route }) {
               defaultButtonText="Selecione um mês"
             />
 
-            <View style={styles.clearButtonContainer}>
+            <View>
               <TouchableOpacity onPress={() => setSelectedMonth(null)}>
-                <Text style={styles.clearButtonText}>Limpar Seleção</Text>
+                <Text>Limpar Seleção</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -121,7 +142,7 @@ export default function VisitasFamiliar({ navigation, route }) {
             {('0' + (new Date(item.Data_HoraVisita).getMonth() + 1)).slice(-2)}
           </Text>
           <Text style={styles.texto}>
-            Hora: {('0' + new Date(item.Data_HoraVisita).getHours()).slice(-2)}/
+            Hora: {('0' + new Date(item.Data_HoraVisita).getHours()).slice(-2)}:
             {('0' + new Date(item.Data_HoraVisita).getMinutes()).slice(-2)}
           </Text>
           <TouchableOpacity style={styles.deleteButton} onPress={() => { console.log(item.idVisita); handleDeleteVisita(item.idVisita); }} >
@@ -139,14 +160,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 15,   
   },
+  loginButton: {
+    backgroundColor: 'rgba(113, 161, 255, 0.5)',
+    paddingVertical: 1,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    height: 25,
+    marginBottom:5,
+    
+  },
+  loginButtonText: {
+    color: '#000',
+    fontSize: 17,
+    width: '100%', 
+  },
+
   image: {
     width: 100,
     height: 100,
     resizeMode: 'cover',
     borderRadius: 50,
-  },
+  },  
   View1: {
-    marginTop: 1,
+    marginTop: 10,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -167,8 +203,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',position: 'relative',
-    marginTop: 10,
+    marginTop: 20,
   },
+  image3:{
+  },
+
   deleteButton: {
     backgroundColor: 'white',
     padding: 10,

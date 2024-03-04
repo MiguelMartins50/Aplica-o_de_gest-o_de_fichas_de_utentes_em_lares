@@ -16,7 +16,7 @@ export default function Visita({ route, navigation }) {
   ];
 
   useEffect(() => {
-    axios.get(`http://192.168.1.42:8800/visita?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.15:8800/visita?Utente_idUtente=${utenteData.idUtente}`)
       .then(visitaResponse => {
         const filteredVisitas = selectedMonth
           ? visitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getMonth() === months.indexOf(selectedMonth))
