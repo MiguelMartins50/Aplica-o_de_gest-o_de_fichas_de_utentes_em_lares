@@ -62,7 +62,6 @@ namespace Projeto_Lar3idade_Back_End
             this.label12 = new System.Windows.Forms.Label();
             this.textBox_idade = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox_genero = new System.Windows.Forms.TextBox();
             this.comboBox_quarto = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.textBox_Localidade = new System.Windows.Forms.TextBox();
@@ -85,6 +84,7 @@ namespace Projeto_Lar3idade_Back_End
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -95,7 +95,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(469, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 26);
+            this.label1.Size = new System.Drawing.Size(85, 27);
             this.label1.TabIndex = 0;
             this.label1.Text = "Utentes";
             // 
@@ -385,13 +385,6 @@ namespace Projeto_Lar3idade_Back_End
             this.label13.TabIndex = 95;
             this.label13.Text = "Género";
             // 
-            // textBox_genero
-            // 
-            this.textBox_genero.Location = new System.Drawing.Point(628, 57);
-            this.textBox_genero.Name = "textBox_genero";
-            this.textBox_genero.Size = new System.Drawing.Size(136, 22);
-            this.textBox_genero.TabIndex = 96;
-            // 
             // comboBox_quarto
             // 
             this.comboBox_quarto.FormattingEnabled = true;
@@ -598,13 +591,22 @@ namespace Projeto_Lar3idade_Back_End
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(122, 113);
             this.panel1.TabIndex = 121;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(628, 58);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 122;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // utentes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox_EstCivil);
@@ -626,7 +628,6 @@ namespace Projeto_Lar3idade_Back_End
             this.Controls.Add(this.label15);
             this.Controls.Add(this.comboBox_quarto);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.textBox_genero);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.textBox_idade);
             this.Controls.Add(this.label12);
@@ -700,7 +701,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox_idade;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox_genero;
         private System.Windows.Forms.ComboBox comboBox_quarto;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBox_Localidade;
@@ -723,5 +723,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

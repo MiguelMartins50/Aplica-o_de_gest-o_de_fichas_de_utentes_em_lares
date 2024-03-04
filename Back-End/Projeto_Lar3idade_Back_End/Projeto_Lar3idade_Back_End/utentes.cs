@@ -19,13 +19,16 @@ namespace Projeto_Lar3idade_Back_End
         private int idMedico;
         private string medico_nome;
         private int idUtente; // Adicione esta variável para rastrear o IdUtente
-
+        private string genero = "";
+        int numeroQ = 0;
         public utentes()
         {
 
             InitializeComponent();
             string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
             conexao = new MySqlConnection(connectionString);
+            comboBox1.Items.Add("Masculino");
+            comboBox1.Items.Add("Feminino");
             LoadComboBox();
             display_data();
 
@@ -81,6 +84,7 @@ namespace Projeto_Lar3idade_Back_End
 
         private void button_insert_Click(object sender, EventArgs e)
         {
+            int controlo = 0;
             try
             {
                 conexao.Open();
@@ -112,7 +116,7 @@ namespace Projeto_Lar3idade_Back_End
                 cmd.Parameters.AddWithValue("@Nif", textBox_nif.Text);
                 cmd.Parameters.AddWithValue("@Niss", textBox_niss.Text);
                 cmd.Parameters.AddWithValue("@NUtenteSaude", textBox_nus.Text);
-                cmd.Parameters.AddWithValue("@Genero", textBox_genero.Text);
+                cmd.Parameters.AddWithValue("@Genero", genero);
                 cmd.Parameters.AddWithValue("@DataNascimento", dateTimePicker_dataNascimento.Value.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@Idade", textBox_idade.Text);
                 cmd.Parameters.AddWithValue("@EstadoCivil", textBox_EstCivil.Text);
@@ -128,11 +132,101 @@ namespace Projeto_Lar3idade_Back_End
                 cmd.Parameters.AddWithValue("@Imagem", imageBytes);
 
                 cmd.ExecuteNonQuery();
+                MySqlCommand getMaxIdCmd = new MySqlCommand("SELECT COALESCE(MAX(idUtente), 0) FROM mydb.utente", conexao);
+                int Novoid = Convert.ToInt32(getMaxIdCmd.ExecuteScalar());
+
+                // After retrieving Novoid
+                Console.WriteLine("Novoid: " + Novoid);
+                int contar = 0;
+                int ocupacao = 0;
+                // Before executing queryQ
+                Console.WriteLine("Query para idUtente: " + Novoid);
+                int quartoid = 0;
+                string queryQ = "SELECT Quarto_idQuarto FROM utente WHERE idUtente = @idUtente;";
+                using (MySqlCommand cmdQ = new MySqlCommand(queryQ, conexao))
+                {
+                    cmdQ.Parameters.AddWithValue("@idUtente", Novoid);
+                    Console.WriteLine("Aqui1");
+                    using (MySqlDataReader readerQ = cmdQ.ExecuteReader())
+                    {
+                        Console.WriteLine("Aqui2");
+                        Console.WriteLine("ReaderQ HasRows: " + readerQ.HasRows);
+
+                        while (readerQ.Read())
+                        {
+                            Console.WriteLine("Aqui3");
+
+                            Console.WriteLine("Quarto_idQuarto:::::::");
+
+                            quartoid = Convert.ToInt32(readerQ["Quarto_idQuarto"]);
+                            Console.WriteLine("QUARTOID:::::::" + quartoid);
+
+                           
+                        }
+                    }
+                }
+
+                string queryQuarto = "SELECT COUNT(u.idUtente) AS ocupacao, q.quantidade_cama FROM quarto q LEFT JOIN utente u ON q.idQuarto = u.Quarto_idQuarto WHERE q.idQuarto = @quartoid;";
+                using (MySqlCommand cmdQuarto = new MySqlCommand(queryQuarto, conexao))
+                {
+                    Console.WriteLine("Quartoid::::" + quartoid);
+                    cmdQuarto.Parameters.AddWithValue("@quartoid", quartoid);
+                    using (MySqlDataReader readerQuarto = cmdQuarto.ExecuteReader())
+                    {
+
+                        Console.WriteLine("Entering the while loop");
+                        if (readerQuarto.HasRows)
+                        {
+                            Console.WriteLine("Reader has rows");
+                            while (readerQuarto.Read())
+                            {
+                                Console.WriteLine("Inside the while loop");
+                                ocupacao = Convert.ToInt32(readerQuarto["ocupacao"].ToString());
+                                Console.WriteLine("Numero:::::" + ocupacao);
+                                contar = ocupacao;
+                                Console.WriteLine("CONTAR::::::" + contar);
+                                int quantidade_cama = Convert.ToInt32(readerQuarto["quantidade_cama"].ToString());
+
+                                // Check if contar is greater than or equal to quantidade_cama
+                                if (contar > quantidade_cama)
+                                {
+                                    // If yes, set contar to quantidade_cama
+                                    contar = quantidade_cama;
+                                    MessageBox.Show("O Utente não foi assignado um quarto porque o quarto ja tem capacidade completa!\nTem que associar um quarto a este utente na secção de quartos!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    controlo = 1;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Reader has no rows");
+                        }
+                    }
+                }
+                string updateQuery = "UPDATE quarto SET ocupacao = @Ocupacao WHERE idQuarto = @QuartoId";
+                using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, conexao))
+                {
+                    updateCmd.Parameters.AddWithValue("@Ocupacao", contar);
+                    updateCmd.Parameters.AddWithValue("@QuartoId", quartoid);
+                    updateCmd.ExecuteNonQuery();
+                }
+                if(controlo == 1)
+                {
+                    string resetQuartoIdQuery = "UPDATE utente SET Quarto_idQuarto = 0  WHERE idUtente = @idUtente";
+                    using (MySqlCommand resetQuartoIdCmd = new MySqlCommand(resetQuartoIdQuery, conexao))
+                    {
+                        resetQuartoIdCmd.Parameters.AddWithValue("@idUtente", Novoid);
+                        resetQuartoIdCmd.ExecuteNonQuery();
+                    }
+                }
+                
                 MessageBox.Show("Utente adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                display_data();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao adicionar utente: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine("Erro ao adicionar utente"+ex.Message);
             }
             finally
             {
@@ -181,8 +275,10 @@ namespace Projeto_Lar3idade_Back_End
         {
             if (comboBox_quarto.SelectedItem != null)
             {
-                string selectedValue = comboBox_quarto.SelectedItem.ToString();
-                idQuarto = int.Parse(selectedValue);
+                string selectedTitle = comboBox_quarto.SelectedItem.ToString();
+                string[] parts = selectedTitle.Split(' '); 
+                string idQuartoPart = parts[0].Substring(3); 
+                idQuarto = int.Parse(idQuartoPart); 
             }
         }
 
@@ -224,7 +320,7 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_nif.Text = "";
                 textBox_niss.Text = "";
                 textBox_nus.Text = "";
-                textBox_genero.Text = "";
+                
                 dateTimePicker_dataNascimento.Text = "";
                 textBox_idade.Text = "";
                 textBox_EstCivil.Text = "";
@@ -236,6 +332,7 @@ namespace Projeto_Lar3idade_Back_End
                 textBox_senha.Text = "";
                 comboBox_medico.SelectedIndex = 0;
                 comboBox_quarto.SelectedIndex = 0;
+                comboBox1.SelectedIndex = 0;
             }
             else
             {
@@ -259,14 +356,67 @@ namespace Projeto_Lar3idade_Back_End
                     {
                         // Obtém o valor do idUtente da célula "idUtente" na linha selecionada
                         object cellValue = dataGridView1.SelectedRows[0].Cells["idUtente"].Value;
+                        
 
                         if (cellValue != null && cellValue != DBNull.Value)
                         {
+
                             // Converte o valor da célula para um inteiro
                             int idUtenteParaExcluir = Convert.ToInt32(cellValue);
-
+                            int quartoid = 0;
                             conexao.Open();
+                            string queryQ = "SELECT Quarto_idQuarto FROM utente WHERE idUtente = @idUtente;";
+                            using (MySqlCommand cmdQ = new MySqlCommand(queryQ, conexao))
+                            {
+                                cmdQ.Parameters.AddWithValue("@idUtente", idUtenteParaExcluir);
+                                Console.WriteLine("Aqui1");
 
+                                using (MySqlDataReader readerQ = cmdQ.ExecuteReader())
+                                {
+                                    Console.WriteLine("Aqui2");
+
+                                    while (readerQ.Read())
+                                    {
+                                        Console.WriteLine("Aqui3");
+
+                                        Console.WriteLine("Quarto_idQuarto:::::::");
+
+                                        quartoid = Convert.ToInt32(readerQ["Quarto_idQuarto"]);
+
+                                        Console.WriteLine("QUARTOID:::::::" + quartoid);
+                                    }
+                                }
+                            }
+                            int contar = 0;
+                            int ocupacao = 0;
+                            string queryQuarto = "SELECT COUNT(u.idUtente) AS ocupacao FROM quarto q LEFT JOIN utente u ON q.idQuarto = u.Quarto_idQuarto where q.idQuarto = @quartoid;";
+                            using (MySqlCommand cmdQuarto = new MySqlCommand(queryQuarto, conexao))
+                            {
+                                Console.WriteLine("Quartoid::::" + quartoid);
+                                cmdQuarto.Parameters.AddWithValue("@quartoid", quartoid);
+                                using (MySqlDataReader readerQuarto = cmdQuarto.ExecuteReader())
+                                {
+
+                                    Console.WriteLine("Entering the while loop");
+                                    if (readerQuarto.HasRows)
+                                    {
+                                        Console.WriteLine("Reader has rows");
+                                        while (readerQuarto.Read())
+                                        {
+                                            Console.WriteLine("Inside the while loop");
+                                            ocupacao = Convert.ToInt32(readerQuarto["ocupacao"].ToString());
+                                            Console.WriteLine("Numero:::::" + ocupacao);
+                                            contar = ocupacao - 1;
+                                            Console.WriteLine("CONTAR::::::" + contar);
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Reader has no rows");
+                                    }
+                                }
+                            }
                             MySqlCommand cmd = conexao.CreateCommand();
                             cmd.CommandType = CommandType.Text;
 
@@ -275,7 +425,16 @@ namespace Projeto_Lar3idade_Back_End
                             cmd.Parameters.AddWithValue("@IdUtente", idUtenteParaExcluir);
 
                             cmd.ExecuteNonQuery();
-
+                            
+                           
+                            
+                            string updateQuery = "UPDATE quarto SET ocupacao = @Ocupacao WHERE idQuarto = @QuartoId";
+                            using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, conexao))
+                            {
+                                updateCmd.Parameters.AddWithValue("@Ocupacao", contar);
+                                updateCmd.Parameters.AddWithValue("@QuartoId", quartoid);
+                                updateCmd.ExecuteNonQuery();
+                            }
                             conexao.Close();
 
                             // Atualizando a exibição dos dados no DataGridView
@@ -307,23 +466,26 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT u.idUtente, m.nome AS nome_medico,u.nome AS nome_utente, u.numero_cc, " +
+            cmd.CommandText = "SELECT u.idUtente, u.nome AS Nome,m.nome AS Medico, u.numero_cc, " +
                 "u.data_validade,u.nif, u.niss, u.n_utenteSaude, u.genero,  u.data_nascimento,  u.idade, u.estado_civil," +
                 "u.morada, u.localidade, u.cod_postal, u.telefone_casa, u.telemovel, u.grau_dependencia, u.email, u.senha,   " +
-                "q.Numero AS numero_quarto, u.Imagem, u.Medico_idMedico FROM utente u JOIN medico m ON u.Medico_idMedico = m.idMedico JOIN quarto q " +
+                "q.Numero AS numero_quarto,u.Quarto_idQuarto, u.Imagem, u.Medico_idMedico FROM utente u JOIN medico m ON u.Medico_idMedico = m.idMedico JOIN quarto q " +
                 "ON u.Quarto_idQuarto = q.idQuarto;";
 
             cmd.ExecuteNonQuery();
             DataTable dta = new DataTable();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
             dataadapter.Fill(dta);
+            dta.DefaultView.Sort = "idUtente ASC";
             if (dta.Rows.Count > 0)
             {
                 // Assuming that Medico_idMedico is of integer type, you may need to cast it accordingly
                 idMedico = Convert.ToInt32(dta.Rows[0]["Medico_idMedico"]);
-                medico_nome = Convert.ToString(dta.Rows[0]["nome_medico"]);
+                medico_nome = Convert.ToString(dta.Rows[0]["Medico"]);
             }
             dataGridView1.DataSource = dta;
+            dataGridView1.Columns["Quarto_idQuarto"].Visible = false;
+
             ResizeDataGridViewColumnImages("Imagem");
 
             conexao.Close();
@@ -413,7 +575,7 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.Parameters.AddWithValue("@Nif", textBox_nif.Text);
                     cmd.Parameters.AddWithValue("@Niss", textBox_niss.Text);
                     cmd.Parameters.AddWithValue("@NUtenteSaude", textBox_nus.Text);
-                    cmd.Parameters.AddWithValue("@Genero", textBox_genero.Text);
+                    cmd.Parameters.AddWithValue("@Genero", genero);
                     cmd.Parameters.AddWithValue("@DataNascimento", dateTimePicker_dataNascimento.Value.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("@Idade", textBox_idade.Text);
                     cmd.Parameters.AddWithValue("@EstadoCivil", textBox_EstCivil.Text);
@@ -430,6 +592,62 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.Parameters.AddWithValue("@Imagem", imageBytes);
                     // Executando o comando
                     cmd.ExecuteNonQuery();
+                    int contar = 0;
+                    int ocupacao = 0;
+                    int controlo = 0;
+                    string queryQuarto = "SELECT COUNT(u.idUtente) AS ocupacao, q.quantidade_cama FROM quarto q LEFT JOIN utente u ON q.idQuarto = u.Quarto_idQuarto WHERE q.idQuarto = @quartoid;";
+                    using (MySqlCommand cmdQuarto = new MySqlCommand(queryQuarto, conexao))
+                    {
+                        Console.WriteLine("Quartoid::::" + idQuarto);
+                        cmdQuarto.Parameters.AddWithValue("@quartoid", idQuarto);
+                        using (MySqlDataReader readerQuarto = cmdQuarto.ExecuteReader())
+                        {
+
+                            Console.WriteLine("Entering the while loop");
+                            if (readerQuarto.HasRows)
+                            {
+                                Console.WriteLine("Reader has rows");
+                                while (readerQuarto.Read())
+                                {
+                                    Console.WriteLine("Inside the while loop");
+                                    ocupacao = Convert.ToInt32(readerQuarto["ocupacao"].ToString());
+                                    Console.WriteLine("Numero:::::" + ocupacao);
+                                    contar = ocupacao;
+                                    Console.WriteLine("CONTAR::::::" + contar);
+                                    int quantidade_cama = Convert.ToInt32(readerQuarto["quantidade_cama"].ToString());
+
+                                    // Check if contar is greater than or equal to quantidade_cama
+                                    if (contar > quantidade_cama)
+                                    {
+                                        // If yes, set contar to quantidade_cama
+                                        contar = quantidade_cama;
+                                        MessageBox.Show("O Utente não foi assignado um quarto porque o quarto ja tem capacidade completa!\nTem que associar um quarto a este utente na secção de quartos!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        controlo = 1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Reader has no rows");
+                            }
+                        }
+                    }
+                    string updateQuery = "UPDATE quarto SET ocupacao = @Ocupacao WHERE idQuarto = @QuartoId";
+                    using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, conexao))
+                    {
+                        updateCmd.Parameters.AddWithValue("@Ocupacao", contar);
+                        updateCmd.Parameters.AddWithValue("@QuartoId", idQuarto);
+                        updateCmd.ExecuteNonQuery();
+                    }
+                    if (controlo == 1)
+                    {
+                        string resetQuartoIdQuery = "UPDATE utente SET Quarto_idQuarto = 0  WHERE idUtente = @idUtente";
+                        using (MySqlCommand resetQuartoIdCmd = new MySqlCommand(resetQuartoIdQuery, conexao))
+                        {
+                            resetQuartoIdCmd.Parameters.AddWithValue("@idUtente", idUtente);
+                            resetQuartoIdCmd.ExecuteNonQuery();
+                        }
+                    }
                     conexao.Close();
 
                     // Limpando os campos e atualizando a exibição dos dados
@@ -458,11 +676,12 @@ namespace Projeto_Lar3idade_Back_End
         {
             if (e.RowIndex >= 0)
             {
+                int quartoid = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Quarto_idQuarto"].Value);
                 object cellValue = dataGridView1.Rows[e.RowIndex].Cells["idUtente"].Value;
                 if (cellValue != DBNull.Value)
                 {
                     int idUtenteParaEditar = Convert.ToInt32(cellValue);
-                    PreencherCamposParaEdicao(idUtenteParaEditar);
+                    PreencherCamposParaEdicao(idUtenteParaEditar ,quartoid);
                 }
                 else
                 {
@@ -472,15 +691,40 @@ namespace Projeto_Lar3idade_Back_End
             }
             
         }
-        private void PreencherCamposParaEdicao(int idUtenteParaEditar)
+        private void PreencherCamposParaEdicao(int idUtenteParaEditar, int quartoid)
         {
+            
             try
             {
                 conexao.Open();
-
+                Console.WriteLine("qaurtoid===" + quartoid);
+                string queryQuarto = "SELECT Numero FROM quarto where idQuarto = @quartoid;";
+                using (MySqlCommand cmdQuarto = new MySqlCommand(queryQuarto, conexao))
+                {
+                    cmdQuarto.Parameters.AddWithValue("@quartoid", quartoid);
+                    using (MySqlDataReader readerQuarto = cmdQuarto.ExecuteReader())
+                    {
+                        Console.WriteLine("Entering the while loop");
+                        if (readerQuarto.HasRows)
+                        {
+                            Console.WriteLine("Reader has rows");
+                            while (readerQuarto.Read())
+                            {
+                                Console.WriteLine("Inside the while loop");
+                                numeroQ = Convert.ToInt32(readerQuarto["Numero"].ToString());
+                                Console.WriteLine("Numero:::::" + numeroQ);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Reader has no rows");
+                        }
+                    }
+                }
                 MySqlCommand cmd = conexao.CreateCommand();
+
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "   SELECT utente.*, medico.nome , Quarto.Numero AS nome_medico FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico INNER JOIN   Quarto ON utente.Quarto_idQuarto = Quarto.idQuarto WHERE idUtente = @idUtente";
+                cmd.CommandText = "   SELECT utente.*, medico.nome  AS Medico , Quarto.Numero AS Numero_Quarto FROM utente INNER JOIN medico ON utente.Medico_idMedico = medico.idMedico INNER JOIN   Quarto ON utente.Quarto_idQuarto = Quarto.idQuarto WHERE idUtente = @idUtente";
                 cmd.Parameters.AddWithValue("@idUtente", idUtenteParaEditar);
                 DataTable dta = new DataTable();
                 MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
@@ -489,7 +733,7 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     // Assuming that Medico_idMedico is of integer type, you may need to cast it accordingly
                     idMedico = Convert.ToInt32(dta.Rows[0]["Medico_idMedico"]);
-                    medico_nome = Convert.ToString(dta.Rows[0]["nome_medico"]);
+                    medico_nome = Convert.ToString(dta.Rows[0]["Medico"]);
                 }
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -506,7 +750,7 @@ namespace Projeto_Lar3idade_Back_End
                         textBox_nif.Text = reader["nif"].ToString();
                         textBox_niss.Text = reader["niss"].ToString();
                         textBox_nus.Text = reader["n_utenteSaude"].ToString();
-                        textBox_genero.Text = reader["genero"].ToString();
+                        comboBox1.Text = reader["genero"].ToString();
                         dateTimePicker_dataNascimento.Value = Convert.ToDateTime(reader["data_nascimento"]);
                         textBox_idade.Text = reader["idade"].ToString();
                         textBox_EstCivil.Text = reader["estado_civil"].ToString();
@@ -518,7 +762,7 @@ namespace Projeto_Lar3idade_Back_End
                         SelecionarRadioButtonPorGrauDependencia(reader["grau_dependencia"].ToString());
                         textBox_email.Text = reader["email"].ToString();
                         textBox_senha.Text = reader["senha"].ToString();
-                        comboBox_quarto.Text = "ID:"+reader["Quarto_idQuarto"].ToString()+" Nº:"+ reader["Quarto_idQuarto"].ToString();
+                        comboBox_quarto.Text = "ID:"+reader["Quarto_idQuarto"].ToString()+" Nº:"+ numeroQ;
 
                         // Carregar imagem no Panel1
                         if (reader["Imagem"] != DBNull.Value)
@@ -594,14 +838,12 @@ namespace Projeto_Lar3idade_Back_End
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
-        }
-
-        private void label22_Click(object sender, EventArgs e)
-        {
-
+            if (comboBox1.SelectedItem != null)
+            {
+                genero = comboBox1.SelectedItem.ToString();
+            }
         }
     }
 }
