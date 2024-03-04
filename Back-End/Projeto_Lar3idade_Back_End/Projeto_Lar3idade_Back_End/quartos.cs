@@ -371,6 +371,7 @@ namespace Projeto_Lar3idade_Back_End
                                 updateCmd.Parameters.AddWithValue("@QuartoId", idQuarto);
                                 updateCmd.ExecuteNonQuery();
                             }
+                            conexao.Close();
                         }
 
                     }
