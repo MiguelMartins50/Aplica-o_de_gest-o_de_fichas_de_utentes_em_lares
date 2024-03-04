@@ -592,6 +592,62 @@ namespace Projeto_Lar3idade_Back_End
                     cmd.Parameters.AddWithValue("@Imagem", imageBytes);
                     // Executando o comando
                     cmd.ExecuteNonQuery();
+                    int contar = 0;
+                    int ocupacao = 0;
+                    int controlo = 0;
+                    string queryQuarto = "SELECT COUNT(u.idUtente) AS ocupacao, q.quantidade_cama FROM quarto q LEFT JOIN utente u ON q.idQuarto = u.Quarto_idQuarto WHERE q.idQuarto = @quartoid;";
+                    using (MySqlCommand cmdQuarto = new MySqlCommand(queryQuarto, conexao))
+                    {
+                        Console.WriteLine("Quartoid::::" + idQuarto);
+                        cmdQuarto.Parameters.AddWithValue("@quartoid", idQuarto);
+                        using (MySqlDataReader readerQuarto = cmdQuarto.ExecuteReader())
+                        {
+
+                            Console.WriteLine("Entering the while loop");
+                            if (readerQuarto.HasRows)
+                            {
+                                Console.WriteLine("Reader has rows");
+                                while (readerQuarto.Read())
+                                {
+                                    Console.WriteLine("Inside the while loop");
+                                    ocupacao = Convert.ToInt32(readerQuarto["ocupacao"].ToString());
+                                    Console.WriteLine("Numero:::::" + ocupacao);
+                                    contar = ocupacao;
+                                    Console.WriteLine("CONTAR::::::" + contar);
+                                    int quantidade_cama = Convert.ToInt32(readerQuarto["quantidade_cama"].ToString());
+
+                                    // Check if contar is greater than or equal to quantidade_cama
+                                    if (contar > quantidade_cama)
+                                    {
+                                        // If yes, set contar to quantidade_cama
+                                        contar = quantidade_cama;
+                                        MessageBox.Show("O Utente não foi assignado um quarto porque o quarto ja tem capacidade completa!\nTem que associar um quarto a este utente na secção de quartos!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        controlo = 1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Reader has no rows");
+                            }
+                        }
+                    }
+                    string updateQuery = "UPDATE quarto SET ocupacao = @Ocupacao WHERE idQuarto = @QuartoId";
+                    using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, conexao))
+                    {
+                        updateCmd.Parameters.AddWithValue("@Ocupacao", contar);
+                        updateCmd.Parameters.AddWithValue("@QuartoId", idQuarto);
+                        updateCmd.ExecuteNonQuery();
+                    }
+                    if (controlo == 1)
+                    {
+                        string resetQuartoIdQuery = "UPDATE utente SET Quarto_idQuarto = 0  WHERE idUtente = @idUtente";
+                        using (MySqlCommand resetQuartoIdCmd = new MySqlCommand(resetQuartoIdQuery, conexao))
+                        {
+                            resetQuartoIdCmd.Parameters.AddWithValue("@idUtente", idUtente);
+                            resetQuartoIdCmd.ExecuteNonQuery();
+                        }
+                    }
                     conexao.Close();
 
                     // Limpando os campos e atualizando a exibição dos dados

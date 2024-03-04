@@ -99,8 +99,8 @@ namespace Projeto_Lar3idade_Back_End
                 using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
                 {
                     conexao.Open();
-                    string query = "INSERT INTO mydb.quarto (idQuarto, estado, quantidade_cama , Numero)" +
-                                  "VALUES (@idQuarto,@estado, @quantidade_cama, @Numero)";
+                    string query = "INSERT INTO mydb.quarto (idQuarto, estado, quantidade_cama , Numero, ocupacao)" +
+                                  "VALUES (@idQuarto,@estado, @quantidade_cama, @Numero,0)";
 
                     string query2 = "SELECT * FROM quarto ORDER BY idQuarto DESC LIMIT 1";
 
@@ -232,7 +232,7 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Open();
                 MySqlCommand cmd = conexao.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT q.idQuarto, q.Numero, q.estado, q.quantidade_cama  FROM quarto q ;";
+                cmd.CommandText = "SELECT q.idQuarto, q.Numero, q.estado, q.quantidade_cama ,q.ocupacao FROM quarto q ;";
 
                 DataTable dta = new DataTable();
                 MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
@@ -313,7 +313,7 @@ namespace Projeto_Lar3idade_Back_End
 
                             
                         }
-                        string query5 = "UPDATE utente SET Quarto_idQuarto = NULL WHERE Quarto_idQuarto = @idQuarto AND idUtente NOT IN (" + string.Join(",", Lista_utente.Select(entry => entry.Split(',')[0].Split(':')[1].Trim())) + ")";
+                        string query5 = "UPDATE utente SET Quarto_idQuarto = 0 WHERE Quarto_idQuarto = @idQuarto AND idUtente NOT IN (" + string.Join(",", Lista_utente.Select(entry => entry.Split(',')[0].Split(':')[1].Trim())) + ")";
                         using (MySqlCommand comandoReset = new MySqlCommand(query5, conexao))
                         {
                             comandoReset.Parameters.AddWithValue("@idQuarto", idQuarto);
@@ -335,7 +335,44 @@ namespace Projeto_Lar3idade_Back_End
                                 comando.ExecuteNonQuery();
                             }
                         }
-                       
+                        int contar = 0;
+                        int ocupacao = 0;
+                        string queryQuarto = "SELECT COUNT(u.idUtente) AS ocupacao FROM quarto q LEFT JOIN utente u ON q.idQuarto = u.Quarto_idQuarto where q.idQuarto = @quartoid;";
+                        using (MySqlCommand cmdQuarto = new MySqlCommand(queryQuarto, conexao))
+                        {
+                            Console.WriteLine("Quartoid::::" + idQuarto);
+                            cmdQuarto.Parameters.AddWithValue("@quartoid", idQuarto);
+                            using (MySqlDataReader readerQuarto = cmdQuarto.ExecuteReader())
+                            {
+
+                                Console.WriteLine("Entering the while loop");
+                                if (readerQuarto.HasRows)
+                                {
+                                    Console.WriteLine("Reader has rows");
+                                    while (readerQuarto.Read())
+                                    {
+                                        Console.WriteLine("Inside the while loop");
+                                        ocupacao = Convert.ToInt32(readerQuarto["ocupacao"].ToString());
+                                        Console.WriteLine("Numero:::::" + ocupacao);
+                                        contar = ocupacao;
+                                        Console.WriteLine("CONTAR::::::" + contar);
+
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Reader has no rows");
+                                }
+                            }
+                            string updateQuery = "UPDATE quarto SET ocupacao = @Ocupacao WHERE idQuarto = @QuartoId";
+                            using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, conexao))
+                            {
+                                updateCmd.Parameters.AddWithValue("@Ocupacao", contar);
+                                updateCmd.Parameters.AddWithValue("@QuartoId", idQuarto);
+                                updateCmd.ExecuteNonQuery();
+                            }
+                        }
+
                     }
                     display_data();
                     Limpar();
@@ -366,7 +403,7 @@ namespace Projeto_Lar3idade_Back_End
                         conexao.Open();
 
                         string query = "DELETE FROM  mydb.quarto WHERE idQuarto = @idQuarto";
-                        string queryUpdateUtente = "UPDATE `mydb`.`utente` SET `Quarto_idQuarto` = null WHERE (`Quarto_idQuarto` = '10');";
+                        string queryUpdateUtente = "UPDATE `mydb`.`utente` SET `Quarto_idQuarto` = 0 WHERE (`Quarto_idQuarto` = @idQuarto);";
                         Console.WriteLine("aqui1");
                         using (MySqlCommand comandoUpdateUtente = new MySqlCommand(queryUpdateUtente, conexao))
                         {
