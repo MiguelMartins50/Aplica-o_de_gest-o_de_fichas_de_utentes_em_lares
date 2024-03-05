@@ -232,7 +232,7 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Open();
                 MySqlCommand cmd = conexao.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT q.idQuarto, q.Numero, q.estado, q.quantidade_cama ,q.ocupacao FROM quarto q ;";
+                cmd.CommandText = "SELECT q.idQuarto, q.Numero, q.estado, q.quantidade_cama, q.ocupacao FROM quarto q WHERE q.idQuarto <> 0;;";
 
                 DataTable dta = new DataTable();
                 MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
@@ -624,5 +624,9 @@ namespace Projeto_Lar3idade_Back_End
             }
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

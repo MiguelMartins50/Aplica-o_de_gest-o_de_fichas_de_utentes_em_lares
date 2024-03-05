@@ -91,14 +91,8 @@ C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Proj
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.AssemblyReference.cache
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.SuggestedBindingRedirects.cache
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_atividade.resources
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_funcionario.resources
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_responsavel.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.admin.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.atividades.resources
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Editar_atividade.resources
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Edit_funcionario.resources
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Edit_respinsavel.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.funcionario.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.Login.resources
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.pagamentos.resources
@@ -112,9 +106,6 @@ C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Proj
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.csproj.CopyComplete
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.exe
 C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.pdb
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_pagamento.resources
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_quartos.resources
-C:\Users\fabio\OneDrive\Ambiente de Trabalho\Projeto\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_tarefas.resources
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_atividade.resources
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_funcionario.resources
 C:\Users\migue\Desktop\Projeto_2023\projeto_final\Back-End\Projeto_Lar3idade_Back_End\Projeto_Lar3idade_Back_End\obj\Debug\Projeto_Lar3idade_Back_End.add_pagamento.resources

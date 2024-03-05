@@ -234,6 +234,7 @@ namespace Projeto_Lar3idade_Back_End
             this.dataGridView1.Size = new System.Drawing.Size(967, 426);
             this.dataGridView1.TabIndex = 56;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // textBox_Search
             // 

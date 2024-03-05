@@ -107,42 +107,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="add_atividade.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="add_atividade.Designer.cs">
-      <DependentUpon>add_atividade.cs</DependentUpon>
-    </Compile>
-    <Compile Include="add_funcionario.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="add_funcionario.Designer.cs">
-      <DependentUpon>add_funcionario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="add_pagamento.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="add_pagamento.Designer.cs">
-      <DependentUpon>add_pagamento.cs</DependentUpon>
-    </Compile>
-    <Compile Include="add_quartos.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="add_quartos.Designer.cs">
-      <DependentUpon>add_quartos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="add_responsavel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="add_responsavel.Designer.cs">
-      <DependentUpon>add_responsavel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="add_tarefas.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="add_tarefas.Designer.cs">
-      <DependentUpon>add_tarefas.cs</DependentUpon>
-    </Compile>
     <Compile Include="admin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,24 +130,6 @@
     </Compile>
     <Compile Include="consultas.Designer.cs">
       <DependentUpon>consultas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editar_atividade.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Editar_atividade.Designer.cs">
-      <DependentUpon>Editar_atividade.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Edit_funcionario.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Edit_funcionario.Designer.cs">
-      <DependentUpon>Edit_funcionario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Edit_respinsavel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Edit_respinsavel.Designer.cs">
-      <DependentUpon>Edit_respinsavel.cs</DependentUpon>
     </Compile>
     <Compile Include="enviar_func.cs">
       <SubType>UserControl</SubType>
@@ -301,24 +247,6 @@
     <Compile Include="Visitas.Designer.cs">
       <DependentUpon>Visitas.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="add_atividade.resx">
-      <DependentUpon>add_atividade.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="add_funcionario.resx">
-      <DependentUpon>add_funcionario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="add_pagamento.resx">
-      <DependentUpon>add_pagamento.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="add_quartos.resx">
-      <DependentUpon>add_quartos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="add_responsavel.resx">
-      <DependentUpon>add_responsavel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="add_tarefas.resx">
-      <DependentUpon>add_tarefas.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="admin.resx">
       <DependentUpon>admin.cs</DependentUpon>
     </EmbeddedResource>
@@ -330,15 +258,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="consultas.resx">
       <DependentUpon>consultas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editar_atividade.resx">
-      <DependentUpon>Editar_atividade.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Edit_funcionario.resx">
-      <DependentUpon>Edit_funcionario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Edit_respinsavel.resx">
-      <DependentUpon>Edit_respinsavel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="enviar_func.resx">
       <DependentUpon>enviar_func.cs</DependentUpon>

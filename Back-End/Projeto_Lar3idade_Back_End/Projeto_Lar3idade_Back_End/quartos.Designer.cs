@@ -58,7 +58,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label3.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(448, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 27);
+            this.label3.Size = new System.Drawing.Size(86, 26);
             this.label3.TabIndex = 14;
             this.label3.Text = "Quartos";
             // 
@@ -195,6 +195,7 @@ namespace Projeto_Lar3idade_Back_End
             this.dataGridView1.Size = new System.Drawing.Size(984, 447);
             this.dataGridView1.TabIndex = 147;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // textBox_utentes
             // 

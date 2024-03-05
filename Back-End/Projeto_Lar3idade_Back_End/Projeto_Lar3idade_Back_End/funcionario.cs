@@ -92,8 +92,9 @@ namespace Projeto_Lar3idade_Back_End
                               FROM (
                               SELECT idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email,senha,Funcao
                               FROM funcionario 
-
-                              UNION                                 
+                              WHERE idFuncionario <> 10
+                              
+                                UNION                                 
                               
                               SELECT idMedico AS idFuncionario, nome , numero_cc , Data_validade AS data_validade, telemovel, salario_hora, email, password as senha,'Médico(a)' as Funcao
                               FROM medico 
@@ -394,6 +395,11 @@ namespace Projeto_Lar3idade_Back_End
             {
                 funcao = comboBox1.SelectedItem.ToString();
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
