@@ -190,31 +190,48 @@ app.get("/tarefa", (req,res) =>{
 
 app.get("/visita", (req, res) => {
     const Utente_idUtente = req.query.Utente_idUtente;
-    const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
-    const Visita_Data = req.query.data;
+const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
+const Visita_Data = req.query.data;
+const Visita_Start = req.query.start;
+const Visita_End = req.query.end;
 
-    let q = `
-        SELECT v.idVisita ,f.nomel AS Nome_Familiar,f.idFamiliar, u.idUtente, v.data AS Data_HoraVisita, u.nome AS nomeutente
-        FROM visita v
-        JOIN familiar f ON v.Familiar_idFamiliar = f.idFamiliar
-        JOIN utente u ON v.Utente_idUtente = u.idUtente
-    `;
+let q = `
+    SELECT v.idVisita, f.nomel AS Nome_Familiar, f.idFamiliar, u.idUtente, v.data AS Data_HoraVisita, u.nome AS nomeutente
+    FROM visita v
+    JOIN familiar f ON v.Familiar_idFamiliar = f.idFamiliar
+    JOIN utente u ON v.Utente_idUtente = u.idUtente
+`;
 
+if (Familiar_idFamiliar) {
+    q += ` WHERE f.idFamiliar = ${Familiar_idFamiliar}`;
+}
+if (Utente_idUtente) {
     if (Familiar_idFamiliar) {
-        q += ` WHERE f.idFamiliar = ${Familiar_idFamiliar}`;
-    }
-    if (Utente_idUtente) {
+        q += ` AND u.idUtente = ${Utente_idUtente}`;
+    } else {
         q += ` WHERE u.idUtente = ${Utente_idUtente}`;
     }
-    if (Visita_Data) {
-       
+}
+if (Visita_Data) {
+    if (Familiar_idFamiliar || Utente_idUtente) {
+        q += ` AND v.data = '${Visita_Data}'`;
+    } else {
         q += ` WHERE v.data = '${Visita_Data}'`;
     }
+}
+if (Visita_Start && Visita_End) {
+    if (Familiar_idFamiliar || Utente_idUtente || Visita_Data) {
+        q += ` AND v.data >= '${Visita_Start}' AND v.data <= '${Visita_End}'`;
+    } else {
+        q += ` WHERE v.data >= '${Visita_Start}' AND v.data <= '${Visita_End}'`;
+    }
+}
 
-    db.query(q, (err, data) => {
-        if (err) return res.json(err);
-        return res.json(data);
-    });
+db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+});
+
 });
 
 
