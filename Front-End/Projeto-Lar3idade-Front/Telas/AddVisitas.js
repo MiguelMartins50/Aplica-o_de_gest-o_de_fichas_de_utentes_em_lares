@@ -26,7 +26,7 @@ export default function AddVistas({navigation, route}) {
   useEffect(() => {
     console.log('Selected Utente :', SelectedUtente);
     // Fetch visits associated with the selected Utente
-    axios.get(`http://192.168.152.1:8800/visita?Utente_idUtente=${SelectedUtente}`)
+    axios.get(`http:/192.168.1.80:8800/visita?Utente_idUtente=${SelectedUtente}`)
       .then(response => {
         setVDATA(response.data);
       })
@@ -97,49 +97,64 @@ export default function AddVistas({navigation, route}) {
       }, [selectedDate, selectedTime]);
 
       const handleAddVisita = () => {
-        const formattedDateTime = moment(combinedDateTime, 'DD/MM/YYYY HH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
+        const [datePart, timePart] = combinedDateTime.split(' ');
+    
+        const [day, month, year] = datePart.split('/');
+        const [hour, minute, second] = timePart.split(':');
+    
+        // Create a new Date object using the extracted components
+        const newDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:0`);
+    
+        // Adjust the date by adding 30 minutes
+        const halfHourLater = new Date(newDate.getTime() + 30 * 60000); // Adding 30 minutes (30 * 60 * 1000 milliseconds)
+    
+        // Format the dates in the desired format (ISO 8601)
+        const formattedDate = newDate.toISOString();
+        const formattedHalfHourLater = halfHourLater.toISOString();
+        console.log(formattedDate);
+        console.log(formattedHalfHourLater);
         const visitaData = {
-          Utente_idUtente: SelectedUtente,
-          data: formattedDateTime,
-          Familiar_idFamiliar: FamiliarData.idFamiliar,
+            Utente_idUtente: SelectedUtente,
+            data: formattedDate,
+            Familiar_idFamiliar: FamiliarData.idFamiliar,
         };
-      
-        // Compare the selected date and time with dates in VData
-        const selectedDateTime = moment(formattedDateTime);
-        const matchedVisits = VData.filter(visita => {
-          const visitaDateTime = moment(visita.data);
-          return selectedDateTime.isSame(visitaDateTime, 'minute');
-        });
-      
-        if (matchedVisits.length > 0) {
-          // If there are matching visits, display an alert
-          Alert.alert(
-            'Erro',
-            'Já existe uma visita marcada para este dia e hora.',
-            [
-              { text: 'OK', onPress: () => console.log('OK pressed') }
-            ],
-            { cancelable: false }
-          );
-        } else {
-          // If no matching visits, add the visit
-          axios.post('http://192.168.1.80:8800/visita', visitaData)
-            .then(response => {
-              console.log('Visita added successfully:', response.data);
-              Alert.alert(
-                'Sucesso',
-                'Visita adicionada com sucesso.',
-                [
-                  { text: 'OK', onPress: () => navigation.navigate('VisitasFamiliar', FamiliarData,familiarID) }
-                ],
-                { cancelable: false }
-              );
+        axios.get(`http://192.168.1.80:8800/Visita?start=${formattedDate}&end=${formattedHalfHourLater}`)
+            .then(consultaResponse => {
+                if (consultaResponse.data.length === 0) {
+                    axios.post('http://192.168.1.80:8800/visita', visitaData)
+                        .then(response => {
+                            console.log('Visita added successfully:', response.data);
+                            Alert.alert(
+                                'Sucesso',
+                                'Visita adicionada com sucesso.',
+                                [
+                                    { text: 'OK', onPress: () => navigation.navigate('VisitasFamiliar', FamiliarData, familiarID) }
+                                ],
+                                { cancelable: false }
+                            );
+                        })
+                        .catch(error => {
+                            console.error('Error adding visita:', error);
+                        });
+                } else {
+                    console.log('Visitas nao podem ser subrepostas');
+                    Alert.alert(
+                        'Horário Ocupado',
+                        'Escolha outra hora para marcar a visita porque o horario que escolheu já está ocupado.',
+                        [
+                            { text: 'OK' }
+                        ],
+                        { cancelable: false }
+                    );
+                }
             })
             .catch(error => {
-              console.error('Error adding visita:', error);
+                console.error('Error checking visita data:', error);
             });
-        }
-      };
+    };
+    
+    
+    
     
     
     

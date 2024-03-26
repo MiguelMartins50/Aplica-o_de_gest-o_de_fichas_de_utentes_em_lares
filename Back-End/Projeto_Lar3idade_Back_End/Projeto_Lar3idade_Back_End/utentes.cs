@@ -221,6 +221,7 @@ namespace Projeto_Lar3idade_Back_End
                 }
                 
                 MessageBox.Show("Utente adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                conexao.Close();
                 display_data();
             }
             catch (Exception ex)
