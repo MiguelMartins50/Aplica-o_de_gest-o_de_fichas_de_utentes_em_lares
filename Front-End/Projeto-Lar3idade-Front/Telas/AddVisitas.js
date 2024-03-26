@@ -41,13 +41,13 @@ export default function AddVistas({navigation, route}) {
   }, [VData]);
   
   useEffect(() => {
-    axios.get(`http://192.168.152.1:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.92:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(consultaResponse => {
         setUFData(consultaResponse.data);
         if (consultaResponse.data && consultaResponse.data[0] && consultaResponse.data[0].Utente_idUtente) {
           const utenteId = consultaResponse.data[0].Utente_idUtente;
   
-          axios.get(`http://192.168.152.1:8800/utente?idUtente=${utenteId}`)
+          axios.get(`http://192.168.1.92:8800/utente?idUtente=${utenteId}`)
             .then(utenteResponse => {
               setUData(utenteResponse.data);
               

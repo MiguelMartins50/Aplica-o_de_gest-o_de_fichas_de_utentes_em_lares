@@ -15,7 +15,7 @@ export default function UFinfo({ navigation, route }) {
   
     useEffect(() => {
       axios
-        .get(`http://192.168.1.15:8800/consulta?Utente_idUtente=${UtenteData.idUtente}`)
+        .get(`http://192.168.1.92:8800/consulta?Utente_idUtente=${UtenteData.idUtente}`)
         .then((consultaResponse) => {
           setConsultasData(consultaResponse.data);
         })

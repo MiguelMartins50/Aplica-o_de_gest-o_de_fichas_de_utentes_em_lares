@@ -15,7 +15,7 @@ export default function PlanoPagamento({ route, navigation }) {
   ];
 
   useEffect(() => {
-    axios.get(`http://192.168.1.15:8800/pagamento?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.92:8800/pagamento?Utente_idUtente=${utenteData.idUtente}`)
       .then(pagamentoResponse => {
         const filteredPagamentos = selectedMonth
           ? pagamentoResponse.data.filter(item => new Date(item.data_limitel).getMonth() === months.indexOf(selectedMonth))

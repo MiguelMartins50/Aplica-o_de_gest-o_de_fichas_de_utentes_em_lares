@@ -8,7 +8,7 @@ export default function Atividade({ route, navigation }) {
   const utenteId = utenteData.idUtente;
 
   useEffect(() => {
-    axios.get(`http://192.168.1.15:8800/atividade?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.92:8800/atividade?Utente_idUtente=${utenteData.idUtente}`)
     .then(atividadeResponse => {
       // Atualiza o estado com os dados da API
       setAtividadeData(atividadeResponse.data);

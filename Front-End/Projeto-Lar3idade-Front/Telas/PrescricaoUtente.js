@@ -7,7 +7,7 @@ export default function PrescricaoUtente({ route, navigation }) {
   const { utenteData } = route.params;
 
   useEffect(() => {
-    axios.get(`http://192.168.1.15:8800/prescricao_medica?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.92:8800/prescricao_medica?Utente_idUtente=${utenteData.idUtente}`)
     .then(prescricaoResponse => {
       setPrescricaoData(prescricaoResponse.data);
     })

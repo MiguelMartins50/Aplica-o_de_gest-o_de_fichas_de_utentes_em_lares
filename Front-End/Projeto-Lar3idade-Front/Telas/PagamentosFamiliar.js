@@ -15,7 +15,7 @@ export default function PagamentosFamiliar({ navigation, route }) {
   ];
 
   useEffect(() => {
-    axios.get(`http://192.168.1.15:8800/pagamento?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.92:8800/pagamento?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
       .then(PagamentoResponse => {
         if (PagamentoResponse.data && Array.isArray(PagamentoResponse.data)) {
           const filteredPagamento = selectedMonth
