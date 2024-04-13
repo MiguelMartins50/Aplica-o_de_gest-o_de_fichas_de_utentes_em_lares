@@ -26,7 +26,7 @@ export default function AddVistas({navigation, route}) {
   useEffect(() => {
     console.log('Selected Utente :', SelectedUtente);
     // Fetch visits associated with the selected Utente
-    axios.get(`http:/192.168.1.80:8800/visita?Utente_idUtente=${SelectedUtente}`)
+    axios.get(`http:/192.168.1.92:8800/visita?Utente_idUtente=${SelectedUtente}`)
       .then(response => {
         setVDATA(response.data);
       })
@@ -118,10 +118,10 @@ export default function AddVistas({navigation, route}) {
             data: formattedDate,
             Familiar_idFamiliar: FamiliarData.idFamiliar,
         };
-        axios.get(`http://192.168.1.80:8800/Visita?start=${formattedDate}&end=${formattedHalfHourLater}`)
+        axios.get(`http://192.168.1.92:8800/Visita?start=${formattedDate}&end=${formattedHalfHourLater}`)
             .then(consultaResponse => {
                 if (consultaResponse.data.length === 0) {
-                    axios.post('http://192.168.1.80:8800/visita', visitaData)
+                    axios.post('http://192.168.1.92:8800/visita', visitaData)
                         .then(response => {
                             console.log('Visita added successfully:', response.data);
                             Alert.alert(

@@ -26,7 +26,7 @@ namespace Projeto_Lar3idade_Back_End
         public tarefas()
         {
             InitializeComponent();
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             conexao = new MySqlConnection(connectionString);
             LoadComboBox();
             display_data();
@@ -81,7 +81,7 @@ namespace Projeto_Lar3idade_Back_End
 
             try
             {
-                using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                 {
                     conexao.Open();
                     string query = "INSERT INTO mydb.tarefa (idTarefa,nome, descricao, Funcionario_idFuncionario, Tipo_idTipo)" +
@@ -202,7 +202,7 @@ namespace Projeto_Lar3idade_Back_End
                     int rowIndex = dataGridView1.SelectedRows[0].Index;
                     int idTarefa = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idTarefa"].Value);
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                     {
                         conexao.Open();
 
@@ -246,7 +246,7 @@ namespace Projeto_Lar3idade_Back_End
                     int rowIndex = dataGridView1.SelectedRows[0].Index;
                     int idTarefa = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idTarefa"].Value);
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                     {
                         conexao.Open();
 

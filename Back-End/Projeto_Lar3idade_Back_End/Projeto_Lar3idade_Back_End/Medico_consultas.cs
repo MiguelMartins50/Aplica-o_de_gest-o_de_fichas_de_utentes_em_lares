@@ -37,7 +37,7 @@ namespace Projeto_Lar3idade_Back_End
             dateTimePicker_data.Format = DateTimePickerFormat.Custom;
             dateTimePicker_data.CustomFormat = "yyyy-MM-dd HH:mm";
             dateTimePicker_data.ShowUpDown = true;
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             conexao = new MySqlConnection(connectionString);
             this.user_ID = userID;
             LoadComboBox();
@@ -461,7 +461,7 @@ namespace Projeto_Lar3idade_Back_End
                     int idprescricao = idPrescricao_medica;
 
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                     {
                         conexao.Open();
 

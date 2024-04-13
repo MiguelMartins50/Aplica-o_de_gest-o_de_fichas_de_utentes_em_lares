@@ -21,7 +21,7 @@ namespace Projeto_Lar3idade_Back_End
         public enviar_func(int userid)
         {
             InitializeComponent();
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             conexao = new MySqlConnection(connectionString);
             this.iduser = userid;
             buscar_nome();
@@ -49,7 +49,7 @@ namespace Projeto_Lar3idade_Back_End
             {
                 try
                 {
-                    using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                     {
                         conexao.Open();
                         string query = "INSERT INTO mydb.notificacao_func (remetente,assunto, messagem, idremetente, funcionario_idFuncionario,proccessada,Data_envio)" +

@@ -28,7 +28,7 @@ namespace Projeto_Lar3idade_Back_End
             dateTimePicker_realizacao.Format = DateTimePickerFormat.Custom;
             dateTimePicker_realizacao.CustomFormat = "yyyy-MM-dd HH:mm";
             dateTimePicker_realizacao.ShowUpDown = true;
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             conexao = new MySqlConnection(connectionString);
             this.iduser = userid;
             Console.WriteLine("id Utlizador da Atividade nª1:" + iduser);
@@ -124,7 +124,7 @@ namespace Projeto_Lar3idade_Back_End
 
             try
             {
-                using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                 {
                     conexao.Open();
                     string query = "INSERT INTO mydb.atividade (idAtividade,Utente_idUtente, Funcionario_idFuncionario, nome, data, descricao, Tipo_idTipo)" +
@@ -187,7 +187,7 @@ namespace Projeto_Lar3idade_Back_End
                         int rowIndex = dataGridView1.SelectedRows[0].Index;
                         int idAtividade = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idAtividade"].Value);
 
-                        using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                        using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                         {
                             conexao.Open();
 

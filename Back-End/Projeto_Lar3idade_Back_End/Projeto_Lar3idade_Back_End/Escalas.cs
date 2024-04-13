@@ -13,7 +13,7 @@ namespace Projeto_Lar3idade_Back_End
 {
     public partial class Escalas : UserControl
     {
-        private string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+        private string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
         private DateTime data_inicio;
         private DateTime data_fim;
         private Dictionary<string, string> mes_begin = new Dictionary<string, string>();

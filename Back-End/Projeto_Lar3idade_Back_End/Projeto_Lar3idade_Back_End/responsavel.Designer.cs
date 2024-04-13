@@ -401,6 +401,7 @@ namespace Projeto_Lar3idade_Back_End
             this.textBox3_senha.Name = "textBox3_senha";
             this.textBox3_senha.Size = new System.Drawing.Size(222, 22);
             this.textBox3_senha.TabIndex = 142;
+            this.textBox3_senha.TextChanged += new System.EventHandler(this.textBox3_senha_TextChanged);
             // 
             // textBox_UtenteFamiliar
             // 

@@ -28,7 +28,7 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void LoadData()
         {
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             string query = "SELECT tarefa.nome, tarefa.descricao , tipo.tipo FROM tarefa JOIN tipo ON tarefa.Tipo_idTipo = tipo.idTipo where tarefa.Funcionario_idFuncionario = @iduser";
 
             using (MySqlConnection conexao = new MySqlConnection(connectionString))
@@ -110,6 +110,11 @@ namespace Projeto_Lar3idade_Back_End
                     verticalPosition += panel.Height + 10; // Adjusted spacing
                 }
             }
+
+        }
+
+        private void Tarefas_Func_Load(object sender, EventArgs e)
+        {
 
         }
     } 

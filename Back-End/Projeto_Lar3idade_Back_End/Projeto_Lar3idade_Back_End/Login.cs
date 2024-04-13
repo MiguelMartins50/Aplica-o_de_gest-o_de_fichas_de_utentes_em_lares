@@ -21,7 +21,7 @@ namespace Projeto_Lar3idade_Back_End
             textBox2.PasswordChar = '*';
 
             // Inicialize a conexão no construtor do formulário
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             conexao = new MySqlConnection(connectionString);
         }
         private void Form1_Resize(object sender, EventArgs e)
@@ -101,8 +101,8 @@ namespace Projeto_Lar3idade_Back_End
                         userID = Convert.ToInt32(resultidMedico);
                         Console.WriteLine("idMedico" + userID);
                         MessageBox.Show("Login bem-sucedido como medico!");
-
-                        // link pra outra tela para medico (replace 'YourMedicoForm' with the actual form for medico)
+                        Console.WriteLine(nome + userID);
+                      
                         Medico_Pagina Medico_Pagina = new Medico_Pagina(userID, nome);
                         Medico_Pagina.Show();
 
@@ -113,6 +113,7 @@ namespace Projeto_Lar3idade_Back_End
                     {
                         MessageBox.Show("Login falhou. Verifique suas credenciais.");
                     }
+
                 }
 
 
@@ -121,6 +122,8 @@ namespace Projeto_Lar3idade_Back_End
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao autenticar: " + ex.Message);
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(Convert.ToString(ex));
             }
             finally
             {

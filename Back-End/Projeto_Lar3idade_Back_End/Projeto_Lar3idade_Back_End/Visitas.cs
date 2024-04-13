@@ -29,7 +29,7 @@ namespace Projeto_Lar3idade_Back_End
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm";
             dateTimePicker1.ShowUpDown = true;
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             conexao = new MySqlConnection(connectionString);
             display_data();
             LoadComboBox();
@@ -226,7 +226,7 @@ namespace Projeto_Lar3idade_Back_End
                         int rowIndex = dataGridView1.SelectedRows[0].Index;
                         int idVisita = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idVisita"].Value);
 
-                        using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                        using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                         {
                             conexao.Open();
 

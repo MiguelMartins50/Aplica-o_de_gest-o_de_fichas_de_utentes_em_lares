@@ -43,11 +43,11 @@ namespace Projeto_Lar3idade_Back_End
         public responsavel()
         {
             InitializeComponent();
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             conexao = new MySqlConnection(connectionString);
             display_data();
             LoadComboBox();
-            
+            textBox3_senha.PasswordChar = '*';
 
             // Adicione o evento CellClick ao DataGridView
             dataGridView1.CellClick += dataGridView1_CellClick;
@@ -117,7 +117,7 @@ namespace Projeto_Lar3idade_Back_End
                         }
                     }
                 }
-                using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                 {
                     conexao.Open();
 
@@ -283,7 +283,7 @@ namespace Projeto_Lar3idade_Back_End
                         }
                     }
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                     {
                         conexao.Open();
                         string queryUpdateFamiliar = "UPDATE mydb.familiar SET " +
@@ -407,7 +407,7 @@ namespace Projeto_Lar3idade_Back_End
                     // Obtém o idFamiliar da linha selecionada
                     int idFamiliarParaExcluir = ObterIdFamiliarSelecionado();
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                     {
                         conexao.Open();
 
@@ -689,7 +689,7 @@ namespace Projeto_Lar3idade_Back_End
 
             try
             {
-                using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
                 {
                     conexao.Open();
 
@@ -829,6 +829,11 @@ namespace Projeto_Lar3idade_Back_End
                     MessageBox.Show("Erro ao carregar a imagem: " + ex.Message);
                 }
             }
+        }
+
+        private void textBox3_senha_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

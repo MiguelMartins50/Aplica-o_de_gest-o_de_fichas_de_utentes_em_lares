@@ -16,17 +16,17 @@ namespace Projeto_Lar3idade_Back_End
         private MySqlConnection conexao;
         private int idupt;
         private string funcao = "";
+        
         public funcionario()
         {
+           
             InitializeComponent();
-
             comboBox1.Items.AddRange(new string[] { "Médico(a)", "Cuidador(a)", "Recepcionista" });
-
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
+            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             conexao = new MySqlConnection(connectionString);
             display_data();
             dataGridView1.CellClick += dataGridView1_CellClick;
-
+            textBox_Senha.PasswordChar = '*';
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -126,6 +126,8 @@ namespace Projeto_Lar3idade_Back_End
                 }
             }
         }
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
