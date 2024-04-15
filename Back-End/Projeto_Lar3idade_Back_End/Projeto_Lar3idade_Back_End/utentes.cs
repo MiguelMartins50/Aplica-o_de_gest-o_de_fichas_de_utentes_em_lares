@@ -470,7 +470,7 @@ namespace Projeto_Lar3idade_Back_End
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT u.idUtente, u.nome AS Nome,m.nome AS Medico, u.numero_cc, " +
                 "u.data_validade,u.nif, u.niss, u.n_utenteSaude, u.genero,  u.data_nascimento,  u.idade, u.estado_civil," +
-                "u.morada, u.localidade, u.cod_postal, u.telefone_casa, u.telemovel, u.grau_dependencia, u.email, u.senha,   " +
+                "u.morada, u.localidade, u.cod_postal, u.telefone_casa, u.telemovel, u.grau_dependencia, u.email,  '****' as senha,   " +
                 "q.Numero AS numero_quarto,u.Quarto_idQuarto, u.Imagem, u.Medico_idMedico FROM utente u JOIN medico m ON u.Medico_idMedico = m.idMedico JOIN quarto q " +
                 "ON u.Quarto_idQuarto = q.idQuarto;";
 
@@ -845,6 +845,23 @@ namespace Projeto_Lar3idade_Back_End
             if (comboBox1.SelectedItem != null)
             {
                 genero = comboBox1.SelectedItem.ToString();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            if (textBox_senha.PasswordChar == '*')
+            {
+                // Se a senha estiver oculta, mostre-a
+                textBox_senha.PasswordChar = '\0'; // Caractere nulo para mostrar o texto da senha
+                button2.Text = "Ocultar"; // Altera o texto do botão
+            }
+            else
+            {
+                // Se a senha estiver visível, oculte-a
+                textBox_senha.PasswordChar = '*'; // Caractere '*' para ocultar a senha
+                button2.Text = "Mostrar"; // Altera o texto do botão
             }
         }
     }

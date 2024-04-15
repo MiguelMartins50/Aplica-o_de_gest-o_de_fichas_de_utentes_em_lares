@@ -56,6 +56,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -305,11 +306,24 @@ namespace Projeto_Lar3idade_Back_End
             this.label10.TabIndex = 63;
             this.label10.Text = "€";
             // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
+            this.button6.ForeColor = System.Drawing.SystemColors.Control;
+            this.button6.Location = new System.Drawing.Point(926, 200);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(68, 26);
+            this.button6.TabIndex = 150;
+            this.button6.Text = "Mostrar";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // funcionario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label6);
@@ -373,5 +387,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button6;
     }
 }

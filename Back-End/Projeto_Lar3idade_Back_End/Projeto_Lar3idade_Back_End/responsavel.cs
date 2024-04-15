@@ -524,7 +524,7 @@ namespace Projeto_Lar3idade_Back_End
                 using (MySqlCommand cmd = conexao.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT * FROM mydb.familiar;";
+                    cmd.CommandText = "SELECT idFamiliar, nomel, numero_cc, data_validade, telemovel, data_nascimento, morada, cod_postal, ocupacao, tel_casa,'*******' as senha, email, Imagem FROM familiar ORDER BY idFamiliar;";
                     cmd.ExecuteNonQuery();
                     DataTable dta = new DataTable();
                     MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
@@ -834,6 +834,22 @@ namespace Projeto_Lar3idade_Back_End
         private void textBox3_senha_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox3_senha.PasswordChar == '*')
+            {
+                // Se a senha estiver oculta, mostre-a
+                textBox3_senha.PasswordChar = '\0'; // Caractere nulo para mostrar o texto da senha
+                button2.Text = "Ocultar"; // Altera o texto do botão
+            }
+            else
+            {
+                // Se a senha estiver visível, oculte-a
+                textBox3_senha.PasswordChar = '*'; // Caractere '*' para ocultar a senha
+                button2.Text = "Mostrar"; // Altera o texto do botão
+            }
         }
     }
 }

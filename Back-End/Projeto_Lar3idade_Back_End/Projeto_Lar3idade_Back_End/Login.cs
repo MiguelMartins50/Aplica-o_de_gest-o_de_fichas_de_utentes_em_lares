@@ -133,5 +133,23 @@ namespace Projeto_Lar3idade_Back_End
             }
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox2.PasswordChar == '*')
+            {
+                // Se a senha estiver oculta, mostre-a
+                textBox2.PasswordChar = '\0'; // Caractere nulo para mostrar o texto da senha
+                button2.Text = "Ocultar"; // Altera o texto do botão
+            }
+            else
+            {
+                // Se a senha estiver visível, oculte-a
+                textBox2.PasswordChar = '*'; // Caractere '*' para ocultar a senha
+                button2.Text = "Mostrar"; // Altera o texto do botão
+            }
+        }
+
+       
     }
 }

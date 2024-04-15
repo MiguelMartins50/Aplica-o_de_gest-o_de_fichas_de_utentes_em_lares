@@ -70,6 +70,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button_desassociate = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -399,7 +400,7 @@ namespace Projeto_Lar3idade_Back_End
             // 
             this.textBox3_senha.Location = new System.Drawing.Point(777, 135);
             this.textBox3_senha.Name = "textBox3_senha";
-            this.textBox3_senha.Size = new System.Drawing.Size(222, 22);
+            this.textBox3_senha.Size = new System.Drawing.Size(168, 22);
             this.textBox3_senha.TabIndex = 142;
             this.textBox3_senha.TextChanged += new System.EventHandler(this.textBox3_senha_TextChanged);
             // 
@@ -456,11 +457,24 @@ namespace Projeto_Lar3idade_Back_End
             this.panel1.Size = new System.Drawing.Size(122, 113);
             this.panel1.TabIndex = 147;
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
+            this.button2.ForeColor = System.Drawing.SystemColors.Control;
+            this.button2.Location = new System.Drawing.Point(935, 134);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(68, 26);
+            this.button2.TabIndex = 148;
+            this.button2.Text = "Mostrar";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // responsavel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button_desassociate);
@@ -552,5 +566,6 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Button button_desassociate;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button2;
     }
 }

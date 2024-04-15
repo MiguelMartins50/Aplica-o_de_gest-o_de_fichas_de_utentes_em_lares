@@ -38,6 +38,7 @@ namespace Projeto_Lar3idade_Back_End
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,7 +112,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(141, 535);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 17);
+            this.label2.Size = new System.Drawing.Size(41, 16);
             this.label2.TabIndex = 5;
             this.label2.Text = "Email";
             // 
@@ -121,15 +122,28 @@ namespace Projeto_Lar3idade_Back_End
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(84, 612);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 17);
+            this.label3.Size = new System.Drawing.Size(96, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Palavra-passe";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(161)))), ((int)(((byte)(255)))));
+            this.button2.ForeColor = System.Drawing.SystemColors.Control;
+            this.button2.Location = new System.Drawing.Point(486, 605);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(87, 26);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Mostrar";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1318, 813);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
@@ -158,6 +172,7 @@ namespace Projeto_Lar3idade_Back_End
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button2;
     }
 }
 

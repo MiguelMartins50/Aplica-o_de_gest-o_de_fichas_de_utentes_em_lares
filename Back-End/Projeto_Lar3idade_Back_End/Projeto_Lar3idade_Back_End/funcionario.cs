@@ -88,7 +88,7 @@ namespace Projeto_Lar3idade_Back_End
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = @"SELECT idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email, senha, Funcao
+            cmd.CommandText = @"SELECT idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email,  '*******' as senha, Funcao
                               FROM (
                               SELECT idFuncionario, nome, numero_cc, data_validade, telemovel, salario_hora, email,senha,Funcao
                               FROM funcionario 
@@ -402,6 +402,22 @@ namespace Projeto_Lar3idade_Back_End
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (textBox_Senha.PasswordChar == '*')
+            {
+                // Se a senha estiver oculta, mostre-a
+                textBox_Senha.PasswordChar = '\0'; // Caractere nulo para mostrar o texto da senha
+                button2.Text = "Ocultar"; // Altera o texto do botão
+            }
+            else
+            {
+                // Se a senha estiver visível, oculte-a
+                textBox_Senha.PasswordChar = '*'; // Caractere '*' para ocultar a senha
+                button2.Text = "Mostrar"; // Altera o texto do botão
+            }
         }
     }
 }
