@@ -4,9 +4,9 @@ import mysql from "mysql";
 const app = express()
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'ipbcurso',
+    host: 'projetolar3idade.mysql.database.azure.com',
+    user: 'projeto4461045279',
+    password: 'Ipbcurso1',
     database: 'mydb',
   })
 
@@ -133,20 +133,30 @@ app.get("/medico", (req,res) =>{
 })
 
 app.get("/pagamento", (req, res) => {
-    const Familiar_idFamiliar = req.query.Familiar_idFamiliar;
+    const { Familiar_idFamiliar, Utente_idUtente } = req.query;
 
+    // Base query
     let q = `
         SELECT p.data_limitel, p.valor, p.estado
         FROM pagamento p
         JOIN utente u ON p.Utente_idUtente = u.idUtente
-        WHERE p.Familiar_idFamiliar = ${Familiar_idFamiliar}
+        WHERE 1=1
     `;
+
+    // Add conditions based on the query parameters
+    if (Familiar_idFamiliar) {
+        q += ` AND p.Familiar_idFamiliar = ${db.escape(Familiar_idFamiliar)}`;
+    }
+    if (Utente_idUtente) {
+        q += ` AND p.Utente_idUtente = ${db.escape(Utente_idUtente)}`;
+    }
 
     db.query(q, (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
     });
 });
+
 
 
 app.get("/prescricao_medica", (req, res) => {
