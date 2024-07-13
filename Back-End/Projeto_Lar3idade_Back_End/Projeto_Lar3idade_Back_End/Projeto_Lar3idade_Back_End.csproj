@@ -179,6 +179,12 @@
     <Compile Include="funcionario.Designer.cs">
       <DependentUpon>funcionario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,12 @@
     </Compile>
     <Compile Include="Medico_Utente.Designer.cs">
       <DependentUpon>Medico_Utente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mensagem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mensagem.Designer.cs">
+      <DependentUpon>Mensagem.cs</DependentUpon>
     </Compile>
     <Compile Include="notificacao_admin.cs">
       <SubType>UserControl</SubType>
@@ -292,6 +304,9 @@
     <EmbeddedResource Include="funcionario.resx">
       <DependentUpon>funcionario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -306,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Medico_Utente.resx">
       <DependentUpon>Medico_Utente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mensagem.resx">
+      <DependentUpon>Mensagem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="notificacao_admin.resx">
       <DependentUpon>notificacao_admin.cs</DependentUpon>
