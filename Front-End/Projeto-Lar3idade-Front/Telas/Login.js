@@ -2,18 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
-import { StyleSheet, Image, Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Image, Text, View, TextInput, TouchableOpacity, ImageBackground, ActivityIndicator, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
 export default function Login({ route, navigation }) {
-  const [tableData, setTableData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [textEmail, setTextEmail] = useState("");
   const [textPass, setTextPass] = useState("");
   const [showPassword, setShowPassword] = useState(false); 
 
   const handleLogin = () => {
-    axios.get('http://192.168.1.92:8800/utente')
+    setLoading(true); 
+    axios.get('http://192.168.1.80:8800/utente')
       .then(utenteResponse => {
         if (utenteResponse.data.length > 0) {
 
@@ -28,6 +29,7 @@ export default function Login({ route, navigation }) {
           const utenteMatch = utenteResponse.data.find(entry => entry.email === inputValueEmail && entry.senha === inputValueSenha);
           console.log(isUtenteMatch);
           if (isUtenteMatch) {
+            setLoading(false);
             console.log(isUtenteMatch);
             console.log('Login com utente!');
             console.log('Email e Senha:', inputValueEmail, inputValueSenha);
@@ -36,7 +38,7 @@ export default function Login({ route, navigation }) {
             navigation.navigate('UtenteDrawer', { screen: 'Home Utente', params: { utenteData: utenteMatch, utenteNome: utenteMatch.nome} });
             
           } else {
-            axios.get('http://192.168.1.92:8800/familiar')
+            axios.get('http://192.168.1.80:8800/familiar')
               .then(familiarResponse => {
                 if (familiarResponse.data.length > 0) {
                   const familiarEmailColumn = familiarResponse.data.map(entry => entry.email);
@@ -46,6 +48,7 @@ export default function Login({ route, navigation }) {
                   const FamiliarMatch = familiarResponse.data.find(entry => entry.email === inputValueEmail && entry.senha === inputValueSenha);
 
                   if (isFamiliarMatch) {
+                    setLoading(false);
                     console.log('Login como Familiar');
                     console.log('Email e Senha:', inputValueEmail, inputValueSenha);
                     console.log('UtenteData:', FamiliarMatch);
@@ -54,6 +57,9 @@ export default function Login({ route, navigation }) {
                    
                     navigation.navigate('FamiliarDrawer');
                   } else {
+                    setLoading(false);
+                    Alert.alert('Login Inválido', 'Email ou senha incorretos.');
+
                     console.log('Login inválido para ambos');
                   }
                 } else {
@@ -115,7 +121,7 @@ export default function Login({ route, navigation }) {
           value={textPass}
         />
         <TouchableOpacity
-      style={styles.showPasswordButton}
+      style={styles.showPasswordButton}   
       onPress={() => setShowPassword(!showPassword)}>
       <Text style={styles.showPasswordText}>
         {showPassword ? 'Ocultar' : 'Mostrar'}
@@ -126,6 +132,12 @@ export default function Login({ route, navigation }) {
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Entrar</Text>
       </TouchableOpacity>
+
+      {loading && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#3498db" />
+        </View>
+      )}
 
       <StatusBar style="auto" />
       <View>
@@ -206,6 +218,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop:110,
     padding:10
+  },
+  loadingContainer: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    zIndex: 999,
+    marginTop: -200,
+    marginLeft: -20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: 10,
+    borderRadius: 10
   },
 
   
