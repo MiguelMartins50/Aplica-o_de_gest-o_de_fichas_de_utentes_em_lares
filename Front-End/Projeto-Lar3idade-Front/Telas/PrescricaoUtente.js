@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ImageBackground, Text, View, FlatList } from 'react-native'; 
 import axios from 'axios'; 
-
+import { iduten } from './Utente';
+import { uten } from './Utente';
 export default function PrescricaoUtente({ route, navigation }) {
   const [PrescricaoData, setPrescricaoData] = useState([]);
-  const { utenteData } = route.params;
+  const  utenteData  = uten;
 
   useEffect(() => {
-    axios.get(`http://192.168.1.92:8800/prescricao_medica?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.80:8800/prescricao_medica?Utente_idUtente=${iduten}`)
     .then(prescricaoResponse => {
       setPrescricaoData(prescricaoResponse.data);
     })

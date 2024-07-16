@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground, FlatList, Alert } from 'react-native';
 import axios from 'axios';
 import SelectDropdown from 'react-native-select-dropdown';
-
+import { idfam } from './Familiar';
 export default function VisitasFamiliar({ navigation, route }) {
   const FamiliarData = route.params && route.params.FamiliarData;
   const [VisitaData, setVisitaData] = useState([]);
@@ -18,7 +18,7 @@ export default function VisitasFamiliar({ navigation, route }) {
 
   const handleAdd = () => {
     console.log('aqui');
-    navigation.navigate('AddVisitas', { FamiliarData});
+    navigation.navigate('AddVisitas', {FamiliarData});
   };
 
   const handleDeleteVisita = (idVisita) => {
@@ -43,16 +43,15 @@ export default function VisitasFamiliar({ navigation, route }) {
   const confirmDelete = (idVisita) => {
     console.log(idVisita);
     axios
-    .delete(`http://192.168.1.92:8800/visita/${idVisita}`)
+      .delete(`http://192.168.1.80:8800/visita/${idVisita}`)
       .then(() => {
         axios
-        .get(`http://192.168.1.92:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+          .get(`http://192.168.1.80:8800/Visita?Familiar_idFamiliar=${idfam}`)
           .then((VisitaResponse) => {
-            const filteredVisita = selectedMonth !== null
-            ? VisitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getMonth() === selectedMonth)
-            : VisitaResponse.data;
-          setVisitaData(filteredVisita);
-
+            const filteredVisita = (selectedMonth !== null)
+              ? VisitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getMonth() === selectedMonth)
+              : VisitaResponse.data;
+            setVisitaData(filteredVisita);
           })
           .catch((error) => {
             console.error('Error fetching Visita data:', error);
@@ -66,8 +65,9 @@ export default function VisitasFamiliar({ navigation, route }) {
         setSelectedDeleteId(null);
       });
   };
+  
   const handleRefresh = () => { console.log(FamiliarData.idFamiliar)
-    axios.get(`http://192.168.1.92:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.80:8800/Visita?Familiar_idFamiliar=${idfam}`)
       .then(VisitaResponse => {
         if (VisitaResponse.data && Array.isArray(VisitaResponse.data)) {
           const filteredVisita = selectedMonth
@@ -84,10 +84,10 @@ export default function VisitasFamiliar({ navigation, route }) {
   };
 
   useEffect(() => {
-    axios.get(`http://192.168.1.92:8800/Visita?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.80:8800/Visita?Familiar_idFamiliar=${idfam}`)
       .then(VisitaResponse => {
         if (VisitaResponse.data && Array.isArray(VisitaResponse.data)) {
-          const filteredVisita = selectedMonth
+          const filteredVisita = (selectedMonth !== null)
             ? VisitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getMonth() === selectedMonth)
             : VisitaResponse.data;
           setVisitaData(filteredVisita);
@@ -99,6 +99,7 @@ export default function VisitasFamiliar({ navigation, route }) {
         console.error('Erro ao buscar Consulta do utente:', error);
       });
   }, [selectedMonth]);
+  
 
   return (
     <FlatList

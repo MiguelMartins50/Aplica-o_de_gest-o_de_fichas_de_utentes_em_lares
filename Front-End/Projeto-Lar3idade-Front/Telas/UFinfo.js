@@ -15,7 +15,7 @@ export default function UFinfo({ navigation, route }) {
   
     useEffect(() => {
       axios
-        .get(`http://192.168.1.92:8800/consulta?Utente_idUtente=${UtenteData.idUtente}`)
+        .get(`http://192.168.1.80:8800/consulta?Utente_idUtente=${UtenteData.idUtente}`)
         .then((consultaResponse) => {
           setConsultasData(consultaResponse.data);
         })
@@ -48,28 +48,32 @@ export default function UFinfo({ navigation, route }) {
     }, [consultaData]);
   
     return (
-      <FlatList
-        style={styles.container}
-        ListHeaderComponent={
-          <View style={styles.View1}>
-            {imageData && <Image style={styles.image} source={{ uri: imageData }} />}
-            <View style={styles.NomeGrauContainer}>
-              {NomeData ? <Text style={styles.NomeText}>Nome: {NomeData}</Text> : <Text>Carregando...</Text>}
-              {GrauData ? <Text style={styles.GrauText}>Grau de dependencia: {GrauData}</Text> : <Text>Carregando...</Text>}
+      <View style={styles.container}>
+        <FlatList
+          style={styles.container}
+          ListHeaderComponent={
+            <View style={styles.View1}>
+              {imageData && <Image style={styles.image} source={{ uri: imageData }} />}
+              <View style={styles.NomeGrauContainer}>
+                {NomeData ? <Text style={styles.NomeText}>Nome: {NomeData}</Text> : <Text>Carregando...</Text>}
+                {GrauData ? <Text style={styles.GrauText}>Grau de dependencia: {GrauData}</Text> : <Text>Carregando...</Text>}
+              </View>
             </View>
-          </View>
-        }
-        data={consultaData}
-        keyExtractor={(item) => item.idConsulta.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.View3}>
-            <Text style={styles.texto}>Médico: {item.nomeMedico}</Text>
-            <Text style={styles.texto}>Data e Hora: {new Date(item.data).toLocaleString()}</Text>
-            <Text style={styles.texto}>Estado: {item.estado}</Text>
-          </View>
-        )}
-      />
+          }
+          data={consultaData}
+          keyExtractor={(item) => item.idConsulta.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.View3}>
+              <Text style={styles.texto}>Médico: {item.nomeMedico}</Text>
+              <Text style={styles.texto}>Data e Hora: {new Date(item.data).toLocaleString()}</Text>
+              <Text style={styles.texto}>Estado: {item.estado}</Text>
+            </View>
+          )}
+        />
+        <ImageBackground source={require('../Image/Image2.png')} style={[styles.Image2, styles.bottomImage]} />
+      </View>
     );
+    
   }
 
   
@@ -137,10 +141,11 @@ const styles = StyleSheet.create({
       marginTop: 20,
     },
     Image2: {
-      height: 205,
-      width: 410,
-      padding: 20,
-      marginTop:200,
-      marginBottom: -300,
+      height:205,
+      width:410,
+      padding:20,
+      marginBottom:-100,
+      marginLeft:-50
+     
     },
   });

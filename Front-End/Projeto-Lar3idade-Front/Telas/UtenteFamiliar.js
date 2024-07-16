@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground,FlatList } from 'react-native';
 import axios from 'axios';
 import base64 from 'base64-js';
-
+import { idfam } from './Familiar';
 
 export default function UtenteFamiliar({ navigation,route  }) {
   const {FamiliarData, FamiliarID} = route.params || {};
@@ -12,14 +12,14 @@ export default function UtenteFamiliar({ navigation,route  }) {
   const [imageData, setImageData] = useState(null);
 
 
-  useEffect(() => {
-    axios.get(`http://192.168.1.92:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+  useEffect(() => {    
+    axios.get(`http://192.168.1.80:8800/utente_familiar?Familiar_idFamiliar=${idfam}`)
       .then(consultaResponse => {
         setUFData(consultaResponse.data);
         if (consultaResponse.data && consultaResponse.data[0] && consultaResponse.data[0].Utente_idUtente) {
           const utenteId = consultaResponse.data[0].Utente_idUtente;
   
-          axios.get(`http://192.168.1.92:8800/utente?idUtente=${utenteId}`)
+          axios.get(`http://192.168.1.80:8800/utente?idUtente=${utenteId}`)
             .then(utenteResponse => {
               setUData(utenteResponse.data);
             })

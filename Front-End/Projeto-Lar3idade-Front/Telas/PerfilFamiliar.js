@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ImageBackground, Text, View, ScrollView ,Image} from 'react-native';
 import base64 from 'base64-js';
-
+import  {fam}  from './Familiar.js';
 export default function PerfilUtente({ route, navigation }) {
   const { params } = route;
-  const { FamiliarData, FamiliarNome } = params || {};
+  const FamiliarData = fam;
+  console.log(FamiliarData);
+
+  const FamiliarNome = useState(null);
+
   const [imageData, setImageData] = useState(null);
+  console.log("params:");
+  console.log(params);
+  
+  
+  
+  
 
   useEffect(() => {
     if (FamiliarData && FamiliarData.Imagem && FamiliarData.Imagem.data) {
       const base64String = base64.fromByteArray(new Uint8Array(FamiliarData.Imagem.data));
       setImageData(`data:image/png;base64,${base64String}`);
     }
+    
   }, [FamiliarData]);
 
   return (
@@ -21,7 +32,7 @@ export default function PerfilUtente({ route, navigation }) {
       {FamiliarNome ? (
         <ScrollView style={styles.PerfilUtente1}>
           {imageData && <Image style={styles.image} source={{ uri: imageData }} />}
-          <Text style={styles.TEXTO}>Nome: {FamiliarNome}</Text>
+          <Text style={styles.TEXTO}>Nome: {FamiliarData.nomel}</Text>
           <Text style={styles.TEXTO}>Número do CC: {FamiliarData.numero_cc}</Text>
           <Text style={styles.TEXTO}>Data de validade: { FamiliarData.data_validade}</Text>
           <Text style={styles.TEXTO}>Telemóvel: {FamiliarData.telemovel}</Text>

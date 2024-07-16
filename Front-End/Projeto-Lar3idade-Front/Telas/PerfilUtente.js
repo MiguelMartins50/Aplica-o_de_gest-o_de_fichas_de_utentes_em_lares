@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ImageBackground, Text, View, ScrollView } from 'react-native';
-
+import { uten } from './Utente';
 export default function PerfilUtente({ route, navigation }) {
   const { params } = route;
-  const { utenteData, utenteNome } = params || {};
+  const utenteData  = uten;
+  const utenteNome  = uten.nome;
   const numeroCC = utenteData?.numero_cc || {};
   const dataValidade = utenteData?.data_validade || {};
   const nif = utenteData?.nif || {};

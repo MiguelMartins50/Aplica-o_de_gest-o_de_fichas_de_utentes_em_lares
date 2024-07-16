@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ImageBackground, Text, View, FlatList } from 'react-native'; 
 import axios from 'axios'; 
-
+import { iduten } from './Utente';
+import { uten } from './Utente';
 export default function Atividade({ route, navigation }) {
   const [atividadeData, setAtividadeData] = useState([]);
-  const { utenteData } = route.params;
-  const utenteId = utenteData.idUtente;
+  const utenteData  = uten;
+  const utenteId = iduten;
 
   useEffect(() => {
-    axios.get(`http://192.168.1.92:8800/atividade?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.80:8800/atividade?Utente_idUtente=${iduten}`)
     .then(atividadeResponse => {
       // Atualiza o estado com os dados da API
       setAtividadeData(atividadeResponse.data);

@@ -2,10 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import SelectDropdown from 'react-native-select-dropdown';
-
+import { iduten } from './Utente';
 export default function PlanoPagamento({ route, navigation }) {
   const [pagamentoData, setPagamentoData] = useState([]);
-  const { utenteData } = route.params;
   const [selectedMonth, setSelectedMonth] = useState(null);
   const selectRef = useRef();
 
@@ -15,7 +14,7 @@ export default function PlanoPagamento({ route, navigation }) {
   ];
 
   useEffect(() => {
-    axios.get(`http://192.168.1.92:8800/pagamento?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.80:8800/pagamento?Utente_idUtente=${iduten}`)
       .then(pagamentoResponse => {
         const filteredPagamentos = selectedMonth
           ? pagamentoResponse.data.filter(item => new Date(item.data_limitel).getMonth() === months.indexOf(selectedMonth))
@@ -23,7 +22,7 @@ export default function PlanoPagamento({ route, navigation }) {
 
         setPagamentoData(filteredPagamentos);
       })
-      .catch(error => {
+      .catch(error => {   
         console.error('Erro ao buscar pagamentos do utente:', error);
       });
   }, [selectedMonth]);

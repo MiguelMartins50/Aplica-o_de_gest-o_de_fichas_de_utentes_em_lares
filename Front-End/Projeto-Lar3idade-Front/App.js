@@ -35,7 +35,7 @@ return(
 
   <Drawer.Navigator initialRouteName="Home Utente" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
     <Drawer.Screen
-        name="Home Utente"
+        name="Pagina Principal"
         component={UtenteScreen}
         initialParams={{ utenteData, utenteNome }}
         options={{
@@ -50,7 +50,7 @@ return(
         name="PerfilUtente"
         component={PerfilUtente}
         options={{
-          title: 'Perfil Utente',
+          title: 'Perfil',
           headerRight: () => (
             <TouchableOpacity onPress={handleSair} color="white" style={styles.sairButton}>
               <Text style={styles.sairButtonText}>Sair</Text>
@@ -109,7 +109,7 @@ return(
   
   <Drawer.Navigator initialRouteName="FamiliarScreen" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
     <Drawer.Screen name="FamiliarScreen" component={FamiliarScreen} options={{
-    title: 'Perfil',
+    title: 'Pagina Principal',
     headerRight: () => (
       <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
       <Text style={styles.sairButtonText}>Sair</Text>
@@ -146,22 +146,8 @@ return(
       </TouchableOpacity>
     ),
   }} />
-  <Drawer.Screen name="Informação Utente" component={UFinfo}options={{
-    title: 'Familiares',
-    headerRight: () => (
-      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
-      <Text style={styles.sairButtonText}>Sair</Text>
-      </TouchableOpacity>
-    ),
-  }} />
-  <Drawer.Screen name="AddVisitas" component={AddVistas}options={{
-    title: 'Visitas',
-    headerRight: () => (
-      <TouchableOpacity onPress= {handleSair} color="white" style={styles.sairButton}> 
-      <Text style={styles.sairButtonText}>Sair</Text>
-      </TouchableOpacity>
-    ),
-  }} />
+  
+  
   </Drawer.Navigator>
 )};
 
@@ -172,6 +158,9 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="UtenteDrawer" component={UtenteDrawer}     />
         <Stack.Screen name="FamiliarDrawer" component={FamiliarDrawer} />
+        <Stack.Screen name="AddVisitas" component={AddVistas} />
+        <Stack.Screen name="Informação Utente" component={UFinfo} />
+
       
       </Stack.Navigator>
     </NavigationContainer>

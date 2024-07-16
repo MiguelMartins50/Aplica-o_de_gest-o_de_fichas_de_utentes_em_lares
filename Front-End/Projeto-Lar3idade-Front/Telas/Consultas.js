@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ImageBackground, Text, View, FlatList } from 'react-native'; 
 import axios from 'axios'; 
-
+import { iduten } from './Utente';
 export default function Consultas({ route, navigation }) {
   const [consultaData, setConsultasData] = useState([]);
-  const { utenteData } = route.params;
 
   useEffect(() => {
-    axios.get(`http://192.168.1.92:8800/consulta?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.80:8800/consulta?Utente_idUtente=${iduten}`)
     .then(consultaResponse => {
       setConsultasData(consultaResponse.data);
     })

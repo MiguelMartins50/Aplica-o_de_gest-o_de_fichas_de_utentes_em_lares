@@ -6,10 +6,12 @@ import SelectDropdown from 'react-native-select-dropdown'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { Alert } from 'react-native';
+import { idfam } from './Familiar';
+import { fam } from './Familiar';
 
 export default function AddVistas({navigation, route}) {
-  const FamiliarData = route.params && route.params.FamiliarData;
-  const familiarID = FamiliarData.idFamiliar;
+  const FamiliarData = fam;
+  const familiarID = idfam;
   const [VisitaData, setVisitaData] = useState([]);
   const [UFData, setUFData] = useState([]);
   const [UData, setUData] = useState([]);
@@ -26,7 +28,7 @@ export default function AddVistas({navigation, route}) {
   useEffect(() => {
     console.log('Selected Utente :', SelectedUtente);
     // Fetch visits associated with the selected Utente
-    axios.get(`http:/192.168.1.92:8800/visita?Utente_idUtente=${SelectedUtente}`)
+    axios.get(`http://192.168.1.80:8800/visita?Utente_idUtente=${SelectedUtente}`)
       .then(response => {
         setVDATA(response.data);
       })
@@ -41,13 +43,13 @@ export default function AddVistas({navigation, route}) {
   }, [VData]);
   
   useEffect(() => {
-    axios.get(`http://192.168.1.92:8800/utente_familiar?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.80:8800/utente_familiar?Familiar_idFamiliar=${idfam}`)
       .then(consultaResponse => {
         setUFData(consultaResponse.data);
         if (consultaResponse.data && consultaResponse.data[0] && consultaResponse.data[0].Utente_idUtente) {
           const utenteId = consultaResponse.data[0].Utente_idUtente;
   
-          axios.get(`http://192.168.1.92:8800/utente?idUtente=${utenteId}`)
+          axios.get(`http://192.168.1.80:8800/utente?idUtente=${utenteId}`)
             .then(utenteResponse => {
               setUData(utenteResponse.data);
               
@@ -103,32 +105,36 @@ export default function AddVistas({navigation, route}) {
         const [hour, minute, second] = timePart.split(':');
     
         // Create a new Date object using the extracted components
-        const newDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:0`);
-    
+        const newDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:00`);
+        console.log(newDate);
+        
         // Adjust the date by adding 30 minutes
         const halfHourLater = new Date(newDate.getTime() + 30 * 60000); // Adding 30 minutes (30 * 60 * 1000 milliseconds)
-    
-        // Format the dates in the desired format (ISO 8601)
-        const formattedDate = newDate.toISOString();
-        const formattedHalfHourLater = halfHourLater.toISOString();
+        
+        // Format the dates in the desired format without 'Z'
+        const formattedDate = newDate.toISOString().slice(0, -1); // Removing the 'Z' at the end
+        const formattedHalfHourLater = halfHourLater.toISOString().slice(0, -1);
+        
         console.log(formattedDate);
         console.log(formattedHalfHourLater);
+        
         const visitaData = {
             Utente_idUtente: SelectedUtente,
             data: formattedDate,
             Familiar_idFamiliar: FamiliarData.idFamiliar,
         };
-        axios.get(`http://192.168.1.92:8800/Visita?start=${formattedDate}&end=${formattedHalfHourLater}`)
+        
+        axios.get(`http://192.168.1.80:8800/Visita?start=${formattedDate}&end=${formattedHalfHourLater}`)
             .then(consultaResponse => {
                 if (consultaResponse.data.length === 0) {
-                    axios.post('http://192.168.1.92:8800/visita', visitaData)
+                    axios.post('http://192.168.1.80:8800/visita', visitaData)
                         .then(response => {
                             console.log('Visita added successfully:', response.data);
                             Alert.alert(
                                 'Sucesso',
                                 'Visita adicionada com sucesso.',
                                 [
-                                    { text: 'OK', onPress: () => navigation.navigate('VisitasFamiliar', FamiliarData, familiarID) }
+                                    { text: 'OK', onPress: () => navigation.navigate('VisitasFamiliar', { FamiliarData }) }
                                 ],
                                 { cancelable: false }
                             );
@@ -152,6 +158,7 @@ export default function AddVistas({navigation, route}) {
                 console.error('Error checking visita data:', error);
             });
     };
+    
     
     
     

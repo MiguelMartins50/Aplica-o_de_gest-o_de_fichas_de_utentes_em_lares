@@ -2,10 +2,9 @@ import React, { useEffect, useState,useRef  } from 'react';
 import { StyleSheet, ImageBackground, Text, View, FlatList,TouchableOpacity } from 'react-native'; 
 import axios from 'axios'; 
 import SelectDropdown from 'react-native-select-dropdown'
-
+import { iduten } from './Utente';
 export default function Visita({ route, navigation }) {
   const [visitaData, setVisitaData] = useState([]);
-  const { utenteData } = route.params;
   const [selectedMonth, setSelectedMonth] = useState(null);
   const selectRef = useRef();
 
@@ -16,7 +15,7 @@ export default function Visita({ route, navigation }) {
   ];
 
   useEffect(() => {
-    axios.get(`http://192.168.1.92:8800/visita?Utente_idUtente=${utenteData.idUtente}`)
+    axios.get(`http://192.168.1.80:8800/visita?Utente_idUtente=${iduten}`)
       .then(visitaResponse => {
         const filteredVisitas = selectedMonth
           ? visitaResponse.data.filter(item => new Date(item.Data_HoraVisita).getMonth() === months.indexOf(selectedMonth))

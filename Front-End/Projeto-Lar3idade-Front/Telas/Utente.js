@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
-
 import base64 from 'base64-js';
+export let uten = {};
+export let iduten = 0;
 
 export default function Utente({ navigation, route }) {
   const { params } = route;
   const { utenteData, utenteNome } = params || {};
   const [imageData, setImageData] = useState(null);
   console.log('Route Params:', route.params);
-
+  uten = utenteData;
+  iduten = utenteData.idUtente;
+  console.log("Params:");
+  console.log(uten);
+  console.log("Id:");
+  console.log(iduten);
   
   useEffect(() => {
     console.log('UtenteDrawer - Route Params:', route.params);

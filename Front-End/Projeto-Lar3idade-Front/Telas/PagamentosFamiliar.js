@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
 import axios from 'axios';
 import SelectDropdown from 'react-native-select-dropdown';
-
+import { idfam } from './Familiar';
 export default function PagamentosFamiliar({ navigation, route }) {
   const FamiliarData = route.params && route.params.FamiliarData;
   const [PagamentoData, setPagamentoData] = useState([]);
@@ -15,7 +15,7 @@ export default function PagamentosFamiliar({ navigation, route }) {
   ];
 
   useEffect(() => {
-    axios.get(`http://192.168.1.92:8800/pagamento?Familiar_idFamiliar=${FamiliarData.idFamiliar}`)
+    axios.get(`http://192.168.1.80:8800/pagamento?Familiar_idFamiliar=${idfam}`)
       .then(PagamentoResponse => {
         if (PagamentoResponse.data && Array.isArray(PagamentoResponse.data)) {
           const filteredPagamento = selectedMonth
