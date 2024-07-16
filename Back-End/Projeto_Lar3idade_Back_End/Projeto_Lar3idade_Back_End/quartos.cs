@@ -30,8 +30,8 @@ namespace Projeto_Lar3idade_Back_End
         public quartos()
         {
             InitializeComponent();
-            string connectionString = "Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso";
-            conexao = new MySqlConnection(connectionString);
+
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             LoadComboBox();
             display_data();
 
@@ -96,7 +96,7 @@ namespace Projeto_Lar3idade_Back_End
             }
             try
             {
-                using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                using (conexao)
                 {
                     conexao.Open();
                     string query = "INSERT INTO mydb.quarto (idQuarto, estado, quantidade_cama , Numero, ocupacao)" +
@@ -232,7 +232,7 @@ namespace Projeto_Lar3idade_Back_End
                 conexao.Open();
                 MySqlCommand cmd = conexao.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT q.idQuarto, q.Numero, q.estado, q.quantidade_cama, q.ocupacao FROM quarto q WHERE q.idQuarto <> 0;;";
+                cmd.CommandText = "SELECT q.idQuarto, q.Numero, q.estado, q.quantidade_cama, q.ocupacao FROM quarto q WHERE q.idQuarto <> 0;";
 
                 DataTable dta = new DataTable();
                 MySqlDataAdapter dataadapter = new MySqlDataAdapter(cmd);
@@ -268,7 +268,7 @@ namespace Projeto_Lar3idade_Back_End
                     int idQuarto = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idQuarto"].Value);
                     int numeroAntigo = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["Numero"].Value); ;
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                    using (conexao)
                     {
                         conexao.Open();
 
@@ -399,7 +399,7 @@ namespace Projeto_Lar3idade_Back_End
                     int rowIndex = dataGridView1.SelectedRows[0].Index;
                     int idQuarto = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idQuarto"].Value);
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                    using (conexao)
                     {
                         conexao.Open();
 
@@ -539,7 +539,7 @@ namespace Projeto_Lar3idade_Back_End
 
             try
             {
-                using (MySqlConnection conexao = new MySqlConnection("Server=localhost;Port=3306;Database=mydb;User ID=root;Password=ipbcurso"))
+                using (conexao)
                 {
                     conexao.Open();
 

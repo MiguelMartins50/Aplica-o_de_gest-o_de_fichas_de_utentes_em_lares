@@ -34,6 +34,7 @@ namespace Projeto_Lar3idade_Back_End
         private int doublecontrol2 = 0;
         private int doublecontrol3 = 0;
         private string relacao = "";
+        private Byte[] img = null;
 
         private List<string> Lista_utente_Familiar = new List<string>(); 
 
@@ -43,8 +44,7 @@ namespace Projeto_Lar3idade_Back_End
         public responsavel()
         {
             InitializeComponent();
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             display_data();
             LoadComboBox();
             textBox3_senha.PasswordChar = '*';
@@ -117,7 +117,7 @@ namespace Projeto_Lar3idade_Back_End
                         }
                     }
                 }
-                using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                using (conexao)
                 {
                     conexao.Open();
 
@@ -283,7 +283,7 @@ namespace Projeto_Lar3idade_Back_End
                         }
                     }
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         conexao.Open();
                         string queryUpdateFamiliar = "UPDATE mydb.familiar SET " +
@@ -336,7 +336,14 @@ namespace Projeto_Lar3idade_Back_End
                             comandoUpdateFamiliar.Parameters.AddWithValue("@tel_casa", tel_casa);
                             comandoUpdateFamiliar.Parameters.AddWithValue("@email", email);
                             comandoUpdateFamiliar.Parameters.AddWithValue("@senha", senha);
-                            comandoUpdateFamiliar.Parameters.AddWithValue("@Imagem", imageBytes);
+                            if (imageBytes != null)
+                            {
+                                comandoUpdateFamiliar.Parameters.AddWithValue("@Imagem", imageBytes);
+                            }
+                            else
+                            {
+                                comandoUpdateFamiliar.Parameters.AddWithValue("@Imagem", img);
+                            }
 
                             comandoUpdateFamiliar.ExecuteNonQuery();
 
@@ -407,7 +414,7 @@ namespace Projeto_Lar3idade_Back_End
                     // Obtém o idFamiliar da linha selecionada
                     int idFamiliarParaExcluir = ObterIdFamiliarSelecionado();
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         conexao.Open();
 
@@ -665,6 +672,7 @@ namespace Projeto_Lar3idade_Back_End
                 if (row.Cells["Imagem"].Value != DBNull.Value)
                 {
                     byte[] imageBytes = (byte[])row.Cells["Imagem"].Value;
+                    img = imageBytes;
                     // Converte os bytes da imagem em um objeto Image
                     using (MemoryStream ms = new MemoryStream(imageBytes))
                     {
@@ -689,7 +697,7 @@ namespace Projeto_Lar3idade_Back_End
 
             try
             {
-                using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                using (conexao)
                 {
                     conexao.Open();
 

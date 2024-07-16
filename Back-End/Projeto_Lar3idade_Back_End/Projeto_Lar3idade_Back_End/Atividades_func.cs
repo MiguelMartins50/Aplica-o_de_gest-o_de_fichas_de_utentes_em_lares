@@ -28,8 +28,7 @@ namespace Projeto_Lar3idade_Back_End
             dateTimePicker_realizacao.Format = DateTimePickerFormat.Custom;
             dateTimePicker_realizacao.CustomFormat = "yyyy-MM-dd HH:mm";
             dateTimePicker_realizacao.ShowUpDown = true;
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             this.iduser = userid;
             Console.WriteLine("id Utlizador da Atividade nª1:" + iduser);
             dataGridView1.CellClick += dataGridView1_CellClick;
@@ -124,7 +123,7 @@ namespace Projeto_Lar3idade_Back_End
 
             try
             {
-                using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                using (conexao)
                 {
                     conexao.Open();
                     string query = "INSERT INTO mydb.atividade (idAtividade,Utente_idUtente, Funcionario_idFuncionario, nome, data, descricao, Tipo_idTipo)" +
@@ -161,6 +160,7 @@ namespace Projeto_Lar3idade_Back_End
                         comando.ExecuteNonQuery();
 
                         MessageBox.Show("Atividade adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        conexao.Close();
 
                         Limpar();
                         display_data();
@@ -170,6 +170,10 @@ namespace Projeto_Lar3idade_Back_End
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao adicionar Atividade: " + ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
             }
 
         }
@@ -187,7 +191,7 @@ namespace Projeto_Lar3idade_Back_End
                         int rowIndex = dataGridView1.SelectedRows[0].Index;
                         int idAtividade = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idAtividade"].Value);
 
-                        using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                        using (conexao)
                         {
                             conexao.Open();
 
@@ -199,6 +203,7 @@ namespace Projeto_Lar3idade_Back_End
                                 comando.ExecuteNonQuery();
 
                                 MessageBox.Show("Atividade excluída com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                conexao.Close();
 
                                 display_data();
                                 Limpar();
@@ -208,6 +213,10 @@ namespace Projeto_Lar3idade_Back_End
                     catch (Exception ex)
                     {
                         MessageBox.Show("Erro ao excluir atividade: " + ex.Message);
+                    }
+                    finally
+                    {
+                        conexao.Close();
                     }
                 }
                

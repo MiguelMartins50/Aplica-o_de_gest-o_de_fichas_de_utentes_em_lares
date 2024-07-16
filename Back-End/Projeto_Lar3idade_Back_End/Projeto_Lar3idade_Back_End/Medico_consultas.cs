@@ -37,8 +37,7 @@ namespace Projeto_Lar3idade_Back_End
             dateTimePicker_data.Format = DateTimePickerFormat.Custom;
             dateTimePicker_data.CustomFormat = "yyyy-MM-dd HH:mm";
             dateTimePicker_data.ShowUpDown = true;
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             this.user_ID = userID;
             LoadComboBox();
             display_data();
@@ -83,6 +82,8 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            Console.WriteLine(idutente);
+            Console.WriteLine(idutente);
 
             try
             {
@@ -138,7 +139,7 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     cmdConsulta.Parameters.AddWithValue("@idConsulta", idConsulta);
                     cmdConsulta.Parameters.AddWithValue("@Utente_idUtente", idutente);
-                    cmdConsulta.Parameters.AddWithValue("@Medico_idMedico", idprescricao);
+                    cmdConsulta.Parameters.AddWithValue("@Medico_idMedico", user_ID);
                     cmdConsulta.Parameters.AddWithValue("@data", dateTimePicker_data.Value.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmdConsulta.Parameters.AddWithValue("@estado", estado_consulta);
                     cmdConsulta.Parameters.AddWithValue("@relatorio", textBox_relatorio.Text);

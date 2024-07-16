@@ -20,8 +20,7 @@ namespace Projeto_Lar3idade_Back_End
         public enviar_medico(int userid, string usernome)
         {
             InitializeComponent();
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             this.iduser = userid;
             this.remetente = usernome;
         }
@@ -34,7 +33,7 @@ namespace Projeto_Lar3idade_Back_End
             {
                 try
                 {
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         conexao.Open();
                         string query = "INSERT INTO mydb.notificacao_medico (remetente,assunto, messagem, idmedico, idFunc,proccessada,Data_envio)" +

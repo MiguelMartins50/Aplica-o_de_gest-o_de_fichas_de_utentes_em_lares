@@ -149,6 +149,7 @@
     <Compile Include="consultas.Designer.cs">
       <DependentUpon>consultas.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseConfig.cs" />
     <Compile Include="enviar_func.cs">
       <SubType>UserControl</SubType>
     </Compile>

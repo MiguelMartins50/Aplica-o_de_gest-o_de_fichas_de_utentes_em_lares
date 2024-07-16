@@ -32,8 +32,7 @@ namespace Projeto_Lar3idade_Back_End
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm";
             dateTimePicker1.ShowUpDown = true;
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             LoadComboBox();
             display_data();
         }

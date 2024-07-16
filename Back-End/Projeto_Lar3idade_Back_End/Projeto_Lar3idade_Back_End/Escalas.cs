@@ -13,7 +13,6 @@ namespace Projeto_Lar3idade_Back_End
 {
     public partial class Escalas : UserControl
     {
-        private string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
         private DateTime data_inicio;
         private DateTime data_fim;
         private Dictionary<string, string> mes_begin = new Dictionary<string, string>();
@@ -44,7 +43,7 @@ namespace Projeto_Lar3idade_Back_End
         public Escalas()
         {
             InitializeComponent();
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             comboBox3.Items.Add("trabalho");
             comboBox3.Items.Add("folga");
             comboBox3.Items.Add("falta");
@@ -398,21 +397,7 @@ namespace Projeto_Lar3idade_Back_End
             }
 
             
-            /*
-                Console.WriteLine("Acabou de criar a escala");
-                // Get the ID of the newly created escala_servico
-                int idEscalaServico;
-                string getLastInsertIdQuery = "SELECT LAST_INSERT_ID();";
-                using (MySqlCommand cmdLastInsertId = new MySqlCommand(getLastInsertIdQuery, conexao))
-                {
-                    idEscalaServico = Convert.ToInt32(cmdLastInsertId.ExecuteScalar());
-                }
-
-                // Create entries in funcionario_escala for each funcionario for each day
-                
-                
-            }
-           */
+           
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -480,12 +465,16 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
                     Console.WriteLine("id_func: " + idescalaParaEditar);
+                    Console.WriteLine(tipo_func);
+
                     PreencherCamposParaEdicao(idescalaParaEditar);
                 }
                 if (tipo_func == "Medico")
                 {
                     int idescalaParaEditar = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
                     Console.WriteLine("id_med: " + idescalaParaEditar);
+                    Console.WriteLine(tipo_func);
+
 
                     PreencherCamposParaEdicao(idescalaParaEditar);
                 }
@@ -494,6 +483,7 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void PreencherCamposParaEdicao(int idescalaParaEditar)
         {
+            Console.WriteLine(idescalaParaEditar);
 
             try
             {
@@ -538,7 +528,7 @@ namespace Projeto_Lar3idade_Back_End
                 }
                 if (tipo_func == "Medico")
                 {
-                    cmd.CommandText = "SELECT idEscala_Medico,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM escala_medico WHERE Medico_idMedico = @Idescala_med";
+                    cmd.CommandText = "SELECT idEscala_Medico,Dia, dia_da_semana, horario_inicio, horario_fim, estado FROM escala_medico WHERE idEscala_Medico = @Idescala_med";
                     cmd.Parameters.AddWithValue("@Idescala_med", idescalaParaEditar);
                     DataTable dta = new DataTable();
 

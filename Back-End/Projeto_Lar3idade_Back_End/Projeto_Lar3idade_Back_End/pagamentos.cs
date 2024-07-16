@@ -28,8 +28,7 @@ namespace Projeto_Lar3idade_Back_End
         public pagamentos()
         {
             InitializeComponent();
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             LoadComboBox();
             display_data();
             dataGridView1.CellClick += dataGridView1_CellClick;
@@ -115,7 +114,7 @@ namespace Projeto_Lar3idade_Back_End
 
             try
             {
-                using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                using (conexao)
                 {
                     conexao.Open();
                     string query = "INSERT INTO mydb.pagamento (idPagamento,Utente_idUtente, Familiar_idFamiliar, data_limitel, valor, estado)" +
@@ -159,8 +158,9 @@ namespace Projeto_Lar3idade_Back_End
                         comando.ExecuteNonQuery();
 
                         MessageBox.Show("Plano de mensalidade adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        conexao.Close();
 
-
+                        display_data();
                         Limpar();
                     }
                 }
@@ -168,6 +168,10 @@ namespace Projeto_Lar3idade_Back_End
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao adicionar Pagamento: " + ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
             }
 
         }
@@ -235,7 +239,7 @@ namespace Projeto_Lar3idade_Back_End
                     DateTime datalimite = dateTimePicker_dataLimite.Value;
                     string estado = comboBox1.Text;
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         conexao.Open();
                         string query = "UPDATE pagamento SET data_limitel = @data_limitel, valor = @valor, estado = @estado WHERE idPagamento = @idPagamento";
@@ -250,6 +254,7 @@ namespace Projeto_Lar3idade_Back_End
                             comando.ExecuteNonQuery();
 
                             MessageBox.Show("Pagamento atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            conexao.Close();
 
                             display_data();
                             Limpar();
@@ -259,6 +264,10 @@ namespace Projeto_Lar3idade_Back_End
                 catch (Exception ex)
                 {
                     MessageBox.Show("Erro ao atualizar pagamento: " + ex.Message);
+                }
+                finally
+                {
+                    conexao.Close();
                 }
             }
             else
@@ -313,7 +322,7 @@ namespace Projeto_Lar3idade_Back_End
                     int rowIndex = dataGridView1.SelectedRows[0].Index;
                     int idPagamento = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idPagamento"].Value);
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         conexao.Open();
 
@@ -325,6 +334,7 @@ namespace Projeto_Lar3idade_Back_End
                             comando.ExecuteNonQuery();
 
                             MessageBox.Show("Pagamento excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            conexao.Close();
 
                             display_data();
                             Limpar();
@@ -334,6 +344,10 @@ namespace Projeto_Lar3idade_Back_End
                 catch (Exception ex)
                 {
                     MessageBox.Show("Erro ao excluir pagamento: " + ex.Message);
+                }
+                finally
+                {
+                    conexao.Close();
                 }
             }
             else

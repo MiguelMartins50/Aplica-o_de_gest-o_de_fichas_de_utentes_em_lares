@@ -30,8 +30,7 @@ namespace Projeto_Lar3idade_Back_End
         public notificacao_admin()
         {
             InitializeComponent();
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             display_data();
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellFormatting += DataGridView1_CellFormatting;
@@ -135,6 +134,9 @@ namespace Projeto_Lar3idade_Back_End
                     textBox1.Text = reader["assunto"].ToString();
                     textBox2.Text = reader["messagem"].ToString().Replace("\n", Environment.NewLine);
                 }
+                conexao.Close();
+
+
             }
             catch (Exception ex)
             {
@@ -142,16 +144,14 @@ namespace Projeto_Lar3idade_Back_End
             }
             finally
             {
-                // Verifica se a conexão está aberta antes de tentar fechá-la
-                if (conexao.State == ConnectionState.Open)
-                {
-                    conexao.Close();
-                }
+                conexao.Close();
             }
         }
 
         private void display_data()
         {
+            conexao.Close();
+
             conexao.Open();
             MySqlCommand cmd = conexao.CreateCommand();
             cmd.CommandType = CommandType.Text;
@@ -194,12 +194,13 @@ namespace Projeto_Lar3idade_Back_End
         {
             Console.WriteLine("control:" + control);
             Console.WriteLine("process:" + process);
+            conexao.Close();
 
-            if (control == 1 && process == 0)
+            if (control == 1)
             {
                 try
                 {
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         Console.WriteLine("aqui1");
                         conexao.Open();
@@ -304,11 +305,13 @@ namespace Projeto_Lar3idade_Back_End
         {
             Console.WriteLine("control:" + control);
             Console.WriteLine("process:" + process);
+            conexao.Close();
+
             if (control == 1 && process == 0)
             {
                 try
                 {
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         conexao.Open();
                         string query = "INSERT INTO mydb.notificacao_func (remetente,assunto, messagem, idremetente, funcionario_idFuncionario,proccessada,Data_envio)" +
@@ -393,6 +396,10 @@ namespace Projeto_Lar3idade_Back_End
                 catch (Exception ex)
                 {
                     MessageBox.Show("Erro ao enviar notificação: " + ex.Message);
+                }
+                finally
+                {
+                    conexao.Close();
                 }
             }
             else

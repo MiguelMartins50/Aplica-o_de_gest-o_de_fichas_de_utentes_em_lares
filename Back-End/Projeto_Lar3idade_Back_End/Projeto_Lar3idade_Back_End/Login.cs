@@ -15,15 +15,13 @@ namespace Projeto_Lar3idade_Back_End
     {
         MySqlConnection conexao;
         private int type = 0;
-
         public Login()
         {
             InitializeComponent();
             textBox2.PasswordChar = '*';
 
             // Inicialize a conexão no construtor do formulário
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
         }
         private void Form1_Resize(object sender, EventArgs e)
         {

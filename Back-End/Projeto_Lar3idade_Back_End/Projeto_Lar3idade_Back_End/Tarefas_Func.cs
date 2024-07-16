@@ -28,10 +28,9 @@ namespace Projeto_Lar3idade_Back_End
         }
         private void LoadData()
         {
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
             string query = "SELECT tarefa.nome, tarefa.descricao , tipo.tipo FROM tarefa JOIN tipo ON tarefa.Tipo_idTipo = tipo.idTipo where tarefa.Funcionario_idFuncionario = @iduser";
 
-            using (MySqlConnection conexao = new MySqlConnection(connectionString))
+            using (MySqlConnection conexao = new MySqlConnection(DatabaseConfig.ConnectionString))
             {
                 conexao.Open();
 
@@ -48,13 +47,13 @@ namespace Projeto_Lar3idade_Back_End
                             string desc = reader["descricao"].ToString();
                             string tipo = reader["tipo"].ToString();
 
-
-                            CreatePanel(nome,  desc, tipo);
+                            CreatePanel(nome, desc, tipo);
                         }
                     }
                 }
             }
         }
+
         private void CreatePanel(string nome,  string desc, string tipo)
         {
             // Create a new panel for each database entry

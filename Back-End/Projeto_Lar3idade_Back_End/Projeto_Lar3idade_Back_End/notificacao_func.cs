@@ -25,8 +25,7 @@ namespace Projeto_Lar3idade_Back_End
         public notificacao_func(int userid, int tipo, string nome)
         {
             InitializeComponent();
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             this.iduser = userid;
             this.usertipo = tipo;
             this.usernome = nome;

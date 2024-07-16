@@ -44,8 +44,7 @@ namespace Projeto_Lar3idade_Back_End
         public Escalas_func( int userid, string func_tipo)
         {
             InitializeComponent();
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             this.iduser = userid;
             this.tipo_func = func_tipo;
             

@@ -21,8 +21,7 @@ namespace Projeto_Lar3idade_Back_End
         public enviar_func(int userid)
         {
             InitializeComponent();
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             this.iduser = userid;
             buscar_nome();
 
@@ -47,9 +46,11 @@ namespace Projeto_Lar3idade_Back_End
             DialogResult result = MessageBox.Show("Tem a que querer enviar este pedido?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
+                conexao.Close();
+
                 try
                 {
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         conexao.Open();
                         string query = "INSERT INTO mydb.notificacao_func (remetente,assunto, messagem, idremetente, funcionario_idFuncionario,proccessada,Data_envio)" +
@@ -85,10 +86,17 @@ namespace Projeto_Lar3idade_Back_End
 
 
                     }
+                    conexao.Close();
+
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Erro ao enviar notificação: " + ex.Message);
+                    MessageBox.Show("Erro ao enviar notificação1: " + ex.Message);
+                }
+                finally
+                {
+                    conexao.Close();
+
                 }
                 NavigateToEscalsFuncClicked?.Invoke(this, EventArgs.Empty);
 

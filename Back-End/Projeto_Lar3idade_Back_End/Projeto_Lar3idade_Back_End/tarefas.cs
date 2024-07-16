@@ -26,8 +26,7 @@ namespace Projeto_Lar3idade_Back_End
         public tarefas()
         {
             InitializeComponent();
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             LoadComboBox();
             display_data();
 
@@ -81,7 +80,7 @@ namespace Projeto_Lar3idade_Back_End
 
             try
             {
-                using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                using (conexao)
                 {
                     conexao.Open();
                     string query = "INSERT INTO mydb.tarefa (idTarefa,nome, descricao, Funcionario_idFuncionario, Tipo_idTipo)" +
@@ -118,8 +117,8 @@ namespace Projeto_Lar3idade_Back_End
                         comando.ExecuteNonQuery();
 
                         MessageBox.Show("Atividade adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                       
+                        conexao.Close();
+                        display_data();
                         LimparTextBoxes();
                     }
                 }
@@ -127,6 +126,10 @@ namespace Projeto_Lar3idade_Back_End
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao adicionar tarefa: " + ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
             }
         }
         private void LimparTextBoxes()
@@ -202,7 +205,7 @@ namespace Projeto_Lar3idade_Back_End
                     int rowIndex = dataGridView1.SelectedRows[0].Index;
                     int idTarefa = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idTarefa"].Value);
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         conexao.Open();
 
@@ -219,6 +222,7 @@ namespace Projeto_Lar3idade_Back_End
                             comando.ExecuteNonQuery();
 
                             MessageBox.Show("Tarefa atualizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            conexao.Close();
 
                             display_data();
                             LimparTextBoxes();
@@ -228,6 +232,10 @@ namespace Projeto_Lar3idade_Back_End
                 catch (Exception ex)
                 {
                     MessageBox.Show("Erro ao atualizar tarefa: " + ex.Message);
+                }
+                finally
+                {
+                    conexao.Close();
                 }
             }
             else
@@ -246,7 +254,7 @@ namespace Projeto_Lar3idade_Back_End
                     int rowIndex = dataGridView1.SelectedRows[0].Index;
                     int idTarefa = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idTarefa"].Value);
 
-                    using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                    using (conexao)
                     {
                         conexao.Open();
 
@@ -258,7 +266,7 @@ namespace Projeto_Lar3idade_Back_End
                             comando.ExecuteNonQuery();
 
                             MessageBox.Show("Tarefa excluída com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                            conexao.Close();
                             display_data();
                             LimparTextBoxes();
                         }
@@ -268,6 +276,10 @@ namespace Projeto_Lar3idade_Back_End
                 catch (Exception ex)
                 {
                     MessageBox.Show("Erro ao excluir tarefa: " + ex.Message);
+                }
+                finally
+                {
+                    conexao.Close();
                 }
             }
             else

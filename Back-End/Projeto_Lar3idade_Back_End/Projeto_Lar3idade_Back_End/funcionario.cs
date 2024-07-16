@@ -16,14 +16,14 @@ namespace Projeto_Lar3idade_Back_End
         private MySqlConnection conexao;
         private int idupt;
         private string funcao = "";
+        private int medicoT = 0;
         
         public funcionario()
         {
            
             InitializeComponent();
             comboBox1.Items.AddRange(new string[] { "Médico(a)", "Cuidador(a)", "Recepcionista" });
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             display_data();
             dataGridView1.CellClick += dataGridView1_CellClick;
             textBox_Senha.PasswordChar = '*';
@@ -193,55 +193,62 @@ namespace Projeto_Lar3idade_Back_End
                 {
                     // Obtém o valor do idFuncionario dos TextBoxes
                     // Utilizando parâmetros para prevenir injeção de SQL
-                    if (funcao == "Médico(a)")
+                    if (medicoT == 0)
                     {
-                        cmd.CommandText = "UPDATE mydb.medico SET nome = @Nome, numero_cc = @NumeroCC, Data_validade = @DataValidade, telemovel = @Telemovel, salario_hora = @SalarioHora, email = @Email, password = @Senha WHERE idMedico = @idMedico";
+                        if (funcao == "Médico(a)")
+                        {
+                            cmd.CommandText = "UPDATE mydb.medico SET nome = @Nome, numero_cc = @NumeroCC, Data_validade = @DataValidade, telemovel = @Telemovel, salario_hora = @SalarioHora, email = @Email, password = @Senha WHERE idMedico = @idMedico";
 
-                        // Adicionando parâmetros
-                        cmd.Parameters.AddWithValue("@Nome", textBox_Name.Text);
-                        cmd.Parameters.AddWithValue("@NumeroCC", textBox_Cc.Text);
-                        cmd.Parameters.AddWithValue("@DataValidade", dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd"));
-                        cmd.Parameters.AddWithValue("@Telemovel", textBox_Tel.Text);
-                        cmd.Parameters.AddWithValue("@SalarioHora", textBox_Salario.Text);
-                        cmd.Parameters.AddWithValue("@Email", textBox_Email.Text);
-                        cmd.Parameters.AddWithValue("@Senha", textBox_Senha.Text);
-                        cmd.Parameters.AddWithValue("@idMedico", idupt);
-                        cmd.Parameters.AddWithValue("@Funcao", comboBox1.SelectedItem.ToString());
+                            // Adicionando parâmetros
+                            cmd.Parameters.AddWithValue("@Nome", textBox_Name.Text);
+                            cmd.Parameters.AddWithValue("@NumeroCC", textBox_Cc.Text);
+                            cmd.Parameters.AddWithValue("@DataValidade", dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd"));
+                            cmd.Parameters.AddWithValue("@Telemovel", textBox_Tel.Text);
+                            cmd.Parameters.AddWithValue("@SalarioHora", textBox_Salario.Text);
+                            cmd.Parameters.AddWithValue("@Email", textBox_Email.Text);
+                            cmd.Parameters.AddWithValue("@Senha", textBox_Senha.Text);
+                            cmd.Parameters.AddWithValue("@idMedico", idupt);
+                            cmd.Parameters.AddWithValue("@Funcao", comboBox1.SelectedItem.ToString());
+                        }
+                        else
+                        {
+                            cmd.CommandText = "UPDATE mydb.funcionario SET nome = @Nome, numero_cc = @NumeroCC, data_validade = @DataValidade, telemovel = @Telemovel, salario_hora = @SalarioHora, email = @Email, senha = @Senha,funcao = @Funcao WHERE idFuncionario = @IdFuncionario";
+
+                            // Adicionando parâmetros
+                            cmd.Parameters.AddWithValue("@Nome", textBox_Name.Text);
+                            cmd.Parameters.AddWithValue("@NumeroCC", textBox_Cc.Text);
+                            cmd.Parameters.AddWithValue("@DataValidade", dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd"));
+                            cmd.Parameters.AddWithValue("@Telemovel", textBox_Tel.Text);
+                            cmd.Parameters.AddWithValue("@SalarioHora", textBox_Salario.Text);
+                            cmd.Parameters.AddWithValue("@Email", textBox_Email.Text);
+                            cmd.Parameters.AddWithValue("@Senha", textBox_Senha.Text);
+                            cmd.Parameters.AddWithValue("@IdFuncionario", idupt);
+                            cmd.Parameters.AddWithValue("@Funcao", comboBox1.SelectedItem.ToString());
+                        }
+                        // Executando o comando
+                        cmd.ExecuteNonQuery();
+
+                        // Limpando os campos e atualizando a exibição dos dados
+                        textBox_Name.Text = "";
+                        textBox_Cc.Text = "";
+                        dateTimePicker_DtaValidade.Text = "";
+                        textBox_Tel.Text = "";
+                        textBox_Salario.Text = "";
+                        textBox_Email.Text = "";
+                        textBox_Senha.Text = "";
+                        comboBox1.SelectedIndex = -1;
+                        display_data();
+                        LimparTextBoxes();
+
+                        MessageBox.Show("Dados atualizados com sucesso");
                     }
-                    else
-                    {
-                        cmd.CommandText = "UPDATE mydb.funcionario SET nome = @Nome, numero_cc = @NumeroCC, data_validade = @DataValidade, telemovel = @Telemovel, salario_hora = @SalarioHora, email = @Email, senha = @Senha,funcao = @Funcao WHERE idFuncionario = @IdFuncionario";
-
-                        // Adicionando parâmetros
-                        cmd.Parameters.AddWithValue("@Nome", textBox_Name.Text);
-                        cmd.Parameters.AddWithValue("@NumeroCC", textBox_Cc.Text);
-                        cmd.Parameters.AddWithValue("@DataValidade", dateTimePicker_DtaValidade.Value.ToString("yyyy-MM-dd"));
-                        cmd.Parameters.AddWithValue("@Telemovel", textBox_Tel.Text);
-                        cmd.Parameters.AddWithValue("@SalarioHora", textBox_Salario.Text);
-                        cmd.Parameters.AddWithValue("@Email", textBox_Email.Text);
-                        cmd.Parameters.AddWithValue("@Senha", textBox_Senha.Text);
-                        cmd.Parameters.AddWithValue("@IdFuncionario", idupt);
-                        cmd.Parameters.AddWithValue("@Funcao", comboBox1.SelectedItem.ToString());
-                    }
+                    if(medicoT == 1)
+                        MessageBox.Show("Não se pode mudar um medico para outro tipo de funcionario");
 
 
-                    // Executando o comando
-                    cmd.ExecuteNonQuery();
+
                     conexao.Close();
 
-                    // Limpando os campos e atualizando a exibição dos dados
-                    textBox_Name.Text = "";
-                    textBox_Cc.Text = "";
-                    dateTimePicker_DtaValidade.Text = "";
-                    textBox_Tel.Text = "";
-                    textBox_Salario.Text = "";
-                    textBox_Email.Text = "";
-                    textBox_Senha.Text = "";
-                    comboBox1.SelectedIndex = -1;
-                    display_data();
-                    LimparTextBoxes();
-
-                    MessageBox.Show("Dados atualizados com sucesso");
                 }
                 else
                 {
@@ -371,6 +378,7 @@ namespace Projeto_Lar3idade_Back_End
                 if (funcao == "Médico(a)")
                 {
                     ExibirDadosMedico(idFuncionarioSelecionado);
+                    medicoT = 1;
                 }
                 else
                 {
@@ -381,15 +389,8 @@ namespace Projeto_Lar3idade_Back_End
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {

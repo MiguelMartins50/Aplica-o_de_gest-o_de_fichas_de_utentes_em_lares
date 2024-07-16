@@ -55,7 +55,7 @@ namespace Projeto_Lar3idade_Back_End
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(451, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 26);
+            this.label1.Size = new System.Drawing.Size(82, 27);
             this.label1.TabIndex = 38;
             this.label1.Text = "Tarefas";
             // 
@@ -196,9 +196,9 @@ namespace Projeto_Lar3idade_Back_End
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(17, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 22);
+            this.label2.Size = new System.Drawing.Size(113, 22);
             this.label2.TabIndex = 114;
-            this.label2.Text = "Nome_Tarefa";
+            this.label2.Text = "Nome Tarefa";
             // 
             // label3
             // 

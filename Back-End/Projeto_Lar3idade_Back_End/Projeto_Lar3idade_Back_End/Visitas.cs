@@ -29,8 +29,7 @@ namespace Projeto_Lar3idade_Back_End
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm";
             dateTimePicker1.ShowUpDown = true;
-            string connectionString = "Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1";
-            conexao = new MySqlConnection(connectionString);
+            conexao = new MySqlConnection(DatabaseConfig.ConnectionString);
             display_data();
             LoadComboBox();
         }
@@ -226,7 +225,7 @@ namespace Projeto_Lar3idade_Back_End
                         int rowIndex = dataGridView1.SelectedRows[0].Index;
                         int idVisita = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idVisita"].Value);
 
-                        using (MySqlConnection conexao = new MySqlConnection("Server=projetolar3idade.mysql.database.azure.com;Port=3306;Database=mydb;Uid=projeto4461045279;Pwd=Ipbcurso1"))
+                        using (conexao)
                         {
                             conexao.Open();
 
@@ -238,6 +237,7 @@ namespace Projeto_Lar3idade_Back_End
                                 comando.ExecuteNonQuery();
 
                                 MessageBox.Show("Visita desmarcada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                conexao.Close();
 
                                 display_data();
                                 LimparComboBoxes();
@@ -248,6 +248,10 @@ namespace Projeto_Lar3idade_Back_End
                     catch (Exception ex)
                     {
                         MessageBox.Show("Erro ao desmarcar uma visita: " + ex.Message);
+                    }
+                    finally
+                    {
+                        conexao.Close();
                     }
                 }
                 else
