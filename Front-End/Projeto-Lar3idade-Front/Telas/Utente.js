@@ -7,58 +7,53 @@ export let iduten = 0;
 
 export default function Utente({ navigation, route }) {
   const { params } = route;
-  const { utenteData, utenteNome } = params || {};
-  const [imageData, setImageData] = useState(null);
-  console.log('Route Params:', route.params);
-  uten = utenteData;
-  iduten = utenteData.idUtente;
-  console.log("Params:");
-  console.log(uten);
-  console.log("Id:");
-  console.log(iduten);
-  
-  useEffect(() => {
-    console.log('UtenteDrawer - Route Params:', route.params);
-    
-  }, [route.params]);
-  useEffect(() => {
-    if (utenteData && utenteData.Imagem && utenteData.Imagem.data) {
-      const base64String = base64.fromByteArray(new Uint8Array(utenteData.Imagem.data));
-      setImageData(`data:image/png;base64,${base64String}`);
-    }
-  }, [navigation, utenteData]);
+const { UtenteData, UtenteNome } = params || {};
+const [imageData, setImageData] = useState(null);
+const [utenteID, setUtenteID] = useState(null);
+console.log("1\n"+params);
+useEffect(() => {
+  if (UtenteData && UtenteData.Imagem && UtenteData.Imagem.data) {
+    const base64String = base64.fromByteArray(new Uint8Array(UtenteData.Imagem.data));
+    setImageData(`data:image/png;base64,${base64String}`);
+  }
+  uten = UtenteData || {};
+  iduten = UtenteData?.idUtente;
+  console.log("id:" + iduten);
+}, [navigation, UtenteData]);
 
+console.log("export:" + uten);
+console.log(uten.idUtente);
   const navigateToPrescricaoUtente = () => {
-    navigation.navigate('Prescrições Médicas',{ utenteData});
+    navigation.navigate('Prescrições Médicas',{ utenteData: UtenteData});
   };
   const navigateToVisitas = () => {
-    navigation.navigate('Visitas',{ utenteData});
+    navigation.navigate('Visitas',{ utenteData: UtenteData});
   };
   const navigateToConsultas = () => {
-    navigation.navigate('Consultas',{ utenteData});
+    navigation.navigate('Consultas',{ utenteData: UtenteData});
   };
   const navigateToAtividades = () => {
-    navigation.navigate('Atividades',{ utenteData});
+    navigation.navigate('Atividades',{ utenteData: UtenteData});
   };
   const navigateToPlanoPagamento = () => {
-    navigation.navigate('Plano de pagamento',{ utenteData});
+    navigation.navigate('Plano de pagamento',{ utenteData: UtenteData});
   };
   const navigateToPerfilUtente = () => {
-    navigation.navigate('PerfilUtente',{ utenteData});
+    navigation.navigate('PerfilUtente',{ utenteData: UtenteData});
   };
 
   return (<View style={styles.container}>
         <View style={styles.Imag1}>
         </View>
         {imageData && <Image style={styles.image} source={{ uri: imageData }} />}
-        {utenteNome ? (
-        <Text style={styles.BemVindo}>Bem-vindo, {utenteNome}!</Text>
+        {UtenteNome ? (
+        <Text style={styles.BemVindo}>Bem-vindo, {UtenteNome}!</Text>
       ) : (
         <Text>Carregando...</Text>
       )}
       <TouchableOpacity
       style={styles.Button}
-      onPress={() =>navigation.navigate('PerfilUtente', { utenteData, utenteNome })}>
+      onPress={() =>navigation.navigate('PerfilUtente', { utenteData: UtenteData, utenteNome: UtenteNome })}>
       <Text style={styles.ButtonText}>Perfil Utente</Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles.Button} onPress={navigateToPrescricaoUtente}>

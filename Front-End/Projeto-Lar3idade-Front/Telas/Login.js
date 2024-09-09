@@ -26,16 +26,16 @@ export default function Login({ route, navigation }) {
           const inputValueSenha = textPass.trim();
 
           const isUtenteMatch = utenteEmailColumn.some((email, index) => email === inputValueEmail && utenteSenhaColumn[index] === inputValueSenha);
-          const utenteMatch = utenteResponse.data.find(entry => entry.email === inputValueEmail && entry.senha === inputValueSenha);
+          const UtenteMatch = utenteResponse.data.find(entry => entry.email === inputValueEmail && entry.senha === inputValueSenha);
           console.log(isUtenteMatch);
           if (isUtenteMatch) {
             setLoading(false);
             console.log(isUtenteMatch);
             console.log('Login com utente!');
             console.log('Email e Senha:', inputValueEmail, inputValueSenha);
-            console.log('UtenteData:', utenteMatch);
-            console.log('Nome do Utente:', utenteMatch.nome);
-            navigation.navigate('UtenteDrawer', { screen: 'Home Utente', params: { utenteData: utenteMatch, utenteNome: utenteMatch.nome} });
+            console.log('UtenteData:', UtenteMatch);
+            console.log('Nome do Utente:', UtenteMatch.nome);
+            navigation.navigate('UtenteDrawer', { screen: 'UtenteScreen', params: { UtenteData: UtenteMatch, UtenteNome: UtenteMatch.nome} });
             
           } else {
             axios.get('http://192.168.1.80:8800/familiar')

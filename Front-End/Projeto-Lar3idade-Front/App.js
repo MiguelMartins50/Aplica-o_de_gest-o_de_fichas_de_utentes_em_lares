@@ -33,11 +33,10 @@ const UtenteDrawer = ({ route,navigation }) => {
 return(
 
 
-  <Drawer.Navigator initialRouteName="Home Utente" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
+  <Drawer.Navigator initialRouteName="UtenteScreen" screenOptions={{headerStyle: {backgroundColor: '#71A1FF'}}}>
     <Drawer.Screen
-        name="Pagina Principal"
+        name="UtenteScreen"
         component={UtenteScreen}
-        initialParams={{ utenteData, utenteNome }}
         options={{
           headerRight: () => (
             <TouchableOpacity onPress={handleSair} color="white" style={styles.sairButton}>

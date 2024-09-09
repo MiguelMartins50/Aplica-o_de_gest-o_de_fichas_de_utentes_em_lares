@@ -12,6 +12,7 @@ export default function Familiar({ navigation, route }) {
   const {FamiliarData, FamiliarNome} = params || {};
   const [imageData, setImageData] = useState(null);
   const [FamiliarID, setFamiliarID]= useState(null);
+  console.log("1\n"+FamiliarData.idFamiliar);
   useEffect(() => {
     if (FamiliarData && FamiliarData.Imagem && FamiliarData.Imagem.data) {
       const base64String = base64.fromByteArray(new Uint8Array(FamiliarData.Imagem.data));
